@@ -14,15 +14,15 @@ class SeaEyeIconController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupMenuBarIcon();
+        self.setupMenuBarIcon()
     }
     
     private func setupMenuBarIcon() {
-        self.setupStyleNotificationObserver();
+        self.setupStyleNotificationObserver()
         if (self.isDarkModeEnabled()) {
-            iconButton.image = NSImage(named: "circleci-normal-alt");
+            iconButton.image = NSImage(named: "circleci-normal-alt")
         } else {
-            iconButton.image = NSImage(named: "circleci-normal");
+            iconButton.image = NSImage(named: "circleci-normal")
         }
     }
     
@@ -33,20 +33,20 @@ class SeaEyeIconController: NSViewController {
                 selector: Selector("alternateIconStyle"),
                 name: "AppleInterfaceThemeChangedNotification",
                 object: nil
-        );
+        )
     }
     
     private func isDarkModeEnabled() -> Bool {
         let dictionary  = NSUserDefaults.standardUserDefaults().persistentDomainForName(NSGlobalDomain);
         if let interfaceStyle = dictionary?["AppleInterfaceStyle"] as? NSString {
-            return interfaceStyle.localizedCaseInsensitiveContainsString("dark");
+            return interfaceStyle.localizedCaseInsensitiveContainsString("dark")
         } else {
-            return false;
+            return false
         }
     }
     
     func alternateIconStyle() {
-        println("alternateIconStyle");
+        println("alternateIconStyle")
     }
     
 }

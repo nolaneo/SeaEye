@@ -63,30 +63,7 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="SeaEye" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-185" y="-273"/>
-        </scene>
-        <!--Sea Eye Popover Controller-->
-        <scene sceneID="Ch3-N2-BKL">
-            <objects>
-                <viewController storyboardIdentifier="SeaEyePopoverController" id="axH-Ma-9aD" customClass="SeaEyePopoverController" customModule="SeaEye" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="qLo-iL-8HG">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s0G-Cn-TSz">
-                                <rect key="frame" x="137" y="249" width="41" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="TEST!" id="Wxb-Ap-Ec0">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
-                    </view>
-                </viewController>
-                <customObject id="Cef-cU-kva" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-295" y="67"/>
+            <point key="canvasLocation" x="-295" y="-346"/>
         </scene>
         <!--SeaEyeIconController-->
         <scene sceneID="tee-4G-cnI">
@@ -103,7 +80,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <segue destination="axH-Ma-9aD" kind="popover" popoverAnchorView="E2a-R8-PFd" popoverBehavior="t" preferredEdge="maxY" id="q3o-82-z0b"/>
+                                    <segue destination="QRi-IY-RWt" kind="popover" popoverAnchorView="E2a-R8-PFd" popoverBehavior="t" preferredEdge="maxY" id="Zq5-cT-ZYC"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -116,8 +93,99 @@
             </objects>
             <point key="canvasLocation" x="-295" y="-273"/>
         </scene>
+        <!--Sea Eye Popover Controller-->
+        <scene sceneID="CIg-nB-0IK">
+            <objects>
+                <viewController id="QRi-IY-RWt" customClass="SeaEyePopoverController" customModule="SeaEye" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="3qo-yU-NtC">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x8D-iC-YhW">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="360"/>
+                            </customView>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6CY-Gb-nxX">
+                                <rect key="frame" x="264" y="368" width="16" height="16"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="settings" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="6qv-hC-01W">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="openSettings:" target="QRi-IY-RWt" id="6eA-Qv-ZHL"/>
+                                </connections>
+                            </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hKb-pS-pRT">
+                                <rect key="frame" x="20" y="368" width="16" height="16"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="back" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="L7v-BT-P6K">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="openBuilds:" target="QRi-IY-RWt" id="fxA-XP-kVK"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="openBuildsButton" destination="hKb-pS-pRT" id="woJ-jz-Rjx"/>
+                        <outlet property="openSettingsButton" destination="6CY-Gb-nxX" id="CIw-XJ-Khg"/>
+                        <outlet property="subcontrollerView" destination="x8D-iC-YhW" id="VZG-78-hre"/>
+                    </connections>
+                </viewController>
+                <customObject id="lZe-cE-Gf0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-295" y="88"/>
+        </scene>
+        <!--Sea Eye Builds Controller-->
+        <scene sceneID="t6F-eR-yFh">
+            <objects>
+                <viewController storyboardIdentifier="SeaEyeBuildsController" id="XHp-sX-6Jy" customClass="SeaEyeBuildsController" customModule="SeaEye" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="KOO-yb-c8B">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="360"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OMD-zF-kc0">
+                                <rect key="frame" x="112" y="172" width="65" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Builds VC" id="hfv-nU-LLr">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </view>
+                </viewController>
+                <customObject id="g4B-bm-3e4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="175" y="-104"/>
+        </scene>
+        <!--Sea Eye Settings Controller-->
+        <scene sceneID="ylw-Gd-HKj">
+            <objects>
+                <viewController storyboardIdentifier="SeaEyeSettingsController" id="tPe-Nl-DuY" customClass="SeaEyeSettingsController" customModule="SeaEye" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="IJv-DR-eDy">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="360"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vLp-UN-kL9">
+                                <rect key="frame" x="112" y="172" width="77" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Settings VC" id="fhw-gf-b00">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </view>
+                </viewController>
+                <customObject id="9if-07-Y83" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="175" y="327"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="back" width="16" height="16"/>
         <image name="circleci-normal" width="15" height="15"/>
+        <image name="settings" width="19.862068176269531" height="19.862068176269531"/>
     </resources>
 </document>
