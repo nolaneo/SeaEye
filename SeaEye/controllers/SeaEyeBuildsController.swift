@@ -10,9 +10,24 @@ import Cocoa
 
 class SeaEyeBuildsController: NSViewController {
 
+    @IBOutlet weak var fallbackView: NSView!;
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
+        self.setupFallBackViews()
+    }
+    
+    private func setupFallBackViews() {
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        if  !userDefaults.boolForKey("hasSetupApiKey") {
+            println("hasnotsetupapikey")
+            return
+        }
+        if !userDefaults.boolForKey("hasSetupTargetedUsers") {
+            println("hasnotsetuptargetedusers")
+            return
+        }
+        fallbackView.hidden = true
     }
     
 }

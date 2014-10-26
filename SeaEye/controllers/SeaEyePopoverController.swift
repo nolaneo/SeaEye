@@ -14,12 +14,14 @@ class SeaEyePopoverController: NSViewController {
     @IBOutlet weak var subcontrollerView : NSView!;
     @IBOutlet weak var openSettingsButton : NSButton!;
     @IBOutlet weak var openBuildsButton : NSButton!;
+    @IBOutlet weak var shutdownButton : NSButton!;
     
     var settingsViewController : SeaEyeSettingsController!;
     var buildsViewController : SeaEyeBuildsController!;
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupNavButtons()
         self.setupViewControllers()
         clickEventMonitor = NSEvent.addGlobalMonitorForEventsMatchingMask(
             NSEventMask.LeftMouseUpMask|NSEventMask.RightMouseUpMask,
@@ -41,21 +43,34 @@ class SeaEyePopoverController: NSViewController {
         settingsViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeSettingsController") as SeaEyeSettingsController
         buildsViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeBuildsController") as SeaEyeBuildsController
         
+        settingsViewController.parent = self
         openBuildsButton.hidden = true;
         subcontrollerView.addSubview(buildsViewController.view)
     }
     
+    private func setupNavButtons() {
+        openSettingsButton.image?.setTemplate(true)
+        openBuildsButton.image?.setTemplate(true)
+        shutdownButton.image?.setTemplate(true)
+    }
+    
     @IBAction func openSettings(sender: NSButton) {
-        sender.hidden = true
+        openSettingsButton.hidden = true
+        shutdownButton.hidden = true
         openBuildsButton.hidden = false
         buildsViewController.view.removeFromSuperview()
         subcontrollerView.addSubview(settingsViewController.view)
     }
     
     @IBAction func openBuilds(sender: NSButton) {
-        sender.hidden = true;
+        openBuildsButton.hidden = true;
+        shutdownButton.hidden = false
         openSettingsButton.hidden = false
         settingsViewController.view.removeFromSuperview()
         subcontrollerView.addSubview(buildsViewController.view)
+    }
+    
+    @IBAction func shutdownApplication(sender: NSButton) {
+        NSApplication.sharedApplication().terminate(self);
     }
 }

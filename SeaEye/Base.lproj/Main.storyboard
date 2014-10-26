@@ -80,7 +80,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <segue destination="QRi-IY-RWt" kind="popover" popoverAnchorView="E2a-R8-PFd" popoverBehavior="t" preferredEdge="maxY" id="Zq5-cT-ZYC"/>
+                                    <segue destination="QRi-IY-RWt" kind="popover" identifier="SeaEyeOpenPopoverSegue" popoverAnchorView="E2a-R8-PFd" popoverBehavior="t" preferredEdge="maxY" id="Zq5-cT-ZYC"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -114,7 +114,7 @@
                                     <action selector="openSettings:" target="QRi-IY-RWt" id="6eA-Qv-ZHL"/>
                                 </connections>
                             </button>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hKb-pS-pRT">
+                            <button hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hKb-pS-pRT">
                                 <rect key="frame" x="20" y="368" width="16" height="16"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="back" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="L7v-BT-P6K">
                                     <behavior key="behavior" lightByContents="YES"/>
@@ -132,11 +132,22 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BZS-jV-gvy">
+                                <rect key="frame" x="20" y="369" width="16" height="16"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="power" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="Lan-DV-k3o">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="shutdownApplication:" target="QRi-IY-RWt" id="gK3-T2-5PI"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="openBuildsButton" destination="hKb-pS-pRT" id="woJ-jz-Rjx"/>
                         <outlet property="openSettingsButton" destination="6CY-Gb-nxX" id="CIw-XJ-Khg"/>
+                        <outlet property="shutdownButton" destination="BZS-jV-gvy" id="hTC-9e-dZX"/>
                         <outlet property="subcontrollerView" destination="x8D-iC-YhW" id="VZG-78-hre"/>
                     </connections>
                 </viewController>
@@ -152,16 +163,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="300" height="360"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OMD-zF-kc0">
-                                <rect key="frame" x="112" y="172" width="65" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Builds VC" id="hfv-nU-LLr">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="66b-Ak-hUL">
+                                <rect key="frame" x="-2" y="172" width="304" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="You have not set an API key" id="MWc-pI-9iR">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                         </subviews>
                     </view>
+                    <connections>
+                        <outlet property="fallbackView" destination="66b-Ak-hUL" id="HjD-oF-VL3"/>
+                    </connections>
                 </viewController>
                 <customObject id="g4B-bm-3e4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -191,7 +205,7 @@
                             </button>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DZD-1W-DnC">
                                 <rect key="frame" x="20" y="137" width="260" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Enter a regular expression for usernames" drawsBackground="YES" id="j44-4N-vqY">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Enter a regex for usernames" bezelStyle="round" id="j44-4N-vqY">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -213,7 +227,7 @@
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZDW-sn-ehD">
                                 <rect key="frame" x="20" y="64" width="260" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Enter a regular expression for branches" drawsBackground="YES" id="Toe-e9-V6T">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Enter a regex for branches" bezelStyle="round" id="Toe-e9-V6T">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -229,7 +243,7 @@
                             </textField>
                             <secureTextField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gEE-KD-xaT">
                                 <rect key="frame" x="20" y="209" width="260" height="22"/>
-                                <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Enter your Circle CI API Key here" drawsBackground="YES" usesSingleLineMode="YES" id="W0C-8n-jAF">
+                                <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Enter your Circle CI API Key here" usesSingleLineMode="YES" bezelStyle="round" id="W0C-8n-jAF">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -262,6 +276,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="saveUserData:" target="tPe-Nl-DuY" id="fgx-NC-9EE"/>
+                                </connections>
                             </button>
                         </subviews>
                     </view>
@@ -274,6 +291,7 @@
     <resources>
         <image name="back" width="16" height="16"/>
         <image name="circleci-normal" width="15" height="15"/>
+        <image name="power" width="16" height="16"/>
         <image name="settings" width="19.862068176269531" height="19.862068176269531"/>
     </resources>
 </document>

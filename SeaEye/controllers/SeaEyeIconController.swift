@@ -15,6 +15,7 @@ class SeaEyeIconController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupMenuBarIcon()
+        iconButton.image = NSImage(named: "circleci-failed")
     }
     
     private func setupMenuBarIcon() {
@@ -46,7 +47,27 @@ class SeaEyeIconController: NSViewController {
     }
     
     func alternateIconStyle() {
-        println("alternateIconStyle")
+        var currentImage = iconButton.image
+        if let imageName = currentImage?.name() {
+            var alternateImageName : NSString
+            if imageName.hasSuffix("-alt") {
+                alternateImageName = imageName.stringByReplacingOccurrencesOfString(
+                    "-alt",
+                    withString: "",
+                    options: nil,
+                    range: nil
+                )
+            } else {
+                alternateImageName = imageName.stringByAppendingString("-alt")
+            }
+            iconButton.image = NSImage(named: alternateImageName)
+        }
+    }
+    
+    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier! == "SeaEyeOpenPopoverSegue" {
+            self.setupMenuBarIcon()
+        }
     }
     
 }

@@ -9,7 +9,9 @@
 import Cocoa
 
 class SeaEyeSettingsController: NSViewController {
-
+    
+    var parent : SeaEyePopoverController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
@@ -17,6 +19,10 @@ class SeaEyeSettingsController: NSViewController {
     
     @IBAction func openAPIPage(sender: NSButton) {
         NSWorkspace.sharedWorkspace().openURL(NSURL(string: "https://circleci.com/account/api")!)
+    }
+    
+    @IBAction func saveUserData(sender: NSButton) {
+        parent.openBuilds(sender)
     }
     
 }
