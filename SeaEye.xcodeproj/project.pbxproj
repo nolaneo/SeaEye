@@ -1,0 +1,444 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		60C73BDF19FC025A0067CDCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C73BDE19FC025A0067CDCA /* AppDelegate.swift */; };
+		60C73BE119FC025A0067CDCA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C73BE019FC025A0067CDCA /* ViewController.swift */; };
+		60C73BE319FC025A0067CDCA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60C73BE219FC025A0067CDCA /* Images.xcassets */; };
+		60C73BE619FC025A0067CDCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60C73BE419FC025A0067CDCA /* Main.storyboard */; };
+		60C73BF219FC025A0067CDCA /* SeaEyeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C73BF119FC025A0067CDCA /* SeaEyeTests.swift */; };
+		60C73C0219FC0FF40067CDCA /* circleci-normal-alt.png in Resources */ = {isa = PBXBuildFile; fileRef = 60C73C0019FC0FF40067CDCA /* circleci-normal-alt.png */; };
+		60C73C0319FC0FF40067CDCA /* circleci-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 60C73C0119FC0FF40067CDCA /* circleci-normal.png */; };
+		60C73C0619FC16FE0067CDCA /* SeaEyePopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C73C0519FC16FE0067CDCA /* SeaEyePopoverController.swift */; };
+		60C73C0919FC23F60067CDCA /* SeaEyeIconController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C73C0719FC23F60067CDCA /* SeaEyeIconController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		60C73BEC19FC025A0067CDCA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 60C73BD119FC025A0067CDCA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 60C73BD819FC025A0067CDCA;
+			remoteInfo = SeaEye;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		60C73BD919FC025A0067CDCA /* SeaEye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeaEye.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		60C73BDD19FC025A0067CDCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		60C73BDE19FC025A0067CDCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		60C73BE019FC025A0067CDCA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		60C73BE219FC025A0067CDCA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		60C73BE519FC025A0067CDCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		60C73BEB19FC025A0067CDCA /* SeaEyeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeaEyeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		60C73BF019FC025A0067CDCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		60C73BF119FC025A0067CDCA /* SeaEyeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaEyeTests.swift; sourceTree = "<group>"; };
+		60C73C0019FC0FF40067CDCA /* circleci-normal-alt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-normal-alt.png"; sourceTree = "<group>"; };
+		60C73C0119FC0FF40067CDCA /* circleci-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-normal.png"; sourceTree = "<group>"; };
+		60C73C0519FC16FE0067CDCA /* SeaEyePopoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeaEyePopoverController.swift; sourceTree = "<group>"; };
+		60C73C0719FC23F60067CDCA /* SeaEyeIconController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeaEyeIconController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		60C73BD619FC025A0067CDCA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60C73BE819FC025A0067CDCA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		60C73BD019FC025A0067CDCA = {
+			isa = PBXGroup;
+			children = (
+				60C73BDB19FC025A0067CDCA /* SeaEye */,
+				60C73BEE19FC025A0067CDCA /* SeaEyeTests */,
+				60C73BDA19FC025A0067CDCA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		60C73BDA19FC025A0067CDCA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				60C73BD919FC025A0067CDCA /* SeaEye.app */,
+				60C73BEB19FC025A0067CDCA /* SeaEyeTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		60C73BDB19FC025A0067CDCA /* SeaEye */ = {
+			isa = PBXGroup;
+			children = (
+				60C73C0419FC16C60067CDCA /* controllers */,
+				60C73BFF19FC0FF40067CDCA /* res */,
+				60C73BDE19FC025A0067CDCA /* AppDelegate.swift */,
+				60C73BE019FC025A0067CDCA /* ViewController.swift */,
+				60C73BE219FC025A0067CDCA /* Images.xcassets */,
+				60C73BE419FC025A0067CDCA /* Main.storyboard */,
+				60C73BDC19FC025A0067CDCA /* Supporting Files */,
+			);
+			path = SeaEye;
+			sourceTree = "<group>";
+		};
+		60C73BDC19FC025A0067CDCA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				60C73BDD19FC025A0067CDCA /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		60C73BEE19FC025A0067CDCA /* SeaEyeTests */ = {
+			isa = PBXGroup;
+			children = (
+				60C73BF119FC025A0067CDCA /* SeaEyeTests.swift */,
+				60C73BEF19FC025A0067CDCA /* Supporting Files */,
+			);
+			path = SeaEyeTests;
+			sourceTree = "<group>";
+		};
+		60C73BEF19FC025A0067CDCA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				60C73BF019FC025A0067CDCA /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		60C73BFF19FC0FF40067CDCA /* res */ = {
+			isa = PBXGroup;
+			children = (
+				60C73C0019FC0FF40067CDCA /* circleci-normal-alt.png */,
+				60C73C0119FC0FF40067CDCA /* circleci-normal.png */,
+			);
+			path = res;
+			sourceTree = "<group>";
+		};
+		60C73C0419FC16C60067CDCA /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				60C73C0519FC16FE0067CDCA /* SeaEyePopoverController.swift */,
+				60C73C0719FC23F60067CDCA /* SeaEyeIconController.swift */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		60C73BD819FC025A0067CDCA /* SeaEye */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 60C73BF519FC025A0067CDCA /* Build configuration list for PBXNativeTarget "SeaEye" */;
+			buildPhases = (
+				60C73BD519FC025A0067CDCA /* Sources */,
+				60C73BD619FC025A0067CDCA /* Frameworks */,
+				60C73BD719FC025A0067CDCA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SeaEye;
+			productName = SeaEye;
+			productReference = 60C73BD919FC025A0067CDCA /* SeaEye.app */;
+			productType = "com.apple.product-type.application";
+		};
+		60C73BEA19FC025A0067CDCA /* SeaEyeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 60C73BF819FC025A0067CDCA /* Build configuration list for PBXNativeTarget "SeaEyeTests" */;
+			buildPhases = (
+				60C73BE719FC025A0067CDCA /* Sources */,
+				60C73BE819FC025A0067CDCA /* Frameworks */,
+				60C73BE919FC025A0067CDCA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				60C73BED19FC025A0067CDCA /* PBXTargetDependency */,
+			);
+			name = SeaEyeTests;
+			productName = SeaEyeTests;
+			productReference = 60C73BEB19FC025A0067CDCA /* SeaEyeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		60C73BD119FC025A0067CDCA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = Nolaneo;
+				TargetAttributes = {
+					60C73BD819FC025A0067CDCA = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					60C73BEA19FC025A0067CDCA = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 60C73BD819FC025A0067CDCA;
+					};
+				};
+			};
+			buildConfigurationList = 60C73BD419FC025A0067CDCA /* Build configuration list for PBXProject "SeaEye" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 60C73BD019FC025A0067CDCA;
+			productRefGroup = 60C73BDA19FC025A0067CDCA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				60C73BD819FC025A0067CDCA /* SeaEye */,
+				60C73BEA19FC025A0067CDCA /* SeaEyeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		60C73BD719FC025A0067CDCA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60C73BE319FC025A0067CDCA /* Images.xcassets in Resources */,
+				60C73C0219FC0FF40067CDCA /* circleci-normal-alt.png in Resources */,
+				60C73C0319FC0FF40067CDCA /* circleci-normal.png in Resources */,
+				60C73BE619FC025A0067CDCA /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60C73BE919FC025A0067CDCA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		60C73BD519FC025A0067CDCA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60C73BE119FC025A0067CDCA /* ViewController.swift in Sources */,
+				60C73BDF19FC025A0067CDCA /* AppDelegate.swift in Sources */,
+				60C73C0919FC23F60067CDCA /* SeaEyeIconController.swift in Sources */,
+				60C73C0619FC16FE0067CDCA /* SeaEyePopoverController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60C73BE719FC025A0067CDCA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60C73BF219FC025A0067CDCA /* SeaEyeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		60C73BED19FC025A0067CDCA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 60C73BD819FC025A0067CDCA /* SeaEye */;
+			targetProxy = 60C73BEC19FC025A0067CDCA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		60C73BE419FC025A0067CDCA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				60C73BE519FC025A0067CDCA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		60C73BF319FC025A0067CDCA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		60C73BF419FC025A0067CDCA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		60C73BF619FC025A0067CDCA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SeaEye/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		60C73BF719FC025A0067CDCA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SeaEye/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		60C73BF919FC025A0067CDCA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SeaEyeTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SeaEye.app/Contents/MacOS/SeaEye";
+			};
+			name = Debug;
+		};
+		60C73BFA19FC025A0067CDCA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SeaEyeTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SeaEye.app/Contents/MacOS/SeaEye";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		60C73BD419FC025A0067CDCA /* Build configuration list for PBXProject "SeaEye" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				60C73BF319FC025A0067CDCA /* Debug */,
+				60C73BF419FC025A0067CDCA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		60C73BF519FC025A0067CDCA /* Build configuration list for PBXNativeTarget "SeaEye" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				60C73BF619FC025A0067CDCA /* Debug */,
+				60C73BF719FC025A0067CDCA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		60C73BF819FC025A0067CDCA /* Build configuration list for PBXNativeTarget "SeaEyeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				60C73BF919FC025A0067CDCA /* Debug */,
+				60C73BFA19FC025A0067CDCA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 60C73BD119FC025A0067CDCA /* Project object */;
+}
