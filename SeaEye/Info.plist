@@ -30,7 +30,9 @@
 	<string>Main</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>LSBackgroundOnly</key>
+	<key>LSUIElement</key>
 	<true/>
+	<key>LSBackgroundOnly</key>
+	<false/>
 </dict>
 </plist>

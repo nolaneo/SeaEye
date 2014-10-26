@@ -15,4 +15,8 @@ class SeaEyeSettingsController: NSViewController {
         // Do view setup here.
     }
     
+    @IBAction func openAPIPage(sender: NSButton) {
+        NSWorkspace.sharedWorkspace().openURL(NSURL(string: "https://circleci.com/account/api")!)
+    }
+    
 }
