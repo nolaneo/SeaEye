@@ -17,6 +17,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         statusBarItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1);
         self.setupApplicationMenuViewController();
+        //self.setupRunOnLogin();
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
@@ -29,6 +30,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusBarIconViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeIconController") as? SeaEyeIconController;
         statusBarItem.view = statusBarIconViewController?.view;
     }
+    
+//    func setupRunOnLogin() {
+//        let bundleURL = NSURL.fileURLWithPath(NSBundle.mainBundle().bundlePath)
+//        
+//        let loginItemsList = LSSharedFileListCreate(
+//            nil,
+//            kLSSharedFileListSessionLoginItems.takeRetainedValue(),
+//            nil
+//        )
+//        
+//        let properties = ["com.apple.loginitem.hideonlaunch": true] as CFDictionaryRef
+//        
+//        LSSharedFileListInsertItemURL(
+//            loginItemsList.takeRetainedValue(),
+//            kLSSharedFileListItemLast.takeRetainedValue(),
+//            nil,
+//            nil,
+//            bundleURL,
+//            properties,
+//            nil
+//        )
+//    }
     
 }
 

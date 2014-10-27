@@ -189,22 +189,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="300" height="360"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xGb-ip-b0v">
-                                <rect key="frame" x="18" y="324" width="164" height="18"/>
-                                <buttonCell key="cell" type="check" title="Run SeaEye on startup" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="8f3-aR-3fP">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VVy-E9-exB">
-                                <rect key="frame" x="18" y="294" width="136" height="18"/>
-                                <buttonCell key="cell" type="check" title="Show notifications" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="sGD-JD-KtU">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DZD-1W-DnC">
-                                <rect key="frame" x="20" y="137" width="260" height="22"/>
+                                <rect key="frame" x="20" y="105" width="260" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Enter a regex for usernames" bezelStyle="round" id="j44-4N-vqY">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -212,21 +198,53 @@
                                 </textFieldCell>
                             </textField>
                             <box verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="SV8-x8-8La">
-                                <rect key="frame" x="20" y="273" width="260" height="5"/>
+                                <rect key="frame" x="20" y="308" width="260" height="5"/>
                                 <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <font key="titleFont" metaFont="system"/>
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q4A-PL-ptF">
-                                <rect key="frame" x="20" y="167" width="221" height="17"/>
+                                <rect key="frame" x="20" y="132" width="221" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Only show builds from these users:" id="OvX-2m-Bp8">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p7a-Mh-Mza">
+                                <rect key="frame" x="20" y="155" width="260" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Comma separated project names" bezelStyle="round" id="IZ1-l0-puS">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FfP-3x-GV5">
+                                <rect key="frame" x="20" y="180" width="55" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Projects" id="eXa-zi-Mz6">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W1Q-eg-wDt">
+                                <rect key="frame" x="20" y="205" width="260" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="e.g. Microsoft" bezelStyle="round" id="AHL-NN-9Qr">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KHb-qI-I0m">
+                                <rect key="frame" x="20" y="230" width="122" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Organization Name" id="gni-iG-a1Z">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZDW-sn-ehD">
-                                <rect key="frame" x="20" y="64" width="260" height="22"/>
+                                <rect key="frame" x="20" y="55" width="260" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Enter a regex for branches" bezelStyle="round" id="Toe-e9-V6T">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -234,7 +252,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="41Y-U0-HUj">
-                                <rect key="frame" x="18" y="94" width="243" height="17"/>
+                                <rect key="frame" x="18" y="82" width="243" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Optional: only monitor these branches:" id="7bV-nT-Fg3">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -242,7 +260,7 @@
                                 </textFieldCell>
                             </textField>
                             <secureTextField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gEE-KD-xaT">
-                                <rect key="frame" x="20" y="209" width="260" height="22"/>
+                                <rect key="frame" x="20" y="256" width="260" height="22"/>
                                 <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Enter your Circle CI API Key here" usesSingleLineMode="YES" bezelStyle="round" id="W0C-8n-jAF">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -253,7 +271,7 @@
                                 </secureTextFieldCell>
                             </secureTextField>
                             <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uho-gu-scZ">
-                                <rect key="frame" x="257" y="236" width="25" height="25"/>
+                                <rect key="frame" x="257" y="278" width="25" height="25"/>
                                 <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dR0-hH-BGp">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -263,7 +281,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HqA-Fl-0tY">
-                                <rect key="frame" x="22" y="241" width="110" height="17"/>
+                                <rect key="frame" x="22" y="283" width="110" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Circle CI API Key" id="bzp-5v-joM">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -280,8 +298,29 @@
                                     <action selector="saveUserData:" target="tPe-Nl-DuY" id="fgx-NC-9EE"/>
                                 </connections>
                             </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xGb-ip-b0v">
+                                <rect key="frame" x="18" y="324" width="114" height="18"/>
+                                <buttonCell key="cell" type="check" title="Run on startup" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="8f3-aR-3fP">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VVy-E9-exB">
+                                <rect key="frame" x="146" y="324" width="136" height="18"/>
+                                <buttonCell key="cell" type="check" title="Show notifications" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="sGD-JD-KtU">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
                     </view>
+                    <connections>
+                        <outlet property="apiKeyField" destination="gEE-KD-xaT" id="05d-ae-Iqc"/>
+                        <outlet property="branchesField" destination="ZDW-sn-ehD" id="iHU-dz-CxR"/>
+                        <outlet property="organizationField" destination="W1Q-eg-wDt" id="kNa-6X-IQU"/>
+                        <outlet property="projectsField" destination="p7a-Mh-Mza" id="A2f-Ql-2sz"/>
+                        <outlet property="usersField" destination="DZD-1W-DnC" id="QdE-Bg-FhQ"/>
+                    </connections>
                 </viewController>
                 <customObject id="9if-07-Y83" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

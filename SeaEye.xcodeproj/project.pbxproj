@@ -11,6 +11,8 @@
 		6033149919FDA94D0073EAED /* power@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033149719FDA94D0073EAED /* power@2x.png */; };
 		6033149C19FDAE540073EAED /* circleci-failed-alt.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033149A19FDAE540073EAED /* circleci-failed-alt.png */; };
 		6033149D19FDAE540073EAED /* circleci-failed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033149B19FDAE540073EAED /* circleci-failed.png */; };
+		603314A619FDCBFD0073EAED /* CircleCIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603314A519FDCBFD0073EAED /* CircleCIModel.swift */; };
+		603314A819FEBDEA0073EAED /* Build.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603314A719FEBDEA0073EAED /* Build.swift */; };
 		60C73BDF19FC025A0067CDCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C73BDE19FC025A0067CDCA /* AppDelegate.swift */; };
 		60C73BE319FC025A0067CDCA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60C73BE219FC025A0067CDCA /* Images.xcassets */; };
 		60C73BE619FC025A0067CDCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60C73BE419FC025A0067CDCA /* Main.storyboard */; };
@@ -43,6 +45,8 @@
 		6033149719FDA94D0073EAED /* power@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "power@2x.png"; sourceTree = "<group>"; };
 		6033149A19FDAE540073EAED /* circleci-failed-alt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-failed-alt.png"; sourceTree = "<group>"; };
 		6033149B19FDAE540073EAED /* circleci-failed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-failed.png"; sourceTree = "<group>"; };
+		603314A519FDCBFD0073EAED /* CircleCIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleCIModel.swift; sourceTree = "<group>"; };
+		603314A719FEBDEA0073EAED /* Build.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Build.swift; sourceTree = "<group>"; };
 		60C73BD919FC025A0067CDCA /* SeaEye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeaEye.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60C73BDD19FC025A0067CDCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60C73BDE19FC025A0067CDCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +86,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		603314A419FDCBD90073EAED /* models */ = {
+			isa = PBXGroup;
+			children = (
+				603314A519FDCBFD0073EAED /* CircleCIModel.swift */,
+				603314A719FEBDEA0073EAED /* Build.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
 		60C73BD019FC025A0067CDCA = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +116,7 @@
 		60C73BDB19FC025A0067CDCA /* SeaEye */ = {
 			isa = PBXGroup;
 			children = (
+				603314A419FDCBD90073EAED /* models */,
 				60C73C0419FC16C60067CDCA /* controllers */,
 				60C73BFF19FC0FF40067CDCA /* res */,
 				60C73BDE19FC025A0067CDCA /* AppDelegate.swift */,
@@ -282,6 +296,8 @@
 				60C73C0619FC16FE0067CDCA /* SeaEyePopoverController.swift in Sources */,
 				60C73C1819FD7EE10067CDCA /* SeaEyeSettingsController.swift in Sources */,
 				60C73C1E19FD8C8A0067CDCA /* WindowExtension.swift in Sources */,
+				603314A819FEBDEA0073EAED /* Build.swift in Sources */,
+				603314A619FDCBFD0073EAED /* CircleCIModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

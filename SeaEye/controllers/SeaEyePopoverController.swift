@@ -18,6 +18,7 @@ class SeaEyePopoverController: NSViewController {
     
     var settingsViewController : SeaEyeSettingsController!;
     var buildsViewController : SeaEyeBuildsController!;
+    var model : CircleCIModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +45,8 @@ class SeaEyePopoverController: NSViewController {
         buildsViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeBuildsController") as SeaEyeBuildsController
         
         settingsViewController.parent = self
+        buildsViewController.model = model
+        
         openBuildsButton.hidden = true;
         subcontrollerView.addSubview(buildsViewController.view)
     }

@@ -11,11 +11,12 @@ import Cocoa
 class SeaEyeIconController: NSViewController {
 
     @IBOutlet weak var iconButton : NSButton!;
+    var model = CircleCIModel()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupMenuBarIcon()
-        iconButton.image = NSImage(named: "circleci-failed")
     }
     
     private func setupMenuBarIcon() {
@@ -67,6 +68,8 @@ class SeaEyeIconController: NSViewController {
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
         if segue.identifier! == "SeaEyeOpenPopoverSegue" {
             self.setupMenuBarIcon()
+            let popoverContoller = segue.destinationController as SeaEyePopoverController
+            popoverContoller.model = self.model
         }
     }
     
