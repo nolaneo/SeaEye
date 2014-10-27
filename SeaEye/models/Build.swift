@@ -13,4 +13,5 @@ class Build: NSObject {
     var project : String!
     var result : String!
     var id : Int!
+    var url : NSURL!
 }

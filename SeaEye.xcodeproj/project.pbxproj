@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6014AD8E19FED4C400865329 /* BuildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6014AD8D19FED4C400865329 /* BuildView.swift */; };
+		6014AD9219FED66F00865329 /* circleci-success-large.png in Resources */ = {isa = PBXBuildFile; fileRef = 6014AD9019FED66F00865329 /* circleci-success-large.png */; };
+		6014AD9319FED66F00865329 /* circleci-success-large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6014AD9119FED66F00865329 /* circleci-success-large@2x.png */; };
+		6014AD9619FEE4A900865329 /* open.png in Resources */ = {isa = PBXBuildFile; fileRef = 6014AD9419FEE4A900865329 /* open.png */; };
+		6014AD9719FEE4A900865329 /* open@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6014AD9519FEE4A900865329 /* open@2x.png */; };
 		6033149819FDA94D0073EAED /* power.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033149619FDA94D0073EAED /* power.png */; };
 		6033149919FDA94D0073EAED /* power@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033149719FDA94D0073EAED /* power@2x.png */; };
 		6033149C19FDAE540073EAED /* circleci-failed-alt.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033149A19FDAE540073EAED /* circleci-failed-alt.png */; };
@@ -41,6 +46,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6014AD8D19FED4C400865329 /* BuildView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildView.swift; sourceTree = "<group>"; };
+		6014AD9019FED66F00865329 /* circleci-success-large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-success-large.png"; sourceTree = "<group>"; };
+		6014AD9119FED66F00865329 /* circleci-success-large@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-success-large@2x.png"; sourceTree = "<group>"; };
+		6014AD9419FEE4A900865329 /* open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = open.png; sourceTree = "<group>"; };
+		6014AD9519FEE4A900865329 /* open@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open@2x.png"; sourceTree = "<group>"; };
 		6033149619FDA94D0073EAED /* power.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power.png; sourceTree = "<group>"; };
 		6033149719FDA94D0073EAED /* power@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "power@2x.png"; sourceTree = "<group>"; };
 		6033149A19FDAE540073EAED /* circleci-failed-alt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-failed-alt.png"; sourceTree = "<group>"; };
@@ -86,6 +96,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6014AD8C19FED4B400865329 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				6014AD8D19FED4C400865329 /* BuildView.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		6014AD8F19FED66F00865329 /* circleci-large */ = {
+			isa = PBXGroup;
+			children = (
+				6014AD9019FED66F00865329 /* circleci-success-large.png */,
+				6014AD9119FED66F00865329 /* circleci-success-large@2x.png */,
+			);
+			path = "circleci-large";
+			sourceTree = "<group>";
+		};
 		603314A419FDCBD90073EAED /* models */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +143,7 @@
 		60C73BDB19FC025A0067CDCA /* SeaEye */ = {
 			isa = PBXGroup;
 			children = (
+				6014AD8C19FED4B400865329 /* views */,
 				603314A419FDCBD90073EAED /* models */,
 				60C73C0419FC16C60067CDCA /* controllers */,
 				60C73BFF19FC0FF40067CDCA /* res */,
@@ -156,6 +184,9 @@
 		60C73BFF19FC0FF40067CDCA /* res */ = {
 			isa = PBXGroup;
 			children = (
+				6014AD9419FEE4A900865329 /* open.png */,
+				6014AD9519FEE4A900865329 /* open@2x.png */,
+				6014AD8F19FED66F00865329 /* circleci-large */,
 				6033149A19FDAE540073EAED /* circleci-failed-alt.png */,
 				6033149B19FDAE540073EAED /* circleci-failed.png */,
 				6033149619FDA94D0073EAED /* power.png */,
@@ -261,15 +292,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6014AD9319FED66F00865329 /* circleci-success-large@2x.png in Resources */,
 				60C73C1219FD7D880067CDCA /* settings.png in Resources */,
 				60C73C1C19FD806A0067CDCA /* back@2x.png in Resources */,
+				6014AD9219FED66F00865329 /* circleci-success-large.png in Resources */,
 				6033149D19FDAE540073EAED /* circleci-failed.png in Resources */,
 				6033149919FDA94D0073EAED /* power@2x.png in Resources */,
 				60C73C1019FD7CD60067CDCA /* settings@2x.png in Resources */,
 				60C73BE319FC025A0067CDCA /* Images.xcassets in Resources */,
 				60C73C0219FC0FF40067CDCA /* circleci-normal-alt.png in Resources */,
 				6033149819FDA94D0073EAED /* power.png in Resources */,
+				6014AD9719FEE4A900865329 /* open@2x.png in Resources */,
 				60C73C1B19FD806A0067CDCA /* back.png in Resources */,
+				6014AD9619FEE4A900865329 /* open.png in Resources */,
 				60C73C0319FC0FF40067CDCA /* circleci-normal.png in Resources */,
 				6033149C19FDAE540073EAED /* circleci-failed-alt.png in Resources */,
 				60C73BE619FC025A0067CDCA /* Main.storyboard in Resources */,
@@ -291,6 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				60C73BDF19FC025A0067CDCA /* AppDelegate.swift in Sources */,
+				6014AD8E19FED4C400865329 /* BuildView.swift in Sources */,
 				60C73C0919FC23F60067CDCA /* SeaEyeIconController.swift in Sources */,
 				60C73C1519FD7ECB0067CDCA /* SeaEyeBuildsController.swift in Sources */,
 				60C73C0619FC16FE0067CDCA /* SeaEyePopoverController.swift in Sources */,

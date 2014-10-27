@@ -8,11 +8,12 @@
 
 import Cocoa
 
-class SeaEyeBuildsController: NSViewController {
+class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
 
     var model : CircleCIModel!
     
-    @IBOutlet weak var fallbackView: NSTextField!;
+    @IBOutlet weak var fallbackView: NSTextField!
+    @IBOutlet weak var buildsTable: NSTableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,5 +44,24 @@ class SeaEyeBuildsController: NSViewController {
         }
         fallbackView.hidden = true
     }
+    
+    //NSTableViewDataSource
+    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+        return 20
+    }
+    
+    func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
+        return "LALALA"
+    }
+    
+    //NSTableViewDelegate
+//    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+//        
+//    }
+
+    func selectionShouldChangeInTableView(tableView: NSTableView) -> Bool {
+        return false
+    }
+    
     
 }
