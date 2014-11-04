@@ -12,6 +12,7 @@
 		6014AD9319FED66F00865329 /* circleci-success-large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6014AD9119FED66F00865329 /* circleci-success-large@2x.png */; };
 		6014AD9619FEE4A900865329 /* open.png in Resources */ = {isa = PBXBuildFile; fileRef = 6014AD9419FEE4A900865329 /* open.png */; };
 		6014AD9719FEE4A900865329 /* open@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6014AD9519FEE4A900865329 /* open@2x.png */; };
+		6014AD991A09874E00865329 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6014AD981A09874D00865329 /* Project.swift */; };
 		6033149819FDA94D0073EAED /* power.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033149619FDA94D0073EAED /* power.png */; };
 		6033149919FDA94D0073EAED /* power@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033149719FDA94D0073EAED /* power@2x.png */; };
 		6033149C19FDAE540073EAED /* circleci-failed-alt.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033149A19FDAE540073EAED /* circleci-failed-alt.png */; };
@@ -51,6 +52,7 @@
 		6014AD9119FED66F00865329 /* circleci-success-large@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-success-large@2x.png"; sourceTree = "<group>"; };
 		6014AD9419FEE4A900865329 /* open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = open.png; sourceTree = "<group>"; };
 		6014AD9519FEE4A900865329 /* open@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open@2x.png"; sourceTree = "<group>"; };
+		6014AD981A09874D00865329 /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		6033149619FDA94D0073EAED /* power.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power.png; sourceTree = "<group>"; };
 		6033149719FDA94D0073EAED /* power@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "power@2x.png"; sourceTree = "<group>"; };
 		6033149A19FDAE540073EAED /* circleci-failed-alt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-failed-alt.png"; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			children = (
 				603314A519FDCBFD0073EAED /* CircleCIModel.swift */,
 				603314A719FEBDEA0073EAED /* Build.swift */,
+				6014AD981A09874D00865329 /* Project.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				60C73BDF19FC025A0067CDCA /* AppDelegate.swift in Sources */,
 				6014AD8E19FED4C400865329 /* BuildView.swift in Sources */,
 				60C73C0919FC23F60067CDCA /* SeaEyeIconController.swift in Sources */,
+				6014AD991A09874E00865329 /* Project.swift in Sources */,
 				60C73C1519FD7ECB0067CDCA /* SeaEyeBuildsController.swift in Sources */,
 				60C73C0619FC16FE0067CDCA /* SeaEyePopoverController.swift in Sources */,
 				60C73C1819FD7EE10067CDCA /* SeaEyeSettingsController.swift in Sources */,

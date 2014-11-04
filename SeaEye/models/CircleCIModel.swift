@@ -22,10 +22,10 @@ class CircleCIModel: NSObject {
         )
     }
     
-    func updateModel() {
-
+    func updateProjects() {
+        
     }
-
+    
     private func validateUserSettings() {
         let validation = self.validateKey("SeaEyeAPIKey")
         && self.validateKey("SeaEyeOrganization")

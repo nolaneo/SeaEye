@@ -9,9 +9,12 @@
 import Cocoa
 
 class Build: NSObject {
-    var name : String!
+    var branch : String!
     var project : String!
-    var result : String!
-    var id : Int!
+    var status : String!
+    var subject : String!
+    var user : String!
+    var buildnum : Int!
     var url : NSURL!
+    var date : NSDate!
 }

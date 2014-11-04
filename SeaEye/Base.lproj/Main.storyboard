@@ -203,15 +203,15 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kxh-84-keH">
-                                                                    <rect key="frame" x="55" y="57" width="179" height="17"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Commit Name" id="oJL-fh-97r">
+                                                                    <rect key="frame" x="16" y="57" width="179" height="20"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Success: Commit Name" id="oJL-fh-97r">
                                                                         <font key="font" size="13" name="HelveticaNeue-Medium"/>
-                                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Aia-PJ-x3s">
-                                                                    <rect key="frame" x="55" y="32" width="235" height="17"/>
+                                                                    <rect key="frame" x="18" y="32" width="235" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="en/1024-open-lala-tha" id="yeh-cf-tR1">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -219,19 +219,18 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lDn-dO-xtx">
-                                                                    <rect key="frame" x="55" y="10" width="126" height="14"/>
-                                                                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Success! 17:15 Aug 20" id="Elr-zV-cjJ">
+                                                                    <rect key="frame" x="18" y="10" width="75" height="14"/>
+                                                                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="17:15 Aug 20" id="Elr-zV-cjJ">
                                                                         <font key="font" metaFont="smallSystem"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
-                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2lO-IE-uG2">
-                                                                    <rect key="frame" x="14" y="22" width="35" height="35"/>
-                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="circleci-success-large" id="3LM-ID-JZ5"/>
-                                                                </imageView>
+                                                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="axY-jc-FQ7">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="10" height="80"/>
+                                                                </customView>
                                                                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tXl-Pb-t07">
-                                                                    <rect key="frame" x="266" y="57" width="16" height="16"/>
+                                                                    <rect key="frame" x="272" y="33" width="16" height="16"/>
                                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="open" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="FNF-nM-tA0">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -426,7 +425,6 @@
     <resources>
         <image name="back" width="16" height="16"/>
         <image name="circleci-normal" width="15" height="15"/>
-        <image name="circleci-success-large" width="35" height="35"/>
         <image name="open" width="16" height="16"/>
         <image name="power" width="16" height="16"/>
         <image name="settings" width="19.862068176269531" height="19.862068176269531"/>
