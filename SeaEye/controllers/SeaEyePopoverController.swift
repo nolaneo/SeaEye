@@ -10,14 +10,15 @@ import Cocoa
 
 class SeaEyePopoverController: NSViewController {
 
-    var clickEventMonitor : AnyObject!;
-    @IBOutlet weak var subcontrollerView : NSView!;
-    @IBOutlet weak var openSettingsButton : NSButton!;
-    @IBOutlet weak var openBuildsButton : NSButton!;
-    @IBOutlet weak var shutdownButton : NSButton!;
+    var clickEventMonitor : AnyObject!
+    @IBOutlet weak var subcontrollerView : NSView!
+    @IBOutlet weak var openSettingsButton : NSButton!
+    @IBOutlet weak var openBuildsButton : NSButton!
+    @IBOutlet weak var shutdownButton : NSButton!
+    @IBOutlet weak var opacityFixView: NSImageView!
     
-    var settingsViewController : SeaEyeSettingsController!;
-    var buildsViewController : SeaEyeBuildsController!;
+    var settingsViewController : SeaEyeSettingsController!
+    var buildsViewController : SeaEyeBuildsController!
     var model : CircleCIModel!
     
     override func viewDidLoad() {
@@ -40,6 +41,12 @@ class SeaEyePopoverController: NSViewController {
     }
     
     private func setupViewControllers() {
+        if isDarkModeEnabled() {
+            opacityFixView.image = NSImage(named: "opacity-fix-dark")
+        } else {
+            opacityFixView.image = NSImage(named: "opacity-fix-light")
+        }
+        
         let storyboard = NSStoryboard(name: "Main", bundle: nil);
         settingsViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeSettingsController") as SeaEyeSettingsController
         buildsViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeBuildsController") as SeaEyeBuildsController
@@ -52,9 +59,16 @@ class SeaEyePopoverController: NSViewController {
     }
     
     private func setupNavButtons() {
-        openSettingsButton.image?.setTemplate(true)
-        openBuildsButton.image?.setTemplate(true)
-        shutdownButton.image?.setTemplate(true)
+        //Templated images cause background overlay weirdness
+        if isDarkModeEnabled() {
+            openSettingsButton.image = NSImage(named: "settings")
+            openBuildsButton.image = NSImage(named: "back")
+            shutdownButton.image = NSImage(named: "power")
+        } else {
+            openSettingsButton.image = NSImage(named: "settings-alt")
+            openBuildsButton.image = NSImage(named: "back-alt")
+            shutdownButton.image = NSImage(named: "power-alt")
+        }
     }
     
     @IBAction func openSettings(sender: NSButton) {
@@ -75,5 +89,14 @@ class SeaEyePopoverController: NSViewController {
     
     @IBAction func shutdownApplication(sender: NSButton) {
         NSApplication.sharedApplication().terminate(self);
+    }
+    
+    private func isDarkModeEnabled() -> Bool {
+        let dictionary  = NSUserDefaults.standardUserDefaults().persistentDomainForName(NSGlobalDomain);
+        if let interfaceStyle = dictionary?["AppleInterfaceStyle"] as? NSString {
+            return interfaceStyle.localizedCaseInsensitiveContainsString("dark")
+        } else {
+            return false
+        }
     }
 }

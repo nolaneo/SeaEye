@@ -50,6 +50,7 @@ class BuildView: NSTableCellView {
     private func setColors(color: NSColor) {
         statusAndSubject.textColor = color
         statusColorBox.fillColor = color
+        let cell = statusAndSubject.cell() as NSCell!
     }
     
     private func greenColor() -> NSColor {
