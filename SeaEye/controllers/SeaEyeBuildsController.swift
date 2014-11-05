@@ -17,6 +17,11 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear() {
+        self.setupFallBackViews()
+        self.reloadBuilds()
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: Selector("reloadBuilds"),
@@ -25,22 +30,19 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
         )
     }
     
-    override func viewWillAppear() {
-        self.setupFallBackViews()
-        self.reloadBuilds()
-    }
-    
     override func viewWillDisappear() {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     func reloadBuilds() {
+        println("Reload builds!")
         setupFallBackViews()
         buildsTable.reloadData()
     }
     
     private func setupFallBackViews() {
         fallbackView.hidden = false
+        buildsTable.hidden = true
         let userDefaults = NSUserDefaults.standardUserDefaults()
         if  (userDefaults.stringForKey("SeaEyeAPIKey") == nil) {
             return fallbackView.stringValue = "You have not set an API key"
@@ -58,6 +60,7 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
             return fallbackView.stringValue = "No Recent Builds Found"
         }
         fallbackView.hidden = true
+        buildsTable.hidden = false
     }
     
     //NSTableViewDataSource

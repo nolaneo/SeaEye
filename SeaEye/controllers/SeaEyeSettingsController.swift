@@ -57,7 +57,7 @@ class SeaEyeSettingsController: NSViewController {
     }
     
     private func setupInputFields() {
-        let notify = NSUserDefaults.standardUserDefaults().boolForKey("SeaEyeNotifiy")
+        let notify = NSUserDefaults.standardUserDefaults().boolForKey("SeaEyeNotify")
         if notify {
             self.showNotifications.state = NSOnState
         } else {

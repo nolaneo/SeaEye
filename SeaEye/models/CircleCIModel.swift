@@ -47,6 +47,7 @@ class CircleCIModel: NSObject {
     
     func updateBuilds() {
         autoreleasepool {
+            println("Update builds!")
             var builds: [Build] = []
             for (project) in (self.allProjects) {
                 if let projectBuilds = project.projectBuilds {
@@ -106,9 +107,10 @@ class CircleCIModel: NSObject {
         let validation = self.validateKey("SeaEyeAPIKey")
         && self.validateKey("SeaEyeOrganization")
         && self.validateKey("SeaEyeProjects")
-        && self.validateKey("SeaEyeUsers")
         
         if (validation) {
+            allBuilds = nil
+            NSNotificationCenter.defaultCenter().postNotificationName("SeaEyeUpdatedBuilds", object: nil)
             resetAPIRequests()
         } else {
             stopAPIRequests()
@@ -125,9 +127,9 @@ class CircleCIModel: NSObject {
     }
     
     private func resetAPIRequests() {
-        if let allProjects = allProjects {
-            self.stopAPIRequests()
-        }
+
+        self.stopAPIRequests()
+        
         allProjects = []
         let userDefaults = NSUserDefaults.standardUserDefaults()
         let apiKey = userDefaults.stringForKey("SeaEyeAPIKey") as String!
@@ -151,6 +153,9 @@ class CircleCIModel: NSObject {
     }
     
     private func stopAPIRequests() {
+        if allProjects == nil {
+            return
+        }
         for(project) in (allProjects) {
             project.stop();
         }

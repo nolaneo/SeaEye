@@ -101,15 +101,35 @@ class Project: NSObject, NSURLConnectionDelegate {
         var builds = Array<Build>()
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        var userRegex : NSRegularExpression!
+        var branchRegex : NSRegularExpression!
+        if let user = NSUserDefaults.standardUserDefaults().stringForKey("SeaEyeUsers") {
+            userRegex = NSRegularExpression(pattern: user,
+                options: NSRegularExpressionOptions.CaseInsensitive,
+                error: nil
+            )
+        }
+        if let branches = NSUserDefaults.standardUserDefaults().stringForKey("SeaEyeBranches") {
+            branchRegex = NSRegularExpression(pattern: branches,
+                options: NSRegularExpressionOptions.CaseInsensitive,
+                error: nil
+            )
+        }
         for (buildJson) in (buildsJsonArray) {
             let build = Build()
             if let branch = buildJson.objectForKey("branch") as? String {
                 build.branch = branch
             }
+            if !matchRegex(branchRegex, string: build.branch) {
+                continue
+            }
             if let user = buildJson.objectForKey("user")?.objectForKey("login") as? String {
                 build.user = user
             } else if let user = buildJson.objectForKey("author_name") as? String {
                 build.user = user
+            }
+            if !matchRegex(userRegex, string: build.user) {
+                continue
             }
             if let status = buildJson.objectForKey("status") as? String {
                 build.status = status
@@ -138,6 +158,14 @@ class Project: NSObject, NSURLConnectionDelegate {
         }
         projectBuilds = builds
         parent.runModelUpdates()
+    }
+    
+    private func matchRegex(regex: NSRegularExpression!, string: String!) -> Bool {
+        if regex == nil {
+            return true
+        }
+        let matches = regex.matchesInString(string, options: nil, range: NSMakeRange(0, countElements(string)))
+        return matches.count != 0
     }
 
 }
