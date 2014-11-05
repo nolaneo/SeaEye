@@ -56,10 +56,6 @@ class CircleCIModel: NSObject {
             self.allBuilds.sort {$0.date.timeIntervalSince1970 > $1.date.timeIntervalSince1970}
             
             self.calculateBuildStatus()
-            
-    //        for (build) in (allBuilds) {
-    //            println(build.subject)
-    //        }
         }
     }
     
@@ -75,8 +71,9 @@ class CircleCIModel: NSObject {
                 if build.date.timeIntervalSince1970 > lastNotificationDate.timeIntervalSince1970 {
                     switch build.status {
                         case "failed": hasRedBuild = true; failures++; failedBuild = build; break;
-                        case "failed": hasRedBuild = true; failures++; failedBuild = build; break;
+                        case "timed out": hasRedBuild = true; failures++; failedBuild = build; break;
                         case "success": hasGreenBuild = true; successes++; successfulBuild = build; break;
+                        case "fixed": hasGreenBuild = true; successes++; successfulBuild = build; break;
                         default: break;
                     }
                 }
@@ -86,12 +83,16 @@ class CircleCIModel: NSObject {
             
             if failures > 1 {
                 println("Has multiple failues")
+                NSNotificationCenter.defaultCenter().postNotificationName("SeaEyeRedBuild", object: nil)
             } else if hasRedBuild {
-                println("Has red build")
+                println("Has red build \(failedBuild.subject)")
+                NSNotificationCenter.defaultCenter().postNotificationName("SeaEyeRedBuild", object: nil)
             } else if successes > 1 {
                 println("Has multiple successes")
+                NSNotificationCenter.defaultCenter().postNotificationName("SeaEyeGreenBuild", object: nil)
             } else if hasGreenBuild {
-                println("Has green build")
+                println("Has green build \(successfulBuild.subject)")
+                NSNotificationCenter.defaultCenter().postNotificationName("SeaEyeGreenBuild", object: nil)
             }
         }
         lastNotificationDate = NSDate()

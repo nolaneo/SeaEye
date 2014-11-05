@@ -12,18 +12,30 @@ class SeaEyeIconController: NSViewController {
 
     @IBOutlet weak var iconButton : NSButton!;
     var model = CircleCIModel()
-    
+    var hasViewedBuilds = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupMenuBarIcon()
+        self.setupStyleNotificationObserver()
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: Selector("alert:"),
             name: "SeaEyeAlert",
             object: nil
         )
-
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: Selector("setRedBuildIcon"),
+            name: "SeaEyeRedBuild",
+            object: nil
+        )
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: Selector("setGreenBuildIcon"),
+            name: "SeaEyeGreenBuild",
+            object: nil
+        )
     }
     
     func alert(notification: NSNotification) {
@@ -35,8 +47,27 @@ class SeaEyeIconController: NSViewController {
         }
     }
     
+    func setGreenBuildIcon() {
+        if hasViewedBuilds {
+            if (self.isDarkModeEnabled()) {
+                iconButton.image = NSImage(named: "circleci-success-alt")
+            } else {
+                iconButton.image = NSImage(named: "circleci-success")
+            }
+        }
+    }
+    
+    func setRedBuildIcon() {
+        hasViewedBuilds = false
+        if (self.isDarkModeEnabled()) {
+            iconButton.image = NSImage(named: "circleci-failed-alt")
+        } else {
+            iconButton.image = NSImage(named: "circleci-failed")
+        }
+    }
+    
     private func setupMenuBarIcon() {
-        self.setupStyleNotificationObserver()
+        hasViewedBuilds = true
         if (self.isDarkModeEnabled()) {
             iconButton.image = NSImage(named: "circleci-normal-alt")
         } else {

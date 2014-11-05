@@ -68,32 +68,32 @@ class Project: NSObject, NSURLConnectionDelegate {
     }
     
     func connectionDidFinishLoading(connection: NSURLConnection!) {
-        let receivedData = NSString(data: data, encoding: NSUTF8StringEncoding)
-        if receivedData? == "{\"message\":\"Couldn't find project at GitHub.\"}" {
-            println("No project was found for \(projectName). Check your API key is correct.")
-            var info = ["errorMessage": "No project was found for \(organizationName)/\(projectName). Check your API key is correct."]
-            NSNotificationCenter.defaultCenter().postNotificationName(
-                "SeaEyeAlert",
-                object: self,
-                userInfo: info
-            )
-            return self.stop()
+        autoreleasepool {
+            let receivedData = NSString(data: self.data, encoding: NSUTF8StringEncoding)
+            if receivedData? == "{\"message\":\"Couldn't find project at GitHub.\"}" {
+                println("No project was found for \(self.projectName). Check your API key is correct.")
+                var info = ["errorMessage": "No project was found for \(self.organizationName)/\(self.projectName). Check your API key is correct."]
+                NSNotificationCenter.defaultCenter().postNotificationName(
+                    "SeaEyeAlert",
+                    object: self,
+                    userInfo: info
+                )
+                return self.stop()
+            }
+            var err: NSError?
+            var json = NSJSONSerialization.JSONObjectWithData(
+                self.data,
+                options: NSJSONReadingOptions.MutableContainers,
+                error: &err
+                ) as Array<NSDictionary>
+            
+            if let error = err {
+                println("An error occured while parsing the json for project \(self.projectName)")
+            } else {
+                self.buildsJsonArray = json
+                self.updateBuilds()
+            }
         }
-        var err: NSError?
-        var json = NSJSONSerialization.JSONObjectWithData(
-            data,
-            options: NSJSONReadingOptions.MutableContainers,
-            error: &err
-            ) as Array<NSDictionary>
-        
-        if let error = err {
-            println("An error occured while parsing the json for project \(projectName)")
-        } else {
-            println("Loaded the json successfully for project \(projectName)")
-            buildsJsonArray = json
-            self.updateBuilds()
-        }
-        
     }
     
     private func updateBuilds() {
@@ -115,6 +115,8 @@ class Project: NSObject, NSURLConnectionDelegate {
             }
             if let subject = buildJson.objectForKey("subject") as? String {
                 build.subject = subject
+            } else {
+                build.subject = build.branch
             }
             if let build_url = buildJson.objectForKey("build_url") as? String {
                 build.url = NSURL(string: build_url)!

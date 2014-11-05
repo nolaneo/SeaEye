@@ -38,20 +38,20 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
             fallbackView.stringValue = "You have not added any projects"
             return
         }
-        if (userDefaults.stringForKey("SeaEyeUsers") == nil) {
-            fallbackView.stringValue = "You have not added users to follow"
-            return
-        }
         fallbackView.hidden = true
     }
     
     //NSTableViewDataSource
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        return 20
+        if model.allBuilds != nil {
+            return model.allBuilds.count
+        } else {
+            return 0
+        }
     }
     
     func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
-        return "LALALA"
+        return model.allBuilds[row]
     }
     
     //NSTableViewDelegate
