@@ -40,7 +40,7 @@ class Project: NSObject, NSURLConnectionDelegate {
     }
     
     func stop() {
-        if let timer = timer {
+        if timer != nil {
             timer.invalidate()
         }
     }
@@ -71,7 +71,7 @@ class Project: NSObject, NSURLConnectionDelegate {
         let receivedData = NSString(data: data, encoding: NSUTF8StringEncoding)
         if receivedData? == "{\"message\":\"Couldn't find project at GitHub.\"}" {
             println("No project was found for \(projectName). Check your API key is correct.")
-            var info = ["errorMessage": "No project was found for \(projectName). Check your API key is correct."]
+            var info = ["errorMessage": "No project was found for \(organizationName)/\(projectName). Check your API key is correct."]
             NSNotificationCenter.defaultCenter().postNotificationName(
                 "SeaEyeAlert",
                 object: self,
@@ -134,7 +134,7 @@ class Project: NSObject, NSURLConnectionDelegate {
             builds.append(build)
         }
         projectBuilds = builds
-        parent.updateBuilds()
+        parent.runModelUpdates()
     }
 
 }

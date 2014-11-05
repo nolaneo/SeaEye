@@ -26,27 +26,75 @@ class CircleCIModel: NSObject {
     var allProjects: [Project]!
     var allBuilds: [Build]!
     var lastNotificationDate: NSDate!
+    var updatesTimer: NSTimer!
     
-    func updateProjects() {
-        println("Doo Stuff")
+    func runModelUpdates() {
+        objc_sync_enter(self)
+        //Debounce the calls to this function
+        if updatesTimer != nil {
+            updatesTimer.invalidate()
+        }
+        updatesTimer = NSTimer.scheduledTimerWithTimeInterval(
+            NSTimeInterval(3),
+            target: self,
+            selector: Selector("updateBuilds"),
+            userInfo: nil,
+            repeats: false
+        )
+        objc_sync_exit(self)
     }
     
     func updateBuilds() {
-        objc_sync_enter(self)
-        
-        var builds: [Build] = []
-        for (project) in (allProjects) {
-            if let projectBuilds = project.projectBuilds {
-                builds += projectBuilds
+        autoreleasepool {
+            var builds: [Build] = []
+            for (project) in (self.allProjects) {
+                if let projectBuilds = project.projectBuilds {
+                    builds += projectBuilds
+                }
+            }
+            self.allBuilds = builds
+            self.allBuilds.sort {$0.date.timeIntervalSince1970 > $1.date.timeIntervalSince1970}
+            
+            self.calculateBuildStatus()
+            
+    //        for (build) in (allBuilds) {
+    //            println(build.subject)
+    //        }
+        }
+    }
+    
+    func calculateBuildStatus() {
+        if lastNotificationDate != nil {
+            var hasGreenBuild = false
+            var hasRedBuild = false
+            var failures = 0
+            var successes = 0
+            var failedBuild : Build!
+            var successfulBuild : Build!
+            for(build) in (allBuilds) {
+                if build.date.timeIntervalSince1970 > lastNotificationDate.timeIntervalSince1970 {
+                    switch build.status {
+                        case "failed": hasRedBuild = true; failures++; failedBuild = build; break;
+                        case "failed": hasRedBuild = true; failures++; failedBuild = build; break;
+                        case "success": hasGreenBuild = true; successes++; successfulBuild = build; break;
+                        default: break;
+                    }
+                }
+            }
+            
+            let showDesktopNotifications = NSUserDefaults.standardUserDefaults().boolForKey("SeaEyeNotify")
+            
+            if failures > 1 {
+                println("Has multiple failues")
+            } else if hasRedBuild {
+                println("Has red build")
+            } else if successes > 1 {
+                println("Has multiple successes")
+            } else if hasGreenBuild {
+                println("Has green build")
             }
         }
-        allBuilds = builds
-        allBuilds.sort {$0.date.timeIntervalSince1970 > $1.date.timeIntervalSince1970}
-        objc_sync_exit(self)
-        
-//        for(build) in (allBuilds) {
-//            println("\(build.subject) \(build.status) at \(build.date)")
-//        }
+        lastNotificationDate = NSDate()
     }
     
     func validateUserSettingsAndStartRequests() {

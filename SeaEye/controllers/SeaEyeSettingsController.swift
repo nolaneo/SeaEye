@@ -35,6 +35,7 @@ class SeaEyeSettingsController: NSViewController {
     }
     
     @IBAction func saveUserData(sender: NSButton) {
+        NSUserDefaults.standardUserDefaults().setBool(showNotifications.enabled, forKey: "SeaEyeNotify")
         self.setUserDefaultsFromField(apiKeyField, key: "SeaEyeAPIKey")
         self.setUserDefaultsFromField(organizationField, key: "SeaEyeOrganization")
         self.setUserDefaultsFromField(projectsField, key: "SeaEyeProjects")
@@ -55,6 +56,7 @@ class SeaEyeSettingsController: NSViewController {
     }
     
     private func setupInputFields() {
+        self.showNotifications.enabled = NSUserDefaults.standardUserDefaults().boolForKey("SeaEyeNotifiy")
         self.setupFieldFromUserDefaults(apiKeyField, key: "SeaEyeAPIKey")
         self.setupFieldFromUserDefaults(organizationField, key: "SeaEyeOrganization")
         self.setupFieldFromUserDefaults(projectsField, key: "SeaEyeProjects")
