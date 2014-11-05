@@ -9,12 +9,13 @@
 import Cocoa
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
 
     var statusBarItem : NSStatusItem = NSStatusItem();
     var statusBarIconViewController : SeaEyeIconController?;
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
+        NSUserNotificationCenter.defaultUserNotificationCenter().delegate = self
         statusBarItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1);
         self.setupApplicationMenuViewController();
         //self.setupRunOnLogin();
@@ -29,6 +30,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let storyboard = NSStoryboard(name: "Main", bundle: nil);
         statusBarIconViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeIconController") as? SeaEyeIconController;
         statusBarItem.view = statusBarIconViewController?.view;
+    }
+    
+    func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {
+        return true
     }
     
 //    func setupRunOnLogin() {

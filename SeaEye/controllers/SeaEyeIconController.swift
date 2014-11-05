@@ -17,6 +17,22 @@ class SeaEyeIconController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupMenuBarIcon()
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: Selector("alert:"),
+            name: "SeaEyeAlert",
+            object: nil
+        )
+
+    }
+    
+    func alert(notification: NSNotification) {
+        if let errorMessage = notification.userInfo!["errorMessage"] as? String {
+            var notification = NSUserNotification()
+            notification.title = "SeaEye"
+            notification.informativeText = errorMessage
+            NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
+        }
     }
     
     private func setupMenuBarIcon() {
@@ -72,5 +88,4 @@ class SeaEyeIconController: NSViewController {
             popoverContoller.model = self.model
         }
     }
-    
 }
