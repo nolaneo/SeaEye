@@ -24,9 +24,10 @@ class BuildView: NSTableCellView {
                 case "success": setColors(greenColor()); break;
                 case "fixed": setColors(greenColor()); break;
                 case "failed": setColors(redColor()); break;
-                case "timed out": setColors(redColor()); break;
+                case "timedout": setColors(redColor()); break;
                 case "running": setColors(blueColor()); break;
                 case "canceled": setColors(grayColor()); break;
+                case "retried": setColors(grayColor()); break;
                 default: break;
             }
             branchName.stringValue = build.branch

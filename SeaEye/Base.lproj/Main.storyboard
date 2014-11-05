@@ -298,7 +298,7 @@
                         <subviews>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DZD-1W-DnC">
                                 <rect key="frame" x="20" y="105" width="260" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Enter a regex for usernames" bezelStyle="round" id="j44-4N-vqY">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="(Optional) Enter a regex for usernames" bezelStyle="round" id="j44-4N-vqY">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -352,15 +352,15 @@
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZDW-sn-ehD">
                                 <rect key="frame" x="20" y="55" width="260" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Enter a regex for branches" bezelStyle="round" id="Toe-e9-V6T">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="(Optional) Enter a regex for branches" bezelStyle="round" id="Toe-e9-V6T">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="41Y-U0-HUj">
-                                <rect key="frame" x="18" y="82" width="243" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Optional: only monitor these branches:" id="7bV-nT-Fg3">
+                                <rect key="frame" x="18" y="82" width="186" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Only monitor these branches:" id="7bV-nT-Fg3">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -426,6 +426,7 @@
                         <outlet property="branchesField" destination="ZDW-sn-ehD" id="iHU-dz-CxR"/>
                         <outlet property="organizationField" destination="W1Q-eg-wDt" id="kNa-6X-IQU"/>
                         <outlet property="projectsField" destination="p7a-Mh-Mza" id="A2f-Ql-2sz"/>
+                        <outlet property="showNotifications" destination="VVy-E9-exB" id="XiA-jW-mLD"/>
                         <outlet property="usersField" destination="DZD-1W-DnC" id="QdE-Bg-FhQ"/>
                     </connections>
                 </viewController>

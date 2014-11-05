@@ -33,6 +33,7 @@ class CircleCIModel: NSObject {
         //Debounce the calls to this function
         if updatesTimer != nil {
             updatesTimer.invalidate()
+            updatesTimer = nil
         }
         updatesTimer = NSTimer.scheduledTimerWithTimeInterval(
             NSTimeInterval(3),
@@ -71,7 +72,7 @@ class CircleCIModel: NSObject {
                 if build.date.timeIntervalSince1970 > lastNotificationDate.timeIntervalSince1970 {
                     switch build.status {
                         case "failed": hasRedBuild = true; failures++; failedBuild = build; break;
-                        case "timed out": hasRedBuild = true; failures++; failedBuild = build; break;
+                        case "timedout": hasRedBuild = true; failures++; failedBuild = build; break;
                         case "success": hasGreenBuild = true; successes++; successfulBuild = build; break;
                         case "fixed": hasGreenBuild = true; successes++; successfulBuild = build; break;
                         default: break;
@@ -79,22 +80,25 @@ class CircleCIModel: NSObject {
                 }
             }
             
-            let showDesktopNotifications = NSUserDefaults.standardUserDefaults().boolForKey("SeaEyeNotify")
-            
             if failures > 1 {
                 println("Has multiple failues")
-                NSNotificationCenter.defaultCenter().postNotificationName("SeaEyeRedBuild", object: nil)
+                let info = ["build": failedBuild, "count": failures]
+                NSNotificationCenter.defaultCenter().postNotificationName("SeaEyeRedBuild", object: nil, userInfo:info)
             } else if hasRedBuild {
                 println("Has red build \(failedBuild.subject)")
-                NSNotificationCenter.defaultCenter().postNotificationName("SeaEyeRedBuild", object: nil)
+                let info = ["build": failedBuild, "count": failures]
+                NSNotificationCenter.defaultCenter().postNotificationName("SeaEyeRedBuild", object: nil, userInfo:info)
             } else if successes > 1 {
                 println("Has multiple successes")
-                NSNotificationCenter.defaultCenter().postNotificationName("SeaEyeGreenBuild", object: nil)
+                let info = ["build": successfulBuild, "count": successes]
+                NSNotificationCenter.defaultCenter().postNotificationName("SeaEyeGreenBuild", object: nil, userInfo:info)
             } else if hasGreenBuild {
                 println("Has green build \(successfulBuild.subject)")
-                NSNotificationCenter.defaultCenter().postNotificationName("SeaEyeGreenBuild", object: nil)
+                let info = ["build": successfulBuild, "count": successes]
+                NSNotificationCenter.defaultCenter().postNotificationName("SeaEyeGreenBuild", object: nil, userInfo:info)
             }
         }
+        NSNotificationCenter.defaultCenter().postNotificationName("SeaEyeUpdatedBuilds", object: nil)
         lastNotificationDate = NSDate()
     }
     

@@ -42,6 +42,7 @@ class Project: NSObject, NSURLConnectionDelegate {
     func stop() {
         if timer != nil {
             timer.invalidate()
+            timer = nil
         }
     }
     

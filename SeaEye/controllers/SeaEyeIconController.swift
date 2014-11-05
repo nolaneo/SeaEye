@@ -26,13 +26,13 @@ class SeaEyeIconController: NSViewController {
         )
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: Selector("setRedBuildIcon"),
+            selector: Selector("setRedBuildIcon:"),
             name: "SeaEyeRedBuild",
             object: nil
         )
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: Selector("setGreenBuildIcon"),
+            selector: Selector("setGreenBuildIcon:"),
             name: "SeaEyeGreenBuild",
             object: nil
         )
@@ -47,23 +47,58 @@ class SeaEyeIconController: NSViewController {
         }
     }
     
-    func setGreenBuildIcon() {
+    func setGreenBuildIcon(notification: NSNotification) {
         if hasViewedBuilds {
             if (self.isDarkModeEnabled()) {
                 iconButton.image = NSImage(named: "circleci-success-alt")
             } else {
                 iconButton.image = NSImage(named: "circleci-success")
             }
+            if NSUserDefaults.standardUserDefaults().boolForKey("SeaEyeNotify") {
+                let build = notification.userInfo!["build"] as Build!
+                let count = notification.userInfo!["count"] as Int!
+                showSuccessfulBuildNotification(build, count: count)
+            }
         }
     }
     
-    func setRedBuildIcon() {
+    func setRedBuildIcon(notification: NSNotification) {
         hasViewedBuilds = false
         if (self.isDarkModeEnabled()) {
             iconButton.image = NSImage(named: "circleci-failed-alt")
         } else {
             iconButton.image = NSImage(named: "circleci-failed")
         }
+        
+        if NSUserDefaults.standardUserDefaults().boolForKey("SeaEyeNotify") {
+            let build = notification.userInfo!["build"] as Build!
+            let count = notification.userInfo!["count"] as Int!
+            showFailedBuildNotification(build, count: count)
+        }
+    }
+    
+    private func showFailedBuildNotification(build: Build, count: Int) {
+        var notification = NSUserNotification()
+        notification.title = "SeaEye"
+        if count > 1 {
+            notification.subtitle = "You have \(count) failed builds"
+        } else {
+            notification.subtitle = build.subject
+            notification.informativeText = "Your build failed!"
+        }
+        NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
+    }
+    
+    private func showSuccessfulBuildNotification(build: Build, count: Int) {
+        var notification = NSUserNotification()
+        notification.title = "SeaEye"
+        if count > 1 {
+            notification.subtitle = "You have \(count) successful builds"
+        } else {
+            notification.subtitle = build.subject
+            notification.informativeText = "Your build passed!"
+        }
+        NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
     }
     
     private func setupMenuBarIcon() {

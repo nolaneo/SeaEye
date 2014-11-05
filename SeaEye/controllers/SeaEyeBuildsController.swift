@@ -17,26 +17,45 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: Selector("reloadBuilds"),
+            name: "SeaEyeUpdatedBuilds",
+            object: nil
+        )
     }
     
     override func viewWillAppear() {
         self.setupFallBackViews()
+        self.reloadBuilds()
+    }
+    
+    override func viewWillDisappear() {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    func reloadBuilds() {
+        setupFallBackViews()
+        buildsTable.reloadData()
     }
     
     private func setupFallBackViews() {
         fallbackView.hidden = false
         let userDefaults = NSUserDefaults.standardUserDefaults()
         if  (userDefaults.stringForKey("SeaEyeAPIKey") == nil) {
-            fallbackView.stringValue = "You have not set an API key"
-            return
+            return fallbackView.stringValue = "You have not set an API key"
         }
         if (userDefaults.stringForKey("SeaEyeOrganization") == nil) {
-            fallbackView.stringValue = "You have not set an organization name"
-            return
+            return fallbackView.stringValue = "You have not set an organization name"
         }
         if (userDefaults.valueForKey("SeaEyeProjects") == nil) {
-            fallbackView.stringValue = "You have not added any projects"
-            return
+            return fallbackView.stringValue = "You have not added any projects"
+        }
+        if (model.allBuilds == nil) {
+            return fallbackView.stringValue = "Loading Recent Builds"
+        }
+        if (model.allBuilds.count == 0) {
+            return fallbackView.stringValue = "No Recent Builds Found"
         }
         fallbackView.hidden = true
     }

@@ -16,8 +16,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         NSUserNotificationCenter.defaultUserNotificationCenter().delegate = self
-        statusBarItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1);
-        self.setupApplicationMenuViewController();
+        statusBarItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
+        self.setupApplicationMenuViewController()
+        self.initialSetup()
         //self.setupRunOnLogin();
     }
 
@@ -27,15 +28,23 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 
     
     func setupApplicationMenuViewController() {
-        let storyboard = NSStoryboard(name: "Main", bundle: nil);
-        statusBarIconViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeIconController") as? SeaEyeIconController;
-        statusBarItem.view = statusBarIconViewController?.view;
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        statusBarIconViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeIconController") as? SeaEyeIconController
+        statusBarItem.view = statusBarIconViewController?.view
     }
     
     func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {
         return true
     }
     
+    
+    private func initialSetup() {
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        if userDefaults.boolForKey("SeaEyePerformedFirstSetup") == false {
+            userDefaults.setBool(true, forKey: "SeaEyeNotify")
+            userDefaults.setBool(true, forKey: "SeaEyePerformedFirstSetup")
+        }
+    }
 //    func setupRunOnLogin() {
 //        let bundleURL = NSURL.fileURLWithPath(NSBundle.mainBundle().bundlePath)
 //        
