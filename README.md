@@ -52,7 +52,7 @@ SeaEye is a menu bar notification app for CircleCI written in Swift.
 
 ---
 ###TODO
-* Add the ability to add application to start up programs.
+* Add the ability to add SeaEye to the user's start up programs.
 * Add paste support to the settings page.
 * Add retina menu bar icons.
 * Add a better transparency fix.
