@@ -18,16 +18,19 @@ SeaEye is a menu bar notification app for CircleCI written in Swift.
 ---
 
 ![](https://raw.githubusercontent.com/nolaneo/SeaEye/master/Screenshots/builds.png)
+
 *Builds are shown right from the menu bar.*
 
 
 ![](https://raw.githubusercontent.com/nolaneo/SeaEye/master/Screenshots/notification.png)
+
 *Notifications let you know when your builds have finished.*
 
 *Don't want notifications? The menu bar icon will still update you.*
 
 
 ![](https://raw.githubusercontent.com/nolaneo/SeaEye/master/Screenshots/settings.png)
+
 *It's simple to set up*
 
 
