@@ -84,8 +84,10 @@ class SeaEyeIconController: NSViewController {
             notification.subtitle = "You have \(count) failed builds"
         } else {
             notification.subtitle = build.subject
-            notification.informativeText = "Your build failed!"
         }
+        let image = NSImage(named: "circle-failed-large")
+        notification.setValue(image, forKey: "_identityImage")
+        notification.setValue(false, forKey: "_identityImageHasBorder")
         NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
     }
     
@@ -96,8 +98,10 @@ class SeaEyeIconController: NSViewController {
             notification.subtitle = "You have \(count) successful builds"
         } else {
             notification.subtitle = build.subject
-            notification.informativeText = "Your build passed!"
         }
+        let image = NSImage(named: "circle-success-large")
+        notification.setValue(image, forKey: "_identityImage")
+        notification.setValue(false, forKey: "_identityImageHasBorder")
         NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
     }
     
