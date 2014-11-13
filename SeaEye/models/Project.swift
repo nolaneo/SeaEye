@@ -105,7 +105,7 @@ class Project: NSObject, NSURLConnectionDelegate {
                 notifyError("No project was found for [\(self.organizationName)/\(self.projectName)] Check that no invalid characters are included in your project names.")
                 return false;
             }
-
+            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "SeaEyeError")
             return true;
             
         } else {
@@ -115,7 +115,7 @@ class Project: NSObject, NSURLConnectionDelegate {
     
     private func notifyError(error: String) {
         println(error)
-        NSUserDefaults.standardUserDefaults().setValue(error, forKey: "SeaEyeError")
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "SeaEyeError")
         var info = ["errorMessage": error]
         NSNotificationCenter.defaultCenter().postNotificationName(
             "SeaEyeAlert",

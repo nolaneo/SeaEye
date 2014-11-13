@@ -42,6 +42,7 @@ class SeaEyeSettingsController: NSViewController {
         self.setUserDefaultsFromField(projectsField, key: "SeaEyeProjects")
         self.setUserDefaultsFromField(branchesField, key: "SeaEyeBranches")
         self.setUserDefaultsFromField(usersField, key: "SeaEyeUsers")
+        NSUserDefaults.standardUserDefaults().setBool(false, forKey: "SeaEyeError")
         NSNotificationCenter.defaultCenter().postNotificationName("SeaEyeSettingsChanged", object: nil)
         parent.openBuilds(sender)
     }

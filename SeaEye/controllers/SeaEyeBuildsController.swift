@@ -47,7 +47,7 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
         if  (userDefaults.stringForKey("SeaEyeAPIKey") == nil) {
             return fallbackView.stringValue = "You have not set an API key"
         }
-        if let errorMessage = userDefaults.stringForKey("SeaEyeError") {
+        if userDefaults.boolForKey("SeaEyeError") {
             return fallbackView.stringValue = "Could not connect with your settings. Check'em!"
         }
         if (userDefaults.stringForKey("SeaEyeOrganization") == nil) {
