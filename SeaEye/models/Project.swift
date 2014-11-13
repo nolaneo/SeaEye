@@ -55,7 +55,7 @@ class Project: NSObject, NSURLConnectionDelegate {
             var connection: NSURLConnection = NSURLConnection(request: request, delegate: self, startImmediately: true)!
         } else {
             println("The url string was fucked up: \(urlPath)")
-            stop()
+            self.notifyError("Attempted connection to \(urlPath) failed. Please check your settings are correct")
         }
 
     }
@@ -92,12 +92,16 @@ class Project: NSObject, NSURLConnectionDelegate {
     
     private func validateReceivedData(receivedData: String?) -> Bool {
         if let unwrappedData = receivedData {
-            if unwrappedData == "{\"message\":\"Couldn't find project at GitHub.\"}" {
+            //Circle error messages are returned as a JSON object.
+            //If we are expecting an array then we need to handle this case here before parse.
+            if unwrappedData.hasPrefix("{") {
                 notifyError("No project was found for [\(self.organizationName)/\(self.projectName)] Check your API key is correct.");
                 return false;
             }
             
-            if unwrappedData.hasPrefix("<!DOCTYPE html>") {
+            //If the URL data was wrong then we will receive a HTML page.
+            //Check for this case
+            if unwrappedData.hasPrefix("<") {
                 notifyError("No project was found for [\(self.organizationName)/\(self.projectName)] Check that no invalid characters are included in your project names.")
                 return false;
             }
@@ -111,6 +115,7 @@ class Project: NSObject, NSURLConnectionDelegate {
     
     private func notifyError(error: String) {
         println(error)
+        NSUserDefaults.standardUserDefaults().setValue(error, forKey: "SeaEyeError")
         var info = ["errorMessage": error]
         NSNotificationCenter.defaultCenter().postNotificationName(
             "SeaEyeAlert",

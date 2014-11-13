@@ -46,6 +46,12 @@ class SeaEyeSettingsController: NSViewController {
         parent.openBuilds(sender)
     }
     
+    @IBAction func saveNotificationPreferences(sender: NSButton) {
+        let notify = showNotifications.state == NSOnState
+        println("Notificaiton Preference: \(notify)")
+        NSUserDefaults.standardUserDefaults().setBool(notify, forKey: "SeaEyeNotify")
+    }
+    
     private func setUserDefaultsFromField(field: NSTextField, key: String) {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         let fieldValue = field.stringValue
