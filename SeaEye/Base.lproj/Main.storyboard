@@ -442,6 +442,14 @@
                                     <outlet property="nextKeyView" destination="W1Q-eg-wDt" id="LHU-Mo-3lr"/>
                                 </connections>
                             </secureTextField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ljk-vL-CCp">
+                                <rect key="frame" x="118" y="12" width="64" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" drawsBackground="YES" id="fyK-MZ-zLH">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
@@ -451,6 +459,7 @@
                         <outlet property="projectsField" destination="p7a-Mh-Mza" id="A2f-Ql-2sz"/>
                         <outlet property="showNotifications" destination="VVy-E9-exB" id="XiA-jW-mLD"/>
                         <outlet property="usersField" destination="DZD-1W-DnC" id="QdE-Bg-FhQ"/>
+                        <outlet property="versionString" destination="ljk-vL-CCp" id="BWr-tY-WEg"/>
                     </connections>
                 </viewController>
                 <customObject id="9if-07-Y83" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

@@ -21,8 +21,11 @@ class SeaEyeSettingsController: NSViewController {
     @IBOutlet weak var usersField : NSTextField!
     @IBOutlet weak var branchesField : NSTextField!
     
+    @IBOutlet weak var versionString : NSTextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupVersionNumber()
     }
     
     override func viewWillAppear() {
@@ -81,6 +84,14 @@ class SeaEyeSettingsController: NSViewController {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         if let savedValue = userDefaults.stringForKey(key) {
             field.stringValue = savedValue
+        }
+    }
+    
+    private func setupVersionNumber() {
+        if let info = NSBundle.mainBundle().infoDictionary as NSDictionary! {
+            if let version = info.objectForKey("CFBundleShortVersionString") as String! {
+                versionString.stringValue = "Version \(version)"
+            }
         }
     }
 }
