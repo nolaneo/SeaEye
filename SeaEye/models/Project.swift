@@ -71,30 +71,53 @@ class Project: NSObject, NSURLConnectionDelegate {
     func connectionDidFinishLoading(connection: NSURLConnection!) {
         autoreleasepool {
             let receivedData = NSString(data: self.data, encoding: NSUTF8StringEncoding)
-            if receivedData? == "{\"message\":\"Couldn't find project at GitHub.\"}" {
-                println("No project was found for \(self.projectName). Check your API key is correct.")
-                var info = ["errorMessage": "No project was found for \(self.organizationName)/\(self.projectName). Check your API key is correct."]
-                NSNotificationCenter.defaultCenter().postNotificationName(
-                    "SeaEyeAlert",
-                    object: self,
-                    userInfo: info
-                )
-                return self.stop()
-            }
-            var err: NSError?
-            var json = NSJSONSerialization.JSONObjectWithData(
-                self.data,
-                options: NSJSONReadingOptions.MutableContainers,
-                error: &err
-                ) as Array<NSDictionary>
-            
-            if let error = err {
-                println("An error occured while parsing the json for project \(self.projectName)")
-            } else {
-                self.buildsJsonArray = json
-                self.updateBuilds()
+
+            if self.validateReceivedData(receivedData) {
+                var err: NSError?
+                var json = NSJSONSerialization.JSONObjectWithData(
+                    self.data,
+                    options: NSJSONReadingOptions.MutableContainers,
+                    error: &err
+                    ) as Array<NSDictionary>
+                
+                if let error = err {
+                    println("An error occured while parsing the json for project \(self.projectName)")
+                } else {
+                    self.buildsJsonArray = json
+                    self.updateBuilds()
+                }
             }
         }
+    }
+    
+    private func validateReceivedData(receivedData: String?) -> Bool {
+        if let unwrappedData = receivedData {
+            if unwrappedData == "{\"message\":\"Couldn't find project at GitHub.\"}" {
+                notifyError("No project was found for [\(self.organizationName)/\(self.projectName)] Check your API key is correct.");
+                return false;
+            }
+            
+            if unwrappedData.hasPrefix("<!DOCTYPE html>") {
+                notifyError("No project was found for [\(self.organizationName)/\(self.projectName)] Check that no invalid characters are included in your project names.")
+                return false;
+            }
+
+            return true;
+            
+        } else {
+            return false;
+        }
+    }
+    
+    private func notifyError(error: String) {
+        println(error)
+        var info = ["errorMessage": error]
+        NSNotificationCenter.defaultCenter().postNotificationName(
+            "SeaEyeAlert",
+            object: self,
+            userInfo: info
+        )
+        self.stop()
     }
     
     private func updateBuilds() {
