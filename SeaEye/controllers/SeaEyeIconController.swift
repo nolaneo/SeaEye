@@ -85,7 +85,7 @@ class SeaEyeIconController: NSViewController {
         } else {
             notification.subtitle = build.subject
         }
-        let image = NSImage(named: "circle-failed-large")
+        let image = NSImage(named: "build-failed")
         notification.setValue(image, forKey: "_identityImage")
         notification.setValue(false, forKey: "_identityImageHasBorder")
         NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
@@ -99,7 +99,7 @@ class SeaEyeIconController: NSViewController {
         } else {
             notification.subtitle = build.subject
         }
-        let image = NSImage(named: "circle-success-large")
+        let image = NSImage(named: "build-passed")
         notification.setValue(image, forKey: "_identityImage")
         notification.setValue(false, forKey: "_identityImageHasBorder")
         NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
