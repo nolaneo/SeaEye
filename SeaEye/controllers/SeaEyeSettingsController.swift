@@ -31,7 +31,7 @@ class SeaEyeSettingsController: NSViewController {
     }
     
     override func viewWillAppear() {
-       self.setupInputFields()
+       setupInputFields()
     }
     
     
@@ -42,11 +42,11 @@ class SeaEyeSettingsController: NSViewController {
     @IBAction func saveUserData(sender: NSButton) {
         let notify = showNotifications.state == NSOnState
         NSUserDefaults.standardUserDefaults().setBool(notify, forKey: "SeaEyeNotify")
-        self.setUserDefaultsFromField(apiKeyField, key: "SeaEyeAPIKey")
-        self.setUserDefaultsFromField(organizationField, key: "SeaEyeOrganization")
-        self.setUserDefaultsFromField(projectsField, key: "SeaEyeProjects")
-        self.setUserDefaultsFromField(branchesField, key: "SeaEyeBranches")
-        self.setUserDefaultsFromField(usersField, key: "SeaEyeUsers")
+        setUserDefaultsFromField(apiKeyField, key: "SeaEyeAPIKey")
+        setUserDefaultsFromField(organizationField, key: "SeaEyeOrganization")
+        setUserDefaultsFromField(projectsField, key: "SeaEyeProjects")
+        setUserDefaultsFromField(branchesField, key: "SeaEyeBranches")
+        setUserDefaultsFromField(usersField, key: "SeaEyeUsers")
         NSUserDefaults.standardUserDefaults().setBool(false, forKey: "SeaEyeError")
         NSNotificationCenter.defaultCenter().postNotificationName("SeaEyeSettingsChanged", object: nil)
         parent.openBuilds(sender)
@@ -76,21 +76,21 @@ class SeaEyeSettingsController: NSViewController {
     private func setupInputFields() {
         let notify = NSUserDefaults.standardUserDefaults().boolForKey("SeaEyeNotify")
         if notify {
-            self.showNotifications.state = NSOnState
+            showNotifications.state = NSOnState
         } else {
-            self.showNotifications.state = NSOffState
+            showNotifications.state = NSOffState
         }
         let hasRunOnStartup = appDelegate.applicationIsInStartUpItems()
         if hasRunOnStartup {
-            self.runOnStartup.state = NSOnState
+            runOnStartup.state = NSOnState
         } else {
-            self.runOnStartup.state = NSOffState
+            runOnStartup.state = NSOffState
         }
-        self.setupFieldFromUserDefaults(apiKeyField, key: "SeaEyeAPIKey")
-        self.setupFieldFromUserDefaults(organizationField, key: "SeaEyeOrganization")
-        self.setupFieldFromUserDefaults(projectsField, key: "SeaEyeProjects")
-        self.setupFieldFromUserDefaults(branchesField, key: "SeaEyeBranches")
-        self.setupFieldFromUserDefaults(usersField, key: "SeaEyeUsers")
+        setupFieldFromUserDefaults(apiKeyField, key: "SeaEyeAPIKey")
+        setupFieldFromUserDefaults(organizationField, key: "SeaEyeOrganization")
+        setupFieldFromUserDefaults(projectsField, key: "SeaEyeProjects")
+        setupFieldFromUserDefaults(branchesField, key: "SeaEyeBranches")
+        setupFieldFromUserDefaults(usersField, key: "SeaEyeUsers")
     }
     
     private func setupFieldFromUserDefaults(field: NSTextField, key: String) {

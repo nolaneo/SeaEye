@@ -413,10 +413,13 @@
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xGb-ip-b0v">
                                 <rect key="frame" x="18" y="324" width="114" height="18"/>
-                                <buttonCell key="cell" type="check" title="Run on startup" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="8f3-aR-3fP">
+                                <buttonCell key="cell" type="check" title="Run on startup" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="8f3-aR-3fP">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="saveRunOnStartupPreferences:" target="tPe-Nl-DuY" id="EQL-57-bpe"/>
+                                </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VVy-E9-exB">
                                 <rect key="frame" x="146" y="324" width="136" height="18"/>
@@ -457,6 +460,7 @@
                         <outlet property="branchesField" destination="ZDW-sn-ehD" id="iHU-dz-CxR"/>
                         <outlet property="organizationField" destination="W1Q-eg-wDt" id="kNa-6X-IQU"/>
                         <outlet property="projectsField" destination="p7a-Mh-Mza" id="A2f-Ql-2sz"/>
+                        <outlet property="runOnStartup" destination="xGb-ip-b0v" id="Dca-hq-BuE"/>
                         <outlet property="showNotifications" destination="VVy-E9-exB" id="XiA-jW-mLD"/>
                         <outlet property="usersField" destination="DZD-1W-DnC" id="QdE-Bg-FhQ"/>
                         <outlet property="versionString" destination="ljk-vL-CCp" id="BWr-tY-WEg"/>

@@ -72,6 +72,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                                 return (currentItemRef, lastItemRef)
                             }
                         }
+                    } else {
+                        println("Unknown login application")
                     }
                 }
                 //The application was not found in the startup list
@@ -101,10 +103,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                         nil,
                         nil
                     )
+                    println("Application was added to login items")
                 }
             } else {
                 if let itemRef = itemReferences.existingReference {
                     LSSharedFileListItemRemove(loginItemsRef,itemRef);
+                    println("Application was removed from login items")
                 }
             }
         }
