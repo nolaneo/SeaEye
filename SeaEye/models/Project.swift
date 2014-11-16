@@ -54,7 +54,6 @@ class Project: NSObject, NSURLConnectionDelegate {
             request.setValue("application/json", forHTTPHeaderField: "Accept")
             var connection: NSURLConnection = NSURLConnection(request: request, delegate: self, startImmediately: true)!
         } else {
-            println("The url string was fucked up: \(urlPath)")
             self.notifyError("Attempted connection to \(urlPath) failed. Please check your settings are correct")
         }
 

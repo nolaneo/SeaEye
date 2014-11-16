@@ -78,11 +78,6 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
         return model.allBuilds[row]
     }
-    
-    //NSTableViewDelegate
-//    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-//        
-//    }
 
     func selectionShouldChangeInTableView(tableView: NSTableView) -> Bool {
         return false

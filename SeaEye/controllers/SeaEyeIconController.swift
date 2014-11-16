@@ -12,6 +12,7 @@ class SeaEyeIconController: NSViewController {
 
     @IBOutlet weak var iconButton : NSButton!;
     var model = CircleCIModel()
+    var applicationStatus = SeaEyeStatus()
     var hasViewedBuilds = true
     
     override func viewDidLoad() {
@@ -79,7 +80,7 @@ class SeaEyeIconController: NSViewController {
     
     private func showFailedBuildNotification(build: Build, count: Int) {
         var notification = NSUserNotification()
-        notification.title = "SeaEye"
+        notification.title = "Build Failed"
         if count > 1 {
             notification.subtitle = "You have \(count) failed builds"
         } else {
@@ -88,16 +89,18 @@ class SeaEyeIconController: NSViewController {
         let image = NSImage(named: "build-failed")
         notification.setValue(image, forKey: "_identityImage")
         notification.setValue(false, forKey: "_identityImageHasBorder")
+        notification.setValue(nil, forKey:"_imageURL")
         NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
     }
     
     private func showSuccessfulBuildNotification(build: Build, count: Int) {
         var notification = NSUserNotification()
-        notification.title = "SeaEye"
+        notification.title = "Build Passed"
         if count > 1 {
             notification.subtitle = "You have \(count) successful builds"
         } else {
             notification.subtitle = build.subject
+            notification.informativeText = build.user
         }
         let image = NSImage(named: "build-passed")
         notification.setValue(image, forKey: "_identityImage")
