@@ -23,6 +23,8 @@ class SeaEyeSettingsController: NSViewController {
     
     @IBOutlet weak var versionString : NSTextField!
     
+    let appDelegate = NSApplication.sharedApplication().delegate as AppDelegate!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVersionNumber()
@@ -56,6 +58,11 @@ class SeaEyeSettingsController: NSViewController {
         NSUserDefaults.standardUserDefaults().setBool(notify, forKey: "SeaEyeNotify")
     }
     
+    @IBAction func saveRunOnStartupPreferences(sender: NSButton) {
+        println("Changing launch on startup")
+        appDelegate.toggleLaunchAtStartup()
+    }
+    
     private func setUserDefaultsFromField(field: NSTextField, key: String) {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         let fieldValue = field.stringValue
@@ -72,6 +79,12 @@ class SeaEyeSettingsController: NSViewController {
             self.showNotifications.state = NSOnState
         } else {
             self.showNotifications.state = NSOffState
+        }
+        let hasRunOnStartup = appDelegate.applicationIsInStartUpItems()
+        if hasRunOnStartup {
+            self.runOnStartup.state = NSOnState
+        } else {
+            self.runOnStartup.state = NSOffState
         }
         self.setupFieldFromUserDefaults(apiKeyField, key: "SeaEyeAPIKey")
         self.setupFieldFromUserDefaults(organizationField, key: "SeaEyeOrganization")
