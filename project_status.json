@@ -1,5 +1,5 @@
 {
 	"latest_version": "0.3",
-	"download_url": "",
-	"changes": []
+	"download_url": "https://github.com/nolaneo/SeaEye#features",
+	"changes": "∙ Added ability to easily add SeaEye to your startup apps.\n\n∙ Bug fixes around connecting to Circle.\n\n∙ Added an error indicator to the popver.\n\n∙ Added retina icons.\n\n∙ Added update support.\n\n"
 }
