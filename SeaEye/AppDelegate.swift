@@ -16,12 +16,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         NSUserNotificationCenter.defaultUserNotificationCenter().delegate = self
+        self.initialSetup()
         statusBarItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
         self.setupApplicationMenuViewController()
-        self.initialSetup()
+        
         
     }
-
+    
     func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
     }
@@ -37,6 +38,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         return true
     }
     
+    func userNotificationCenter(center: NSUserNotificationCenter, didActivateNotification notification: NSUserNotification) {
+        if notification.activationType == NSUserNotificationActivationType.ActionButtonClicked {
+            if let userInfo = notification.userInfo {
+                if let url = userInfo["url"] as? String{
+                    NSWorkspace.sharedWorkspace().openURL(NSURL(string: url)!)
+                }
+            }
+        }
+    }
     
     private func initialSetup() {
         let userDefaults = NSUserDefaults.standardUserDefaults()

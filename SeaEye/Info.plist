@@ -28,6 +28,8 @@
 	<string>Main</string>
 	<key>LSUIElement</key>
 	<true/>
+	<key>NSUserNotificationAlertStyle</key>
+	<string>banner</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 </dict>

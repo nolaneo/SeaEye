@@ -40,11 +40,21 @@ class SeaEyeIconController: NSViewController {
     }
     
     func alert(notification: NSNotification) {
-        if let message = notification.userInfo!["message"] as? String {
-            var notification = NSUserNotification()
-            notification.title = "SeaEye"
-            notification.informativeText = message
-            NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
+        if let userInfo = notification.userInfo {
+            if let message = userInfo["message"] as? String {
+                var notification = NSUserNotification()
+                notification.title = "SeaEye"
+                notification.informativeText = message
+                
+                if let url = userInfo["url"] as? String {
+                    notification.setValue(true, forKey: "_showsButtons")
+                    notification.hasActionButton = true
+                    notification.actionButtonTitle = "Download"
+                    notification.userInfo = ["url": url]
+                }
+                
+                NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
+            }
         }
     }
     
@@ -160,6 +170,7 @@ class SeaEyeIconController: NSViewController {
             self.setupMenuBarIcon()
             let popoverContoller = segue.destinationController as SeaEyePopoverController
             popoverContoller.model = self.model
+            popoverContoller.applicationStatus = self.applicationStatus
         }
     }
 }

@@ -11,12 +11,16 @@ import Cocoa
 class SeaEyeStatus: NSObject, NSURLConnectionDelegate {
     
     var data = NSMutableData()
+    var hasUpdate = false
+    var changes : String!
+    var latestVersion : String!
+    var updateURL : NSURL!
     
     override init() {
         super.init()
         //After 60 seconds check for updates
         NSTimer.scheduledTimerWithTimeInterval(
-            NSTimeInterval(60),
+            NSTimeInterval(5),
             target: self,
             selector: Selector("getApplicationStatus"),
             userInfo: nil,
@@ -52,16 +56,25 @@ class SeaEyeStatus: NSObject, NSURLConnectionDelegate {
         if let error = err {
             println("An error occured while parsing the project status from GitHub")
         } else {
-            let latestVersionString = json.objectForKey("latest_version") as NSString!
+            let latestVersionString = json.objectForKey("latest_version") as String!
+            let downloadURLString = json.objectForKey("download_url") as String!
+            updateURL = NSURL(string: downloadURLString)
+            changes = json.objectForKey("changes") as String!
             println("The latest version of SeaEye is: \(latestVersionString)")
+            println("Changes\n\(changes)")
             if let info = NSBundle.mainBundle().infoDictionary as NSDictionary! {
                 if let currentVersionString = info.objectForKey("CFBundleShortVersionString") as String! {
                     let numberFormatter = NSNumberFormatter()
                     let currentVersionFloat = numberFormatter.numberFromString(currentVersionString)?.floatValue
                     let latestVersionFloat = numberFormatter.numberFromString(latestVersionString)?.floatValue
                     
-                    if currentVersionFloat < latestVersionFloat {
-                        var info = ["message": "A new version of SeaEye is available (\(latestVersionString))"]
+                    if currentVersionFloat <= latestVersionFloat {
+                        hasUpdate = true
+                        latestVersion = latestVersionString
+                        var info = [
+                            "message": "A new version of SeaEye is available (\(latestVersionString))",
+                            "url": downloadURLString
+                        ]
                         NSNotificationCenter.defaultCenter().postNotificationName(
                             "SeaEyeAlert",
                             object: self,

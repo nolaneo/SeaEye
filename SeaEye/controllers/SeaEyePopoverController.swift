@@ -14,17 +14,21 @@ class SeaEyePopoverController: NSViewController {
     @IBOutlet weak var subcontrollerView : NSView!
     @IBOutlet weak var openSettingsButton : NSButton!
     @IBOutlet weak var openBuildsButton : NSButton!
+    @IBOutlet weak var openUpdatesButton : NSButton!
     @IBOutlet weak var shutdownButton : NSButton!
     @IBOutlet weak var opacityFixView: NSImageView!
     
     var settingsViewController : SeaEyeSettingsController!
     var buildsViewController : SeaEyeBuildsController!
+    var updatesViewController : SeaEyeUpdatesController!
     var model : CircleCIModel!
+    var applicationStatus : SeaEyeStatus!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupNavButtons()
-        self.setupViewControllers()
+        setupNavButtons()
+        setupViewControllers()
+        showUpdateButtonIfAppropriate()
         clickEventMonitor = NSEvent.addGlobalMonitorForEventsMatchingMask(
             NSEventMask.LeftMouseUpMask|NSEventMask.RightMouseUpMask,
             handler: closePopover
@@ -50,9 +54,11 @@ class SeaEyePopoverController: NSViewController {
         let storyboard = NSStoryboard(name: "Main", bundle: nil);
         settingsViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeSettingsController") as SeaEyeSettingsController
         buildsViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeBuildsController") as SeaEyeBuildsController
+        updatesViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeUpdatesController") as SeaEyeUpdatesController
         
         settingsViewController.parent = self
         buildsViewController.model = model
+        updatesViewController.applicationStatus = self.applicationStatus
         
         openBuildsButton.hidden = true;
         subcontrollerView.addSubview(buildsViewController.view)
@@ -73,6 +79,7 @@ class SeaEyePopoverController: NSViewController {
     
     @IBAction func openSettings(sender: NSButton) {
         openSettingsButton.hidden = true
+        openUpdatesButton.hidden = true
         shutdownButton.hidden = true
         openBuildsButton.hidden = false
         buildsViewController.view.removeFromSuperview()
@@ -80,15 +87,43 @@ class SeaEyePopoverController: NSViewController {
     }
     
     @IBAction func openBuilds(sender: NSButton) {
+        showUpdateButtonIfAppropriate()
         openBuildsButton.hidden = true;
         shutdownButton.hidden = false
         openSettingsButton.hidden = false
         settingsViewController.view.removeFromSuperview()
+        updatesViewController.view.removeFromSuperview()
         subcontrollerView.addSubview(buildsViewController.view)
+    }
+    
+    @IBAction func openUpdates(sender: NSButton) {
+        openUpdatesButton.hidden = true
+        openSettingsButton.hidden = true
+        shutdownButton.hidden = true
+        openBuildsButton.hidden = false
+        buildsViewController.view.removeFromSuperview()
+        subcontrollerView.addSubview(updatesViewController.view)
     }
     
     @IBAction func shutdownApplication(sender: NSButton) {
         NSApplication.sharedApplication().terminate(self);
+    }
+    
+    private func showUpdateButtonIfAppropriate() {
+        if applicationStatus.hasUpdate {
+            let versionString = NSMutableAttributedString(string: applicationStatus.latestVersion)
+            let range = NSMakeRange(0, countElements(applicationStatus.latestVersion))
+            versionString.addAttribute(
+                NSForegroundColorAttributeName,
+                value: NSColor.redColor(),
+                range: range
+            )
+            versionString.fixAttributesInRange(range)
+            openUpdatesButton.attributedTitle = versionString
+            openUpdatesButton.hidden = false
+        } else {
+            openUpdatesButton.hidden = true
+        }
     }
     
     private func isDarkModeEnabled() -> Bool {

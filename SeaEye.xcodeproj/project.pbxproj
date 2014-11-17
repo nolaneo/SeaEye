@@ -26,6 +26,8 @@
 		602BB1B91A1A880000E50B78 /* circleci-normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 602BB1B51A1A880000E50B78 /* circleci-normal@2x.png */; };
 		602BB1BC1A1A881E00E50B78 /* circleci-success-alt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 602BB1BA1A1A881E00E50B78 /* circleci-success-alt@2x.png */; };
 		602BB1BD1A1A881E00E50B78 /* circleci-success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 602BB1BB1A1A881E00E50B78 /* circleci-success@2x.png */; };
+		602BB1C01A1A93E900E50B78 /* update.png in Resources */ = {isa = PBXBuildFile; fileRef = 602BB1BE1A1A93E900E50B78 /* update.png */; };
+		602BB1C11A1A93E900E50B78 /* update@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 602BB1BF1A1A93E900E50B78 /* update@2x.png */; };
 		6033149819FDA94D0073EAED /* power.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033149619FDA94D0073EAED /* power.png */; };
 		6033149919FDA94D0073EAED /* power@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033149719FDA94D0073EAED /* power@2x.png */; };
 		6033149C19FDAE540073EAED /* circleci-failed-alt.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033149A19FDAE540073EAED /* circleci-failed-alt.png */; };
@@ -62,6 +64,7 @@
 		60C73C1B19FD806A0067CDCA /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 60C73C1919FD806A0067CDCA /* back.png */; };
 		60C73C1C19FD806A0067CDCA /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60C73C1A19FD806A0067CDCA /* back@2x.png */; };
 		60C73C1E19FD8C8A0067CDCA /* WindowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C73C1D19FD8C8A0067CDCA /* WindowExtension.swift */; };
+		60F0232C1A1A95930067C0A0 /* SeaEyeUpdatesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F0232B1A1A95930067C0A0 /* SeaEyeUpdatesController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +97,8 @@
 		602BB1B51A1A880000E50B78 /* circleci-normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-normal@2x.png"; sourceTree = "<group>"; };
 		602BB1BA1A1A881E00E50B78 /* circleci-success-alt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-success-alt@2x.png"; sourceTree = "<group>"; };
 		602BB1BB1A1A881E00E50B78 /* circleci-success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-success@2x.png"; sourceTree = "<group>"; };
+		602BB1BE1A1A93E900E50B78 /* update.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = update.png; sourceTree = "<group>"; };
+		602BB1BF1A1A93E900E50B78 /* update@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "update@2x.png"; sourceTree = "<group>"; };
 		6033149619FDA94D0073EAED /* power.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power.png; sourceTree = "<group>"; };
 		6033149719FDA94D0073EAED /* power@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "power@2x.png"; sourceTree = "<group>"; };
 		6033149A19FDAE540073EAED /* circleci-failed-alt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-failed-alt.png"; sourceTree = "<group>"; };
@@ -134,6 +139,7 @@
 		60C73C1919FD806A0067CDCA /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		60C73C1A19FD806A0067CDCA /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		60C73C1D19FD8C8A0067CDCA /* WindowExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowExtension.swift; sourceTree = "<group>"; };
+		60F0232B1A1A95930067C0A0 /* SeaEyeUpdatesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeaEyeUpdatesController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +266,8 @@
 		60C73BFF19FC0FF40067CDCA /* res */ = {
 			isa = PBXGroup;
 			children = (
+				602BB1BE1A1A93E900E50B78 /* update.png */,
+				602BB1BF1A1A93E900E50B78 /* update@2x.png */,
 				602BB1BA1A1A881E00E50B78 /* circleci-success-alt@2x.png */,
 				602BB1BB1A1A881E00E50B78 /* circleci-success@2x.png */,
 				602BB1B21A1A880000E50B78 /* circleci-failed-alt@2x.png */,
@@ -303,6 +311,7 @@
 				60C73C0719FC23F60067CDCA /* SeaEyeIconController.swift */,
 				60C73C1319FD7ECB0067CDCA /* SeaEyeBuildsController.swift */,
 				60C73C1719FD7EE10067CDCA /* SeaEyeSettingsController.swift */,
+				60F0232B1A1A95930067C0A0 /* SeaEyeUpdatesController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -408,6 +417,7 @@
 				6033149819FDA94D0073EAED /* power.png in Resources */,
 				602BB1BD1A1A881E00E50B78 /* circleci-success@2x.png in Resources */,
 				60BE79A41A0AB357007E5179 /* back-alt.png in Resources */,
+				602BB1C11A1A93E900E50B78 /* update@2x.png in Resources */,
 				60BE79A91A0AB357007E5179 /* setting-alt.png in Resources */,
 				602BB1B91A1A880000E50B78 /* circleci-normal@2x.png in Resources */,
 				601D48CF1A0A841F007EA297 /* icon_512x512.png in Resources */,
@@ -423,6 +433,7 @@
 				601D48D01A0A841F007EA297 /* icon_512x512@2x.png in Resources */,
 				60BE799C1A0AAD3C007E5179 /* opacity-fix-dark.png in Resources */,
 				60C73C0319FC0FF40067CDCA /* circleci-normal.png in Resources */,
+				602BB1C01A1A93E900E50B78 /* update.png in Resources */,
 				607C77F31A1860070040FD5C /* build-passed.png in Resources */,
 				6033149C19FDAE540073EAED /* circleci-failed-alt.png in Resources */,
 				607C77F41A1860070040FD5C /* build-passed@2x.png in Resources */,
@@ -457,6 +468,7 @@
 				60C73C1819FD7EE10067CDCA /* SeaEyeSettingsController.swift in Sources */,
 				60C73C1E19FD8C8A0067CDCA /* WindowExtension.swift in Sources */,
 				603314A819FEBDEA0073EAED /* Build.swift in Sources */,
+				60F0232C1A1A95930067C0A0 /* SeaEyeUpdatesController.swift in Sources */,
 				603314A619FDCBFD0073EAED /* CircleCIModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
