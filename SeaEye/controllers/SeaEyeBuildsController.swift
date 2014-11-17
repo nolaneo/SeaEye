@@ -20,14 +20,16 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     }
     
     override func viewWillAppear() {
-        self.setupFallBackViews()
-        self.reloadBuilds()
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: Selector("reloadBuilds"),
             name: "SeaEyeUpdatedBuilds",
             object: nil
         )
+    }
+    
+    override func viewDidAppear() {
+        self.reloadBuilds()
     }
     
     override func viewWillDisappear() {

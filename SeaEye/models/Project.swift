@@ -104,9 +104,16 @@ class Project: NSObject, NSURLConnectionDelegate {
                 notifyError("No project was found for [\(self.organizationName)/\(self.projectName)] Check that no invalid characters are included in your project names.")
                 return false;
             }
-            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "SeaEyeError")
-            return true;
             
+            //Ensure the response is a JSON array
+            if unwrappedData.hasPrefix("[") && unwrappedData.hasSuffix("]") {
+                NSUserDefaults.standardUserDefaults().setBool(false, forKey: "SeaEyeError")
+                return true;
+            } else {
+                notifyError("The application received an unknown response. There may be network issues.")
+                return false;
+            }
+
         } else {
             return false;
         }
@@ -115,7 +122,7 @@ class Project: NSObject, NSURLConnectionDelegate {
     private func notifyError(error: String) {
         println(error)
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: "SeaEyeError")
-        var info = ["errorMessage": error]
+        var info = ["message": error]
         NSNotificationCenter.defaultCenter().postNotificationName(
             "SeaEyeAlert",
             object: self,
