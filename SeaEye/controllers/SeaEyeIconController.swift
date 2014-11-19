@@ -14,6 +14,15 @@ class SeaEyeIconController: NSViewController {
     var model = CircleCIModel()
     var applicationStatus = SeaEyeStatus()
     var hasViewedBuilds = true
+    var popover = NSPopover()
+    
+    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +45,10 @@ class SeaEyeIconController: NSViewController {
             selector: Selector("setGreenBuildIcon:"),
             name: "SeaEyeGreenBuild",
             object: nil
+        )
+        NSEvent.addGlobalMonitorForEventsMatchingMask(
+            NSEventMask.LeftMouseUpMask|NSEventMask.RightMouseUpMask,
+            handler: closePopover
         )
     }
     
@@ -168,9 +181,29 @@ class SeaEyeIconController: NSViewController {
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
         if segue.identifier! == "SeaEyeOpenPopoverSegue" {
             self.setupMenuBarIcon()
-            let popoverContoller = segue.destinationController as SeaEyePopoverController
-            popoverContoller.model = self.model
-            popoverContoller.applicationStatus = self.applicationStatus
+            let popoverController = segue.destinationController as SeaEyePopoverController
+            popoverController.model = self.model
+            popoverController.applicationStatus = self.applicationStatus
+        }
+    }
+    
+    @IBAction func openPopover(sender: NSButton) {
+        self.setupMenuBarIcon()
+        let popoverController = SeaEyePopoverController(nibName: "SeaEyePopoverController", bundle: nil) as SeaEyePopoverController!
+        popoverController.model = self.model
+        popoverController.applicationStatus = self.applicationStatus
+        
+        if !popover.shown {
+            popover.contentViewController = popoverController
+            popover.showRelativeToRect(self.view.frame, ofView: self.view, preferredEdge: NSMinYEdge)
+        } else {
+            popover.close()
+        }
+    }
+    
+    func closePopover(aEvent: (NSEvent!)) -> Void {
+        if popover.shown {
+            popover.close()
         }
     }
 }

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6008690E1A1D3E5E00600E4C /* SeaEyeBuildsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6008690D1A1D3E5E00600E4C /* SeaEyeBuildsController.xib */; };
+		600869101A1D3E6F00600E4C /* SeaEyeSettingsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6008690F1A1D3E6F00600E4C /* SeaEyeSettingsController.xib */; };
+		600869121A1D3E9200600E4C /* SeaEyePopoverController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 600869111A1D3E9200600E4C /* SeaEyePopoverController.xib */; };
+		600869141A1D3EA000600E4C /* SeaEyeUpdatesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 600869131A1D3EA000600E4C /* SeaEyeUpdatesController.xib */; };
 		6014AD8E19FED4C400865329 /* BuildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6014AD8D19FED4C400865329 /* BuildView.swift */; };
 		6014AD9619FEE4A900865329 /* open.png in Resources */ = {isa = PBXBuildFile; fileRef = 6014AD9419FEE4A900865329 /* open.png */; };
 		6014AD9719FEE4A900865329 /* open@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6014AD9519FEE4A900865329 /* open@2x.png */; };
@@ -29,6 +33,7 @@
 		602BB1C01A1A93E900E50B78 /* update.png in Resources */ = {isa = PBXBuildFile; fileRef = 602BB1BE1A1A93E900E50B78 /* update.png */; };
 		602BB1C11A1A93E900E50B78 /* update@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 602BB1BF1A1A93E900E50B78 /* update@2x.png */; };
 		602F20EE1A1C014700F16F79 /* IntercomExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602F20ED1A1C014700F16F79 /* IntercomExtension.swift */; };
+		602F20F31A1D313A00F16F79 /* SeaEyeIconController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 602F20F21A1D313A00F16F79 /* SeaEyeIconController.xib */; };
 		6033149819FDA94D0073EAED /* power.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033149619FDA94D0073EAED /* power.png */; };
 		6033149919FDA94D0073EAED /* power@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033149719FDA94D0073EAED /* power@2x.png */; };
 		6033149C19FDAE540073EAED /* circleci-failed-alt.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033149A19FDAE540073EAED /* circleci-failed-alt.png */; };
@@ -52,7 +57,6 @@
 		60BE79AA1A0AB357007E5179 /* settings-alt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60BE79A31A0AB357007E5179 /* settings-alt@2x.png */; };
 		60C73BDF19FC025A0067CDCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C73BDE19FC025A0067CDCA /* AppDelegate.swift */; };
 		60C73BE319FC025A0067CDCA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60C73BE219FC025A0067CDCA /* Images.xcassets */; };
-		60C73BE619FC025A0067CDCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60C73BE419FC025A0067CDCA /* Main.storyboard */; };
 		60C73BF219FC025A0067CDCA /* SeaEyeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C73BF119FC025A0067CDCA /* SeaEyeTests.swift */; };
 		60C73C0219FC0FF40067CDCA /* circleci-normal-alt.png in Resources */ = {isa = PBXBuildFile; fileRef = 60C73C0019FC0FF40067CDCA /* circleci-normal-alt.png */; };
 		60C73C0319FC0FF40067CDCA /* circleci-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 60C73C0119FC0FF40067CDCA /* circleci-normal.png */; };
@@ -79,6 +83,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6008690D1A1D3E5E00600E4C /* SeaEyeBuildsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeaEyeBuildsController.xib; sourceTree = "<group>"; };
+		6008690F1A1D3E6F00600E4C /* SeaEyeSettingsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeaEyeSettingsController.xib; sourceTree = "<group>"; };
+		600869111A1D3E9200600E4C /* SeaEyePopoverController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeaEyePopoverController.xib; sourceTree = "<group>"; };
+		600869131A1D3EA000600E4C /* SeaEyeUpdatesController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeaEyeUpdatesController.xib; sourceTree = "<group>"; };
 		6014AD8D19FED4C400865329 /* BuildView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildView.swift; sourceTree = "<group>"; };
 		6014AD9419FEE4A900865329 /* open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = open.png; sourceTree = "<group>"; };
 		6014AD9519FEE4A900865329 /* open@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open@2x.png"; sourceTree = "<group>"; };
@@ -101,6 +109,7 @@
 		602BB1BE1A1A93E900E50B78 /* update.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = update.png; sourceTree = "<group>"; };
 		602BB1BF1A1A93E900E50B78 /* update@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "update@2x.png"; sourceTree = "<group>"; };
 		602F20ED1A1C014700F16F79 /* IntercomExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntercomExtension.swift; sourceTree = "<group>"; };
+		602F20F21A1D313A00F16F79 /* SeaEyeIconController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeaEyeIconController.xib; sourceTree = "<group>"; };
 		6033149619FDA94D0073EAED /* power.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power.png; sourceTree = "<group>"; };
 		6033149719FDA94D0073EAED /* power@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "power@2x.png"; sourceTree = "<group>"; };
 		6033149A19FDAE540073EAED /* circleci-failed-alt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-failed-alt.png"; sourceTree = "<group>"; };
@@ -126,7 +135,6 @@
 		60C73BDD19FC025A0067CDCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60C73BDE19FC025A0067CDCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		60C73BE219FC025A0067CDCA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		60C73BE519FC025A0067CDCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		60C73BEB19FC025A0067CDCA /* SeaEyeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeaEyeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		60C73BF019FC025A0067CDCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60C73BF119FC025A0067CDCA /* SeaEyeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaEyeTests.swift; sourceTree = "<group>"; };
@@ -166,6 +174,11 @@
 			isa = PBXGroup;
 			children = (
 				6014AD8D19FED4C400865329 /* BuildView.swift */,
+				600869131A1D3EA000600E4C /* SeaEyeUpdatesController.xib */,
+				602F20F21A1D313A00F16F79 /* SeaEyeIconController.xib */,
+				6008690D1A1D3E5E00600E4C /* SeaEyeBuildsController.xib */,
+				6008690F1A1D3E6F00600E4C /* SeaEyeSettingsController.xib */,
+				600869111A1D3E9200600E4C /* SeaEyePopoverController.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -233,7 +246,6 @@
 				60C73BFF19FC0FF40067CDCA /* res */,
 				60C73BDE19FC025A0067CDCA /* AppDelegate.swift */,
 				60C73BE219FC025A0067CDCA /* Images.xcassets */,
-				60C73BE419FC025A0067CDCA /* Main.storyboard */,
 				60C73BDC19FC025A0067CDCA /* Supporting Files */,
 				60C73C1D19FD8C8A0067CDCA /* WindowExtension.swift */,
 				602F20ED1A1C014700F16F79 /* IntercomExtension.swift */,
@@ -409,10 +421,12 @@
 				6033149919FDA94D0073EAED /* power@2x.png in Resources */,
 				60C73C1019FD7CD60067CDCA /* settings@2x.png in Resources */,
 				60C73BE319FC025A0067CDCA /* Images.xcassets in Resources */,
+				600869141A1D3EA000600E4C /* SeaEyeUpdatesController.xib in Resources */,
 				601D48CE1A0A841F007EA297 /* icon_32x32@2x.png in Resources */,
 				601D48CC1A0A841F007EA297 /* icon_256x256.png in Resources */,
 				60BE79A61A0AB357007E5179 /* opacity-fix-light in Resources */,
 				60C73C0219FC0FF40067CDCA /* circleci-normal-alt.png in Resources */,
+				600869101A1D3E6F00600E4C /* SeaEyeSettingsController.xib in Resources */,
 				607C77F21A1860070040FD5C /* build-failed@2x.png in Resources */,
 				607783811A0A4110004CD286 /* circleci-success.png in Resources */,
 				602BB1BC1A1A881E00E50B78 /* circleci-success-alt@2x.png in Resources */,
@@ -427,6 +441,7 @@
 				601D48C01A0A62C6007EA297 /* open-alt.png in Resources */,
 				601D48CD1A0A841F007EA297 /* icon_32x32.png in Resources */,
 				601D48C11A0A62C6007EA297 /* open-alt@2x.png in Resources */,
+				602F20F31A1D313A00F16F79 /* SeaEyeIconController.xib in Resources */,
 				601D48CB1A0A841F007EA297 /* icon_16x16.png in Resources */,
 				602BB1B71A1A880000E50B78 /* circleci-failed@2x.png in Resources */,
 				6014AD9719FEE4A900865329 /* open@2x.png in Resources */,
@@ -437,10 +452,11 @@
 				60BE799C1A0AAD3C007E5179 /* opacity-fix-dark.png in Resources */,
 				60C73C0319FC0FF40067CDCA /* circleci-normal.png in Resources */,
 				602BB1C01A1A93E900E50B78 /* update.png in Resources */,
+				600869121A1D3E9200600E4C /* SeaEyePopoverController.xib in Resources */,
 				607C77F31A1860070040FD5C /* build-passed.png in Resources */,
 				6033149C19FDAE540073EAED /* circleci-failed-alt.png in Resources */,
 				607C77F41A1860070040FD5C /* build-passed@2x.png in Resources */,
-				60C73BE619FC025A0067CDCA /* Main.storyboard in Resources */,
+				6008690E1A1D3E5E00600E4C /* SeaEyeBuildsController.xib in Resources */,
 				607783801A0A4110004CD286 /* circleci-success-alt.png in Resources */,
 				60BE79A51A0AB357007E5179 /* back-alt@2x.png in Resources */,
 				60BE79A71A0AB357007E5179 /* power-alt.png in Resources */,
@@ -494,17 +510,6 @@
 			targetProxy = 60C73BEC19FC025A0067CDCA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		60C73BE419FC025A0067CDCA /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				60C73BE519FC025A0067CDCA /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		60C73BF319FC025A0067CDCA /* Debug */ = {

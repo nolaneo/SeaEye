@@ -15,6 +15,14 @@ class SeaEyeUpdatesController: NSViewController {
     @IBOutlet weak var versionLabel : NSTextField!
     @IBOutlet weak var changes : NSTextField!
     
+    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         changes.stringValue = applicationStatus.changes

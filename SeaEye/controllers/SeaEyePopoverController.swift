@@ -24,6 +24,14 @@ class SeaEyePopoverController: NSViewController {
     var model : CircleCIModel!
     var applicationStatus : SeaEyeStatus!
     
+    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavButtons()
@@ -45,16 +53,14 @@ class SeaEyePopoverController: NSViewController {
     }
     
     private func setupViewControllers() {
+        
         if isDarkModeEnabled() {
             opacityFixView.image = NSImage(named: "opacity-fix-dark")
         } else {
             opacityFixView.image = NSImage(named: "opacity-fix-light")
         }
         
-        let storyboard = NSStoryboard(name: "Main", bundle: nil);
-        settingsViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeSettingsController") as SeaEyeSettingsController
-        buildsViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeBuildsController") as SeaEyeBuildsController
-        updatesViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeUpdatesController") as SeaEyeUpdatesController
+        setupNibControllers()
         
         settingsViewController.parent = self
         buildsViewController.model = model
@@ -62,6 +68,20 @@ class SeaEyePopoverController: NSViewController {
         
         openBuildsButton.hidden = true;
         subcontrollerView.addSubview(buildsViewController.view)
+    }
+    
+    private func setupStoryboardControllers() {
+        
+        let storyboard = NSStoryboard(name: "Main", bundle: nil);
+        settingsViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeSettingsController") as SeaEyeSettingsController
+        buildsViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeBuildsController") as SeaEyeBuildsController
+        updatesViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeUpdatesController") as SeaEyeUpdatesController
+    }
+    
+    private func setupNibControllers() {
+        settingsViewController = SeaEyeSettingsController(nibName: "SeaEyeSettingsController", bundle: nil)
+        buildsViewController = SeaEyeBuildsController(nibName: "SeaEyeBuildsController", bundle: nil)
+        updatesViewController = SeaEyeUpdatesController(nibName: "SeaEyeUpdatesController", bundle: nil)
     }
     
     private func setupNavButtons() {

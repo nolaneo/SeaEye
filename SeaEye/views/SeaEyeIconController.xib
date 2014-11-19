@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A379b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="SeaEyeIconController" customModule="SeaEye" customModuleProvider="target">
+            <connections>
+                <outlet property="iconButton" destination="3Jt-GG-4o5" id="jg8-cf-Qmh"/>
+                <outlet property="view" destination="zyr-N0-mXZ" id="wMg-Zk-Nlr"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <view autoresizesSubviews="NO" id="zyr-N0-mXZ">
+            <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Jt-GG-4o5">
+                    <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="circleci-normal" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="k9m-Cj-9cd">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="openPopover:" target="-2" id="4xi-bz-yWZ"/>
+                    </connections>
+                </button>
+            </subviews>
+        </view>
+    </objects>
+    <resources>
+        <image name="circleci-normal" width="15" height="15"/>
+    </resources>
+</document>

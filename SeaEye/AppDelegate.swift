@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Foundation
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
@@ -23,14 +24,22 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         
     }
     
-    func applicationWillTerminate(aNotification: NSNotification) {
-        // Insert code here to tear down your application
+    func setupApplicationMenuViewController() {
+        if OS_IS_MAVERICKS_OR_LESS() || true {
+            setupNibViewController()
+        } else {
+            setupStoryboardViewController()
+        }
     }
     
-    func setupApplicationMenuViewController() {
+    func setupNibViewController() {
+        statusBarIconViewController = SeaEyeIconController(nibName: "SeaEyeIconController", bundle: nil)
+        statusBarItem.view = statusBarIconViewController?.view
+    }
+    
+    func setupStoryboardViewController() {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         statusBarIconViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeIconController") as? SeaEyeIconController
-        statusBarItem.view = statusBarIconViewController?.view
     }
     
     func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {
@@ -121,6 +130,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                 }
             }
         }
+    }
+    
+    func OS_IS_MAVERICKS_OR_LESS() -> Bool {
+        let osVersion = NSNumber(double: NSAppKitVersionNumber)
+        let mavericks = NSNumber(int: NSAppKitVersionNumber10_9)
+        return osVersion.integerValue <= mavericks.integerValue
     }
 }
 

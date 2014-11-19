@@ -25,6 +25,14 @@ class SeaEyeSettingsController: NSViewController {
     
     let appDelegate = NSApplication.sharedApplication().delegate as AppDelegate!
     
+    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVersionNumber()

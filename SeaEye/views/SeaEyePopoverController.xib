@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A379b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="SeaEyePopoverController" customModule="SeaEye" customModuleProvider="target">
+            <connections>
+                <outlet property="opacityFixView" destination="4pd-89-q1m" id="X3Q-Fv-eFM"/>
+                <outlet property="openBuildsButton" destination="GEF-ue-G8e" id="pKb-Wg-J7G"/>
+                <outlet property="openSettingsButton" destination="lUS-Wj-shM" id="DKQ-V9-ALN"/>
+                <outlet property="openUpdatesButton" destination="59N-QJ-ftt" id="5GF-Af-bnW"/>
+                <outlet property="shutdownButton" destination="gt6-9W-qfz" id="xL8-3K-qpR"/>
+                <outlet property="subcontrollerView" destination="hzT-j3-Atn" id="CRl-sI-XVk"/>
+                <outlet property="view" destination="18V-Gk-M1h" id="cvd-Sp-GBi"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <view id="18V-Gk-M1h">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4pd-89-q1m">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="opacity-fix-dark" id="nni-tF-mTk"/>
+                </imageView>
+                <customView autoresizesSubviews="NO" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hzT-j3-Atn">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="360"/>
+                </customView>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lUS-Wj-shM">
+                    <rect key="frame" x="264" y="368" width="16" height="16"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="settings" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="dxi-7M-EwI">
+                        <behavior key="behavior" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="openSettings:" target="-2" id="4Yx-13-Tmq"/>
+                    </connections>
+                </button>
+                <button hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GEF-ue-G8e">
+                    <rect key="frame" x="20" y="368" width="16" height="16"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="back" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="PKN-Ir-7iU">
+                        <behavior key="behavior" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="openBuilds:" target="-2" id="cBo-2U-ynm"/>
+                    </connections>
+                </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PzJ-Xs-qa7">
+                    <rect key="frame" x="125" y="368" width="51" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="SeaEye" drawsBackground="YES" id="6Bf-S2-zsS">
+                        <font key="font" metaFont="systemBold"/>
+                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
+                    </textFieldCell>
+                </textField>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gt6-9W-qfz">
+                    <rect key="frame" x="20" y="369" width="16" height="16"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="power" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="fhv-z5-d7z">
+                        <behavior key="behavior" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="shutdownApplication:" target="-2" id="NhG-gX-Rav"/>
+                    </connections>
+                </button>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="59N-QJ-ftt">
+                    <rect key="frame" x="208" y="369" width="48" height="16"/>
+                    <buttonCell key="cell" type="square" title="V0.4" bezelStyle="shadowlessSquare" image="update" imagePosition="right" alignment="left" imageScaling="proportionallyDown" inset="2" id="jNL-Oq-yRE">
+                        <behavior key="behavior" lightByContents="YES"/>
+                        <font key="font" size="11" name="HelveticaNeue-Bold"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="openUpdates:" target="-2" id="FYN-Af-p4g"/>
+                    </connections>
+                </button>
+            </subviews>
+        </view>
+    </objects>
+    <resources>
+        <image name="back" width="16" height="16"/>
+        <image name="opacity-fix-dark" width="300" height="400"/>
+        <image name="power" width="16" height="16"/>
+        <image name="settings" width="19.862068176269531" height="19.862068176269531"/>
+        <image name="update" width="16" height="16"/>
+    </resources>
+</document>

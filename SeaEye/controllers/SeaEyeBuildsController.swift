@@ -15,6 +15,14 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     @IBOutlet weak var fallbackView: NSTextField!
     @IBOutlet weak var buildsTable: NSTableView!
     
+    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -84,6 +92,4 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     func selectionShouldChangeInTableView(tableView: NSTableView) -> Bool {
         return false
     }
-    
-    
 }
