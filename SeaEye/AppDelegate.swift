@@ -26,7 +26,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
     }
-
     
     func setupApplicationMenuViewController() {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
