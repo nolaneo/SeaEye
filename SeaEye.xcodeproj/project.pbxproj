@@ -11,6 +11,7 @@
 		600869101A1D3E6F00600E4C /* SeaEyeSettingsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6008690F1A1D3E6F00600E4C /* SeaEyeSettingsController.xib */; };
 		600869121A1D3E9200600E4C /* SeaEyePopoverController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 600869111A1D3E9200600E4C /* SeaEyePopoverController.xib */; };
 		600869141A1D3EA000600E4C /* SeaEyeUpdatesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 600869131A1D3EA000600E4C /* SeaEyeUpdatesController.xib */; };
+		6008691D1A1D4F7400600E4C /* Main.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6008691C1A1D4F7400600E4C /* Main.xib */; };
 		6014AD8E19FED4C400865329 /* BuildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6014AD8D19FED4C400865329 /* BuildView.swift */; };
 		6014AD9619FEE4A900865329 /* open.png in Resources */ = {isa = PBXBuildFile; fileRef = 6014AD9419FEE4A900865329 /* open.png */; };
 		6014AD9719FEE4A900865329 /* open@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6014AD9519FEE4A900865329 /* open@2x.png */; };
@@ -87,6 +88,7 @@
 		6008690F1A1D3E6F00600E4C /* SeaEyeSettingsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeaEyeSettingsController.xib; sourceTree = "<group>"; };
 		600869111A1D3E9200600E4C /* SeaEyePopoverController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeaEyePopoverController.xib; sourceTree = "<group>"; };
 		600869131A1D3EA000600E4C /* SeaEyeUpdatesController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeaEyeUpdatesController.xib; sourceTree = "<group>"; };
+		6008691C1A1D4F7400600E4C /* Main.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Main.xib; sourceTree = "<group>"; };
 		6014AD8D19FED4C400865329 /* BuildView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildView.swift; sourceTree = "<group>"; };
 		6014AD9419FEE4A900865329 /* open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = open.png; sourceTree = "<group>"; };
 		6014AD9519FEE4A900865329 /* open@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open@2x.png"; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 		60C73BD019FC025A0067CDCA = {
 			isa = PBXGroup;
 			children = (
+				6008691C1A1D4F7400600E4C /* Main.xib */,
 				60C73BDB19FC025A0067CDCA /* SeaEye */,
 				60C73BEE19FC025A0067CDCA /* SeaEyeTests */,
 				60C73BDA19FC025A0067CDCA /* Products */,
@@ -447,6 +450,7 @@
 				6014AD9719FEE4A900865329 /* open@2x.png in Resources */,
 				60C73C1B19FD806A0067CDCA /* back.png in Resources */,
 				6014AD9619FEE4A900865329 /* open.png in Resources */,
+				6008691D1A1D4F7400600E4C /* Main.xib in Resources */,
 				601D48CA1A0A841F007EA297 /* icon_128x128.png in Resources */,
 				601D48D01A0A841F007EA297 /* icon_512x512@2x.png in Resources */,
 				60BE799C1A0AAD3C007E5179 /* opacity-fix-dark.png in Resources */,
@@ -596,7 +600,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SeaEye/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -609,7 +613,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SeaEye/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};

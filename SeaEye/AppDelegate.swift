@@ -25,21 +25,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     }
     
     func setupApplicationMenuViewController() {
-        if OS_IS_MAVERICKS_OR_LESS() || true {
-            setupNibViewController()
-        } else {
-            setupStoryboardViewController()
-        }
-    }
-    
-    func setupNibViewController() {
         statusBarIconViewController = SeaEyeIconController(nibName: "SeaEyeIconController", bundle: nil)
         statusBarItem.view = statusBarIconViewController?.view
-    }
-    
-    func setupStoryboardViewController() {
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        statusBarIconViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeIconController") as? SeaEyeIconController
     }
     
     func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {
