@@ -15,19 +15,53 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     @IBOutlet weak var fallbackView: NSTextField!
     @IBOutlet weak var buildsTable: NSTableView!
     
+    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        //Mavericks Workaround
+        let appDelegate = NSApplication.sharedApplication().delegate as AppDelegate
+        if appDelegate.OS_IS_MAVERICKS_OR_LESS() {
+            for (view) in (self.view.subviews) {
+                if let id = view.identifier? {
+                    println("Setup: \(id)")
+                    switch id {
+                    case "FallbackView": fallbackView = view as NSTextField
+                    case "BuildsTable": buildsTable = view as NSTableView
+                    default: println("Unknown View \(id)")
+                    }
+                }
+            }
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewWillAppear() {
-        self.setupFallBackViews()
-        self.reloadBuilds()
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: Selector("reloadBuilds"),
             name: "SeaEyeUpdatedBuilds",
             object: nil
         )
+    }
+    
+    override func viewDidAppear() {
+        self.reloadBuilds()
+    }
+    
+    func mavericksSetup() {
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: Selector("reloadBuilds"),
+            name: "SeaEyeUpdatedBuilds",
+            object: nil
+        )
+        self.reloadBuilds()
     }
     
     override func viewWillDisappear() {
@@ -47,6 +81,9 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
         if  (userDefaults.stringForKey("SeaEyeAPIKey") == nil) {
             return fallbackView.stringValue = "You have not set an API key"
         }
+        if userDefaults.boolForKey("SeaEyeError") {
+            return fallbackView.stringValue = "Could not connect with your settings. Check'em!"
+        }
         if (userDefaults.stringForKey("SeaEyeOrganization") == nil) {
             return fallbackView.stringValue = "You have not set an organization name"
         }
@@ -65,7 +102,7 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     
     //NSTableViewDataSource
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        if model.allBuilds != nil {
+        if model != nil && model.allBuilds != nil {
             return model.allBuilds.count
         } else {
             return 0
@@ -75,15 +112,8 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
         return model.allBuilds[row]
     }
-    
-    //NSTableViewDelegate
-//    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-//        
-//    }
 
     func selectionShouldChangeInTableView(tableView: NSTableView) -> Bool {
         return false
     }
-    
-    
 }

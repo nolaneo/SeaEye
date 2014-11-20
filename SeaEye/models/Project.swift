@@ -54,8 +54,7 @@ class Project: NSObject, NSURLConnectionDelegate {
             request.setValue("application/json", forHTTPHeaderField: "Accept")
             var connection: NSURLConnection = NSURLConnection(request: request, delegate: self, startImmediately: true)!
         } else {
-            println("The url string was fucked up: \(urlPath)")
-            stop()
+            self.notifyError("Attempted connection to \(urlPath) failed. Please check your settings are correct")
         }
 
     }
@@ -71,30 +70,65 @@ class Project: NSObject, NSURLConnectionDelegate {
     func connectionDidFinishLoading(connection: NSURLConnection!) {
         autoreleasepool {
             let receivedData = NSString(data: self.data, encoding: NSUTF8StringEncoding)
-            if receivedData? == "{\"message\":\"Couldn't find project at GitHub.\"}" {
-                println("No project was found for \(self.projectName). Check your API key is correct.")
-                var info = ["errorMessage": "No project was found for \(self.organizationName)/\(self.projectName). Check your API key is correct."]
-                NSNotificationCenter.defaultCenter().postNotificationName(
-                    "SeaEyeAlert",
-                    object: self,
-                    userInfo: info
-                )
-                return self.stop()
-            }
-            var err: NSError?
-            var json = NSJSONSerialization.JSONObjectWithData(
-                self.data,
-                options: NSJSONReadingOptions.MutableContainers,
-                error: &err
-                ) as Array<NSDictionary>
-            
-            if let error = err {
-                println("An error occured while parsing the json for project \(self.projectName)")
-            } else {
-                self.buildsJsonArray = json
-                self.updateBuilds()
+
+            if self.validateReceivedData(receivedData) {
+                var err: NSError?
+                var json = NSJSONSerialization.JSONObjectWithData(
+                    self.data,
+                    options: NSJSONReadingOptions.MutableContainers,
+                    error: &err
+                    ) as Array<NSDictionary>
+                
+                if let error = err {
+                    println("An error occured while parsing the json for project \(self.projectName)")
+                } else {
+                    self.buildsJsonArray = json
+                    self.updateBuilds()
+                }
             }
         }
+    }
+    
+    private func validateReceivedData(receivedData: String?) -> Bool {
+        if let unwrappedData = receivedData {
+            //Circle error messages are returned as a JSON object.
+            //If we are expecting an array then we need to handle this case here before parse.
+            if unwrappedData.hasPrefix("{") {
+                notifyError("No project was found for [\(self.organizationName)/\(self.projectName)] Check your API key is correct.");
+                return false;
+            }
+            
+            //If the URL data was wrong then we will receive a HTML page.
+            //Check for this case
+            if unwrappedData.hasPrefix("<") {
+                notifyError("No project was found for [\(self.organizationName)/\(self.projectName)] Check that no invalid characters are included in your project names.")
+                return false;
+            }
+            
+            //Ensure the response is a JSON array
+            if unwrappedData.hasPrefix("[") && unwrappedData.hasSuffix("]") {
+                NSUserDefaults.standardUserDefaults().setBool(false, forKey: "SeaEyeError")
+                return true;
+            } else {
+                notifyError("The application received an unknown response. There may be network issues.")
+                return false;
+            }
+
+        } else {
+            return false;
+        }
+    }
+    
+    private func notifyError(error: String) {
+        println(error)
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "SeaEyeError")
+        var info = ["message": error]
+        NSNotificationCenter.defaultCenter().postNotificationName(
+            "SeaEyeAlert",
+            object: self,
+            userInfo: info
+        )
+        self.stop()
     }
     
     private func updateBuilds() {

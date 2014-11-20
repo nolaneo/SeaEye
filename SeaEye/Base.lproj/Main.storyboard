@@ -146,12 +146,23 @@
                                     <action selector="shutdownApplication:" target="QRi-IY-RWt" id="gK3-T2-5PI"/>
                                 </connections>
                             </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kgg-0H-6TQ">
+                                <rect key="frame" x="208" y="369" width="48" height="16"/>
+                                <buttonCell key="cell" type="square" title="V0.4" bezelStyle="shadowlessSquare" image="update" imagePosition="right" alignment="left" imageScaling="proportionallyDown" inset="2" id="Dmd-Zr-oBk">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" size="11" name="HelveticaNeue-Bold"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="openUpdates:" target="QRi-IY-RWt" id="7wN-kC-2kH"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="opacityFixView" destination="mjp-kG-2z9" id="Weu-3E-TEI"/>
                         <outlet property="openBuildsButton" destination="hKb-pS-pRT" id="woJ-jz-Rjx"/>
                         <outlet property="openSettingsButton" destination="6CY-Gb-nxX" id="CIw-XJ-Khg"/>
+                        <outlet property="openUpdatesButton" destination="kgg-0H-6TQ" id="TFR-HE-1np"/>
                         <outlet property="shutdownButton" destination="BZS-jV-gvy" id="hTC-9e-dZX"/>
                         <outlet property="subcontrollerView" destination="x8D-iC-YhW" id="VZG-78-hre"/>
                     </connections>
@@ -169,9 +180,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="66b-Ak-hUL">
-                                <rect key="frame" x="0.0" y="172" width="300" height="17"/>
+                                <rect key="frame" x="0.0" y="174" width="300" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="You have not set an API key" drawsBackground="YES" id="MWc-pI-9iR">
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
                                 </textFieldCell>
@@ -319,7 +330,7 @@
                                 <font key="titleFont" metaFont="system"/>
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q4A-PL-ptF">
-                                <rect key="frame" x="22" y="132" width="217" height="17"/>
+                                <rect key="frame" x="22" y="132" width="251" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Only show builds from these users:" drawsBackground="YES" id="OvX-2m-Bp8">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -328,7 +339,7 @@
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p7a-Mh-Mza">
                                 <rect key="frame" x="20" y="155" width="260" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Space separeted project names" bezelStyle="round" id="IZ1-l0-puS">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Space separated project names" bezelStyle="round" id="IZ1-l0-puS">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -338,7 +349,7 @@
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FfP-3x-GV5">
-                                <rect key="frame" x="22" y="180" width="51" height="17"/>
+                                <rect key="frame" x="22" y="180" width="200" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Projects" drawsBackground="YES" id="eXa-zi-Mz6">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -357,7 +368,7 @@
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KHb-qI-I0m">
-                                <rect key="frame" x="22" y="230" width="118" height="17"/>
+                                <rect key="frame" x="22" y="230" width="200" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Organization Name" drawsBackground="YES" id="gni-iG-a1Z">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -376,7 +387,7 @@
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="41Y-U0-HUj">
-                                <rect key="frame" x="20" y="82" width="182" height="17"/>
+                                <rect key="frame" x="20" y="82" width="238" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Only monitor these branches:" drawsBackground="YES" id="7bV-nT-Fg3">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -394,7 +405,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HqA-Fl-0tY">
-                                <rect key="frame" x="24" y="283" width="106" height="17"/>
+                                <rect key="frame" x="24" y="283" width="198" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Circle CI API Key" drawsBackground="YES" id="bzp-5v-joM">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -413,10 +424,13 @@
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xGb-ip-b0v">
                                 <rect key="frame" x="18" y="324" width="114" height="18"/>
-                                <buttonCell key="cell" type="check" title="Run on startup" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="8f3-aR-3fP">
+                                <buttonCell key="cell" type="check" title="Run on startup" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="8f3-aR-3fP">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="saveRunOnStartupPreferences:" target="tPe-Nl-DuY" id="EQL-57-bpe"/>
+                                </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VVy-E9-exB">
                                 <rect key="frame" x="146" y="324" width="136" height="18"/>
@@ -424,6 +438,9 @@
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="saveNotificationPreferences:" target="tPe-Nl-DuY" id="A4L-HR-H1Y"/>
+                                </connections>
                             </button>
                             <secureTextField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gEE-KD-xaT">
                                 <rect key="frame" x="20" y="255" width="260" height="22"/>
@@ -439,6 +456,14 @@
                                     <outlet property="nextKeyView" destination="W1Q-eg-wDt" id="LHU-Mo-3lr"/>
                                 </connections>
                             </secureTextField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ljk-vL-CCp">
+                                <rect key="frame" x="20" y="20" width="182" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" placeholderString="Version" drawsBackground="YES" id="fyK-MZ-zLH">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
@@ -446,13 +471,68 @@
                         <outlet property="branchesField" destination="ZDW-sn-ehD" id="iHU-dz-CxR"/>
                         <outlet property="organizationField" destination="W1Q-eg-wDt" id="kNa-6X-IQU"/>
                         <outlet property="projectsField" destination="p7a-Mh-Mza" id="A2f-Ql-2sz"/>
+                        <outlet property="runOnStartup" destination="xGb-ip-b0v" id="Dca-hq-BuE"/>
                         <outlet property="showNotifications" destination="VVy-E9-exB" id="XiA-jW-mLD"/>
                         <outlet property="usersField" destination="DZD-1W-DnC" id="QdE-Bg-FhQ"/>
+                        <outlet property="versionString" destination="ljk-vL-CCp" id="BWr-tY-WEg"/>
                     </connections>
                 </viewController>
                 <customObject id="9if-07-Y83" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="175" y="327"/>
+        </scene>
+        <!--Sea Eye Updates Controller-->
+        <scene sceneID="5t2-MD-RJO">
+            <objects>
+                <viewController storyboardIdentifier="SeaEyeUpdatesController" id="if3-rS-Qt2" customClass="SeaEyeUpdatesController" customModule="SeaEye" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Hec-UW-5Xp">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="360"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xx6-BK-Ti7">
+                                <rect key="frame" x="20" y="318" width="260" height="29"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Version 0.3 Available" drawsBackground="YES" id="v5n-X7-2Pa">
+                                    <font key="font" size="24" name="HelveticaNeue-Thin"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YAc-2d-5eT">
+                                <rect key="frame" x="20" y="281" width="260" height="29"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Changes" drawsBackground="YES" id="PqP-jy-eAM">
+                                    <font key="font" size="16" name="HelveticaNeue-Thin"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
+                                </textFieldCell>
+                            </textField>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NJ1-Ml-K4w">
+                                <rect key="frame" x="18" y="17" width="256" height="44"/>
+                                <buttonCell key="cell" type="bevel" title="Get it on GitHub" bezelStyle="regularSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="heF-Hi-l1U">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system" size="16"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="openUpdatesPage:" target="if3-rS-Qt2" id="O4S-xv-n2N"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tVO-go-JPG">
+                                <rect key="frame" x="22" y="67" width="250" height="208"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Label" drawsBackground="YES" id="DxW-u3-aSl">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="changes" destination="tVO-go-JPG" id="9t5-A7-rJs"/>
+                        <outlet property="versionLabel" destination="xx6-BK-Ti7" id="9s6-mR-NWR"/>
+                    </connections>
+                </viewController>
+                <customObject id="SQS-pW-zA1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-295" y="570"/>
         </scene>
     </scenes>
     <resources>
@@ -462,5 +542,6 @@
         <image name="open" width="16" height="16"/>
         <image name="power" width="16" height="16"/>
         <image name="settings" width="19.862068176269531" height="19.862068176269531"/>
+        <image name="update" width="16" height="16"/>
     </resources>
 </document>
