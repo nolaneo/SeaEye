@@ -68,7 +68,7 @@ class SeaEyeStatus: NSObject, NSURLConnectionDelegate {
                     let currentVersionFloat = numberFormatter.numberFromString(currentVersionString)?.floatValue
                     let latestVersionFloat = numberFormatter.numberFromString(latestVersionString)?.floatValue
                     
-                    if currentVersionFloat <= latestVersionFloat {
+                    if currentVersionFloat < latestVersionFloat {
                         hasUpdate = true
                         latestVersion = latestVersionString
                         var info = [

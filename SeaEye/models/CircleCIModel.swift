@@ -153,6 +153,10 @@ class CircleCIModel: NSObject {
     }
     
     private func stopAPIRequests() {
+        if updatesTimer != nil {
+            updatesTimer.invalidate()
+            updatesTimer = nil
+        }
         if allProjects == nil {
             return
         }

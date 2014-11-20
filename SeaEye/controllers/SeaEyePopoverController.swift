@@ -64,10 +64,6 @@ class SeaEyePopoverController: NSViewController {
         showUpdateButtonIfAppropriate()
     }
     
-    override func viewWillDisappear() {
-        NSEvent.removeMonitor(clickEventMonitor)
-    }
-    
     private func setupViewControllers() {
         
         if isDarkModeEnabled() {

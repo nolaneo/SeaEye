@@ -20,17 +20,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         self.initialSetup()
         statusBarItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
         self.setupApplicationMenuViewController()
-        
-        
     }
     
     func setupApplicationMenuViewController() {
         statusBarIconViewController = SeaEyeIconController(nibName: "SeaEyeIconController", bundle: nil)
-        //statusBarItem.view = statusBarIconViewController?.view
-        
-        statusBarItem.view = NSView(frame: NSMakeRect(0, 0, 22, 22))
-        statusBarItem.view?.addSubview(statusBarIconViewController.view)
-
+        statusBarItem.view = statusBarIconViewController?.view
     }
     
     func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {
