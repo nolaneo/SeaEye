@@ -13,7 +13,15 @@ SeaEye is a menu bar notification app for CircleCI written in Swift.
 * Restrict notifications to specific users or branches using regular expressions.
 * Jump directly to the CircleCI site for any build listed.
 
-##[Download V0.2 (OSX 10.10 only)](https://github.com/nolaneo/SeaEye/blob/master/Builds/SeaEye%20v0.2.zip?raw=true)
+##[Download V0.3 (OSX 10.9 +)](https://github.com/nolaneo/SeaEye/blob/master/Builds/SeaEye%20v0.3.zip?raw=true)
+
+###Updates for v0.3
+* Mavericks support!
+* Adding SeaEye to your start up apps can now be done at the click of a button.
+* Nicer notifications with green ticks for passed builds and red X's for failed builds.
+* An updates system to notify you of changes and new versions.
+* Retina menu bar icons.
+* Better error handling for incorrect API keys or repo names.
 
 ---
 
@@ -44,17 +52,13 @@ SeaEye is a menu bar notification app for CircleCI written in Swift.
 ---
 ###FAQ
 
-*What about Mavericks support?*
-* The UI for SeaEye was built using XCode's new storyboards for OSX feature. Unfortunately, this means the app will only work on Yosemitie or greater.
+*My builds won't load*
+* Make sure you're using your own personal Circle CI token and not the repo specific token. Otherwise ensure that you've spelt the names of your projects correctly. If that doesnt work, try use cURL to hit the Circle API with your token and open an issue if you get back good data.
 
 *I broke SeaEye, how do I force quit?*
 * :( SeaEye doesn't show up in the simple Force Quit window because it's an agent app. This means you'll need to close it from Activity Monitor.
 
 ---
 ###TODO
-* Add the ability to add SeaEye to the user's start up programs.
 * Add paste support to the settings page.
-* Add retina menu bar icons.
-* Add a better transparency fix.
-* Change desktop notifications to have green/red icons depending on the build outcome.
 
