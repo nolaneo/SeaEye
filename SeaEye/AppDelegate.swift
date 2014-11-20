@@ -13,7 +13,7 @@ import Foundation
 class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
 
     var statusBarItem : NSStatusItem = NSStatusItem();
-    var statusBarIconViewController : SeaEyeIconController?;
+    var statusBarIconViewController : SeaEyeIconController!;
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         NSUserNotificationCenter.defaultUserNotificationCenter().delegate = self
@@ -26,7 +26,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     
     func setupApplicationMenuViewController() {
         statusBarIconViewController = SeaEyeIconController(nibName: "SeaEyeIconController", bundle: nil)
-        statusBarItem.view = statusBarIconViewController?.view
+        //statusBarItem.view = statusBarIconViewController?.view
+        
+        statusBarItem.view = NSView(frame: NSMakeRect(0, 0, 22, 22))
+        statusBarItem.view?.addSubview(statusBarIconViewController.view)
+
     }
     
     func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {

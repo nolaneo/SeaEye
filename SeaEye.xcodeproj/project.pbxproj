@@ -33,7 +33,6 @@
 		602BB1BD1A1A881E00E50B78 /* circleci-success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 602BB1BB1A1A881E00E50B78 /* circleci-success@2x.png */; };
 		602BB1C01A1A93E900E50B78 /* update.png in Resources */ = {isa = PBXBuildFile; fileRef = 602BB1BE1A1A93E900E50B78 /* update.png */; };
 		602BB1C11A1A93E900E50B78 /* update@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 602BB1BF1A1A93E900E50B78 /* update@2x.png */; };
-		602F20EE1A1C014700F16F79 /* IntercomExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602F20ED1A1C014700F16F79 /* IntercomExtension.swift */; };
 		602F20F31A1D313A00F16F79 /* SeaEyeIconController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 602F20F21A1D313A00F16F79 /* SeaEyeIconController.xib */; };
 		6033149819FDA94D0073EAED /* power.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033149619FDA94D0073EAED /* power.png */; };
 		6033149919FDA94D0073EAED /* power@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033149719FDA94D0073EAED /* power@2x.png */; };
@@ -48,6 +47,7 @@
 		607C77F31A1860070040FD5C /* build-passed.png in Resources */ = {isa = PBXBuildFile; fileRef = 607C77EB1A1860070040FD5C /* build-passed.png */; };
 		607C77F41A1860070040FD5C /* build-passed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 607C77EC1A1860070040FD5C /* build-passed@2x.png */; };
 		607C78261A190C580040FD5C /* SeaEyeStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607C78251A190C580040FD5C /* SeaEyeStatus.swift */; };
+		60A6E9E91A1E7056000C743F /* IntercomExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A6E9E81A1E7056000C743F /* IntercomExtension.swift */; };
 		60BE799C1A0AAD3C007E5179 /* opacity-fix-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 60BE799B1A0AAD3C007E5179 /* opacity-fix-dark.png */; };
 		60BE79A41A0AB357007E5179 /* back-alt.png in Resources */ = {isa = PBXBuildFile; fileRef = 60BE799D1A0AB357007E5179 /* back-alt.png */; };
 		60BE79A51A0AB357007E5179 /* back-alt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60BE799E1A0AB357007E5179 /* back-alt@2x.png */; };
@@ -110,7 +110,6 @@
 		602BB1BB1A1A881E00E50B78 /* circleci-success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-success@2x.png"; sourceTree = "<group>"; };
 		602BB1BE1A1A93E900E50B78 /* update.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = update.png; sourceTree = "<group>"; };
 		602BB1BF1A1A93E900E50B78 /* update@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "update@2x.png"; sourceTree = "<group>"; };
-		602F20ED1A1C014700F16F79 /* IntercomExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntercomExtension.swift; sourceTree = "<group>"; };
 		602F20F21A1D313A00F16F79 /* SeaEyeIconController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeaEyeIconController.xib; sourceTree = "<group>"; };
 		6033149619FDA94D0073EAED /* power.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power.png; sourceTree = "<group>"; };
 		6033149719FDA94D0073EAED /* power@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "power@2x.png"; sourceTree = "<group>"; };
@@ -125,6 +124,7 @@
 		607C77EB1A1860070040FD5C /* build-passed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "build-passed.png"; sourceTree = "<group>"; };
 		607C77EC1A1860070040FD5C /* build-passed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "build-passed@2x.png"; sourceTree = "<group>"; };
 		607C78251A190C580040FD5C /* SeaEyeStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeaEyeStatus.swift; sourceTree = "<group>"; };
+		60A6E9E81A1E7056000C743F /* IntercomExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntercomExtension.swift; sourceTree = "<group>"; };
 		60BE799B1A0AAD3C007E5179 /* opacity-fix-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "opacity-fix-dark.png"; sourceTree = "<group>"; };
 		60BE799D1A0AB357007E5179 /* back-alt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-alt.png"; sourceTree = "<group>"; };
 		60BE799E1A0AB357007E5179 /* back-alt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-alt@2x.png"; sourceTree = "<group>"; };
@@ -251,7 +251,7 @@
 				60C73BE219FC025A0067CDCA /* Images.xcassets */,
 				60C73BDC19FC025A0067CDCA /* Supporting Files */,
 				60C73C1D19FD8C8A0067CDCA /* WindowExtension.swift */,
-				602F20ED1A1C014700F16F79 /* IntercomExtension.swift */,
+				60A6E9E81A1E7056000C743F /* IntercomExtension.swift */,
 			);
 			path = SeaEye;
 			sourceTree = "<group>";
@@ -487,7 +487,7 @@
 				60C73C0919FC23F60067CDCA /* SeaEyeIconController.swift in Sources */,
 				6014AD991A09874E00865329 /* Project.swift in Sources */,
 				60C73C1519FD7ECB0067CDCA /* SeaEyeBuildsController.swift in Sources */,
-				602F20EE1A1C014700F16F79 /* IntercomExtension.swift in Sources */,
+				60A6E9E91A1E7056000C743F /* IntercomExtension.swift in Sources */,
 				60C73C0619FC16FE0067CDCA /* SeaEyePopoverController.swift in Sources */,
 				60C73C1819FD7EE10067CDCA /* SeaEyeSettingsController.swift in Sources */,
 				60C73C1E19FD8C8A0067CDCA /* WindowExtension.swift in Sources */,

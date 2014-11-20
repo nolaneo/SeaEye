@@ -24,8 +24,29 @@ class SeaEyePopoverController: NSViewController {
     var model : CircleCIModel!
     var applicationStatus : SeaEyeStatus!
     
+    let appDelegate = NSApplication.sharedApplication().delegate as AppDelegate
+    
     override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        //Mavericks Workaround
+        if appDelegate.OS_IS_MAVERICKS_OR_LESS() {
+            for (view) in (self.view.subviews) {
+                if let id = view.identifier? {
+                    println("Setup: \(id)")
+                    switch id {
+                    case "SubcontrollerView": subcontrollerView = view as NSView
+                    case "OpenSettingsButton": openSettingsButton = view as NSButton
+                    case "OpenUpdatesButton": openUpdatesButton = view as NSButton
+                    case "OpenBuildsButton": openBuildsButton = view as NSButton
+                    case "ShutdownButton": shutdownButton = view as NSButton
+                    case "OpacityFixView": opacityFixView = view as NSImageView
+                    default: println("Unknown View \(id)")
+                    }
+                }
+            }
+            opacityFixView.hidden = true
+        }
+
     }
     
     required init?(coder: NSCoder) {
@@ -34,22 +55,17 @@ class SeaEyePopoverController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+    }
+    
+    func setup() {
         setupNavButtons()
         setupViewControllers()
         showUpdateButtonIfAppropriate()
-        clickEventMonitor = NSEvent.addGlobalMonitorForEventsMatchingMask(
-            NSEventMask.LeftMouseUpMask|NSEventMask.RightMouseUpMask,
-            handler: closePopover
-        )
     }
     
     override func viewWillDisappear() {
         NSEvent.removeMonitor(clickEventMonitor)
-    }
-    
-    func closePopover(aEvent: (NSEvent!)) -> Void {
-        let presentingController = self.presentingViewController
-        presentingController?.dismissViewController(self)
     }
     
     private func setupViewControllers() {
@@ -65,6 +81,10 @@ class SeaEyePopoverController: NSViewController {
         settingsViewController.parent = self
         buildsViewController.model = model
         updatesViewController.applicationStatus = self.applicationStatus
+        
+        if appDelegate.OS_IS_MAVERICKS_OR_LESS() {
+            buildsViewController.mavericksSetup()
+        }
         
         openBuildsButton.hidden = true;
         subcontrollerView.addSubview(buildsViewController.view)
@@ -141,6 +161,11 @@ class SeaEyePopoverController: NSViewController {
             versionString.fixAttributesInRange(range)
             openUpdatesButton.attributedTitle = versionString
             openUpdatesButton.hidden = false
+            
+            if appDelegate.OS_IS_MAVERICKS_OR_LESS() {
+                updatesViewController.setup()
+            }
+            
         } else {
             openUpdatesButton.hidden = true
         }

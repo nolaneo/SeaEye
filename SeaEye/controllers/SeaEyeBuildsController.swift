@@ -17,6 +17,20 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     
     override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        //Mavericks Workaround
+        let appDelegate = NSApplication.sharedApplication().delegate as AppDelegate
+        if appDelegate.OS_IS_MAVERICKS_OR_LESS() {
+            for (view) in (self.view.subviews) {
+                if let id = view.identifier? {
+                    println("Setup: \(id)")
+                    switch id {
+                    case "FallbackView": fallbackView = view as NSTextField
+                    case "BuildsTable": buildsTable = view as NSTableView
+                    default: println("Unknown View \(id)")
+                    }
+                }
+            }
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -37,6 +51,16 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     }
     
     override func viewDidAppear() {
+        self.reloadBuilds()
+    }
+    
+    func mavericksSetup() {
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: Selector("reloadBuilds"),
+            name: "SeaEyeUpdatedBuilds",
+            object: nil
+        )
         self.reloadBuilds()
     }
     
@@ -78,7 +102,7 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     
     //NSTableViewDataSource
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        if model.allBuilds != nil {
+        if model != nil && model.allBuilds != nil {
             return model.allBuilds.count
         } else {
             return 0

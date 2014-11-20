@@ -10,7 +10,7 @@ import Cocoa
 
 class SeaEyeIconController: NSViewController {
 
-    @IBOutlet weak var iconButton : NSButton!
+    @IBOutlet var iconButton : NSButton!
     var model = CircleCIModel()
     var applicationStatus = SeaEyeStatus()
     var hasViewedBuilds = true
@@ -18,14 +18,32 @@ class SeaEyeIconController: NSViewController {
     
     override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        //Mavericks Workaround
+        let appDelegate = NSApplication.sharedApplication().delegate as AppDelegate
+        if appDelegate.OS_IS_MAVERICKS_OR_LESS() {
+            for (view) in (self.view.subviews) {
+                if let id = view.identifier? {
+                    switch id {
+                    case "IconButton": iconButton = view as NSButton
+                    default: println("Unknown View")
+                    }
+                }
+            }
+            setup()
+        }
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+    }
+    
+    func setup() {
         self.setupMenuBarIcon()
         self.setupStyleNotificationObserver()
         NSNotificationCenter.defaultCenter().addObserver(
@@ -50,6 +68,7 @@ class SeaEyeIconController: NSViewController {
             NSEventMask.LeftMouseUpMask|NSEventMask.RightMouseUpMask,
             handler: closePopover
         )
+
     }
     
     func alert(notification: NSNotification) {
@@ -192,6 +211,12 @@ class SeaEyeIconController: NSViewController {
         let popoverController = SeaEyePopoverController(nibName: "SeaEyePopoverController", bundle: nil) as SeaEyePopoverController!
         popoverController.model = self.model
         popoverController.applicationStatus = self.applicationStatus
+        let view = popoverController.view
+        
+        let appDelegate = NSApplication.sharedApplication().delegate as AppDelegate
+        if appDelegate.OS_IS_MAVERICKS_OR_LESS() {
+            popoverController.setup()
+        }
         
         if !popover.shown {
             popover.contentViewController = popoverController
