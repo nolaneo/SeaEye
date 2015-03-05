@@ -78,16 +78,16 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
         fallbackView.hidden = false
         buildsTable.hidden = true
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        if  (userDefaults.stringForKey("SeaEyeAPIKey") == nil) {
+        if  (userDefaults.stringForKey("SeaEyeCircleCIAPIKey") == nil) {
             return fallbackView.stringValue = "You have not set an API key"
         }
         if userDefaults.boolForKey("SeaEyeError") {
             return fallbackView.stringValue = "Could not connect with your settings. Check'em!"
         }
-        if (userDefaults.stringForKey("SeaEyeOrganization") == nil) {
+        if (userDefaults.stringForKey("SeaEyeCircleCIOrganization") == nil) {
             return fallbackView.stringValue = "You have not set an organization name"
         }
-        if (userDefaults.valueForKey("SeaEyeProjects") == nil) {
+        if (userDefaults.valueForKey("SeaEyeCircleCIProjects") == nil) {
             return fallbackView.stringValue = "You have not added any projects"
         }
         if (model.allBuilds == nil) {

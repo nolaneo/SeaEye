@@ -137,13 +137,13 @@ class Project: NSObject, NSURLConnectionDelegate {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         var userRegex : NSRegularExpression!
         var branchRegex : NSRegularExpression!
-        if let user = NSUserDefaults.standardUserDefaults().stringForKey("SeaEyeUsers") {
+        if let user = NSUserDefaults.standardUserDefaults().stringForKey("SeaEyeCircleCIUsers") {
             userRegex = NSRegularExpression(pattern: user,
                 options: NSRegularExpressionOptions.CaseInsensitive,
                 error: nil
             )
         }
-        if let branches = NSUserDefaults.standardUserDefaults().stringForKey("SeaEyeBranches") {
+        if let branches = NSUserDefaults.standardUserDefaults().stringForKey("SeaEyeCircleCIBranches") {
             branchRegex = NSRegularExpression(pattern: branches,
                 options: NSRegularExpressionOptions.CaseInsensitive,
                 error: nil

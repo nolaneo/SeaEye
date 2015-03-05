@@ -72,10 +72,10 @@ class SeaEyeSettingsController: NSViewController {
     @IBAction func saveUserData(sender: NSButton) {
         let notify = showNotifications.state == NSOnState
         NSUserDefaults.standardUserDefaults().setBool(notify, forKey: "SeaEyeNotify")
-        setUserDefaultsFromField(apiKeyField, key: "SeaEyeAPIKey")
-        setUserDefaultsFromField(organizationField, key: "SeaEyeOrganization")
-        setUserDefaultsFromField(projectsField, key: "SeaEyeProjects")
-        setUserDefaultsFromField(branchesField, key: "SeaEyeBranches")
+        setUserDefaultsFromField(apiKeyField, key: "SeaEyeCircleCIAPIKey")
+        setUserDefaultsFromField(organizationField, key: "SeaEyeCircleCIOrganization")
+        setUserDefaultsFromField(projectsField, key: "SeaEyeCircleCIProjects")
+        setUserDefaultsFromField(branchesField, key: "SeaEyeCircleCIBranches")
         setUserDefaultsFromField(usersField, key: "SeaEyeUsers")
         NSUserDefaults.standardUserDefaults().setBool(false, forKey: "SeaEyeError")
         NSNotificationCenter.defaultCenter().postNotificationName("SeaEyeSettingsChanged", object: nil)
@@ -116,11 +116,11 @@ class SeaEyeSettingsController: NSViewController {
         } else {
             runOnStartup.state = NSOffState
         }
-        setupFieldFromUserDefaults(apiKeyField, key: "SeaEyeAPIKey")
-        setupFieldFromUserDefaults(organizationField, key: "SeaEyeOrganization")
-        setupFieldFromUserDefaults(projectsField, key: "SeaEyeProjects")
-        setupFieldFromUserDefaults(branchesField, key: "SeaEyeBranches")
-        setupFieldFromUserDefaults(usersField, key: "SeaEyeUsers")
+        setupFieldFromUserDefaults(apiKeyField, key: "SeaEyeCircleCIAPIKey")
+        setupFieldFromUserDefaults(organizationField, key: "SeaEyeCircleCIOrganization")
+        setupFieldFromUserDefaults(projectsField, key: "SeaEyeCircleCIProjects")
+        setupFieldFromUserDefaults(branchesField, key: "SeaEyeCircleCIBranches")
+        setupFieldFromUserDefaults(usersField, key: "SeaEyeCircleCIUsers")
     }
     
     private func setupFieldFromUserDefaults(field: NSTextField, key: String) {

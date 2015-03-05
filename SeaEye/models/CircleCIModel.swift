@@ -104,9 +104,9 @@ class CircleCIModel: NSObject {
     }
     
     func validateUserSettingsAndStartRequests() {
-        let validation = self.validateKey("SeaEyeAPIKey")
-        && self.validateKey("SeaEyeOrganization")
-        && self.validateKey("SeaEyeProjects")
+        let validation = self.validateKey("SeaEyeCircleCIAPIKey")
+        && self.validateKey("SeaEyeCircleCIOrganization")
+        && self.validateKey("SeaEyeCircleCIProjects")
         
         if (validation) {
             allBuilds = nil
@@ -132,9 +132,9 @@ class CircleCIModel: NSObject {
         
         allProjects = []
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        let apiKey = userDefaults.stringForKey("SeaEyeAPIKey") as String!
-        let organization = userDefaults.stringForKey("SeaEyeOrganization") as String!
-        let projectsString = userDefaults.stringForKey("SeaEyeProjects") as String!
+        let apiKey = userDefaults.stringForKey("SeaEyeCircleCIAPIKey") as String!
+        let organization = userDefaults.stringForKey("SeaEyeCircleCIOrganization") as String!
+        let projectsString = userDefaults.stringForKey("SeaEyeCircleCIProjects") as String!
         
         let projectsArray = projectsString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
         
