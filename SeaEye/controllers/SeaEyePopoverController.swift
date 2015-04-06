@@ -26,33 +26,6 @@ class SeaEyePopoverController: NSViewController {
     
     let appDelegate = NSApplication.sharedApplication().delegate as AppDelegate
     
-    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        //Mavericks Workaround
-        if appDelegate.OS_IS_MAVERICKS_OR_LESS() {
-            for (view) in (self.view.subviews) {
-                if let id = view.identifier? {
-                    println("Setup: \(id)")
-                    switch id {
-                    case "SubcontrollerView": subcontrollerView = view as NSView
-                    case "OpenSettingsButton": openSettingsButton = view as NSButton
-                    case "OpenUpdatesButton": openUpdatesButton = view as NSButton
-                    case "OpenBuildsButton": openBuildsButton = view as NSButton
-                    case "ShutdownButton": shutdownButton = view as NSButton
-                    case "OpacityFixView": opacityFixView = view as NSImageView
-                    default: println("Unknown View \(id)")
-                    }
-                }
-            }
-            opacityFixView.hidden = true
-        }
-
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -157,10 +130,6 @@ class SeaEyePopoverController: NSViewController {
             versionString.fixAttributesInRange(range)
             openUpdatesButton.attributedTitle = versionString
             openUpdatesButton.hidden = false
-            
-            if appDelegate.OS_IS_MAVERICKS_OR_LESS() {
-                updatesViewController.setup()
-            }
             
         } else {
             openUpdatesButton.hidden = true
