@@ -1,8 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6099" systemVersion="14A191" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A379b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="hPL-R0-edY">
     <dependencies>
-        <deployment defaultVersion="101000" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6099"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Sea Eye Icon Controller-->
+        <scene sceneID="qo9-fu-Nkf">
+            <objects>
+                <viewController storyboardIdentifier="SeaEyeIconController" showSeguePresentationStyle="single" id="hPL-R0-edY" customClass="SeaEyeIconController" customModule="SeaEye" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="rbH-28-nFH">
+                        <rect key="frame" x="0.0" y="0.0" width="22" height="21"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button identifier="IconButton" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kqh-2c-bgt">
+                                <rect key="frame" x="0.0" y="-1" width="22" height="22"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="circleci-normal" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="bfj-NH-0PL">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="openPopover:" target="hPL-R0-edY" id="2pw-Pe-IR8"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="iconButton" destination="Kqh-2c-bgt" id="gTh-Tv-58O"/>
+                    </connections>
+                </viewController>
+                <customObject id="ayM-HE-JTU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="358" y="117.5"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="circleci-normal" width="15" height="15"/>
+    </resources>
 </document>

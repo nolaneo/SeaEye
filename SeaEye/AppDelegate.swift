@@ -23,13 +23,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     }
     
     func setupApplicationMenuViewController() {
-        statusBarIconViewController = SeaEyeIconController(nibName: "SeaEyeIconController", bundle: nil)
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        statusBarIconViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeIconController") as? SeaEyeIconController
         statusBarItem.view = statusBarIconViewController?.view
     }
     
     func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {
         return true
     }
+    
     
     func userNotificationCenter(center: NSUserNotificationCenter, didActivateNotification notification: NSUserNotification) {
         if notification.activationType == NSUserNotificationActivationType.ActionButtonClicked {
