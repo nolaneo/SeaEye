@@ -10,7 +10,7 @@ import Cocoa
 
 class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
 
-    var model : CircleCIModel!
+    var projectManager : ProjectManager!
     
     @IBOutlet weak var fallbackView: NSTextField!
     @IBOutlet weak var buildsTable: NSTableView!
@@ -78,22 +78,22 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
         fallbackView.hidden = false
         buildsTable.hidden = true
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        if  (userDefaults.stringForKey("SeaEyeAPIKey") == nil) {
+        if  (userDefaults.stringForKey("SeaEyeCircleCIAPIKey") == nil) {
             return fallbackView.stringValue = "You have not set an API key"
         }
         if userDefaults.boolForKey("SeaEyeError") {
             return fallbackView.stringValue = "Could not connect with your settings. Check'em!"
         }
-        if (userDefaults.stringForKey("SeaEyeOrganization") == nil) {
+        if (userDefaults.stringForKey("SeaEyeCircleCIOrganization") == nil) {
             return fallbackView.stringValue = "You have not set an organization name"
         }
-        if (userDefaults.valueForKey("SeaEyeProjects") == nil) {
+        if (userDefaults.valueForKey("SeaEyeCircleCIProjects") == nil) {
             return fallbackView.stringValue = "You have not added any projects"
         }
-        if (model.allBuilds == nil) {
+        if (projectManager.allBuilds == nil) {
             return fallbackView.stringValue = "Loading Recent Builds"
         }
-        if (model.allBuilds.count == 0) {
+        if (projectManager.allBuilds.count == 0) {
             return fallbackView.stringValue = "No Recent Builds Found"
         }
         fallbackView.hidden = true
@@ -102,15 +102,15 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     
     //NSTableViewDataSource
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        if model != nil && model.allBuilds != nil {
-            return model.allBuilds.count
+        if projectManager != nil && projectManager.allBuilds != nil {
+            return projectManager.allBuilds.count
         } else {
             return 0
         }
     }
     
     func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
-        return model.allBuilds[row]
+        return projectManager.allBuilds[row]
     }
 
     func selectionShouldChangeInTableView(tableView: NSTableView) -> Bool {

@@ -8,198 +8,87 @@
 
 import Cocoa
 
-class Project: NSObject, NSURLConnectionDelegate {
-    
+protocol CIProviderInterface {
+    func fetchBuilds()
+    func cancelFetch()
+    func hasValidSettings() -> Bool
+}
+
+class Project: NSObject, NSURLConnectionDelegate, NSCoding {
+    var providerName: String!
     var projectName: String!
-    var organizationName: String!
     var apiKey: String!
-    var parent: CircleCIModel!
     
-    init(name: String, organization: String, key: String, parentModel: CircleCIModel!) {
-        projectName = name
-        apiKey = key
-        organizationName = organization
-        parent = parentModel
-    }
+    var organizationName: String?
+    var userRegexString: String?
+    var branchRegexString: String?
     
-    var timer: NSTimer!
-    var projectBuilds : Array<Build>!
-    var buildsJsonArray : Array<NSDictionary>!
+    var hasError: Bool!
+    var projectBuilds: Array<Build>!
+    var projectManager: ProjectManager!
     
-    var data = NSMutableData()
-    
-    func reset() {
-        self.stop()
-        self.getBuildData()
-        timer = NSTimer.scheduledTimerWithTimeInterval(
-            NSTimeInterval(30),
-            target: self,
-            selector: Selector("getBuildData"),
-            userInfo: nil, repeats: true
-        )
-    }
-    
-    func stop() {
-        if timer != nil {
-            timer.invalidate()
-            timer = nil
-        }
-    }
-    
-    func getBuildData(){
-        let urlPath: String = "https://circleci.com/api/v1/project/" + organizationName + "/" + projectName + "?circle-token=" + apiKey
-        var url = NSURL(string: urlPath)
-        if let url = url {
-            var request: NSMutableURLRequest = NSMutableURLRequest(URL: url)
-            request.setValue("application/json", forHTTPHeaderField: "Accept")
-            var connection: NSURLConnection = NSURLConnection(request: request, delegate: self, startImmediately: true)!
-        } else {
-            self.notifyError("Attempted connection to \(urlPath) failed. Please check your settings are correct")
-        }
 
-    }
-    
-    func connection(didReceiveResponse: NSURLConnection!, didReceiveResponse response: NSURLResponse!) {
-        self.data = NSMutableData()
-    }
-    
-    func connection(connection: NSURLConnection!, didReceiveData data: NSData!){
-        self.data.appendData(data)
-    }
-    
-    func connectionDidFinishLoading(connection: NSURLConnection!) {
-        autoreleasepool {
-            let receivedData = NSString(data: self.data, encoding: NSUTF8StringEncoding)
-
-            if self.validateReceivedData(receivedData) {
-                var err: NSError?
-                var json = NSJSONSerialization.JSONObjectWithData(
-                    self.data,
-                    options: NSJSONReadingOptions.MutableContainers,
-                    error: &err
-                    ) as Array<NSDictionary>
-                
-                if let error = err {
-                    println("An error occured while parsing the json for project \(self.projectName)")
-                } else {
-                    self.buildsJsonArray = json
-                    self.updateBuilds()
-                }
-            }
-        }
-    }
-    
-    private func validateReceivedData(receivedData: String?) -> Bool {
-        if let unwrappedData = receivedData {
-            //Circle error messages are returned as a JSON object.
-            //If we are expecting an array then we need to handle this case here before parse.
-            if unwrappedData.hasPrefix("{") {
-                notifyError("No project was found for [\(self.organizationName)/\(self.projectName)] Check your API key is correct.");
-                return false;
-            }
-            
-            //If the URL data was wrong then we will receive a HTML page.
-            //Check for this case
-            if unwrappedData.hasPrefix("<") {
-                notifyError("No project was found for [\(self.organizationName)/\(self.projectName)] Check that no invalid characters are included in your project names.")
-                return false;
-            }
-            
-            //Ensure the response is a JSON array
-            if unwrappedData.hasPrefix("[") && unwrappedData.hasSuffix("]") {
-                NSUserDefaults.standardUserDefaults().setBool(false, forKey: "SeaEyeError")
-                return true;
-            } else {
-                notifyError("The application received an unknown response. There may be network issues.")
-                return false;
-            }
-
-        } else {
-            return false;
-        }
-    }
-    
-    private func notifyError(error: String) {
+    func notifyError(error: String) {
         println(error)
-        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "SeaEyeError")
-        var info = ["message": error]
-        NSNotificationCenter.defaultCenter().postNotificationName(
-            "SeaEyeAlert",
-            object: self,
-            userInfo: info
-        )
-        self.stop()
+        if (!self.hasError) {
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "SeaEyeError")
+            var info = ["message": error]
+            NSNotificationCenter.defaultCenter().postNotificationName(
+                "SeaEyeAlert",
+                object: self,
+                userInfo: info
+            )
+            hasError = true
+        }
     }
     
-    private func updateBuilds() {
-        var builds = Array<Build>()
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        var userRegex : NSRegularExpression!
-        var branchRegex : NSRegularExpression!
-        if let user = NSUserDefaults.standardUserDefaults().stringForKey("SeaEyeUsers") {
-            userRegex = NSRegularExpression(pattern: user,
-                options: NSRegularExpressionOptions.CaseInsensitive,
-                error: nil
-            )
-        }
-        if let branches = NSUserDefaults.standardUserDefaults().stringForKey("SeaEyeBranches") {
-            branchRegex = NSRegularExpression(pattern: branches,
-                options: NSRegularExpressionOptions.CaseInsensitive,
-                error: nil
-            )
-        }
-        for (buildJson) in (buildsJsonArray) {
-            let build = Build()
-            if let branch = buildJson.objectForKey("branch") as? String {
-                build.branch = branch
-            }
-            if !matchRegex(branchRegex, string: build.branch) {
-                continue
-            }
-            if let user = buildJson.objectForKey("user")?.objectForKey("login") as? String {
-                build.user = user
-            } else if let user = buildJson.objectForKey("author_name") as? String {
-                build.user = user
-            }
-            if !matchRegex(userRegex, string: build.user) {
-                continue
-            }
-            if let status = buildJson.objectForKey("status") as? String {
-                build.status = status
-            }
-            if let subject = buildJson.objectForKey("subject") as? String {
-                build.subject = subject
-            } else {
-                build.subject = build.branch
-            }
-            if let build_url = buildJson.objectForKey("build_url") as? String {
-                build.url = NSURL(string: build_url)!
-            }
-            if let build_num = buildJson.objectForKey("build_num") as? Int {
-                build.buildnum = build_num
-            }
-            if let reponame = buildJson.objectForKey("reponame") as? String {
-                build.project = reponame
-            }
-            if let stoptime = buildJson.objectForKey("stop_time") as? String {
-                let date = dateFormatter.dateFromString(stoptime)
-                build.date = date
-            } else {
-                build.date = NSDate()
-            }
-            builds.append(build)
-        }
-        projectBuilds = builds
-        parent.runModelUpdates()
-    }
-    
-    private func matchRegex(regex: NSRegularExpression!, string: String!) -> Bool {
+    func matchRegex(regex: NSRegularExpression!, string: String!) -> Bool {
         if regex == nil {
             return true
         }
         let matches = regex.matchesInString(string, options: nil, range: NSMakeRange(0, countElements(string)))
         return matches.count != 0
     }
+    
+    override init() {
+        
+    }
 
+    required init(coder aDecoder: NSCoder) {
+        if let providerName = aDecoder.decodeObjectForKey("providerName") as? String {
+            self.providerName = providerName
+        }
+        if let projectName = aDecoder.decodeObjectForKey("projectName") as? String {
+            self.projectName = projectName
+        }
+        if let apiKey = aDecoder.decodeObjectForKey("apiKey") as? String {
+            self.apiKey = apiKey
+        }
+        if let organizationName = aDecoder.decodeObjectForKey("organizationName") as? String {
+            self.organizationName = organizationName
+        }
+        if let userRegexString = aDecoder.decodeObjectForKey("userRegexString") as? String {
+            self.userRegexString = userRegexString
+        }
+        if let branchRegexString = aDecoder.decodeObjectForKey("branchRegexString") as? String {
+            self.branchRegexString = branchRegexString
+        }
+    }
+    
+     func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(providerName, forKey: "providerName")
+        aCoder.encodeObject(projectName, forKey: "projectName")
+        aCoder.encodeObject(apiKey, forKey: "apiKey")
+        
+        if let organizationName = self.organizationName {
+            aCoder.encodeObject(organizationName, forKey: "organizationName")
+        }
+        if let userRegexString = self.userRegexString {
+            aCoder.encodeObject(userRegexString, forKey: "userRegexString")
+        }
+        if let branchRegexString = self.branchRegexString {
+            aCoder.encodeObject(branchRegexString, forKey: "branchRegexString")
+        }
+    }
+    
 }
