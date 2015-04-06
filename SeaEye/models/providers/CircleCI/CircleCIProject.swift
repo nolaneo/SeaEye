@@ -10,49 +10,44 @@ import Cocoa
 
 class CircleCIProject: Project, CIProviderInterface {
     
-    init(name: String, organization: String, key: String, manager: ProviderManager!) {
+    init(name: String, organization: String, key: String, manager: ProjectManager!) {
+        super.init()
         providerName = "CircleCI"
         projectName = name
         apiKey = key
         organizationName = organization
-        providerManager = manager
+        projectManager = manager
     }
     
-    var timer: NSTimer!
-    var projectBuilds : Array<Build>!
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
     var buildsJsonArray : Array<NSDictionary>!
+    var connection : NSURLConnection!
     
     var data = NSMutableData()
     
-    func reset() {
-        self.stop()
-        self.getBuildData()
-        timer = NSTimer.scheduledTimerWithTimeInterval(
-            NSTimeInterval(30),
-            target: self,
-            selector: Selector("getBuildData"),
-            userInfo: nil, repeats: true
-        )
+    func hasValidSettings() -> Bool {
+        return true
     }
     
-    func stop() {
-        if timer != nil {
-            timer.invalidate()
-            timer = nil
-        }
-    }
-    
-    private func getBuildData(){
-        let urlPath: String = "https://circleci.com/api/v1/project/" + organizationName + "/" + projectName + "?circle-token=" + apiKey
+    func fetchBuilds() {
+        self.data.length = 0;
+        let urlPath: String = "https://circleci.com/api/v1/project/" + organizationName! + "/" + projectName + "?circle-token=" + apiKey
         var url = NSURL(string: urlPath)
         if let url = url {
             var request: NSMutableURLRequest = NSMutableURLRequest(URL: url)
             request.setValue("application/json", forHTTPHeaderField: "Accept")
-            var connection: NSURLConnection = NSURLConnection(request: request, delegate: self, startImmediately: true)!
+            connection = NSURLConnection(request: request, delegate: self, startImmediately: true)!
         } else {
             self.notifyError("Attempted connection to \(urlPath) failed. Please check your settings are correct")
         }
         
+    }
+    
+    func cancelFetch() {
+        connection.cancel()
     }
     
     func connection(didReceiveResponse: NSURLConnection!, didReceiveResponse response: NSURLResponse!) {
@@ -67,76 +62,53 @@ class CircleCIProject: Project, CIProviderInterface {
         autoreleasepool {
             let receivedData = NSString(data: self.data, encoding: NSUTF8StringEncoding)
             
-            if self.validateReceivedData(receivedData) {
-                var err: NSError?
-                var json = NSJSONSerialization.JSONObjectWithData(
-                    self.data,
-                    options: NSJSONReadingOptions.MutableContainers,
-                    error: &err
-                    ) as Array<NSDictionary>
-                
-                if let error = err {
-                    println("An error occured while parsing the json for project \(self.projectName)")
-                } else {
-                    self.buildsJsonArray = json
+            var err: NSError?
+            var json: AnyObject? = NSJSONSerialization.JSONObjectWithData(
+                self.data,
+                options: NSJSONReadingOptions.MutableContainers,
+                error: &err
+            )
+            
+            if let error = err {
+                println("An error occured while parsing the json for project \(self.projectName)")
+            } else if let unwrappedJSON: AnyObject = json {
+                let isValid = NSJSONSerialization.isValidJSONObject(unwrappedJSON)
+                if !isValid {
+                    println("The JSON response for \(self.projectName) is not valid")
+                    self.hasError =  true
+                }else if let builds = json as? Array<NSDictionary> {
+                    self.hasError = false
+                    self.buildsJsonArray = builds
                     self.updateBuilds()
+                } else {
+                    self.hasError = true
+                    println("The JSON response for \(self.projectName) was not in the correct format")
                 }
-            }
-        }
-    }
-    
-    private func validateReceivedData(receivedData: String?) -> Bool {
-        if let unwrappedData = receivedData {
-            //Circle error messages are returned as a JSON object.
-            //If we are expecting an array then we need to handle this case here before parse.
-            if unwrappedData.hasPrefix("{") {
-                notifyError("No project was found for [\(self.organizationName)/\(self.projectName)] Check your API key is correct.");
-                return false;
-            }
-            
-            //If the URL data was wrong then we will receive a HTML page.
-            //Check for this case
-            if unwrappedData.hasPrefix("<") {
-                notifyError("No project was found for [\(self.organizationName)/\(self.projectName)] Check that no invalid characters are included in your project names.")
-                return false;
-            }
-            
-            //Ensure the response is a JSON array
-            if unwrappedData.hasPrefix("[") && unwrappedData.hasSuffix("]") {
-                NSUserDefaults.standardUserDefaults().setBool(false, forKey: "SeaEyeError")
-                return true;
-            } else {
-                notifyError("The application received an unknown response. There may be network issues.")
-                return false;
-            }
-            
-        } else {
-            return false;
-        }
-    }
-    
 
+            }
+        }
+    }
     
     private func updateBuilds() {
-        var builds = Array<Build>()
+        var builds = Array<CircleCIBuild>()
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         var userRegex : NSRegularExpression!
         var branchRegex : NSRegularExpression!
-        if let user = NSUserDefaults.standardUserDefaults().stringForKey("SeaEyeCircleCIUsers") {
+        if let user = self.userRegexString {
             userRegex = NSRegularExpression(pattern: user,
                 options: NSRegularExpressionOptions.CaseInsensitive,
                 error: nil
             )
         }
-        if let branches = NSUserDefaults.standardUserDefaults().stringForKey("SeaEyeCircleCIBranches") {
-            branchRegex = NSRegularExpression(pattern: branches,
+        if let branchRegexString = self.branchRegexString {
+            branchRegex = NSRegularExpression(pattern: branchRegexString,
                 options: NSRegularExpressionOptions.CaseInsensitive,
                 error: nil
             )
         }
         for (buildJson) in (buildsJsonArray) {
-            let build = Build()
+            let build = CircleCIBuild()
             if let branch = buildJson.objectForKey("branch") as? String {
                 build.branch = branch
             }
@@ -177,14 +149,7 @@ class CircleCIProject: Project, CIProviderInterface {
             builds.append(build)
         }
         projectBuilds = builds
-        parent.runModelUpdates()
+        projectManager.runBuildUpdate()
     }
-    
-    private func matchRegex(regex: NSRegularExpression!, string: String!) -> Bool {
-        if regex == nil {
-            return true
-        }
-        let matches = regex.matchesInString(string, options: nil, range: NSMakeRange(0, countElements(string)))
-        return matches.count != 0
-    }
+
 }

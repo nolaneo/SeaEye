@@ -6,4 +6,8 @@
 //  Copyright (c) 2015 Nolaneo. All rights reserved.
 //
 
-import Foundation
+import Cocoa
+
+class CircleCIBuild: Build {
+    
+}

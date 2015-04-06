@@ -21,7 +21,7 @@ class SeaEyePopoverController: NSViewController {
     var settingsViewController : SeaEyeSettingsController!
     var buildsViewController : SeaEyeBuildsController!
     var updatesViewController : SeaEyeUpdatesController!
-    var model : CircleCIModel!
+    var projectManager : ProjectManager!
     var applicationStatus : SeaEyeStatus!
     
     let appDelegate = NSApplication.sharedApplication().delegate as AppDelegate
@@ -75,7 +75,7 @@ class SeaEyePopoverController: NSViewController {
         setupNibControllers()
         
         settingsViewController.parent = self
-        buildsViewController.model = model
+        buildsViewController.projectManager = projectManager
         updatesViewController.applicationStatus = self.applicationStatus
         
         if appDelegate.OS_IS_MAVERICKS_OR_LESS() {

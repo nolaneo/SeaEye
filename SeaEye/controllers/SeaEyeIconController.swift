@@ -11,7 +11,7 @@ import Cocoa
 class SeaEyeIconController: NSViewController {
 
     @IBOutlet var iconButton : NSButton!
-    var model = CircleCIModel()
+    var projectManager = ProjectManager()
     var applicationStatus = SeaEyeStatus()
     var hasViewedBuilds = true
     var popover = NSPopover()
@@ -201,7 +201,7 @@ class SeaEyeIconController: NSViewController {
         if segue.identifier! == "SeaEyeOpenPopoverSegue" {
             self.setupMenuBarIcon()
             let popoverController = segue.destinationController as SeaEyePopoverController
-            popoverController.model = self.model
+            popoverController.projectManager = self.projectManager
             popoverController.applicationStatus = self.applicationStatus
         }
     }
@@ -209,7 +209,7 @@ class SeaEyeIconController: NSViewController {
     @IBAction func openPopover(sender: NSButton) {
         self.setupMenuBarIcon()
         let popoverController = SeaEyePopoverController(nibName: "SeaEyePopoverController", bundle: nil) as SeaEyePopoverController!
-        popoverController.model = self.model
+        popoverController.projectManager = self.projectManager
         popoverController.applicationStatus = self.applicationStatus
         let view = popoverController.view
         
