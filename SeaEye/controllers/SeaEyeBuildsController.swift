@@ -17,20 +17,6 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     
     override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        //Mavericks Workaround
-        let appDelegate = NSApplication.sharedApplication().delegate as AppDelegate
-        if appDelegate.OS_IS_MAVERICKS_OR_LESS() {
-            for (view) in (self.view.subviews) {
-                if let id = view.identifier? {
-                    println("Setup: \(id)")
-                    switch id {
-                    case "FallbackView": fallbackView = view as NSTextField
-                    case "BuildsTable": buildsTable = view as NSTableView
-                    default: println("Unknown View \(id)")
-                    }
-                }
-            }
-        }
     }
     
     required init?(coder: NSCoder) {
@@ -109,10 +95,12 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
         }
     }
     
-    func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
-        return model.allBuilds[row]
+    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        var cellView: BuildView = tableView.makeViewWithIdentifier(tableColumn!.identifier, owner: self) as! BuildView
+        cellView.setupForBuild(model.allBuilds[row])
+        return cellView;
     }
-
+    
     func selectionShouldChangeInTableView(tableView: NSTableView) -> Bool {
         return false
     }

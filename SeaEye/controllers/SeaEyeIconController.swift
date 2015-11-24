@@ -18,19 +18,6 @@ class SeaEyeIconController: NSViewController {
     
     override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        //Mavericks Workaround
-        let appDelegate = NSApplication.sharedApplication().delegate as AppDelegate
-        if appDelegate.OS_IS_MAVERICKS_OR_LESS() {
-            for (view) in (self.view.subviews) {
-                if let id = view.identifier? {
-                    switch id {
-                    case "IconButton": iconButton = view as NSButton
-                    default: println("Unknown View")
-                    }
-                }
-            }
-            setup()
-        }
     }
 
     required init?(coder: NSCoder) {
@@ -98,8 +85,8 @@ class SeaEyeIconController: NSViewController {
                 iconButton.image = NSImage(named: "circleci-success")
             }
             if NSUserDefaults.standardUserDefaults().boolForKey("SeaEyeNotify") {
-                let build = notification.userInfo!["build"] as Build!
-                let count = notification.userInfo!["count"] as Int!
+                let build = notification.userInfo!["build"] as! Build
+                let count = notification.userInfo!["count"] as! Int
                 showSuccessfulBuildNotification(build, count: count)
             }
         }
@@ -114,8 +101,8 @@ class SeaEyeIconController: NSViewController {
         }
         
         if NSUserDefaults.standardUserDefaults().boolForKey("SeaEyeNotify") {
-            let build = notification.userInfo!["build"] as Build!
-            let count = notification.userInfo!["count"] as Int!
+            let build = notification.userInfo!["build"] as! Build
+            let count = notification.userInfo!["count"] as! Int
             showFailedBuildNotification(build, count: count)
         }
     }
@@ -193,14 +180,14 @@ class SeaEyeIconController: NSViewController {
             } else {
                 alternateImageName = imageName.stringByAppendingString("-alt")
             }
-            iconButton.image = NSImage(named: alternateImageName)
+            iconButton.image = NSImage(named: alternateImageName as String)
         }
     }
     
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
         if segue.identifier! == "SeaEyeOpenPopoverSegue" {
             self.setupMenuBarIcon()
-            let popoverController = segue.destinationController as SeaEyePopoverController
+            let popoverController = segue.destinationController as! SeaEyePopoverController
             popoverController.model = self.model
             popoverController.applicationStatus = self.applicationStatus
         }
@@ -213,7 +200,7 @@ class SeaEyeIconController: NSViewController {
         popoverController.applicationStatus = self.applicationStatus
         let view = popoverController.view
         
-        let appDelegate = NSApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
         if appDelegate.OS_IS_MAVERICKS_OR_LESS() {
             popoverController.setup()
         }

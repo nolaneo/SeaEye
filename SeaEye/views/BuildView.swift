@@ -16,7 +16,7 @@ class BuildView: NSTableCellView {
     @IBOutlet var openURLButton : NSButton!
     var url : NSURL!
     
-    func setObjectValue(value: AnyObject) {
+    func setupForBuild(value: AnyObject) {
         if let build = value as? Build {
             url = build.url
             statusAndSubject.stringValue = build.status.capitalizedString + ": " + build.subject
@@ -50,7 +50,7 @@ class BuildView: NSTableCellView {
     private func setColors(color: NSColor) {
         statusAndSubject.textColor = color
         statusColorBox.fillColor = color
-        let cell = statusAndSubject.cell() as NSCell!
+        let cell = statusAndSubject.cell() as! NSCell
     }
     
     private func greenColor() -> NSColor {

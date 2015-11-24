@@ -17,20 +17,6 @@ class SeaEyeUpdatesController: NSViewController {
     
     override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        //Mavericks Workaround
-        let appDelegate = NSApplication.sharedApplication().delegate as AppDelegate
-        if appDelegate.OS_IS_MAVERICKS_OR_LESS() {
-            for (view) in (self.view.subviews) {
-                if let id = view.identifier? {
-                    println("Setup: \(id)")
-                    switch id {
-                    case "VersionLabel": versionLabel = view as NSTextField
-                    case "Changes": changes = view as NSTextField
-                    default: println("Unknown View \(id)")
-                    }
-                }
-            }
-        }
     }
     
     required init?(coder: NSCoder) {

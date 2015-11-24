@@ -71,13 +71,13 @@ class Project: NSObject, NSURLConnectionDelegate {
         autoreleasepool {
             let receivedData = NSString(data: self.data, encoding: NSUTF8StringEncoding)
 
-            if self.validateReceivedData(receivedData) {
+            if self.validateReceivedData(receivedData as String!) {
                 var err: NSError?
                 var json = NSJSONSerialization.JSONObjectWithData(
                     self.data,
                     options: NSJSONReadingOptions.MutableContainers,
                     error: &err
-                    ) as Array<NSDictionary>
+                    ) as! Array<NSDictionary>
                 
                 if let error = err {
                     println("An error occured while parsing the json for project \(self.projectName)")
@@ -89,7 +89,7 @@ class Project: NSObject, NSURLConnectionDelegate {
         }
     }
     
-    private func validateReceivedData(receivedData: String?) -> Bool {
+    private func validateReceivedData(receivedData: String!) -> Bool {
         if let unwrappedData = receivedData {
             //Circle error messages are returned as a JSON object.
             //If we are expecting an array then we need to handle this case here before parse.
@@ -198,7 +198,7 @@ class Project: NSObject, NSURLConnectionDelegate {
         if regex == nil {
             return true
         }
-        let matches = regex.matchesInString(string, options: nil, range: NSMakeRange(0, countElements(string)))
+        let matches = regex.matchesInString(string, options: nil, range: NSMakeRange(0, count(string)))
         return matches.count != 0
     }
 
