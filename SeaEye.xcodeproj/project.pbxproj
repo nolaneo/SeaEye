@@ -68,7 +68,6 @@
 		60C73C1819FD7EE10067CDCA /* SeaEyeSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C73C1719FD7EE10067CDCA /* SeaEyeSettingsController.swift */; };
 		60C73C1B19FD806A0067CDCA /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 60C73C1919FD806A0067CDCA /* back.png */; };
 		60C73C1C19FD806A0067CDCA /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60C73C1A19FD806A0067CDCA /* back@2x.png */; };
-		60C73C1E19FD8C8A0067CDCA /* WindowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C73C1D19FD8C8A0067CDCA /* WindowExtension.swift */; };
 		60F0232C1A1A95930067C0A0 /* SeaEyeUpdatesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F0232B1A1A95930067C0A0 /* SeaEyeUpdatesController.swift */; };
 /* End PBXBuildFile section */
 
@@ -148,7 +147,6 @@
 		60C73C1719FD7EE10067CDCA /* SeaEyeSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeaEyeSettingsController.swift; sourceTree = "<group>"; };
 		60C73C1919FD806A0067CDCA /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		60C73C1A19FD806A0067CDCA /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
-		60C73C1D19FD8C8A0067CDCA /* WindowExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowExtension.swift; sourceTree = "<group>"; };
 		60F0232B1A1A95930067C0A0 /* SeaEyeUpdatesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeaEyeUpdatesController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -248,7 +246,6 @@
 				60C73BDE19FC025A0067CDCA /* AppDelegate.swift */,
 				60C73BE219FC025A0067CDCA /* Images.xcassets */,
 				60C73BDC19FC025A0067CDCA /* Supporting Files */,
-				60C73C1D19FD8C8A0067CDCA /* WindowExtension.swift */,
 			);
 			path = SeaEye;
 			sourceTree = "<group>";
@@ -486,7 +483,6 @@
 				60C73C1519FD7ECB0067CDCA /* SeaEyeBuildsController.swift in Sources */,
 				60C73C0619FC16FE0067CDCA /* SeaEyePopoverController.swift in Sources */,
 				60C73C1819FD7EE10067CDCA /* SeaEyeSettingsController.swift in Sources */,
-				60C73C1E19FD8C8A0067CDCA /* WindowExtension.swift in Sources */,
 				603314A819FEBDEA0073EAED /* Build.swift in Sources */,
 				60F0232C1A1A95930067C0A0 /* SeaEyeUpdatesController.swift in Sources */,
 				603314A619FDCBFD0073EAED /* CircleCIModel.swift in Sources */,

@@ -51,19 +51,19 @@ class SeaEyeStatus: NSObject, NSURLConnectionDelegate {
             self.data,
             options: NSJSONReadingOptions.MutableContainers,
             error: &err
-            ) as NSDictionary
+            ) as! NSDictionary
         
         if let error = err {
             println("An error occured while parsing the project status from GitHub")
         } else {
-            let latestVersionString = json.objectForKey("latest_version") as String!
-            let downloadURLString = json.objectForKey("download_url") as String!
+            let latestVersionString = json.objectForKey("latest_version") as! String
+            let downloadURLString = json.objectForKey("download_url") as! String
             updateURL = NSURL(string: downloadURLString)
-            changes = json.objectForKey("changes") as String!
+            changes = json.objectForKey("changes") as! String
             println("The latest version of SeaEye is: \(latestVersionString)")
             println("Changes\n\(changes)")
             if let info = NSBundle.mainBundle().infoDictionary as NSDictionary! {
-                if let currentVersionString = info.objectForKey("CFBundleShortVersionString") as String! {
+                if let currentVersionString = info.objectForKey("CFBundleShortVersionString") as? String {
                     let numberFormatter = NSNumberFormatter()
                     let currentVersionFloat = numberFormatter.numberFromString(currentVersionString)?.floatValue
                     let latestVersionFloat = numberFormatter.numberFromString(latestVersionString)?.floatValue

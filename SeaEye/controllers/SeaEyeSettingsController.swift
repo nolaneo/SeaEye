@@ -23,32 +23,10 @@ class SeaEyeSettingsController: NSViewController {
     
     @IBOutlet weak var versionString : NSTextField!
     
-    let appDelegate = NSApplication.sharedApplication().delegate as AppDelegate!
+    let appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
     
     override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        //Mavericks Workaround
-        if appDelegate.OS_IS_MAVERICKS_OR_LESS() {
-            for (view) in (self.view.subviews) {
-                if let id = view.identifier? {
-                    println("Setup: \(id)")
-                    switch id {
-                    case "RunOnStartup": runOnStartup = view as NSButton
-                    case "ShowNotifications": showNotifications = view as NSButton
-                    case "ApiKeyField": apiKeyField = view as NSTextField
-                    case "OrganizationField": organizationField = view as NSTextField
-                    case "ProjectsField": projectsField = view as NSTextField
-                    case "UsersField": usersField = view as NSTextField
-                    case "BranchesField": branchesField = view as NSTextField
-                    case "VersionString": versionString = view as NSTextField
-                    default: println("Unknown View \(id)")
-                    }
-                }
-                setupVersionNumber()
-                setupInputFields()
-            }
-        }
-
     }
     
     required init?(coder: NSCoder) {
@@ -132,7 +110,7 @@ class SeaEyeSettingsController: NSViewController {
     
     private func setupVersionNumber() {
         if let info = NSBundle.mainBundle().infoDictionary as NSDictionary! {
-            if let version = info.objectForKey("CFBundleShortVersionString") as String! {
+            if let version = info.objectForKey("CFBundleShortVersionString") as? String {
                 versionString.stringValue = "Version \(version)"
             }
         }
