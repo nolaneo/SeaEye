@@ -15,7 +15,7 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     @IBOutlet weak var fallbackView: NSTextField!
     @IBOutlet weak var buildsTable: NSTableView!
     
-    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
@@ -54,7 +54,7 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
         NotificationCenter.default.removeObserver(self)
     }
     
-    func reloadBuilds() {
+    @objc func reloadBuilds() {
         print("Reload builds!")
         setupFallBackViews()
         buildsTable.reloadData()
@@ -96,7 +96,7 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        var cellView: BuildView = tableView.make(withIdentifier: tableColumn!.identifier, owner: self) as! BuildView
+        var cellView: BuildView = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! BuildView
         cellView.setupForBuild(model.allBuilds[row])
         return cellView;
     }

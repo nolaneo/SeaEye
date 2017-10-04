@@ -18,12 +18,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         NSUserNotificationCenter.default.delegate = self
         self.initialSetup()
-        statusBarItem = NSStatusBar.system().statusItem(withLength: -1)
+        statusBarItem = NSStatusBar.system.statusItem(withLength: -1)
         self.setupApplicationMenuViewController()
     }
     
     func setupApplicationMenuViewController() {
-        statusBarIconViewController = SeaEyeIconController(nibName: "SeaEyeIconController", bundle: nil)
+        statusBarIconViewController = SeaEyeIconController(nibName: NSNib.Name(rawValue: "SeaEyeIconController"), bundle: nil)
         statusBarItem.view = statusBarIconViewController?.view
     }
     
@@ -35,7 +35,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         if notification.activationType == NSUserNotification.ActivationType.actionButtonClicked {
             if let userInfo = notification.userInfo {
                 if let url = userInfo["url"] as? String{
-                    NSWorkspace.shared().open(URL(string: url)!)
+                    NSWorkspace.shared.open(URL(string: url)!)
                 }
             }
         }
@@ -55,7 +55,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     }
     
     func itemReferencesInLoginItems() -> (existingReference: LSSharedFileListItem?, lastReference: LSSharedFileListItem?) {
-        var itemUrl : UnsafeMutablePointer<Unmanaged<CFURL>?> = UnsafeMutablePointer<Unmanaged<CFURL>?>.allocate(capacity: 1)
+//        var itemUrl : UnsafeMutablePointer<Unmanaged<CFURL>?> = UnsafeMutablePointer<Unmanaged<CFURL>?>.allocate(capacity: 1)
         if let appUrl : URL = URL(fileURLWithPath: Bundle.main.bundlePath) {
             let loginItemsRef = LSSharedFileListCreate(
                 nil,
@@ -66,7 +66,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                 let loginItems: NSArray = LSSharedFileListCopySnapshot(loginItemsRef, nil).takeRetainedValue() as NSArray
                 print("There are \(loginItems.count) login items")
                 let lastItemRef: LSSharedFileListItem = loginItems.lastObject as! LSSharedFileListItem
-                let lCount = loginItems.count + 1
+//                let lCount = loginItems.count + 1
                 
                 for currentItemRef in loginItems as! [LSSharedFileListItem] {
                     if let itemUrl = LSSharedFileListItemCopyResolvedURL(currentItemRef, 0, nil) {

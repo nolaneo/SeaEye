@@ -9,11 +9,14 @@
 import Cocoa
 
 class Project: NSObject, NSURLConnectionDelegate {
-    
     var projectName: String!
     var organizationName: String!
     var apiKey: String!
     var parent: CircleCIModel!
+    var timer: Timer!
+    var projectBuilds : Array<Build>!
+    var buildsJsonArray : Array<NSDictionary>!
+    var data = NSMutableData()
     
     init(name: String, organization: String, key: String, parentModel: CircleCIModel!) {
         projectName = name
@@ -22,20 +25,16 @@ class Project: NSObject, NSURLConnectionDelegate {
         parent = parentModel
     }
     
-    var timer: Timer!
-    var projectBuilds : Array<Build>!
-    var buildsJsonArray : Array<NSDictionary>!
-    
-    var data = NSMutableData()
-    
     func reset() {
         self.stop()
         self.getBuildData()
+        
         timer = Timer.scheduledTimer(
             timeInterval: TimeInterval(30),
             target: self,
             selector: #selector(Project.getBuildData),
-            userInfo: nil, repeats: true
+            userInfo: nil,
+            repeats: true
         )
     }
     
@@ -46,7 +45,7 @@ class Project: NSObject, NSURLConnectionDelegate {
         }
     }
     
-    func getBuildData(){
+    @objc func getBuildData(){
         let urlPath: String = "https://circleci.com/api/v1/project/" + organizationName + "/" + projectName + "?circle-token=" + apiKey
         let url = URL(string: urlPath)
         if let url = url {

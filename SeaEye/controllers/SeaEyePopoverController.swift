@@ -24,9 +24,9 @@ class SeaEyePopoverController: NSViewController {
     var model : CircleCIModel!
     var applicationStatus : SeaEyeStatus!
     
-    let appDelegate = NSApplication.shared().delegate as! AppDelegate
+    let appDelegate = NSApplication.shared.delegate as! AppDelegate
     
-    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
@@ -48,9 +48,9 @@ class SeaEyePopoverController: NSViewController {
     fileprivate func setupViewControllers() {
         
         if isDarkModeEnabled() {
-            opacityFixView.image = NSImage(named: "opacity-fix-dark")
+            opacityFixView.image = NSImage(named: NSImage.Name(rawValue: "opacity-fix-dark"))
         } else {
-            opacityFixView.image = NSImage(named: "opacity-fix-light")
+            opacityFixView.image = NSImage(named: NSImage.Name(rawValue: "opacity-fix-light"))
         }
         
         setupNibControllers()
@@ -69,28 +69,28 @@ class SeaEyePopoverController: NSViewController {
     
     fileprivate func setupStoryboardControllers() {
         
-        let storyboard = NSStoryboard(name: "Main", bundle: nil);
-        settingsViewController = storyboard.instantiateController(withIdentifier: "SeaEyeSettingsController") as! SeaEyeSettingsController
-        buildsViewController = storyboard.instantiateController(withIdentifier: "SeaEyeBuildsController") as! SeaEyeBuildsController
-        updatesViewController = storyboard.instantiateController(withIdentifier: "SeaEyeUpdatesController") as! SeaEyeUpdatesController
+        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil);
+        settingsViewController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "SeaEyeSettingsController")) as! SeaEyeSettingsController
+        buildsViewController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "SeaEyeBuildsController")) as! SeaEyeBuildsController
+        updatesViewController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "SeaEyeUpdatesController")) as! SeaEyeUpdatesController
     }
     
     fileprivate func setupNibControllers() {
-        settingsViewController = SeaEyeSettingsController(nibName: "SeaEyeSettingsController", bundle: nil)
-        buildsViewController = SeaEyeBuildsController(nibName: "SeaEyeBuildsController", bundle: nil)
-        updatesViewController = SeaEyeUpdatesController(nibName: "SeaEyeUpdatesController", bundle: nil)
+        settingsViewController = SeaEyeSettingsController(nibName: NSNib.Name(rawValue: "SeaEyeSettingsController"), bundle: nil)
+        buildsViewController = SeaEyeBuildsController(nibName: NSNib.Name(rawValue: "SeaEyeBuildsController"), bundle: nil)
+        updatesViewController = SeaEyeUpdatesController(nibName: NSNib.Name(rawValue: "SeaEyeUpdatesController"), bundle: nil)
     }
     
     fileprivate func setupNavButtons() {
         //Templated images cause background overlay weirdness
         if isDarkModeEnabled() {
-            openSettingsButton.image = NSImage(named: "settings")
-            openBuildsButton.image = NSImage(named: "back")
-            shutdownButton.image = NSImage(named: "power")
+            openSettingsButton.image = NSImage(named: NSImage.Name(rawValue: "settings"))
+            openBuildsButton.image = NSImage(named: NSImage.Name(rawValue: "back"))
+            shutdownButton.image = NSImage(named: NSImage.Name(rawValue: "power"))
         } else {
-            openSettingsButton.image = NSImage(named: "settings-alt")
-            openBuildsButton.image = NSImage(named: "back-alt")
-            shutdownButton.image = NSImage(named: "power-alt")
+            openSettingsButton.image = NSImage(named: NSImage.Name(rawValue: "settings-alt"))
+            openBuildsButton.image = NSImage(named: NSImage.Name(rawValue: "back-alt"))
+            shutdownButton.image = NSImage(named: NSImage.Name(rawValue: "power-alt"))
         }
     }
     
@@ -123,7 +123,7 @@ class SeaEyePopoverController: NSViewController {
     }
     
     @IBAction func shutdownApplication(_ sender: NSButton) {
-        NSApplication.shared().terminate(self);
+        NSApplication.shared.terminate(self);
     }
     
     fileprivate func showUpdateButtonIfAppropriate() {
@@ -131,7 +131,7 @@ class SeaEyePopoverController: NSViewController {
             let versionString = NSMutableAttributedString(string: applicationStatus.latestVersion)
             let range = NSMakeRange(0, applicationStatus.latestVersion.count)
             versionString.addAttribute(
-                NSForegroundColorAttributeName,
+                NSAttributedStringKey.foregroundColor,
                 value: NSColor.red,
                 range: range
             )

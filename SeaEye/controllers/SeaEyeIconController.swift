@@ -16,7 +16,7 @@ class SeaEyeIconController: NSViewController {
     var hasViewedBuilds = true
     var popover = NSPopover()
     
-    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
@@ -59,7 +59,7 @@ class SeaEyeIconController: NSViewController {
 
     }
     
-    func alert(_ notification: Notification) {
+    @objc func alert(_ notification: Notification) {
         if let userInfo = notification.userInfo {
             if let message = userInfo["message"] as? String {
                 let notification = NSUserNotification()
@@ -78,12 +78,12 @@ class SeaEyeIconController: NSViewController {
         }
     }
     
-    func setGreenBuildIcon(_ notification: Notification) {
+    @objc func setGreenBuildIcon(_ notification: Notification) {
         if hasViewedBuilds {
             if (self.isDarkModeEnabled()) {
-                iconButton.image = NSImage(named: "circleci-success-alt")
+                iconButton.image = NSImage(named: NSImage.Name(rawValue: "circleci-success-alt"))
             } else {
-                iconButton.image = NSImage(named: "circleci-success")
+                iconButton.image = NSImage(named: NSImage.Name(rawValue: "circleci-success"))
             }
             if UserDefaults.standard.bool(forKey: "SeaEyeNotify") {
                 let build = notification.userInfo!["build"] as! Build
@@ -93,12 +93,12 @@ class SeaEyeIconController: NSViewController {
         }
     }
     
-    func setRedBuildIcon(_ notification: Notification) {
+    @objc func setRedBuildIcon(_ notification: Notification) {
         hasViewedBuilds = false
         if (self.isDarkModeEnabled()) {
-            iconButton.image = NSImage(named: "circleci-failed-alt")
+            iconButton.image = NSImage(named: NSImage.Name(rawValue: "circleci-failed-alt"))
         } else {
-            iconButton.image = NSImage(named: "circleci-failed")
+            iconButton.image = NSImage(named: NSImage.Name(rawValue: "circleci-failed"))
         }
         
         if UserDefaults.standard.bool(forKey: "SeaEyeNotify") {
@@ -117,7 +117,7 @@ class SeaEyeIconController: NSViewController {
             notification.subtitle = build.subject
             notification.informativeText = build.user
         }
-        let image = NSImage(named: "build-failed")
+        let image = NSImage(named: NSImage.Name(rawValue: "build-failed"))
         notification.setValue(image, forKey: "_identityImage")
         notification.setValue(false, forKey: "_identityImageHasBorder")
         notification.setValue(nil, forKey:"_imageURL")
@@ -133,7 +133,7 @@ class SeaEyeIconController: NSViewController {
             notification.subtitle = build.subject
             notification.informativeText = build.user
         }
-        let image = NSImage(named: "build-passed")
+        let image = NSImage(named: NSImage.Name(rawValue: "build-passed"))
         notification.setValue(image, forKey: "_identityImage")
         notification.setValue(false, forKey: "_identityImageHasBorder")
         NSUserNotificationCenter.default.deliver(notification)
@@ -142,9 +142,9 @@ class SeaEyeIconController: NSViewController {
     fileprivate func setupMenuBarIcon() {
         hasViewedBuilds = true
         if (self.isDarkModeEnabled()) {
-            iconButton.image = NSImage(named: "circleci-normal-alt")
+            iconButton.image = NSImage(named: NSImage.Name(rawValue: "circleci-normal-alt"))
         } else {
-            iconButton.image = NSImage(named: "circleci-normal")
+            iconButton.image = NSImage(named: NSImage.Name(rawValue: "circleci-normal"))
         }
     }
     
@@ -167,21 +167,21 @@ class SeaEyeIconController: NSViewController {
         }
     }
     
-    func alternateIconStyle() {
+    @objc func alternateIconStyle() {
         let currentImage = iconButton.image
-        if let imageName = currentImage?.name() {
+        if let imageName = currentImage?.name()?.rawValue{
             var alternateImageName : NSString
             if imageName.hasSuffix("-alt") {
                 alternateImageName = imageName.replacingOccurrences(of: "alt", with: "") as NSString
             } else {
                 alternateImageName = imageName + "-alt" as NSString
             }
-            iconButton.image = NSImage(named: alternateImageName as String)
+            iconButton.image = NSImage(named: NSImage.Name(rawValue: alternateImageName as String as String))
         }
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        if segue.identifier! == "SeaEyeOpenPopoverSegue" {
+        if segue.identifier!.rawValue == "SeaEyeOpenPopoverSegue" {
             self.setupMenuBarIcon()
             let popoverController = segue.destinationController as! SeaEyePopoverController
             popoverController.model = self.model
@@ -191,12 +191,12 @@ class SeaEyeIconController: NSViewController {
     
     @IBAction func openPopover(_ sender: NSButton) {
         self.setupMenuBarIcon()
-        let popoverController = SeaEyePopoverController(nibName: "SeaEyePopoverController", bundle: nil) as SeaEyePopoverController!
+        let popoverController = SeaEyePopoverController(nibName: NSNib.Name(rawValue: "SeaEyePopoverController"), bundle: nil) as SeaEyePopoverController!
         popoverController?.model = self.model
         popoverController?.applicationStatus = self.applicationStatus
         let view = popoverController?.view
         
-        let appDelegate = NSApplication.shared().delegate as! AppDelegate
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
         if appDelegate.OS_IS_MAVERICKS_OR_LESS() {
             popoverController?.setup()
         }

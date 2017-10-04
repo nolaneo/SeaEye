@@ -23,9 +23,9 @@ class SeaEyeSettingsController: NSViewController {
     
     @IBOutlet weak var versionString : NSTextField!
     
-    let appDelegate = NSApplication.shared().delegate as! AppDelegate
+    let appDelegate = NSApplication.shared.delegate as! AppDelegate
     
-    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
@@ -44,11 +44,11 @@ class SeaEyeSettingsController: NSViewController {
     
     
     @IBAction func openAPIPage(_ sender: NSButton) {
-        NSWorkspace.shared().open(URL(string: "https://circleci.com/account/api")!)
+        NSWorkspace.shared.open(URL(string: "https://circleci.com/account/api")!)
     }
     
     @IBAction func saveUserData(_ sender: NSButton) {
-        let notify = showNotifications.state == NSOnState
+        let notify = showNotifications.state == .on
         UserDefaults.standard.set(notify, forKey: "SeaEyeNotify")
         setUserDefaultsFromField(apiKeyField, key: "SeaEyeAPIKey")
         setUserDefaultsFromField(organizationField, key: "SeaEyeOrganization")
@@ -61,7 +61,7 @@ class SeaEyeSettingsController: NSViewController {
     }
     
     @IBAction func saveNotificationPreferences(_ sender: NSButton) {
-        let notify = showNotifications.state == NSOnState
+        let notify = showNotifications.state == .on
         print("Notificaiton Preference: \(notify)")
         UserDefaults.standard.set(notify, forKey: "SeaEyeNotify")
     }
@@ -84,15 +84,15 @@ class SeaEyeSettingsController: NSViewController {
     fileprivate func setupInputFields() {
         let notify = UserDefaults.standard.bool(forKey: "SeaEyeNotify")
         if notify {
-            showNotifications.state = NSOnState
+            showNotifications.state = NSControl.StateValue.on
         } else {
-            showNotifications.state = NSOffState
+            showNotifications.state = NSControl.StateValue.off
         }
         let hasRunOnStartup = appDelegate.applicationIsInStartUpItems()
         if hasRunOnStartup {
-            runOnStartup.state = NSOnState
+            runOnStartup.state = NSControl.StateValue.on
         } else {
-            runOnStartup.state = NSOffState
+            runOnStartup.state = NSControl.StateValue.off
         }
         setupFieldFromUserDefaults(apiKeyField, key: "SeaEyeAPIKey")
         setupFieldFromUserDefaults(organizationField, key: "SeaEyeOrganization")

@@ -26,8 +26,8 @@ class SeaEyeStatus: NSObject, NSURLConnectionDelegate {
             repeats: false
         )
     }
-    
-    func getApplicationStatus(){
+
+    @objc func getApplicationStatus(){
         let urlPath: String = "https://raw.githubusercontent.com/nolaneo/SeaEye/master/project_status.json"
         let url = URL(string: urlPath)
         if let url = url {
@@ -78,9 +78,6 @@ class SeaEyeStatus: NSObject, NSURLConnectionDelegate {
                     }
                 }
             }
-
         }
-
     }
-
 }

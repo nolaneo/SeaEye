@@ -9,7 +9,6 @@
 import Cocoa
 
 class CircleCIModel: NSObject {
-    
     var hasValidUserSettings = false
     
     override init() {
@@ -45,7 +44,7 @@ class CircleCIModel: NSObject {
         objc_sync_exit(self)
     }
     
-    func updateBuilds() {
+    @objc func updateBuilds() {
         autoreleasepool {
             print("Update builds!")
             var builds: [Build] = []
@@ -54,8 +53,7 @@ class CircleCIModel: NSObject {
                     builds += projectBuilds
                 }
             }
-            self.allBuilds = builds
-            self.allBuilds.sorted {$0.date.timeIntervalSince1970 > $1.date.timeIntervalSince1970}
+            self.allBuilds = builds.sorted {$0.date.timeIntervalSince1970 > $1.date.timeIntervalSince1970}
             
             self.calculateBuildStatus()
         }
@@ -103,7 +101,7 @@ class CircleCIModel: NSObject {
         lastNotificationDate = Date()
     }
     
-    func validateUserSettingsAndStartRequests() {
+    @objc func validateUserSettingsAndStartRequests() {
         let validation = self.validateKey("SeaEyeAPIKey")
         && self.validateKey("SeaEyeOrganization")
         && self.validateKey("SeaEyeProjects")
@@ -119,11 +117,7 @@ class CircleCIModel: NSObject {
     
     fileprivate func validateKey(_ key : String) -> Bool {
         let userDefaults = UserDefaults.standard
-        if let x = userDefaults.string(forKey: key) {
-            return true;
-        } else {
-            return false
-        }
+        return userDefaults.string(forKey: key) != nil
     }
     
     fileprivate func resetAPIRequests() {
@@ -135,15 +129,20 @@ class CircleCIModel: NSObject {
         let apiKey = userDefaults.string(forKey: "SeaEyeAPIKey") as String!
         let organization = userDefaults.string(forKey: "SeaEyeOrganization") as String!
         let projectsString = userDefaults.string(forKey: "SeaEyeProjects") as String!
-        
         let projectsArray = projectsString?.components(separatedBy: CharacterSet.whitespaces)
         
-        for (projectName) in (projectsArray)! {
-            print("Setting up \(projectName)")
-            let project = Project(name: projectName, organization: organization!, key:apiKey!, parentModel: self)
-            allProjects.append(project)
-        }
+ 
+        allProjects = ProjectsFromSettings(APIKey: apiKey!, Organisation: organization!, ProjectNames: projectsArray!)
         self.startAPIRequests()
+    }
+    
+    func ProjectsFromSettings(APIKey: String, Organisation: String, ProjectNames: [String] ) -> [Project] {
+        var projects = [Project]()
+        for projectName in ProjectNames {
+            let project = Project(name: projectName, organization: Organisation, key:APIKey, parentModel: self)
+            projects.append(project)
+        }
+        return projects
     }
     
     fileprivate func startAPIRequests() {

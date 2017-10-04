@@ -15,7 +15,7 @@ class SeaEyeUpdatesController: NSViewController {
     @IBOutlet weak var versionLabel : NSTextField!
     @IBOutlet weak var changes : NSTextField!
     
-    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
@@ -34,7 +34,7 @@ class SeaEyeUpdatesController: NSViewController {
     }
     
     @IBAction func openUpdatesPage(_ sender : NSButton) {
-        NSWorkspace.shared().open(applicationStatus.updateURL as URL)
+        NSWorkspace.shared.open(applicationStatus.updateURL as URL)
     }
     
 }

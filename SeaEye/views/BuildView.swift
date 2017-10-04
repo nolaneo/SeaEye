@@ -36,14 +36,14 @@ class BuildView: NSTableCellView {
             timeAndBuildNumber.stringValue = dateFormatter.string(from: build.date as Date) + " | Build #\(build.buildnum)"
             
             if isDarkModeEnabled() {
-                openURLButton.image = NSImage(named: "open-alt")
+                openURLButton.image = NSImage(named: NSImage.Name(rawValue: "open-alt"))
             }
         }
     }
     
     @IBAction func openBuild(_ sender: AnyObject) {
         if url != nil {
-            NSWorkspace.shared().open(url)
+            NSWorkspace.shared.open(url)
         }
     }
     
