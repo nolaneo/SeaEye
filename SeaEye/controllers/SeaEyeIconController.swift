@@ -51,11 +51,10 @@ class SeaEyeIconController: NSViewController {
             name: NSNotification.Name(rawValue: "SeaEyeGreenBuild"),
             object: nil
         )
-        // TODO
-//        NSEvent.addGlobalMonitorForEventsMatchingMask(
-//            NSEventMask.LeftMouseUp|NSEventMask.RightMouseUp,
-//            handler: closePopover
-//        )
+        NSEvent.addGlobalMonitorForEvents(
+            matching: [.leftMouseUp, .rightMouseUp],
+            handler: closePopover
+        )
 
     }
     
