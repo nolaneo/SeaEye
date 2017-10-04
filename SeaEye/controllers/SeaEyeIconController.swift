@@ -126,7 +126,7 @@ class SeaEyeIconController: NSViewController {
     
     fileprivate func showSuccessfulBuildNotification(_ build: Build, count: Int) {
         let notification = NSUserNotification()
-        notification.title = "SeaEye: Build Passed"
+        notification.title = build.project + ": Build Passed"
         if count > 1 {
             notification.subtitle = "You have \(count) successful builds"
         } else {
