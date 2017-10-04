@@ -30,7 +30,8 @@ class BuildView: NSTableCellView {
                 case "retried": setColors(grayColor()); break;
                 default: break;
             }
-            branchName.stringValue = build.branch
+            let branchString = "\(build.branch!) | \(build.project!)"
+            branchName.stringValue = branchString
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "HH:mm MMM dd"
             timeAndBuildNumber.stringValue = dateFormatter.string(from: build.date as Date) + " | Build #\(build.buildnum!)"
