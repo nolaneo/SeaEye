@@ -197,9 +197,6 @@ class SeaEyeIconController: NSViewController {
         let view = popoverController?.view
         
         let appDelegate = NSApplication.shared.delegate as! AppDelegate
-        if appDelegate.OS_IS_MAVERICKS_OR_LESS() {
-            popoverController?.setup()
-        }
         
         if !popover.isShown {
             popover.contentViewController = popoverController

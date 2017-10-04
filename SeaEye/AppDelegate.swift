@@ -115,12 +115,5 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             }
         }
     }
-    
-    func OS_IS_MAVERICKS_OR_LESS() -> Bool {
-//        let osVersion = NSNumber(value: NSAppKitVersionNumber)
-//        let mavericks = NSNumber(value: NSAppKitVersionNumber10_9)
-//        return osVersion.intValue <= mavericks.intValue
-        return false
-    }
 }
 

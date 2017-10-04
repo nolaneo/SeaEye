@@ -40,16 +40,6 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
         self.reloadBuilds()
     }
     
-    func mavericksSetup() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SeaEyeBuildsController.reloadBuilds),
-            name: NSNotification.Name(rawValue: "SeaEyeUpdatedBuilds"),
-            object: nil
-        )
-        self.reloadBuilds()
-    }
-    
     override func viewWillDisappear() {
         NotificationCenter.default.removeObserver(self)
     }

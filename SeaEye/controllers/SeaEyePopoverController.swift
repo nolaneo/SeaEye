@@ -58,11 +58,6 @@ class SeaEyePopoverController: NSViewController {
         settingsViewController.pparent = self
         buildsViewController.model = model
         updatesViewController.applicationStatus = self.applicationStatus
-        
-        if appDelegate.OS_IS_MAVERICKS_OR_LESS() {
-            buildsViewController.mavericksSetup()
-        }
-        
         openBuildsButton.isHidden = true;
         subcontrollerView.addSubview(buildsViewController.view)
     }
@@ -138,10 +133,6 @@ class SeaEyePopoverController: NSViewController {
             versionString.fixAttributes(in: range)
             openUpdatesButton.attributedTitle = versionString
             openUpdatesButton.isHidden = false
-            
-            if appDelegate.OS_IS_MAVERICKS_OR_LESS() {
-                updatesViewController.setup()
-            }
             
         } else {
             openUpdatesButton.isHidden = true
