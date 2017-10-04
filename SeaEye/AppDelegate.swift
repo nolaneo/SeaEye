@@ -55,7 +55,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     }
     
     func itemReferencesInLoginItems() -> (existingReference: LSSharedFileListItem?, lastReference: LSSharedFileListItem?) {
-//        var itemUrl : UnsafeMutablePointer<Unmanaged<CFURL>?> = UnsafeMutablePointer<Unmanaged<CFURL>?>.allocate(capacity: 1)
         if let appUrl : URL = URL(fileURLWithPath: Bundle.main.bundlePath) {
             let loginItemsRef = LSSharedFileListCreate(
                 nil,
@@ -66,7 +65,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                 let loginItems: NSArray = LSSharedFileListCopySnapshot(loginItemsRef, nil).takeRetainedValue() as NSArray
                 print("There are \(loginItems.count) login items")
                 let lastItemRef: LSSharedFileListItem = loginItems.lastObject as! LSSharedFileListItem
-//                let lCount = loginItems.count + 1
                 
                 for currentItemRef in loginItems as! [LSSharedFileListItem] {
                     if let itemUrl = LSSharedFileListItemCopyResolvedURL(currentItemRef, 0, nil) {

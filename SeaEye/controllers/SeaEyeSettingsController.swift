@@ -10,7 +10,7 @@ import Cocoa
 
 class SeaEyeSettingsController: NSViewController {
     
-    var pparent : SeaEyePopoverController!
+    var parent_controller : SeaEyePopoverController!
     
     @IBOutlet weak var runOnStartup : NSButton!
     @IBOutlet weak var showNotifications : NSButton!
@@ -57,7 +57,7 @@ class SeaEyeSettingsController: NSViewController {
         setUserDefaultsFromField(usersField, key: "SeaEyeUsers")
         UserDefaults.standard.set(false, forKey: "SeaEyeError")
         NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeSettingsChanged"), object: nil)
-        pparent.openBuilds(sender)
+        parent_controller.openBuilds(sender)
     }
     
     @IBAction func saveNotificationPreferences(_ sender: NSButton) {

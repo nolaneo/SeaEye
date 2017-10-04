@@ -55,7 +55,7 @@ class SeaEyePopoverController: NSViewController {
         
         setupNibControllers()
         
-        settingsViewController.pparent = self
+        settingsViewController.parent_controller = self
         buildsViewController.model = model
         updatesViewController.applicationStatus = self.applicationStatus
         openBuildsButton.isHidden = true;
