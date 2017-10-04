@@ -15,10 +15,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     var statusBarItem : NSStatusItem = NSStatusItem();
     var statusBarIconViewController : SeaEyeIconController!;
     
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
-        NSUserNotificationCenter.defaultUserNotificationCenter().delegate = self
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        NSUserNotificationCenter.default.delegate = self
         self.initialSetup()
-        statusBarItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
+        statusBarItem = NSStatusBar.system().statusItem(withLength: -1)
         self.setupApplicationMenuViewController()
     }
     
@@ -27,25 +27,25 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         statusBarItem.view = statusBarIconViewController?.view
     }
     
-    func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {
+    func userNotificationCenter(_ center: NSUserNotificationCenter, shouldPresent notification: NSUserNotification) -> Bool {
         return true
     }
     
-    func userNotificationCenter(center: NSUserNotificationCenter, didActivateNotification notification: NSUserNotification) {
-        if notification.activationType == NSUserNotificationActivationType.ActionButtonClicked {
+    func userNotificationCenter(_ center: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
+        if notification.activationType == NSUserNotification.ActivationType.actionButtonClicked {
             if let userInfo = notification.userInfo {
                 if let url = userInfo["url"] as? String{
-                    NSWorkspace.sharedWorkspace().openURL(NSURL(string: url)!)
+                    NSWorkspace.shared().open(URL(string: url)!)
                 }
             }
         }
     }
     
-    private func initialSetup() {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        if userDefaults.boolForKey("SeaEyePerformedFirstSetup") == false {
-            userDefaults.setBool(true, forKey: "SeaEyeNotify")
-            userDefaults.setBool(true, forKey: "SeaEyePerformedFirstSetup")
+    fileprivate func initialSetup() {
+        let userDefaults = UserDefaults.standard
+        if userDefaults.bool(forKey: "SeaEyePerformedFirstSetup") == false {
+            userDefaults.set(true, forKey: "SeaEyeNotify")
+            userDefaults.set(true, forKey: "SeaEyePerformedFirstSetup")
             toggleLaunchAtStartup()
         }
     }
@@ -54,31 +54,30 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         return (itemReferencesInLoginItems().existingReference != nil)
     }
     
-    func itemReferencesInLoginItems() -> (existingReference: LSSharedFileListItemRef?, lastReference: LSSharedFileListItemRef?) {
-        var itemUrl : UnsafeMutablePointer<Unmanaged<CFURL>?> = UnsafeMutablePointer<Unmanaged<CFURL>?>.alloc(1)
-        if let appUrl : NSURL = NSURL.fileURLWithPath(NSBundle.mainBundle().bundlePath) {
+    func itemReferencesInLoginItems() -> (existingReference: LSSharedFileListItem?, lastReference: LSSharedFileListItem?) {
+        var itemUrl : UnsafeMutablePointer<Unmanaged<CFURL>?> = UnsafeMutablePointer<Unmanaged<CFURL>?>.allocate(capacity: 1)
+        if let appUrl : URL = URL(fileURLWithPath: Bundle.main.bundlePath) {
             let loginItemsRef = LSSharedFileListCreate(
                 nil,
                 kLSSharedFileListSessionLoginItems.takeRetainedValue(),
                 nil
-            ).takeRetainedValue() as LSSharedFileListRef?
+            ).takeRetainedValue() as LSSharedFileList?
             if loginItemsRef != nil {
                 let loginItems: NSArray = LSSharedFileListCopySnapshot(loginItemsRef, nil).takeRetainedValue() as NSArray
-                println("There are \(loginItems.count) login items")
-                let lastItemRef: LSSharedFileListItemRef = loginItems.lastObject as! LSSharedFileListItemRef
-                for var i = 0; i < loginItems.count; ++i {
-                    let currentItemRef: LSSharedFileListItemRef = loginItems.objectAtIndex(i) as! LSSharedFileListItemRef
-                    if LSSharedFileListItemResolve(currentItemRef, 0, itemUrl, nil) == noErr {
-                        if let urlRef: NSURL =  itemUrl.memory?.takeRetainedValue() {
-                            println("URL Ref: \(urlRef.lastPathComponent)")
-                            if urlRef.isEqual(appUrl) {
-                                return (currentItemRef, lastItemRef)
-                            }
+                print("There are \(loginItems.count) login items")
+                let lastItemRef: LSSharedFileListItem = loginItems.lastObject as! LSSharedFileListItem
+                let lCount = loginItems.count + 1
+                
+                for currentItemRef in loginItems as! [LSSharedFileListItem] {
+                    if let itemUrl = LSSharedFileListItemCopyResolvedURL(currentItemRef, 0, nil) {
+                        if (itemUrl.takeRetainedValue() as URL) == appUrl {
+                            return (currentItemRef, lastItemRef)
                         }
                     } else {
-                        println("Unknown login application")
+                        print("Unknown login application")
                     }
                 }
+               
                 //The application was not found in the startup list
                 return (nil, lastItemRef)
             }
@@ -93,10 +92,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             nil,
             kLSSharedFileListSessionLoginItems.takeRetainedValue(),
             nil
-            ).takeRetainedValue() as LSSharedFileListRef?
+            ).takeRetainedValue() as LSSharedFileList?
         if loginItemsRef != nil {
             if shouldBeToggled {
-                if let appUrl : CFURLRef = NSURL.fileURLWithPath(NSBundle.mainBundle().bundlePath) {
+                if let appUrl : CFURL = URL(fileURLWithPath: Bundle.main.bundlePath) as CFURL {
                     LSSharedFileListInsertItemURL(
                         loginItemsRef,
                         itemReferences.lastReference,
@@ -106,21 +105,22 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                         nil,
                         nil
                     )
-                    println("Application was added to login items")
+                    print("Application was added to login items")
                 }
             } else {
                 if let itemRef = itemReferences.existingReference {
                     LSSharedFileListItemRemove(loginItemsRef,itemRef);
-                    println("Application was removed from login items")
+                    print("Application was removed from login items")
                 }
             }
         }
     }
     
     func OS_IS_MAVERICKS_OR_LESS() -> Bool {
-        let osVersion = NSNumber(double: NSAppKitVersionNumber)
-        let mavericks = NSNumber(int: NSAppKitVersionNumber10_9)
-        return osVersion.integerValue <= mavericks.integerValue
+//        let osVersion = NSNumber(value: NSAppKitVersionNumber)
+//        let mavericks = NSNumber(value: NSAppKitVersionNumber10_9)
+//        return osVersion.intValue <= mavericks.intValue
+        return false
     }
 }
 

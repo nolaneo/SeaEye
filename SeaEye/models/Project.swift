@@ -22,7 +22,7 @@ class Project: NSObject, NSURLConnectionDelegate {
         parent = parentModel
     }
     
-    var timer: NSTimer!
+    var timer: Timer!
     var projectBuilds : Array<Build>!
     var buildsJsonArray : Array<NSDictionary>!
     
@@ -31,10 +31,10 @@ class Project: NSObject, NSURLConnectionDelegate {
     func reset() {
         self.stop()
         self.getBuildData()
-        timer = NSTimer.scheduledTimerWithTimeInterval(
-            NSTimeInterval(30),
+        timer = Timer.scheduledTimer(
+            timeInterval: TimeInterval(30),
             target: self,
-            selector: Selector("getBuildData"),
+            selector: #selector(Project.getBuildData),
             userInfo: nil, repeats: true
         )
     }
@@ -48,39 +48,38 @@ class Project: NSObject, NSURLConnectionDelegate {
     
     func getBuildData(){
         let urlPath: String = "https://circleci.com/api/v1/project/" + organizationName + "/" + projectName + "?circle-token=" + apiKey
-        var url = NSURL(string: urlPath)
+        let url = URL(string: urlPath)
         if let url = url {
-            var request: NSMutableURLRequest = NSMutableURLRequest(URL: url)
+            let request: NSMutableURLRequest = NSMutableURLRequest(url: url)
             request.setValue("application/json", forHTTPHeaderField: "Accept")
-            var connection: NSURLConnection = NSURLConnection(request: request, delegate: self, startImmediately: true)!
+            var connection: NSURLConnection = NSURLConnection(request: request as URLRequest, delegate: self, startImmediately: true)!
         } else {
             self.notifyError("Attempted connection to \(urlPath) failed. Please check your settings are correct")
         }
 
     }
     
-    func connection(didReceiveResponse: NSURLConnection!, didReceiveResponse response: NSURLResponse!) {
+    func connection(_ didReceiveResponse: NSURLConnection!, didReceiveResponse response: URLResponse!) {
         self.data = NSMutableData()
     }
     
-    func connection(connection: NSURLConnection!, didReceiveData data: NSData!){
-        self.data.appendData(data)
+    func connection(_ connection: NSURLConnection!, didReceiveData data: Data!){
+        self.data.append(data)
     }
     
-    func connectionDidFinishLoading(connection: NSURLConnection!) {
+    func connectionDidFinishLoading(_ connection: NSURLConnection!) {
         autoreleasepool {
-            let receivedData = NSString(data: self.data, encoding: NSUTF8StringEncoding)
+            let receivedData = NSString(data: self.data as Data, encoding: String.Encoding.utf8.rawValue)
 
             if self.validateReceivedData(receivedData as String!) {
                 var err: NSError?
-                var json = NSJSONSerialization.JSONObjectWithData(
-                    self.data,
-                    options: NSJSONReadingOptions.MutableContainers,
-                    error: &err
+                var json = try? JSONSerialization.jsonObject(
+                    with: self.data as Data,
+                    options: JSONSerialization.ReadingOptions.mutableContainers
                     ) as! Array<NSDictionary>
                 
                 if let error = err {
-                    println("An error occured while parsing the json for project \(self.projectName)")
+                    print("An error occured while parsing the json for project \(self.projectName)")
                 } else {
                     self.buildsJsonArray = json
                     self.updateBuilds()
@@ -89,7 +88,7 @@ class Project: NSObject, NSURLConnectionDelegate {
         }
     }
     
-    private func validateReceivedData(receivedData: String!) -> Bool {
+    fileprivate func validateReceivedData(_ receivedData: String!) -> Bool {
         if let unwrappedData = receivedData {
             //Circle error messages are returned as a JSON object.
             //If we are expecting an array then we need to handle this case here before parse.
@@ -107,7 +106,7 @@ class Project: NSObject, NSURLConnectionDelegate {
             
             //Ensure the response is a JSON array
             if unwrappedData.hasPrefix("[") && unwrappedData.hasSuffix("]") {
-                NSUserDefaults.standardUserDefaults().setBool(false, forKey: "SeaEyeError")
+                UserDefaults.standard.set(false, forKey: "SeaEyeError")
                 return true;
             } else {
                 notifyError("The application received an unknown response. There may be network issues.")
@@ -119,74 +118,72 @@ class Project: NSObject, NSURLConnectionDelegate {
         }
     }
     
-    private func notifyError(error: String) {
-        println(error)
-        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "SeaEyeError")
+    fileprivate func notifyError(_ error: String) {
+        print(error)
+        UserDefaults.standard.set(true, forKey: "SeaEyeError")
         var info = ["message": error]
-        NSNotificationCenter.defaultCenter().postNotificationName(
-            "SeaEyeAlert",
+        NotificationCenter.default.post(
+            name: Notification.Name(rawValue: "SeaEyeAlert"),
             object: self,
             userInfo: info
         )
         self.stop()
     }
     
-    private func updateBuilds() {
+    fileprivate func updateBuilds() {
         var builds = Array<Build>()
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         var userRegex : NSRegularExpression!
         var branchRegex : NSRegularExpression!
-        if let user = NSUserDefaults.standardUserDefaults().stringForKey("SeaEyeUsers") {
-            userRegex = NSRegularExpression(pattern: user,
-                options: NSRegularExpressionOptions.CaseInsensitive,
-                error: nil
-            )
+        if let user = UserDefaults.standard.string(forKey: "SeaEyeUsers") {
+            do {
+                userRegex = try! NSRegularExpression(pattern: user, options: NSRegularExpression.Options.caseInsensitive)
+            }catch {}
         }
-        if let branches = NSUserDefaults.standardUserDefaults().stringForKey("SeaEyeBranches") {
-            branchRegex = NSRegularExpression(pattern: branches,
-                options: NSRegularExpressionOptions.CaseInsensitive,
-                error: nil
-            )
+        if let branches = UserDefaults.standard.string(forKey: "SeaEyeBranches") {
+            do {
+            branchRegex = try! NSRegularExpression(pattern: branches,options: NSRegularExpression.Options.caseInsensitive)
+            } catch {}
         }
         for (buildJson) in (buildsJsonArray) {
             let build = Build()
-            if let branch = buildJson.objectForKey("branch") as? String {
+            if let branch = buildJson.object(forKey: "branch") as? String {
                 build.branch = branch
             }
             if !matchRegex(branchRegex, string: build.branch) {
                 continue
             }
-            if let user = buildJson.objectForKey("user")?.objectForKey("login") as? String {
+            if let user = (buildJson.object(forKey: "user") as AnyObject).object(forKey: "login") as? String {
                 build.user = user
-            } else if let user = buildJson.objectForKey("author_name") as? String {
+            } else if let user = buildJson.object(forKey: "author_name") as? String {
                 build.user = user
             }
             if !matchRegex(userRegex, string: build.user) {
                 continue
             }
-            if let status = buildJson.objectForKey("status") as? String {
+            if let status = buildJson.object(forKey: "status") as? String {
                 build.status = status
             }
-            if let subject = buildJson.objectForKey("subject") as? String {
+            if let subject = buildJson.object(forKey: "subject") as? String {
                 build.subject = subject
             } else {
                 build.subject = build.branch
             }
-            if let build_url = buildJson.objectForKey("build_url") as? String {
-                build.url = NSURL(string: build_url)!
+            if let build_url = buildJson.object(forKey: "build_url") as? String {
+                build.url = URL(string: build_url)!
             }
-            if let build_num = buildJson.objectForKey("build_num") as? Int {
+            if let build_num = buildJson.object(forKey: "build_num") as? Int {
                 build.buildnum = build_num
             }
-            if let reponame = buildJson.objectForKey("reponame") as? String {
+            if let reponame = buildJson.object(forKey: "reponame") as? String {
                 build.project = reponame
             }
-            if let stoptime = buildJson.objectForKey("stop_time") as? String {
-                let date = dateFormatter.dateFromString(stoptime)
-                build.date = date
+            if let stoptime = buildJson.object(forKey: "stop_time") as? String {
+                let date = dateFormatter.date(from: stoptime)
+                build.date = (date as! NSDate) as Date!
             } else {
-                build.date = NSDate()
+                build.date = Date()
             }
             builds.append(build)
         }
@@ -194,11 +191,11 @@ class Project: NSObject, NSURLConnectionDelegate {
         parent.runModelUpdates()
     }
     
-    private func matchRegex(regex: NSRegularExpression!, string: String!) -> Bool {
+    fileprivate func matchRegex(_ regex: NSRegularExpression!, string: String!) -> Bool {
         if regex == nil {
             return true
         }
-        let matches = regex.matchesInString(string, options: nil, range: NSMakeRange(0, count(string)))
+        let matches = regex.matches(in: string, range: NSMakeRange(0, string.count))
         return matches.count != 0
     }
 

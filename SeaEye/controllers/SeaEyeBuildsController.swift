@@ -15,7 +15,7 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     @IBOutlet weak var fallbackView: NSTextField!
     @IBOutlet weak var buildsTable: NSTableView!
     
-    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
@@ -28,10 +28,10 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     }
     
     override func viewWillAppear() {
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
-            selector: Selector("reloadBuilds"),
-            name: "SeaEyeUpdatedBuilds",
+            selector: #selector(SeaEyeBuildsController.reloadBuilds),
+            name: NSNotification.Name(rawValue: "SeaEyeUpdatedBuilds"),
             object: nil
         )
     }
@@ -41,39 +41,39 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     }
     
     func mavericksSetup() {
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
-            selector: Selector("reloadBuilds"),
-            name: "SeaEyeUpdatedBuilds",
+            selector: #selector(SeaEyeBuildsController.reloadBuilds),
+            name: NSNotification.Name(rawValue: "SeaEyeUpdatedBuilds"),
             object: nil
         )
         self.reloadBuilds()
     }
     
     override func viewWillDisappear() {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     func reloadBuilds() {
-        println("Reload builds!")
+        print("Reload builds!")
         setupFallBackViews()
         buildsTable.reloadData()
     }
     
-    private func setupFallBackViews() {
-        fallbackView.hidden = false
-        buildsTable.hidden = true
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        if  (userDefaults.stringForKey("SeaEyeAPIKey") == nil) {
+    fileprivate func setupFallBackViews() {
+        fallbackView.isHidden = false
+        buildsTable.isHidden = true
+        let userDefaults = UserDefaults.standard
+        if  (userDefaults.string(forKey: "SeaEyeAPIKey") == nil) {
             return fallbackView.stringValue = "You have not set an API key"
         }
-        if userDefaults.boolForKey("SeaEyeError") {
+        if userDefaults.bool(forKey: "SeaEyeError") {
             return fallbackView.stringValue = "Could not connect with your settings. Check'em!"
         }
-        if (userDefaults.stringForKey("SeaEyeOrganization") == nil) {
+        if (userDefaults.string(forKey: "SeaEyeOrganization") == nil) {
             return fallbackView.stringValue = "You have not set an organization name"
         }
-        if (userDefaults.valueForKey("SeaEyeProjects") == nil) {
+        if (userDefaults.value(forKey: "SeaEyeProjects") == nil) {
             return fallbackView.stringValue = "You have not added any projects"
         }
         if (model.allBuilds == nil) {
@@ -82,12 +82,12 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
         if (model.allBuilds.count == 0) {
             return fallbackView.stringValue = "No Recent Builds Found"
         }
-        fallbackView.hidden = true
-        buildsTable.hidden = false
+        fallbackView.isHidden = true
+        buildsTable.isHidden = false
     }
     
     //NSTableViewDataSource
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         if model != nil && model.allBuilds != nil {
             return model.allBuilds.count
         } else {
@@ -95,13 +95,13 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
         }
     }
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        var cellView: BuildView = tableView.makeViewWithIdentifier(tableColumn!.identifier, owner: self) as! BuildView
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        var cellView: BuildView = tableView.make(withIdentifier: tableColumn!.identifier, owner: self) as! BuildView
         cellView.setupForBuild(model.allBuilds[row])
         return cellView;
     }
     
-    func selectionShouldChangeInTableView(tableView: NSTableView) -> Bool {
+    func selectionShouldChange(in tableView: NSTableView) -> Bool {
         return false
     }
 }
