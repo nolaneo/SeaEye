@@ -24,9 +24,9 @@ class SeaEyePopoverController: NSViewController {
     var model : CircleCIModel!
     var applicationStatus : SeaEyeStatus!
     
-    let appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
+    let appDelegate = NSApplication.shared.delegate as! AppDelegate
     
-    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
@@ -45,113 +45,104 @@ class SeaEyePopoverController: NSViewController {
         showUpdateButtonIfAppropriate()
     }
     
-    private func setupViewControllers() {
+    fileprivate func setupViewControllers() {
         
         if isDarkModeEnabled() {
-            opacityFixView.image = NSImage(named: "opacity-fix-dark")
+            opacityFixView.image = NSImage(named: NSImage.Name(rawValue: "opacity-fix-dark"))
         } else {
-            opacityFixView.image = NSImage(named: "opacity-fix-light")
+            opacityFixView.image = NSImage(named: NSImage.Name(rawValue: "opacity-fix-light"))
         }
         
         setupNibControllers()
         
-        settingsViewController.parent = self
+        settingsViewController.parent_controller = self
         buildsViewController.model = model
         updatesViewController.applicationStatus = self.applicationStatus
-        
-        if appDelegate.OS_IS_MAVERICKS_OR_LESS() {
-            buildsViewController.mavericksSetup()
-        }
-        
-        openBuildsButton.hidden = true;
+        openBuildsButton.isHidden = true;
         subcontrollerView.addSubview(buildsViewController.view)
     }
     
-    private func setupStoryboardControllers() {
+    fileprivate func setupStoryboardControllers() {
         
-        let storyboard = NSStoryboard(name: "Main", bundle: nil);
-        settingsViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeSettingsController") as! SeaEyeSettingsController
-        buildsViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeBuildsController") as! SeaEyeBuildsController
-        updatesViewController = storyboard?.instantiateControllerWithIdentifier("SeaEyeUpdatesController") as! SeaEyeUpdatesController
+        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil);
+        settingsViewController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "SeaEyeSettingsController")) as! SeaEyeSettingsController
+        buildsViewController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "SeaEyeBuildsController")) as! SeaEyeBuildsController
+        updatesViewController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "SeaEyeUpdatesController")) as! SeaEyeUpdatesController
     }
     
-    private func setupNibControllers() {
-        settingsViewController = SeaEyeSettingsController(nibName: "SeaEyeSettingsController", bundle: nil)
-        buildsViewController = SeaEyeBuildsController(nibName: "SeaEyeBuildsController", bundle: nil)
-        updatesViewController = SeaEyeUpdatesController(nibName: "SeaEyeUpdatesController", bundle: nil)
+    fileprivate func setupNibControllers() {
+        settingsViewController = SeaEyeSettingsController(nibName: NSNib.Name(rawValue: "SeaEyeSettingsController"), bundle: nil)
+        buildsViewController = SeaEyeBuildsController(nibName: NSNib.Name(rawValue: "SeaEyeBuildsController"), bundle: nil)
+        updatesViewController = SeaEyeUpdatesController(nibName: NSNib.Name(rawValue: "SeaEyeUpdatesController"), bundle: nil)
     }
     
-    private func setupNavButtons() {
+    fileprivate func setupNavButtons() {
         //Templated images cause background overlay weirdness
         if isDarkModeEnabled() {
-            openSettingsButton.image = NSImage(named: "settings")
-            openBuildsButton.image = NSImage(named: "back")
-            shutdownButton.image = NSImage(named: "power")
+            openSettingsButton.image = NSImage(named: NSImage.Name(rawValue: "settings"))
+            openBuildsButton.image = NSImage(named: NSImage.Name(rawValue: "back"))
+            shutdownButton.image = NSImage(named: NSImage.Name(rawValue: "power"))
         } else {
-            openSettingsButton.image = NSImage(named: "settings-alt")
-            openBuildsButton.image = NSImage(named: "back-alt")
-            shutdownButton.image = NSImage(named: "power-alt")
+            openSettingsButton.image = NSImage(named: NSImage.Name(rawValue: "settings-alt"))
+            openBuildsButton.image = NSImage(named: NSImage.Name(rawValue: "back-alt"))
+            shutdownButton.image = NSImage(named: NSImage.Name(rawValue: "power-alt"))
         }
     }
     
-    @IBAction func openSettings(sender: NSButton) {
-        openSettingsButton.hidden = true
-        openUpdatesButton.hidden = true
-        shutdownButton.hidden = true
-        openBuildsButton.hidden = false
+    @IBAction func openSettings(_ sender: NSButton) {
+        openSettingsButton.isHidden = true
+        openUpdatesButton.isHidden = true
+        shutdownButton.isHidden = true
+        openBuildsButton.isHidden = false
         buildsViewController.view.removeFromSuperview()
         subcontrollerView.addSubview(settingsViewController.view)
     }
     
-    @IBAction func openBuilds(sender: NSButton) {
+    @IBAction func openBuilds(_ sender: NSButton) {
         showUpdateButtonIfAppropriate()
-        openBuildsButton.hidden = true;
-        shutdownButton.hidden = false
-        openSettingsButton.hidden = false
+        openBuildsButton.isHidden = true;
+        shutdownButton.isHidden = false
+        openSettingsButton.isHidden = false
         settingsViewController.view.removeFromSuperview()
         updatesViewController.view.removeFromSuperview()
         subcontrollerView.addSubview(buildsViewController.view)
     }
     
-    @IBAction func openUpdates(sender: NSButton) {
-        openUpdatesButton.hidden = true
-        openSettingsButton.hidden = true
-        shutdownButton.hidden = true
-        openBuildsButton.hidden = false
+    @IBAction func openUpdates(_ sender: NSButton) {
+        openUpdatesButton.isHidden = true
+        openSettingsButton.isHidden = true
+        shutdownButton.isHidden = true
+        openBuildsButton.isHidden = false
         buildsViewController.view.removeFromSuperview()
         subcontrollerView.addSubview(updatesViewController.view)
     }
     
-    @IBAction func shutdownApplication(sender: NSButton) {
-        NSApplication.sharedApplication().terminate(self);
+    @IBAction func shutdownApplication(_ sender: NSButton) {
+        NSApplication.shared.terminate(self);
     }
     
-    private func showUpdateButtonIfAppropriate() {
+    fileprivate func showUpdateButtonIfAppropriate() {
         if applicationStatus.hasUpdate {
             let versionString = NSMutableAttributedString(string: applicationStatus.latestVersion)
-            let range = NSMakeRange(0, count(applicationStatus.latestVersion))
+            let range = NSMakeRange(0, applicationStatus.latestVersion.count)
             versionString.addAttribute(
-                NSForegroundColorAttributeName,
-                value: NSColor.redColor(),
+                NSAttributedStringKey.foregroundColor,
+                value: NSColor.red,
                 range: range
             )
-            versionString.fixAttributesInRange(range)
+            versionString.fixAttributes(in: range)
             openUpdatesButton.attributedTitle = versionString
-            openUpdatesButton.hidden = false
-            
-            if appDelegate.OS_IS_MAVERICKS_OR_LESS() {
-                updatesViewController.setup()
-            }
+            openUpdatesButton.isHidden = false
             
         } else {
-            openUpdatesButton.hidden = true
+            openUpdatesButton.isHidden = true
         }
     }
     
-    private func isDarkModeEnabled() -> Bool {
-        let dictionary  = NSUserDefaults.standardUserDefaults().persistentDomainForName(NSGlobalDomain);
+    fileprivate func isDarkModeEnabled() -> Bool {
+        let dictionary  = UserDefaults.standard.persistentDomain(forName: UserDefaults.globalDomain);
         if let interfaceStyle = dictionary?["AppleInterfaceStyle"] as? NSString {
-            return interfaceStyle.localizedCaseInsensitiveContainsString("dark")
+            return interfaceStyle.localizedCaseInsensitiveContains("dark")
         } else {
             return false
         }

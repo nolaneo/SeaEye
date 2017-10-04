@@ -16,7 +16,7 @@ class SeaEyeIconController: NSViewController {
     var hasViewedBuilds = true
     var popover = NSPopover()
     
-    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
@@ -33,35 +33,36 @@ class SeaEyeIconController: NSViewController {
     func setup() {
         self.setupMenuBarIcon()
         self.setupStyleNotificationObserver()
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
-            selector: Selector("alert:"),
-            name: "SeaEyeAlert",
+            selector: #selector(SeaEyeIconController.alert(_:)),
+            name: NSNotification.Name(rawValue: "SeaEyeAlert"),
             object: nil
         )
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
-            selector: Selector("setRedBuildIcon:"),
-            name: "SeaEyeRedBuild",
+            selector: #selector(SeaEyeIconController.setRedBuildIcon(_:)),
+            name: NSNotification.Name(rawValue: "SeaEyeRedBuild"),
             object: nil
         )
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
-            selector: Selector("setGreenBuildIcon:"),
-            name: "SeaEyeGreenBuild",
+            selector: #selector(SeaEyeIconController.setGreenBuildIcon(_:)),
+            name: NSNotification.Name(rawValue: "SeaEyeGreenBuild"),
             object: nil
         )
-        NSEvent.addGlobalMonitorForEventsMatchingMask(
-            NSEventMask.LeftMouseUpMask|NSEventMask.RightMouseUpMask,
-            handler: closePopover
-        )
+        // TODO
+//        NSEvent.addGlobalMonitorForEventsMatchingMask(
+//            NSEventMask.LeftMouseUp|NSEventMask.RightMouseUp,
+//            handler: closePopover
+//        )
 
     }
     
-    func alert(notification: NSNotification) {
+    @objc func alert(_ notification: Notification) {
         if let userInfo = notification.userInfo {
             if let message = userInfo["message"] as? String {
-                var notification = NSUserNotification()
+                let notification = NSUserNotification()
                 notification.title = "SeaEye"
                 notification.informativeText = message
                 
@@ -72,19 +73,19 @@ class SeaEyeIconController: NSViewController {
                     notification.userInfo = ["url": url]
                 }
                 
-                NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
+                NSUserNotificationCenter.default.deliver(notification)
             }
         }
     }
     
-    func setGreenBuildIcon(notification: NSNotification) {
+    @objc func setGreenBuildIcon(_ notification: Notification) {
         if hasViewedBuilds {
             if (self.isDarkModeEnabled()) {
-                iconButton.image = NSImage(named: "circleci-success-alt")
+                iconButton.image = NSImage(named: NSImage.Name(rawValue: "circleci-success-alt"))
             } else {
-                iconButton.image = NSImage(named: "circleci-success")
+                iconButton.image = NSImage(named: NSImage.Name(rawValue: "circleci-success"))
             }
-            if NSUserDefaults.standardUserDefaults().boolForKey("SeaEyeNotify") {
+            if UserDefaults.standard.bool(forKey: "SeaEyeNotify") {
                 let build = notification.userInfo!["build"] as! Build
                 let count = notification.userInfo!["count"] as! Int
                 showSuccessfulBuildNotification(build, count: count)
@@ -92,23 +93,23 @@ class SeaEyeIconController: NSViewController {
         }
     }
     
-    func setRedBuildIcon(notification: NSNotification) {
+    @objc func setRedBuildIcon(_ notification: Notification) {
         hasViewedBuilds = false
         if (self.isDarkModeEnabled()) {
-            iconButton.image = NSImage(named: "circleci-failed-alt")
+            iconButton.image = NSImage(named: NSImage.Name(rawValue: "circleci-failed-alt"))
         } else {
-            iconButton.image = NSImage(named: "circleci-failed")
+            iconButton.image = NSImage(named: NSImage.Name(rawValue: "circleci-failed"))
         }
         
-        if NSUserDefaults.standardUserDefaults().boolForKey("SeaEyeNotify") {
+        if UserDefaults.standard.bool(forKey: "SeaEyeNotify") {
             let build = notification.userInfo!["build"] as! Build
             let count = notification.userInfo!["count"] as! Int
             showFailedBuildNotification(build, count: count)
         }
     }
     
-    private func showFailedBuildNotification(build: Build, count: Int) {
-        var notification = NSUserNotification()
+    fileprivate func showFailedBuildNotification(_ build: Build, count: Int) {
+        let notification = NSUserNotification()
         notification.title = "SeaEye: Build Failed"
         if count > 1 {
             notification.subtitle = "You have \(count) failed builds"
@@ -116,15 +117,15 @@ class SeaEyeIconController: NSViewController {
             notification.subtitle = build.subject
             notification.informativeText = build.user
         }
-        let image = NSImage(named: "build-failed")
+        let image = NSImage(named: NSImage.Name(rawValue: "build-failed"))
         notification.setValue(image, forKey: "_identityImage")
         notification.setValue(false, forKey: "_identityImageHasBorder")
         notification.setValue(nil, forKey:"_imageURL")
-        NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
+        NSUserNotificationCenter.default.deliver(notification)
     }
     
-    private func showSuccessfulBuildNotification(build: Build, count: Int) {
-        var notification = NSUserNotification()
+    fileprivate func showSuccessfulBuildNotification(_ build: Build, count: Int) {
+        let notification = NSUserNotification()
         notification.title = "SeaEye: Build Passed"
         if count > 1 {
             notification.subtitle = "You have \(count) successful builds"
@@ -132,60 +133,55 @@ class SeaEyeIconController: NSViewController {
             notification.subtitle = build.subject
             notification.informativeText = build.user
         }
-        let image = NSImage(named: "build-passed")
+        let image = NSImage(named: NSImage.Name(rawValue: "build-passed"))
         notification.setValue(image, forKey: "_identityImage")
         notification.setValue(false, forKey: "_identityImageHasBorder")
-        NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(notification)
+        NSUserNotificationCenter.default.deliver(notification)
     }
     
-    private func setupMenuBarIcon() {
+    fileprivate func setupMenuBarIcon() {
         hasViewedBuilds = true
         if (self.isDarkModeEnabled()) {
-            iconButton.image = NSImage(named: "circleci-normal-alt")
+            iconButton.image = NSImage(named: NSImage.Name(rawValue: "circleci-normal-alt"))
         } else {
-            iconButton.image = NSImage(named: "circleci-normal")
+            iconButton.image = NSImage(named: NSImage.Name(rawValue: "circleci-normal"))
         }
     }
     
-    private func setupStyleNotificationObserver() {
-        NSDistributedNotificationCenter.defaultCenter()
+    fileprivate func setupStyleNotificationObserver() {
+        DistributedNotificationCenter.default()
             .addObserver(
                 self,
-                selector: Selector("alternateIconStyle"),
-                name: "AppleInterfaceThemeChangedNotification",
+                selector: #selector(SeaEyeIconController.alternateIconStyle),
+                name: NSNotification.Name(rawValue: "AppleInterfaceThemeChangedNotification"),
                 object: nil
         )
     }
     
-    private func isDarkModeEnabled() -> Bool {
-        let dictionary  = NSUserDefaults.standardUserDefaults().persistentDomainForName(NSGlobalDomain);
+    fileprivate func isDarkModeEnabled() -> Bool {
+        let dictionary  = UserDefaults.standard.persistentDomain(forName: UserDefaults.globalDomain);
         if let interfaceStyle = dictionary?["AppleInterfaceStyle"] as? NSString {
-            return interfaceStyle.localizedCaseInsensitiveContainsString("dark")
+            return interfaceStyle.localizedCaseInsensitiveContains("dark")
         } else {
             return false
         }
     }
     
-    func alternateIconStyle() {
-        var currentImage = iconButton.image
-        if let imageName = currentImage?.name() {
+    @objc func alternateIconStyle() {
+        let currentImage = iconButton.image
+        if let imageName = currentImage?.name()?.rawValue{
             var alternateImageName : NSString
             if imageName.hasSuffix("-alt") {
-                alternateImageName = imageName.stringByReplacingOccurrencesOfString(
-                    "-alt",
-                    withString: "",
-                    options: nil,
-                    range: nil
-                )
+                alternateImageName = imageName.replacingOccurrences(of: "alt", with: "") as NSString
             } else {
-                alternateImageName = imageName.stringByAppendingString("-alt")
+                alternateImageName = imageName + "-alt" as NSString
             }
-            iconButton.image = NSImage(named: alternateImageName as String)
+            iconButton.image = NSImage(named: NSImage.Name(rawValue: alternateImageName as String as String))
         }
     }
     
-    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier! == "SeaEyeOpenPopoverSegue" {
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if segue.identifier!.rawValue == "SeaEyeOpenPopoverSegue" {
             self.setupMenuBarIcon()
             let popoverController = segue.destinationController as! SeaEyePopoverController
             popoverController.model = self.model
@@ -193,28 +189,25 @@ class SeaEyeIconController: NSViewController {
         }
     }
     
-    @IBAction func openPopover(sender: NSButton) {
+    @IBAction func openPopover(_ sender: NSButton) {
         self.setupMenuBarIcon()
-        let popoverController = SeaEyePopoverController(nibName: "SeaEyePopoverController", bundle: nil) as SeaEyePopoverController!
-        popoverController.model = self.model
-        popoverController.applicationStatus = self.applicationStatus
-        let view = popoverController.view
+        let popoverController = SeaEyePopoverController(nibName: NSNib.Name(rawValue: "SeaEyePopoverController"), bundle: nil) as SeaEyePopoverController!
+        popoverController?.model = self.model
+        popoverController?.applicationStatus = self.applicationStatus
+        let view = popoverController?.view
         
-        let appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
-        if appDelegate.OS_IS_MAVERICKS_OR_LESS() {
-            popoverController.setup()
-        }
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
         
-        if !popover.shown {
+        if !popover.isShown {
             popover.contentViewController = popoverController
-            popover.showRelativeToRect(self.view.frame, ofView: self.view, preferredEdge: NSMinYEdge)
+            popover.show(relativeTo: self.view.frame, of: self.view, preferredEdge: NSRectEdge.minY)
         } else {
             popover.close()
         }
     }
     
-    func closePopover(aEvent: (NSEvent!)) -> Void {
-        if popover.shown {
+    func closePopover(_ aEvent: (NSEvent!)) -> Void {
+        if popover.isShown {
             popover.close()
         }
     }

@@ -14,12 +14,12 @@ class BuildView: NSTableCellView {
     @IBOutlet var branchName : NSTextField!
     @IBOutlet var timeAndBuildNumber : NSTextField!
     @IBOutlet var openURLButton : NSButton!
-    var url : NSURL!
+    var url : URL!
     
-    func setupForBuild(value: AnyObject) {
+    func setupForBuild(_ value: AnyObject) {
         if let build = value as? Build {
-            url = build.url
-            statusAndSubject.stringValue = build.status.capitalizedString + ": " + build.subject
+            url = build.url as URL!
+            statusAndSubject.stringValue = build.status.capitalized + ": " + build.subject
             switch build.status {
                 case "success": setColors(greenColor()); break;
                 case "fixed": setColors(greenColor()); break;
@@ -31,45 +31,45 @@ class BuildView: NSTableCellView {
                 default: break;
             }
             branchName.stringValue = build.branch
-            let dateFormatter = NSDateFormatter()
+            let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "HH:mm MMM dd"
-            timeAndBuildNumber.stringValue = dateFormatter.stringFromDate(build.date) + " | Build #\(build.buildnum)"
+            timeAndBuildNumber.stringValue = dateFormatter.string(from: build.date as Date) + " | Build #\(build.buildnum!)"
             
             if isDarkModeEnabled() {
-                openURLButton.image = NSImage(named: "open-alt")
+                openURLButton.image = NSImage(named: NSImage.Name(rawValue: "open-alt"))
             }
         }
     }
     
-    @IBAction func openBuild(sender: AnyObject) {
+    @IBAction func openBuild(_ sender: AnyObject) {
         if url != nil {
-            NSWorkspace.sharedWorkspace().openURL(url)
+            NSWorkspace.shared.open(url)
         }
     }
     
-    private func setColors(color: NSColor) {
+    fileprivate func setColors(_ color: NSColor) {
         statusAndSubject.textColor = color
         statusColorBox.fillColor = color
-        let cell = statusAndSubject.cell() as! NSCell
+        let cell = statusAndSubject.cell as! NSCell
     }
     
-    private func greenColor() -> NSColor {
+    fileprivate func greenColor() -> NSColor {
         if isDarkModeEnabled() {
-            return NSColor.greenColor()
+            return NSColor.green
         } else {
             return NSColorFromRGB(0x229922)
         }
     }
     
-    private func redColor() -> NSColor {
+    fileprivate func redColor() -> NSColor {
         if isDarkModeEnabled() {
             return NSColorFromRGB(0xff5b5b)
         } else {
-            return NSColor.redColor()
+            return NSColor.red
         }
     }
     
-    private func blueColor() -> NSColor {
+    fileprivate func blueColor() -> NSColor {
         if isDarkModeEnabled() {
             return NSColorFromRGB(0x00bfff)
         } else {
@@ -77,24 +77,24 @@ class BuildView: NSTableCellView {
         }
     }
     
-    private func grayColor() -> NSColor {
+    fileprivate func grayColor() -> NSColor {
         if isDarkModeEnabled() {
-            return NSColor.lightGrayColor()
+            return NSColor.lightGray
         } else {
-            return NSColor.grayColor()
+            return NSColor.gray
         }
     }
 
-    private func isDarkModeEnabled() -> Bool {
-        let dictionary  = NSUserDefaults.standardUserDefaults().persistentDomainForName(NSGlobalDomain);
+    fileprivate func isDarkModeEnabled() -> Bool {
+        let dictionary  = UserDefaults.standard.persistentDomain(forName: UserDefaults.globalDomain);
         if let interfaceStyle = dictionary?["AppleInterfaceStyle"] as? NSString {
-            return interfaceStyle.localizedCaseInsensitiveContainsString("dark")
+            return interfaceStyle.localizedCaseInsensitiveContains("dark")
         } else {
             return false
         }
     }
     
-    private func NSColorFromRGB(rgbValue: UInt) -> NSColor {
+    fileprivate func NSColorFromRGB(_ rgbValue: UInt) -> NSColor {
         return NSColor(
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
             green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,

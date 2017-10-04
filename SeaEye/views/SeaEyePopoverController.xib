@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A379b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SeaEyePopoverController" customModule="SeaEye" customModuleProvider="target">
@@ -24,13 +25,16 @@
             <subviews>
                 <imageView identifier="OpacityFixView" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4pd-89-q1m">
                     <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="opacity-fix-dark" id="nni-tF-mTk"/>
                 </imageView>
                 <customView identifier="SubcontrollerView" autoresizesSubviews="NO" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hzT-j3-Atn">
                     <rect key="frame" x="0.0" y="0.0" width="300" height="360"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </customView>
                 <button identifier="OpenSettingsButton" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lUS-Wj-shM">
                     <rect key="frame" x="264" y="368" width="16" height="16"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="settings" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="dxi-7M-EwI">
                         <behavior key="behavior" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -41,6 +45,7 @@
                 </button>
                 <button identifier="OpenBuildsButton" hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GEF-ue-G8e">
                     <rect key="frame" x="20" y="368" width="16" height="16"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="back" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="PKN-Ir-7iU">
                         <behavior key="behavior" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -51,6 +56,7 @@
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PzJ-Xs-qa7">
                     <rect key="frame" x="125" y="368" width="51" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="SeaEye" drawsBackground="YES" id="6Bf-S2-zsS">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -59,6 +65,7 @@
                 </textField>
                 <button identifier="ShutdownButton" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gt6-9W-qfz">
                     <rect key="frame" x="20" y="369" width="16" height="16"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="power" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="fhv-z5-d7z">
                         <behavior key="behavior" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -69,6 +76,7 @@
                 </button>
                 <button identifier="OpenUpdatesButton" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="59N-QJ-ftt">
                     <rect key="frame" x="208" y="369" width="48" height="16"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="square" title="V0.4" bezelStyle="shadowlessSquare" image="update" imagePosition="right" alignment="left" imageScaling="proportionallyDown" inset="2" id="jNL-Oq-yRE">
                         <behavior key="behavior" lightByContents="YES"/>
                         <font key="font" size="11" name="HelveticaNeue-Bold"/>

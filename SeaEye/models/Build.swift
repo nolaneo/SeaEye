@@ -15,6 +15,6 @@ class Build: NSObject {
     var subject : String!
     var user : String!
     var buildnum : Int!
-    var url : NSURL!
-    var date : NSDate!
+    var url : URL!
+    var date : Date!
 }

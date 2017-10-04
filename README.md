@@ -7,7 +7,7 @@ SeaEye is a menu bar notification app for CircleCI written in Swift.
 
 ---
 
-###Features
+### Features
 * SeaEye gives you desktop notifications on CircleCI build progress over multiple repos.
 * You can view ongoing and past builds directly from the menu bar.
 * Restrict notifications to specific users or branches using regular expressions.
@@ -15,11 +15,11 @@ SeaEye is a menu bar notification app for CircleCI written in Swift.
 
 ##[Download V0.4 (OSX Yosemite +)](https://github.com/nolaneo/SeaEye/blob/master/Builds/SeaEye%20v0.4.zip?raw=true)
 
-###Updates for v0.4
+### Updates for v0.4
 * Fixed crash after entering API key.
 * Removed Mavericks support.
 
-###Updates for v0.3
+### Updates for v0.3
 * Mavericks support!
 * Adding SeaEye to your start up apps can now be done at the click of a button.
 * Nicer notifications with green ticks for passed builds and red X's for failed builds.
@@ -54,7 +54,7 @@ SeaEye is a menu bar notification app for CircleCI written in Swift.
 * Don't want desktop notifications? Turn them off!
 
 ---
-###FAQ
+### FAQ
 
 *My builds won't load*
 * Make sure you're using your own personal Circle CI token and not the repo specific token. Otherwise ensure that you've spelt the names of your projects correctly. If that doesnt work, try use cURL to hit the Circle API with your token and open an issue if you get back good data.
@@ -63,6 +63,6 @@ SeaEye is a menu bar notification app for CircleCI written in Swift.
 * :( SeaEye doesn't show up in the simple Force Quit window because it's an agent app. This means you'll need to close it from Activity Monitor.
 
 ---
-###TODO
+### TODO
 * Add paste support to the settings page.
 
