@@ -46,7 +46,7 @@ class Project: NSObject, NSURLConnectionDelegate {
     }
     
     @objc func getBuildData(){
-        let urlPath: String = "https://circleci.com/api/v1/project/" + organizationName + "/" + projectName + "?circle-token=" + apiKey
+        let urlPath: String = "https://circleci.com/api/v1/project/\(organizationName)/\(projectName)?circle-token=\(apiKey)"
         let url = URL(string: urlPath)
         if let url = url {
             let request: NSMutableURLRequest = NSMutableURLRequest(url: url)
