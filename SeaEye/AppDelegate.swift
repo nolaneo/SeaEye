@@ -32,13 +32,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     }
     
     func userNotificationCenter(_ center: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
-        if notification.activationType == NSUserNotification.ActivationType.actionButtonClicked {
-            if let userInfo = notification.userInfo {
-                if let url = userInfo["url"] as? String{
-                    NSWorkspace.shared.open(URL(string: url)!)
-                }
-            }
+        let userInfo = notification.userInfo
+
+        if let url = userInfo!["url"] as? String{
+            NSWorkspace.shared.open(URL(string: url)!)
         }
+
     }
     
     fileprivate func initialSetup() {

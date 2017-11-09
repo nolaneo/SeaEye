@@ -120,6 +120,7 @@ class SeaEyeIconController: NSViewController {
         notification.setValue(image, forKey: "_identityImage")
         notification.setValue(false, forKey: "_identityImageHasBorder")
         notification.setValue(nil, forKey:"_imageURL")
+        notification.userInfo = ["url": build.url.absoluteString]
         NSUserNotificationCenter.default.deliver(notification)
     }
     
@@ -135,6 +136,7 @@ class SeaEyeIconController: NSViewController {
         let image = NSImage(named: NSImage.Name(rawValue: "build-passed"))
         notification.setValue(image, forKey: "_identityImage")
         notification.setValue(false, forKey: "_identityImageHasBorder")
+        notification.userInfo = ["url": build.url.absoluteString]
         NSUserNotificationCenter.default.deliver(notification)
     }
     
