@@ -207,7 +207,7 @@ class SeaEyeIconController: NSViewController {
         }
     }
     
-    func closePopover(_ aEvent: (NSEvent!)) -> Void {
+    func closePopover(_ aEvent: NSEvent) -> Void {
         if popover.isShown {
             popover.close()
         }
