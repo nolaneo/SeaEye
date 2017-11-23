@@ -9,9 +9,9 @@
 import Cocoa
 
 class Project: NSObject, NSURLConnectionDelegate {
-    var projectName: String!
-    var organizationName: String!
-    var apiKey: String!
+    var projectName: String
+    var organizationName: String
+    var apiKey: String
     var parent: CircleCIModel!
     var timer: Timer!
     var projectBuilds : Array<Build>!
@@ -120,7 +120,7 @@ class Project: NSObject, NSURLConnectionDelegate {
     fileprivate func notifyError(_ error: String) {
         print(error)
         UserDefaults.standard.set(true, forKey: "SeaEyeError")
-        var info = ["message": error]
+        let info = ["message": error]
         NotificationCenter.default.post(
             name: Notification.Name(rawValue: "SeaEyeAlert"),
             object: self,
@@ -180,7 +180,7 @@ class Project: NSObject, NSURLConnectionDelegate {
             }
             if let stoptime = buildJson.object(forKey: "stop_time") as? String {
                 let date = dateFormatter.date(from: stoptime)
-                build.date = (date as! NSDate) as Date!
+                build.date = (date! as NSDate) as Date!
             } else {
                 build.date = Date()
             }

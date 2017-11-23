@@ -56,6 +56,12 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
         let userDefaults = UserDefaults.standard
         if  (userDefaults.string(forKey: "SeaEyeAPIKey") == nil) {
             return fallbackView.stringValue = "You have not set an API key"
+        }else {
+            CircleCIClient.init(apiKey: userDefaults.string(forKey: "SeaEyeAPIKey")!).Projects();
+            let window = NSWindow()
+            let controller = NSWindowController(window: window)
+            
+            controller.showWindow(self)
         }
         if userDefaults.bool(forKey: "SeaEyeError") {
             return fallbackView.stringValue = "Could not connect with your settings. Check'em!"

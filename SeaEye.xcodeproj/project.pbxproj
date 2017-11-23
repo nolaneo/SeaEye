@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		534DDFF31FB51DC300E59B58 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534DDFF21FB51DC300E59B58 /* User.swift */; };
+		5BF3D47D95F5E77E521CF1DE /* Pods_SeaEyeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 726B32430E67B806811E607A /* Pods_SeaEyeTests.framework */; };
 		6008690E1A1D3E5E00600E4C /* SeaEyeBuildsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6008690D1A1D3E5E00600E4C /* SeaEyeBuildsController.xib */; };
 		600869101A1D3E6F00600E4C /* SeaEyeSettingsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6008690F1A1D3E6F00600E4C /* SeaEyeSettingsController.xib */; };
 		600869121A1D3E9200600E4C /* SeaEyePopoverController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 600869111A1D3E9200600E4C /* SeaEyePopoverController.xib */; };
@@ -69,6 +71,9 @@
 		60C73C1B19FD806A0067CDCA /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 60C73C1919FD806A0067CDCA /* back.png */; };
 		60C73C1C19FD806A0067CDCA /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60C73C1A19FD806A0067CDCA /* back@2x.png */; };
 		60F0232C1A1A95930067C0A0 /* SeaEyeUpdatesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F0232B1A1A95930067C0A0 /* SeaEyeUpdatesController.swift */; };
+		D03BEA104732F3F57F33BC81 /* Pods_SeaEye.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 697797592AC79B7B90051BE2 /* Pods_SeaEye.framework */; };
+		F4DAAF0E1F9C1C8D005E338A /* CircleCIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DAAF0D1F9C1C8D005E338A /* CircleCIClient.swift */; };
+		F4DAAF101F9C219B005E338A /* CircleCIMiniProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DAAF0F1F9C219B005E338A /* CircleCIMiniProject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +87,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		20CDC89419D5813C1ED5A19E /* Pods-SeaEyeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeaEyeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SeaEyeTests/Pods-SeaEyeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		534DDFF21FB51DC300E59B58 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		5A0AF27883FBC82733AE2979 /* Pods-SeaEyeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeaEyeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SeaEyeTests/Pods-SeaEyeTests.release.xcconfig"; sourceTree = "<group>"; };
 		6008690D1A1D3E5E00600E4C /* SeaEyeBuildsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeaEyeBuildsController.xib; sourceTree = "<group>"; };
 		6008690F1A1D3E6F00600E4C /* SeaEyeSettingsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeaEyeSettingsController.xib; sourceTree = "<group>"; };
 		600869111A1D3E9200600E4C /* SeaEyePopoverController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeaEyePopoverController.xib; sourceTree = "<group>"; };
@@ -148,6 +156,12 @@
 		60C73C1919FD806A0067CDCA /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		60C73C1A19FD806A0067CDCA /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		60F0232B1A1A95930067C0A0 /* SeaEyeUpdatesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeaEyeUpdatesController.swift; sourceTree = "<group>"; };
+		697797592AC79B7B90051BE2 /* Pods_SeaEye.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeaEye.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		726B32430E67B806811E607A /* Pods_SeaEyeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeaEyeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B78C62D1618390B8CAEC67EC /* Pods-SeaEye.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeaEye.release.xcconfig"; path = "Pods/Target Support Files/Pods-SeaEye/Pods-SeaEye.release.xcconfig"; sourceTree = "<group>"; };
+		E9836E778B612DD0AE972843 /* Pods-SeaEye.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeaEye.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SeaEye/Pods-SeaEye.debug.xcconfig"; sourceTree = "<group>"; };
+		F4DAAF0D1F9C1C8D005E338A /* CircleCIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCIClient.swift; sourceTree = "<group>"; };
+		F4DAAF0F1F9C219B005E338A /* CircleCIMiniProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCIMiniProject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D03BEA104732F3F57F33BC81 /* Pods_SeaEye.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,15 +177,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BF3D47D95F5E77E521CF1DE /* Pods_SeaEyeTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37994EEC685A0F2B5DC3B28F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E9836E778B612DD0AE972843 /* Pods-SeaEye.debug.xcconfig */,
+				B78C62D1618390B8CAEC67EC /* Pods-SeaEye.release.xcconfig */,
+				20CDC89419D5813C1ED5A19E /* Pods-SeaEyeTests.debug.xcconfig */,
+				5A0AF27883FBC82733AE2979 /* Pods-SeaEyeTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		539D8D9B1F84324100AD486A /* services */ = {
 			isa = PBXGroup;
 			children = (
+				F4DAAF0D1F9C1C8D005E338A /* CircleCIClient.swift */,
+				F4DAAF0F1F9C219B005E338A /* CircleCIMiniProject.swift */,
 			);
 			path = services;
 			sourceTree = "<group>";
@@ -209,6 +238,7 @@
 				603314A719FEBDEA0073EAED /* Build.swift */,
 				6014AD981A09874D00865329 /* Project.swift */,
 				607C78251A190C580040FD5C /* SeaEyeStatus.swift */,
+				534DDFF21FB51DC300E59B58 /* User.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -231,6 +261,8 @@
 				60C73BDB19FC025A0067CDCA /* SeaEye */,
 				60C73BEE19FC025A0067CDCA /* SeaEyeTests */,
 				60C73BDA19FC025A0067CDCA /* Products */,
+				37994EEC685A0F2B5DC3B28F /* Pods */,
+				9C6C590E053D9D46FFD2A856 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -336,6 +368,15 @@
 			path = controllers;
 			sourceTree = "<group>";
 		};
+		9C6C590E053D9D46FFD2A856 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				697797592AC79B7B90051BE2 /* Pods_SeaEye.framework */,
+				726B32430E67B806811E607A /* Pods_SeaEyeTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -343,9 +384,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 60C73BF519FC025A0067CDCA /* Build configuration list for PBXNativeTarget "SeaEye" */;
 			buildPhases = (
+				968846C09461507DF481FB80 /* [CP] Check Pods Manifest.lock */,
 				60C73BD519FC025A0067CDCA /* Sources */,
 				60C73BD619FC025A0067CDCA /* Frameworks */,
 				60C73BD719FC025A0067CDCA /* Resources */,
+				CACB89DDD746DE4485025EF4 /* [CP] Embed Pods Frameworks */,
+				7B32B3F970925AA485649EC8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -360,9 +404,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 60C73BF819FC025A0067CDCA /* Build configuration list for PBXNativeTarget "SeaEyeTests" */;
 			buildPhases = (
+				8E77195D320826473559731A /* [CP] Check Pods Manifest.lock */,
 				60C73BE719FC025A0067CDCA /* Sources */,
 				60C73BE819FC025A0067CDCA /* Frameworks */,
 				60C73BE919FC025A0067CDCA /* Resources */,
+				06C27B5FB2D2B9B1D6B0CE2C /* [CP] Embed Pods Frameworks */,
+				1BCF520770F61A7D19B0DE18 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -480,15 +527,111 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		06C27B5FB2D2B9B1D6B0CE2C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SeaEyeTests/Pods-SeaEyeTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1BCF520770F61A7D19B0DE18 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SeaEyeTests/Pods-SeaEyeTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7B32B3F970925AA485649EC8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SeaEye/Pods-SeaEye-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8E77195D320826473559731A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		968846C09461507DF481FB80 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CACB89DDD746DE4485025EF4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SeaEye/Pods-SeaEye-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		60C73BD519FC025A0067CDCA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4DAAF101F9C219B005E338A /* CircleCIMiniProject.swift in Sources */,
+				F4DAAF0E1F9C1C8D005E338A /* CircleCIClient.swift in Sources */,
 				60C73BDF19FC025A0067CDCA /* AppDelegate.swift in Sources */,
 				6014AD8E19FED4C400865329 /* BuildView.swift in Sources */,
 				607C78261A190C580040FD5C /* SeaEyeStatus.swift in Sources */,
 				60C73C0919FC23F60067CDCA /* SeaEyeIconController.swift in Sources */,
+				534DDFF31FB51DC300E59B58 /* User.swift in Sources */,
 				6014AD991A09874E00865329 /* Project.swift in Sources */,
 				60C73C1519FD7ECB0067CDCA /* SeaEyeBuildsController.swift in Sources */,
 				60C73C0619FC16FE0067CDCA /* SeaEyePopoverController.swift in Sources */,
@@ -617,6 +760,7 @@
 		};
 		60C73BF619FC025A0067CDCA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E9836E778B612DD0AE972843 /* Pods-SeaEye.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -633,6 +777,7 @@
 		};
 		60C73BF719FC025A0067CDCA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B78C62D1618390B8CAEC67EC /* Pods-SeaEye.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -649,6 +794,7 @@
 		};
 		60C73BF919FC025A0067CDCA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20CDC89419D5813C1ED5A19E /* Pods-SeaEyeTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -672,6 +818,7 @@
 		};
 		60C73BFA19FC025A0067CDCA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5A0AF27883FBC82733AE2979 /* Pods-SeaEyeTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;

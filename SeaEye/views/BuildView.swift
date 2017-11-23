@@ -30,11 +30,11 @@ class BuildView: NSTableCellView {
                 case "retried": setColors(grayColor()); break;
                 default: break;
             }
-            let branchString = "\(build.branch!) | \(build.project!)"
+            let branchString = "\(build.branch) | \(build.project!)"
             branchName.stringValue = branchString
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "HH:mm MMM dd"
-            timeAndBuildNumber.stringValue = dateFormatter.string(from: build.date as Date) + " | Build #\(build.buildnum!) | By \(build.user!)"
+            timeAndBuildNumber.stringValue = dateFormatter.string(from: build.date as Date) + " | Build #\(build.buildnum) | By \(build.user!)"
             
             if isDarkModeEnabled() {
                 openURLButton.image = NSImage(named: NSImage.Name(rawValue: "open-alt"))
