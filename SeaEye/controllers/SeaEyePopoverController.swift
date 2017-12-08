@@ -23,7 +23,7 @@ class SeaEyePopoverController: NSViewController {
     var updatesViewController : SeaEyeUpdatesController!
     var model : CircleCIModel!
     var applicationStatus : SeaEyeStatus!
-    
+    var settingsController: SeaEyeWindowSettingsController!
     let appDelegate = NSApplication.shared.delegate as! AppDelegate
     
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
@@ -46,12 +46,8 @@ class SeaEyePopoverController: NSViewController {
     }
     
     fileprivate func setupViewControllers() {
-        
-        if isDarkModeEnabled() {
-            opacityFixView.image = NSImage(named: NSImage.Name(rawValue: "opacity-fix-dark"))
-        } else {
-            opacityFixView.image = NSImage(named: NSImage.Name(rawValue: "opacity-fix-light"))
-        }
+        let imageFile = isDarkModeEnabled()  ? "opacity-fix-dark" : "opacity-fix-light"
+        opacityFixView.image = NSImage(named: NSImage.Name(rawValue: imageFile))
         
         setupNibControllers()
         
@@ -63,7 +59,6 @@ class SeaEyePopoverController: NSViewController {
     }
     
     fileprivate func setupStoryboardControllers() {
-        
         let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil);
         settingsViewController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "SeaEyeSettingsController")) as! SeaEyeSettingsController
         buildsViewController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "SeaEyeBuildsController")) as! SeaEyeBuildsController
@@ -74,19 +69,16 @@ class SeaEyePopoverController: NSViewController {
         settingsViewController = SeaEyeSettingsController(nibName: NSNib.Name(rawValue: "SeaEyeSettingsController"), bundle: nil)
         buildsViewController = SeaEyeBuildsController(nibName: NSNib.Name(rawValue: "SeaEyeBuildsController"), bundle: nil)
         updatesViewController = SeaEyeUpdatesController(nibName: NSNib.Name(rawValue: "SeaEyeUpdatesController"), bundle: nil)
+        settingsController = SeaEyeWindowSettingsController(windowNibName: NSNib.Name("SettingsWindow"))
     }
     
     fileprivate func setupNavButtons() {
         //Templated images cause background overlay weirdness
-        if isDarkModeEnabled() {
-            openSettingsButton.image = NSImage(named: NSImage.Name(rawValue: "settings"))
-            openBuildsButton.image = NSImage(named: NSImage.Name(rawValue: "back"))
-            shutdownButton.image = NSImage(named: NSImage.Name(rawValue: "power"))
-        } else {
-            openSettingsButton.image = NSImage(named: NSImage.Name(rawValue: "settings-alt"))
-            openBuildsButton.image = NSImage(named: NSImage.Name(rawValue: "back-alt"))
-            shutdownButton.image = NSImage(named: NSImage.Name(rawValue: "power-alt"))
-        }
+        let imageSuffix = isDarkModeEnabled() ? "" : "-alt"
+        
+        openSettingsButton.image = NSImage(named: NSImage.Name(rawValue: "settings\(imageSuffix)"))
+        openBuildsButton.image = NSImage(named: NSImage.Name(rawValue: "back\(imageSuffix)"))
+        shutdownButton.image = NSImage(named: NSImage.Name(rawValue: "power\(imageSuffix)"))
     }
     
     @IBAction func openSettings(_ sender: NSButton) {
@@ -96,6 +88,7 @@ class SeaEyePopoverController: NSViewController {
         openBuildsButton.isHidden = false
         buildsViewController.view.removeFromSuperview()
         subcontrollerView.addSubview(settingsViewController.view)
+//        settingsController.showWindow(self)
     }
     
     @IBAction func openBuilds(_ sender: NSButton) {
@@ -123,8 +116,8 @@ class SeaEyePopoverController: NSViewController {
     
     fileprivate func showUpdateButtonIfAppropriate() {
         if applicationStatus.hasUpdate {
-            let versionString = NSMutableAttributedString(string: applicationStatus.latestVersion)
-            let range = NSMakeRange(0, applicationStatus.latestVersion.count)
+            let versionString = NSMutableAttributedString(string: applicationStatus.version!.latest_version)
+            let range = NSMakeRange(0, applicationStatus.version!.latest_version.count)
             versionString.addAttribute(
                 NSAttributedStringKey.foregroundColor,
                 value: NSColor.red,
