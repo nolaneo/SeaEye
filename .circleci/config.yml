@@ -1,0 +1,24 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: ~/seaeye
+    macos:
+      xcode: 9.2.0
+    environment:
+      LC_ALL: en_US.UTF-8
+      LANG: en_US.UTF-8
+    shell: /bin/bash --login -eo pipefail
+    steps:
+      - checkout
+      - run: bundle install
+      - run: bundle exec fastlane scan
+      - run: cp /Users/distiller/seaeye/fastlane/test_output/report.junit /Users/distiller/seaeye/fastlane/test_output/results.xml
+      - store_test_results:
+          path: /Users/distiller/seaeye/fastlane/test_output
+      - store_artifacts:
+          path: /Users/distiller/seaeye/fastlane/test_output
+          destination: scan-test-results
+      - store_artifacts:
+          path: ~/Library/Logs/scan
+          destination: scan-logs
