@@ -1,3 +1,0 @@
-test:
-  override:
-    - xctool -scheme SeaEye -reporter pretty -reporter junit:$CIRCLE_TEST_REPORTS/xcode/results.xml build test
