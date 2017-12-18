@@ -70,7 +70,6 @@
 		60BE79AA1A0AB357007E5179 /* settings-alt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60BE79A31A0AB357007E5179 /* settings-alt@2x.png */; };
 		60C73BDF19FC025A0067CDCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C73BDE19FC025A0067CDCA /* AppDelegate.swift */; };
 		60C73BE319FC025A0067CDCA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60C73BE219FC025A0067CDCA /* Images.xcassets */; };
-		60C73BF219FC025A0067CDCA /* SeaEyeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C73BF119FC025A0067CDCA /* SeaEyeTests.swift */; };
 		60C73C0219FC0FF40067CDCA /* circleci-normal-alt.png in Resources */ = {isa = PBXBuildFile; fileRef = 60C73C0019FC0FF40067CDCA /* circleci-normal-alt.png */; };
 		60C73C0319FC0FF40067CDCA /* circleci-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 60C73C0119FC0FF40067CDCA /* circleci-normal.png */; };
 		60C73C0619FC16FE0067CDCA /* SeaEyePopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C73C0519FC16FE0067CDCA /* SeaEyePopoverController.swift */; };
@@ -155,7 +154,6 @@
 		60C73BE219FC025A0067CDCA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		60C73BEB19FC025A0067CDCA /* SeaEyeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeaEyeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		60C73BF019FC025A0067CDCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		60C73BF119FC025A0067CDCA /* SeaEyeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaEyeTests.swift; sourceTree = "<group>"; };
 		60C73C0019FC0FF40067CDCA /* circleci-normal-alt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-normal-alt.png"; sourceTree = "<group>"; };
 		60C73C0119FC0FF40067CDCA /* circleci-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-normal.png"; sourceTree = "<group>"; };
 		60C73C0519FC16FE0067CDCA /* SeaEyePopoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeaEyePopoverController.swift; sourceTree = "<group>"; };
@@ -291,7 +289,6 @@
 		60C73BEE19FC025A0067CDCA /* SeaEyeTests */ = {
 			isa = PBXGroup;
 			children = (
-				60C73BF119FC025A0067CDCA /* SeaEyeTests.swift */,
 				60C73BEF19FC025A0067CDCA /* Supporting Files */,
 				539479831FCB8D8F00D6FA19 /* BuildsForUserTests.swift */,
 				5389EF491FCBBA49001C0D5F /* DecodingTests.swift */,
@@ -534,7 +531,6 @@
 			files = (
 				5394798D1FCB909600D6FA19 /* CircleCIClient.swift in Sources */,
 				539479871FCB8EA500D6FA19 /* CircleCIBuild.swift in Sources */,
-				60C73BF219FC025A0067CDCA /* SeaEyeTests.swift in Sources */,
 				539479861FCB8E8F00D6FA19 /* CircleCIModel.swift in Sources */,
 				53A3BE9A1FD35F6B006961C6 /* CircleCIDecoder.swift in Sources */,
 				5389EF4A1FCBBA49001C0D5F /* DecodingTests.swift in Sources */,
