@@ -55,7 +55,6 @@ class CircleCIModel: NSObject {
                 builds += project.projectBuilds
             }
             self.allBuilds = builds.sorted {$0.start_time.timeIntervalSince1970 > $1.start_time.timeIntervalSince1970}
-            self.allBuilds = builds
             self.calculateBuildStatus()
         }
     }
