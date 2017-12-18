@@ -12,8 +12,8 @@ import Foundation
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
 
-    var statusBarItem : NSStatusItem = NSStatusItem();
-    var statusBarIconViewController : SeaEyeIconController!;
+    var statusBarItem : NSStatusItem = NSStatusItem()
+    var statusBarIconViewController : SeaEyeIconController!
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         NSUserNotificationCenter.default.delegate = self
@@ -54,32 +54,31 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     }
     
     func itemReferencesInLoginItems() -> (existingReference: LSSharedFileListItem?, lastReference: LSSharedFileListItem?) {
-        if let appUrl : URL = URL(fileURLWithPath: Bundle.main.bundlePath) {
-            let loginItemsRef = LSSharedFileListCreate(
+        let appUrl : URL = URL(fileURLWithPath: Bundle.main.bundlePath)
+        let loginItemsRef = LSSharedFileListCreate(
                 nil,
                 kLSSharedFileListSessionLoginItems.takeRetainedValue(),
                 nil
-            ).takeRetainedValue() as LSSharedFileList?
-            if loginItemsRef != nil {
-                let loginItems: NSArray = LSSharedFileListCopySnapshot(loginItemsRef, nil).takeRetainedValue() as NSArray
-                print("There are \(loginItems.count) login items")
-                let lastItemRef: LSSharedFileListItem = loginItems.lastObject as! LSSharedFileListItem
-                
-                for currentItemRef in loginItems as! [LSSharedFileListItem] {
-                    if let itemUrl = LSSharedFileListItemCopyResolvedURL(currentItemRef, 0, nil) {
-                        if (itemUrl.takeRetainedValue() as URL) == appUrl {
-                            return (currentItemRef, lastItemRef)
-                        }
-                    } else {
-                        print("Unknown login application")
-                    }
+        ).takeRetainedValue() as LSSharedFileList?
+            if loginItemsRef == nil {
+                return (nil, nil)
+        }
+        let loginItems: NSArray = LSSharedFileListCopySnapshot(loginItemsRef, nil).takeRetainedValue() as NSArray
+        print("There are \(loginItems.count) login items")
+        let lastItemRef: LSSharedFileListItem = loginItems.lastObject as! LSSharedFileListItem
+        
+        for currentItemRef in loginItems as! [LSSharedFileListItem] {
+            if let itemUrl = LSSharedFileListItemCopyResolvedURL(currentItemRef, 0, nil) {
+                if (itemUrl.takeRetainedValue() as URL) == appUrl {
+                    return (currentItemRef, lastItemRef)
                 }
-               
-                //The application was not found in the startup list
-                return (nil, lastItemRef)
+            } else {
+                print("Unknown login application")
             }
         }
-        return (nil, nil)
+       
+        //The application was not found in the startup list
+        return (nil, lastItemRef)
     }
     
     func toggleLaunchAtStartup() {
@@ -92,18 +91,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             ).takeRetainedValue() as LSSharedFileList?
         if loginItemsRef != nil {
             if shouldBeToggled {
-                if let appUrl : CFURL = URL(fileURLWithPath: Bundle.main.bundlePath) as CFURL {
-                    LSSharedFileListInsertItemURL(
-                        loginItemsRef,
-                        itemReferences.lastReference,
-                        nil,
-                        nil,
-                        appUrl,
-                        nil,
-                        nil
-                    )
-                    print("Application was added to login items")
-                }
+                let appUrl : CFURL = URL(fileURLWithPath: Bundle.main.bundlePath) as CFURL
+                
+                LSSharedFileListInsertItemURL(
+                    loginItemsRef,
+                    itemReferences.lastReference,
+                    nil,
+                    nil,
+                    appUrl,
+                    nil,
+                    nil
+                )
+                print("Application was added to login items")
             } else {
                 if let itemRef = itemReferences.existingReference {
                     LSSharedFileListItemRemove(loginItemsRef,itemRef);
@@ -113,4 +112,3 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         }
     }
 }
-
