@@ -37,7 +37,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         if let url = userInfo!["url"] as? String{
             NSWorkspace.shared.open(URL(string: url)!)
         }
-
+        center.removeDeliveredNotification(notification)
     }
     
     fileprivate func initialSetup() {
