@@ -1,17 +1,8 @@
-//
-//  DecodingTests.swift
-//  SeaEyeTests
-//
-//  Created by Conor Mongey on 27/11/2017.
-//  Copyright © 2017 Nolaneo. All rights reserved.
-//
-
 import Cocoa
 import XCTest
 
 class DecodingTests: XCTestCase {
     func testDecodeForBuildCircleCI2() {
-        // This is an example of a functional test case.
         let bundle = Bundle(for: type(of: self))
         let path = bundle.path(forResource: "circleci2-project", ofType: "json")!
         do {
@@ -25,9 +16,9 @@ class DecodingTests: XCTestCase {
             } catch  {
                 XCTFail(error.localizedDescription)
             }
-            
+
         } catch{
             XCTFail("couldn't load file")
         }
-    }   
+    }
 }
