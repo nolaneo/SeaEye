@@ -33,24 +33,21 @@ class SeaEyeIconController: NSViewController {
     func setup() {
         self.setupMenuBarIcon()
         self.setupStyleNotificationObserver()
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SeaEyeIconController.alert(_:)),
-            name: NSNotification.Name(rawValue: "SeaEyeAlert"),
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SeaEyeIconController.setRedBuildIcon(_:)),
-            name: NSNotification.Name(rawValue: "SeaEyeRedBuild"),
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SeaEyeIconController.setGreenBuildIcon(_:)),
-            name: NSNotification.Name(rawValue: "SeaEyeGreenBuild"),
-            object: nil
-        )
+
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "SeaEyeAlert"),
+                                               object: nil,
+                                               queue: OperationQueue.main,
+                                               using: alert)
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "SeaEyeRedBuild"),
+                                               object: nil,
+                                               queue: OperationQueue.main,
+                                               using: setRedBuildIcon)
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "SeaEyeRedBuild"),
+                                               object: nil,
+                                               queue: OperationQueue.main,
+                                               using: setGreenBuildIcon)
+        
         NSEvent.addGlobalMonitorForEvents(
             matching: [.leftMouseUp, .rightMouseUp],
             handler: closePopover
@@ -58,7 +55,7 @@ class SeaEyeIconController: NSViewController {
 
     }
     
-    @objc func alert(_ notification: Notification) {
+    func alert(notification: Notification) -> Void {
         if let userInfo = notification.userInfo {
             if let message = userInfo["message"] as? String {
                 let notification = NSUserNotification()
@@ -77,22 +74,20 @@ class SeaEyeIconController: NSViewController {
         }
     }
     
-    @objc func setGreenBuildIcon(_ notification: Notification) {
+    func setGreenBuildIcon(notification: Notification) -> Void {
         if hasViewedBuilds {
-            if (self.isDarkModeEnabled()) {
-                iconButton.image = NSImage(named: NSImage.Name(rawValue: "circleci-success-alt"))
-            } else {
-                iconButton.image = NSImage(named: NSImage.Name(rawValue: "circleci-success"))
-            }
+            let imageFile = self.isDarkModeEnabled() ? "circleci-success-alt" : "circleci-success"
+            iconButton.image = NSImage(named: NSImage.Name(rawValue: imageFile))
+            
             if UserDefaults.standard.bool(forKey: "SeaEyeNotify") {
-                let build = notification.userInfo!["build"] as! Build
+                let build = notification.userInfo!["build"] as! CircleCIBuild
                 let count = notification.userInfo!["count"] as! Int
-                showSuccessfulBuildNotification(build, count: count)
+                NSUserNotificationCenter.default.deliver(buildNotification(build: build, count: count))
             }
         }
     }
     
-    @objc func setRedBuildIcon(_ notification: Notification) {
+    func setRedBuildIcon(notification: Notification) -> Void{
         hasViewedBuilds = false
         if (self.isDarkModeEnabled()) {
             iconButton.image = NSImage(named: NSImage.Name(rawValue: "circleci-failed-alt"))
@@ -101,52 +96,43 @@ class SeaEyeIconController: NSViewController {
         }
         
         if UserDefaults.standard.bool(forKey: "SeaEyeNotify") {
-            let build = notification.userInfo!["build"] as! Build
+            let build = notification.userInfo!["build"] as! CircleCIBuild
             let count = notification.userInfo!["count"] as! Int
-            showFailedBuildNotification(build, count: count)
+            
+            NSUserNotificationCenter.default.deliver(buildNotification(build: build, count: count))
         }
     }
-    
-    fileprivate func showFailedBuildNotification(_ build: Build, count: Int) {
+    func notifcationForBuild(build: CircleCIBuild) -> NSUserNotification {
         let notification = NSUserNotification()
-        notification.title = "SeaEye: Build Failed"
-        if count > 1 {
-            notification.subtitle = "You have \(count) failed builds"
-        } else {
-            notification.subtitle = build.subject
-            notification.informativeText = build.user
-        }
-        let image = NSImage(named: NSImage.Name(rawValue: "build-failed"))
-        notification.setValue(image, forKey: "_identityImage")
         notification.setValue(false, forKey: "_identityImageHasBorder")
         notification.setValue(nil, forKey:"_imageURL")
-        notification.userInfo = ["url": build.url.absoluteString]
-        NSUserNotificationCenter.default.deliver(notification)
+        notification.userInfo = ["url": build.build_url.absoluteString]
+        return notification
     }
     
-    fileprivate func showSuccessfulBuildNotification(_ build: Build, count: Int) {
-        let notification = NSUserNotification()
-        notification.title = build.project + ": Build Passed"
+    func buildNotification(build: CircleCIBuild, count: Int) -> NSUserNotification{
+        let notification = notifcationForBuild(build: build)
+        let endTitle = build.status == "success" ? "Sucess" : "Failed"
+        let plural = build.status == "success" ?  "successful" : "failed"
+        let imageFile = build.status == "success" ? "build-passed" : "build-failed"
+        
+        notification.title = "SeaEye: Build \(endTitle)"
         if count > 1 {
-            notification.subtitle = "You have \(count) successful builds"
+            notification.subtitle = "You have \(count) \(plural) builds"
         } else {
             notification.subtitle = build.subject
-            notification.informativeText = build.user
+            notification.informativeText = build.author_name
         }
-        let image = NSImage(named: NSImage.Name(rawValue: "build-passed"))
+        
+        let image = NSImage(named: NSImage.Name(rawValue: imageFile))
         notification.setValue(image, forKey: "_identityImage")
-        notification.setValue(false, forKey: "_identityImageHasBorder")
-        notification.userInfo = ["url": build.url.absoluteString]
-        NSUserNotificationCenter.default.deliver(notification)
+        return notification
     }
     
     fileprivate func setupMenuBarIcon() {
         hasViewedBuilds = true
-        if (self.isDarkModeEnabled()) {
-            iconButton.image = NSImage(named: NSImage.Name(rawValue: "circleci-normal-alt"))
-        } else {
-            iconButton.image = NSImage(named: NSImage.Name(rawValue: "circleci-normal"))
-        }
+        let imageFile = isDarkModeEnabled() ? "circleci-normal-alt" : "circleci-normal"
+        iconButton.image = NSImage(named: NSImage.Name(rawValue: imageFile))
     }
     
     fileprivate func setupStyleNotificationObserver() {
@@ -194,10 +180,7 @@ class SeaEyeIconController: NSViewController {
         self.setupMenuBarIcon()
         let popoverController = SeaEyePopoverController(nibName: NSNib.Name(rawValue: "SeaEyePopoverController"), bundle: nil) as SeaEyePopoverController!
         popoverController?.model = self.model
-        popoverController?.applicationStatus = self.applicationStatus
-        let view = popoverController?.view
-        
-        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        popoverController?.applicationStatus = self.applicationStatus   
         
         if !popover.isShown {
             popover.contentViewController = popoverController

@@ -8,76 +8,64 @@
 
 import Cocoa
 
-class SeaEyeStatus: NSObject, NSURLConnectionDelegate {
-    
-    var data = NSMutableData()
+class SeaEyeStatus: NSObject {
     var hasUpdate = false
-    var changes : String!
-    var latestVersion : String!
-    var updateURL: URL!
+    var version: SeaEyeVersion?
+    
     override init() {
         super.init()
-        //After 60 seconds check for updates
         Timer.scheduledTimer(
-            timeInterval: TimeInterval(5),
+            timeInterval: TimeInterval(60),
             target: self,
-            selector: #selector(SeaEyeStatus.getApplicationStatus),
+            selector: #selector(self.getApplicationStatus),
             userInfo: nil,
             repeats: false
         )
     }
 
-    @objc func getApplicationStatus(){
-        let urlPath: String = "https://raw.githubusercontent.com/nolaneo/SeaEye/master/project_status.json"
-        let url = URL(string: urlPath)
-        if let url = url {
-            let request: NSMutableURLRequest = NSMutableURLRequest(url: url)
-            var connection: NSURLConnection = NSURLConnection(request: request as URLRequest, delegate: self, startImmediately: true)!
-        }
-    }
-    
-    func connection(_ didReceiveResponse: NSURLConnection!, didReceiveResponse response: URLResponse!) {
-        self.data = NSMutableData()
-    }
-    
-    func connection(_ connection: NSURLConnection!, didReceiveData data: Data!){
-        self.data.append(data)
-    }
-    
-    func connectionDidFinishLoading(_ connection: NSURLConnection!) {
-        var err: NSError?
-        var json = try? JSONSerialization.jsonObject(
-            with: self.data as Data,
-            options: JSONSerialization.ReadingOptions.mutableContainers
-            ) as! NSDictionary
-        
-        if let error = err {
-            print("An error occured while parsing the project status from GitHub")
-        } else {
-            let latestVersionString = json?.object(forKey: "latest_version") as! String
-            let downloadURLString = json?.object(forKey: "download_url") as! String
-         self.updateURL = URL(string: downloadURLString)
-            changes = json?.object(forKey: "changes") as! String
-            print("The latest version of SeaEye is: \(latestVersionString)")
-            print("Changes\n\(changes)")
-            if let info = Bundle.main.infoDictionary as NSDictionary! {
-                if let currentVersionString = info.object(forKey: "CFBundleShortVersionString") as? String {
-                    let numberFormatter = NumberFormatter()
-                    let currentVersionFloat = numberFormatter.number(from: currentVersionString)!.floatValue
-                    let latestVersionFloat = numberFormatter.number(from: latestVersionString)!.floatValue
-                    
-                    if currentVersionFloat < latestVersionFloat {
-                        hasUpdate = true
-                        latestVersion = latestVersionString
-                        var info = [
-                            "message": "A new version of SeaEye is available (\(latestVersionString))",
-                            "url": downloadURLString
-                        ]
-                        let notification = Notification(name: Notification.Name(rawValue: "SeaEyeAlert"), object: self, userInfo: info)
-                        NotificationCenter.default.post(notification)
-                    }
+    @objc func getApplicationStatus() {
+        latestSeaEyeVersion(completion: {(r) in
+            switch r {
+            case .success(let version):
+                self.version = version
+                if self.updateAvailable() {
+                    self.notifyOfNewVersion(version: version)
                 }
+                break
+            
+            case .failure:
+                break
+            }
+        })
+    }
+    
+    func notifyOfNewVersion(version: SeaEyeVersion) {
+        print("The latest version of SeaEye is: \(version.latest_version)")
+        let info = [
+            "message": "A new version of SeaEye is available (\(version.latest_version))",
+            "url": version.download_url.absoluteString
+        ]
+        let notification = Notification(name: Notification.Name(rawValue: "SeaEyeAlert"), object: self, userInfo: info)
+        NotificationCenter.default.post(notification)
+    }
+    
+    func updateAvailable() -> Bool {
+        if self.version != nil {
+            let numberFormatter = NumberFormatter()
+            let currentVersionFloat = numberFormatter.number(from: currentVersion())!.floatValue
+            let latestVersionFloat = numberFormatter.number(from: self.version!.latest_version)!.floatValue
+            return currentVersionFloat < latestVersionFloat
+        }
+        return false
+    }
+    
+    func currentVersion() -> String {
+        var version = "0.0"
+        if let info = Bundle.main.infoDictionary as NSDictionary! {
+            if let currentVersionString = info.object(forKey: "CFBundleShortVersionString") as? String {
+                version =  currentVersionString
             }
         }
+        return version
     }
 }
