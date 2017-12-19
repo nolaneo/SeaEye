@@ -3,6 +3,8 @@ SeaEye
 
 **OSX desktop notifications for Circle CI builds**
 
+[![CircleCI](https://circleci.com/gh/nolaneo/SeaEye.svg?style=svg)](https://circleci.com/gh/nolaneo/SeaEye)
+
 SeaEye is a menu bar notification app for CircleCI written in Swift.
 
 ---

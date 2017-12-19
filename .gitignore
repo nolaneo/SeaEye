@@ -7,3 +7,5 @@ SeaEye.xcodeproj/project.xcworkspace/xcuserdata/eoinnolan.xcuserdatad/UserInterf
 xcuserdata
 build
 .DS_Store
+fastlane/test_output/*
+fastlane/report.xml
