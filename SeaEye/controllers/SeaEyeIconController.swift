@@ -43,7 +43,7 @@ class SeaEyeIconController: NSViewController {
                                                object: nil,
                                                queue: OperationQueue.main,
                                                using: setRedBuildIcon)
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "SeaEyeRedBuild"),
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "SeaEyeGreenBuild"),
                                                object: nil,
                                                queue: OperationQueue.main,
                                                using: setGreenBuildIcon)

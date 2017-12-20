@@ -78,7 +78,7 @@ class CircleCIModel: NSObject {
             }
             
             if failures > 0 {
-//                print("Has red build \(failedBuild!.subject)")
+                print("Has red build \(String(describing: failedBuild!.subject))")
                 let info = ["build": failedBuild!, "count": failures] as [String : Any]
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeRedBuild"), object: nil, userInfo:info)
             } else if successes > 0 {
