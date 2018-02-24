@@ -1,0 +1,103 @@
+{
+    "compare": "https://github.com/nolaneo/SeaEye/compare/27e10fc8df14...be6d014c1cf8",
+    "previous_successful_build": {
+        "build_num": 12,
+        "status": "success",
+        "build_time_millis": 71681
+    },
+    "build_parameters": null,
+    "oss": true,
+    "all_commit_details_truncated": false,
+    "committer_date": "2017-11-23T02:22:33Z",
+    "body": "",
+    "usage_queued_at": "2017-11-23T02:22:29.695Z",
+    "fail_reason": null,
+    "retry_of": null,
+    "reponame": "SeaEye",
+    "ssh_users": [],
+    "build_url": "https://circleci.com/gh/nolaneo/SeaEye/64",
+    "parallel": 1,
+    "failed": true,
+    "branch": "cm-circleci2",
+    "username": "nolaneo",
+    "author_date": "2017-11-23T02:22:33Z",
+    "why": "github",
+    "user": {
+        "is_user": true,
+        "login": "Mongey",
+        "avatar_url": "https://avatars1.githubusercontent.com/u/625787?v=4",
+        "name": "Conor Mongey",
+        "vcs_type": "github",
+        "id": 625787
+    },
+    "vcs_revision": "be6d014c1cf859a59e4abbd51a84ffa016464808",
+    "vcs_tag": null,
+    "build_num": 64,
+    "infrastructure_fail": false,
+    "committer_email": "conor@mongey.net",
+    "has_artifacts": true,
+    "previous": {
+        "build_num": 63,
+        "status": "failed",
+        "build_time_millis": 52316
+    },
+    "status": "failed",
+    "committer_name": "Conor Mongey",
+    "retries": null,
+    "subject": "Use circleci 2.0",
+    "vcs_type": "github",
+    "timedout": false,
+    "dont_build": null,
+    "lifecycle": "finished",
+    "no_dependency_cache": false,
+    "stop_time": "2017-11-23T02:23:34.050Z",
+    "ssh_disabled": true,
+    "build_time_millis": 54144,
+    "picard": {
+        "build_agent": {
+            "image": null,
+            "properties": {
+                "build_agent": "0.0.4557-e1c1ed4",
+                "executor": "macos"
+            }
+        },
+        "resource_class": {
+            "cpu": 2,
+            "ram": 4096,
+            "class": "medium"
+        }
+    },
+    "circle_yml": {
+        "string": "version: 2\n\njobs:\n  build:\n    working_directory: ~/seaeye\n    macos:\n      xcode: \"9.0.0\"\n    environment:\n      CIRCLE_TEST_RESULTS: $HOME/test-results\n      LC_ALL: en_US.UTF-8\n      LANG: en_US.UTF-8\n    shell: /bin/bash --login -eo pipefail\n    steps:\n      - checkout\n      - run: fastlane test\n      - store_test_results:\n          path: /Users/distiller/fatlane/test_output/report.junit\n      - store_artifacts:\n          path: /Users/distiller/fatlane/\n          destination: scan-test-results\n      - store_artifacts:\n          path: ~/Library/Logs/scan\n          destination: scan-logs\n"
+    },
+    "messages": [],
+    "is_first_green_build": false,
+    "job_name": null,
+    "start_time": "2017-11-23T02:22:39.906Z",
+    "canceler": null,
+    "all_commit_details": [
+                           {
+                           "committer_date": "2017-11-23T02:22:33Z",
+                           "body": "",
+                           "branch": "cm-circleci2",
+                           "author_date": "2017-11-23T02:22:33Z",
+                           "committer_email": "conor@mongey.net",
+                           "commit": "be6d014c1cf859a59e4abbd51a84ffa016464808",
+                           "committer_login": "Mongey",
+                           "committer_name": "Conor Mongey",
+                           "subject": "Use circleci 2.0",
+                           "commit_url": "https://github.com/nolaneo/SeaEye/commit/be6d014c1cf859a59e4abbd51a84ffa016464808",
+                           "author_login": "Mongey",
+                           "author_name": "Conor Mongey",
+                           "author_email": "conor@mongey.net"
+                           }
+                           ],
+    "platform": "2.0",
+    "outcome": "failed",
+    "vcs_url": "https://github.com/nolaneo/SeaEye",
+    "author_name": "Conor Mongey",
+    "node": null,
+    "queued_at": "2017-11-23T02:22:36.669Z",
+    "canceled": false,
+    "author_email": "conor@mongey.net"
+}

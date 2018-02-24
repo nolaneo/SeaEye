@@ -28,12 +28,10 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     }
     
     override func viewWillAppear() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(SeaEyeBuildsController.reloadBuilds),
-            name: NSNotification.Name(rawValue: "SeaEyeUpdatedBuilds"),
-            object: nil
-        )
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "SeaEyeUpdatedBuilds"),
+                                               object: nil,
+                                               queue: OperationQueue.main,
+                                               using: reloadBuilds)
     }
     
     override func viewDidAppear() {
@@ -44,7 +42,7 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
         NotificationCenter.default.removeObserver(self)
     }
     
-    @objc func reloadBuilds() {
+    func reloadBuilds(_: Any? = nil) -> Void{
         print("Reload builds!")
         setupFallBackViews()
         buildsTable.reloadData()
@@ -57,17 +55,12 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
         if  (userDefaults.string(forKey: "SeaEyeAPIKey") == nil) {
             return fallbackView.stringValue = "You have not set an API key"
         }
-        if userDefaults.bool(forKey: "SeaEyeError") {
-            return fallbackView.stringValue = "Could not connect with your settings. Check'em!"
-        }
+
         if (userDefaults.string(forKey: "SeaEyeOrganization") == nil) {
             return fallbackView.stringValue = "You have not set an organization name"
         }
         if (userDefaults.value(forKey: "SeaEyeProjects") == nil) {
             return fallbackView.stringValue = "You have not added any projects"
-        }
-        if (model.allBuilds == nil) {
-            return fallbackView.stringValue = "Loading Recent Builds"
         }
         if (model.allBuilds.count == 0) {
             return fallbackView.stringValue = "No Recent Builds Found"
@@ -78,7 +71,7 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     
     //NSTableViewDataSource
     func numberOfRows(in tableView: NSTableView) -> Int {
-        if model != nil && model.allBuilds != nil {
+        if model != nil  {
             return model.allBuilds.count
         } else {
             return 0
@@ -86,8 +79,8 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        var cellView: BuildView = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! BuildView
-        cellView.setupForBuild(model.allBuilds[row])
+        let cellView: BuildView = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! BuildView
+        cellView.setupForBuild(build: model.allBuilds[row])
         return cellView;
     }
     
