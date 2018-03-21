@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041E7C2820630A3400B22010 /* circleci-pending.png in Resources */ = {isa = PBXBuildFile; fileRef = 041E7C2420630A3300B22010 /* circleci-pending.png */; };
+		041E7C2920630A3400B22010 /* circleci-pending-alt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 041E7C2520630A3300B22010 /* circleci-pending-alt@2x.png */; };
+		041E7C2A20630A3400B22010 /* circleci-pending@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 041E7C2620630A3300B22010 /* circleci-pending@2x.png */; };
+		041E7C2B20630A3400B22010 /* circleci-pending-alt.png in Resources */ = {isa = PBXBuildFile; fileRef = 041E7C2720630A3300B22010 /* circleci-pending-alt.png */; };
 		5389EF4A1FCBBA49001C0D5F /* DecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5389EF491FCBBA49001C0D5F /* DecodingTests.swift */; };
 		539479751FCB639300D6FA19 /* CircleCIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539479741FCB639300D6FA19 /* CircleCIClient.swift */; };
 		5394797D1FCB8C5200D6FA19 /* CircleCIBuild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5394797C1FCB8C5200D6FA19 /* CircleCIBuild.swift */; };
@@ -94,6 +98,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		041E7C2420630A3300B22010 /* circleci-pending.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-pending.png"; sourceTree = "<group>"; };
+		041E7C2520630A3300B22010 /* circleci-pending-alt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-pending-alt@2x.png"; sourceTree = "<group>"; };
+		041E7C2620630A3300B22010 /* circleci-pending@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-pending@2x.png"; sourceTree = "<group>"; };
+		041E7C2720630A3300B22010 /* circleci-pending-alt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-pending-alt.png"; sourceTree = "<group>"; };
 		5389EF491FCBBA49001C0D5F /* DecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingTests.swift; sourceTree = "<group>"; };
 		539479741FCB639300D6FA19 /* CircleCIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCIClient.swift; sourceTree = "<group>"; };
 		5394797C1FCB8C5200D6FA19 /* CircleCIBuild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCIBuild.swift; sourceTree = "<group>"; };
@@ -312,6 +320,10 @@
 				602BB1BF1A1A93E900E50B78 /* update@2x.png */,
 				602BB1BA1A1A881E00E50B78 /* circleci-success-alt@2x.png */,
 				602BB1BB1A1A881E00E50B78 /* circleci-success@2x.png */,
+				041E7C2720630A3300B22010 /* circleci-pending-alt.png */,
+				041E7C2520630A3300B22010 /* circleci-pending-alt@2x.png */,
+				041E7C2420630A3300B22010 /* circleci-pending.png */,
+				041E7C2620630A3300B22010 /* circleci-pending@2x.png */,
 				602BB1B21A1A880000E50B78 /* circleci-failed-alt@2x.png */,
 				602BB1B31A1A880000E50B78 /* circleci-failed@2x.png */,
 				602BB1B41A1A880000E50B78 /* circleci-normal-alt@2x.png */,
@@ -449,10 +461,12 @@
 				6033149D19FDAE540073EAED /* circleci-failed.png in Resources */,
 				6033149919FDA94D0073EAED /* power@2x.png in Resources */,
 				60C73C1019FD7CD60067CDCA /* settings@2x.png in Resources */,
+				041E7C2A20630A3400B22010 /* circleci-pending@2x.png in Resources */,
 				60C73BE319FC025A0067CDCA /* Images.xcassets in Resources */,
 				600869141A1D3EA000600E4C /* SeaEyeUpdatesController.xib in Resources */,
 				601D48CE1A0A841F007EA297 /* icon_32x32@2x.png in Resources */,
 				601D48CC1A0A841F007EA297 /* icon_256x256.png in Resources */,
+				041E7C2820630A3400B22010 /* circleci-pending.png in Resources */,
 				60BE79A61A0AB357007E5179 /* opacity-fix-light in Resources */,
 				60C73C0219FC0FF40067CDCA /* circleci-normal-alt.png in Resources */,
 				600869101A1D3E6F00600E4C /* SeaEyeSettingsController.xib in Resources */,
@@ -463,6 +477,7 @@
 				6033149819FDA94D0073EAED /* power.png in Resources */,
 				602BB1BD1A1A881E00E50B78 /* circleci-success@2x.png in Resources */,
 				60BE79A41A0AB357007E5179 /* back-alt.png in Resources */,
+				041E7C2B20630A3400B22010 /* circleci-pending-alt.png in Resources */,
 				602BB1C11A1A93E900E50B78 /* update@2x.png in Resources */,
 				60BE79A91A0AB357007E5179 /* setting-alt.png in Resources */,
 				602BB1B91A1A880000E50B78 /* circleci-normal@2x.png in Resources */,
@@ -473,6 +488,7 @@
 				602F20F31A1D313A00F16F79 /* SeaEyeIconController.xib in Resources */,
 				601D48CB1A0A841F007EA297 /* icon_16x16.png in Resources */,
 				602BB1B71A1A880000E50B78 /* circleci-failed@2x.png in Resources */,
+				041E7C2920630A3400B22010 /* circleci-pending-alt@2x.png in Resources */,
 				6014AD9719FEE4A900865329 /* open@2x.png in Resources */,
 				60C73C1B19FD806A0067CDCA /* back.png in Resources */,
 				6014AD9619FEE4A900865329 /* open.png in Resources */,
