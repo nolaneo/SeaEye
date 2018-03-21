@@ -1,0 +1,10 @@
+fastlane_version "2.59.0"
+
+default_platform :mac
+
+platform :mac do
+  desc "Runs all the tests"
+  lane :test do
+    scan(output_types: "junit")
+  end
+end

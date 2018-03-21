@@ -14,76 +14,70 @@ class BuildView: NSTableCellView {
     @IBOutlet var branchName : NSTextField!
     @IBOutlet var timeAndBuildNumber : NSTextField!
     @IBOutlet var openURLButton : NSButton!
-    var url : URL!
+    var url : URL?
     
-    func setupForBuild(_ value: AnyObject) {
-        if let build = value as? Build {
-            url = build.url as URL!
-            statusAndSubject.stringValue = build.status.capitalized + ": " + build.subject
-            switch build.status {
-                case "success": setColors(greenColor()); break;
-                case "fixed": setColors(greenColor()); break;
-                case "failed": setColors(redColor()); break;
-                case "timedout": setColors(redColor()); break;
-                case "running": setColors(blueColor()); break;
-                case "canceled": setColors(grayColor()); break;
-                case "retried": setColors(grayColor()); break;
-                default: break;
-            }
-            let branchString = "\(build.branch!) | \(build.project!)"
-            branchName.stringValue = branchString
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "HH:mm MMM dd"
-            timeAndBuildNumber.stringValue = dateFormatter.string(from: build.date as Date) + " | Build #\(build.buildnum!) | By \(build.user!)"
+    func setupForBuild(build: CircleCIBuild) {
+        url = build.build_url
+        statusAndSubject.stringValue = build.status.capitalized
+
+        if build.status == "no_tests" {
+            statusAndSubject.stringValue = "No tests"
+        }
+        if build.subject != nil {
+            statusAndSubject.stringValue = statusAndSubject.stringValue + ": \(build.subject!)"
+        }
+        switch build.status {
+            case "success": setColors(greenColor()); break;
+            case "fixed": setColors(greenColor()); break;
+            case "no_tests": setColors(redColor()); break;
+            case "failed": setColors(redColor()); break;
+            case "timedout": setColors(redColor()); break;
+            case "running": setColors(blueColor()); break;
+            case "canceled": setColors(grayColor()); break;
+            case "retried": setColors(grayColor()); break;
+            default:
+                print("unknown status" + build.status)
+                break;
+        }
+        branchName.stringValue = "\(build.branch) | \(build.reponame)"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm MMM dd"
+        timeAndBuildNumber.stringValue = dateFormatter.string(from: build.start_time) + " | Build #\(build.build_num)"
+
+        if build.author_name != nil {
+            timeAndBuildNumber.stringValue = dateFormatter.string(from: build.start_time) + " | Build #\(build.build_num)" + " | By \(build.author_name!)"
             
-            if isDarkModeEnabled() {
-                openURLButton.image = NSImage(named: NSImage.Name(rawValue: "open-alt"))
-            }
+        }
+        if isDarkModeEnabled() {
+            openURLButton.image = NSImage(named: NSImage.Name(rawValue: "open-alt"))
         }
     }
     
     @IBAction func openBuild(_ sender: AnyObject) {
         if url != nil {
-            NSWorkspace.shared.open(url)
+            NSWorkspace.shared.open(url!)
         }
     }
     
     fileprivate func setColors(_ color: NSColor) {
         statusAndSubject.textColor = color
         statusColorBox.fillColor = color
-        let cell = statusAndSubject.cell as! NSCell
     }
     
     fileprivate func greenColor() -> NSColor {
-        if isDarkModeEnabled() {
-            return NSColor.green
-        } else {
-            return NSColorFromRGB(0x229922)
-        }
+        return isDarkModeEnabled() ? NSColor.green : NSColorFromRGB(0x229922)
     }
     
     fileprivate func redColor() -> NSColor {
-        if isDarkModeEnabled() {
-            return NSColorFromRGB(0xff5b5b)
-        } else {
-            return NSColor.red
-        }
+        return isDarkModeEnabled() ? NSColorFromRGB(0xff5b5b) : NSColor.red
     }
     
     fileprivate func blueColor() -> NSColor {
-        if isDarkModeEnabled() {
-            return NSColorFromRGB(0x00bfff)
-        } else {
-            return NSColorFromRGB(0x0096c8)
-        }
+        return isDarkModeEnabled() ? NSColorFromRGB(0x00bfff) : NSColorFromRGB(0x0096c8)
     }
     
     fileprivate func grayColor() -> NSColor {
-        if isDarkModeEnabled() {
-            return NSColor.lightGray
-        } else {
-            return NSColor.gray
-        }
+        return isDarkModeEnabled() ? NSColor.lightGray : NSColor.gray
     }
 
     fileprivate func isDarkModeEnabled() -> Bool {

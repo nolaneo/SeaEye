@@ -12,6 +12,9 @@ class CircleCIModel: NSObject {
     var hasValidUserSettings = false
     
     override init() {
+        self.allBuilds = []
+        self.allProjects = []
+
         super.init()
         NotificationCenter.default.addObserver(
             self,
@@ -22,8 +25,8 @@ class CircleCIModel: NSObject {
         self.validateUserSettingsAndStartRequests()
     }
     
-    var allProjects: [Project]!
-    var allBuilds: [Build]!
+    var allProjects: [Project]
+    var allBuilds: [CircleCIBuild]
     var lastNotificationDate: Date!
     var updatesTimer: Timer!
     
@@ -47,53 +50,40 @@ class CircleCIModel: NSObject {
     @objc func updateBuilds() {
         autoreleasepool {
             print("Update builds!")
-            var builds: [Build] = []
+            var builds: [CircleCIBuild] = []
             for (project) in (self.allProjects) {
-                if let projectBuilds = project.projectBuilds {
-                    builds += projectBuilds
-                }
+                builds += project.projectBuilds
             }
-            self.allBuilds = builds.sorted {$0.date.timeIntervalSince1970 > $1.date.timeIntervalSince1970}
-            
+            self.allBuilds = builds.sorted {$0.start_time.timeIntervalSince1970 > $1.start_time.timeIntervalSince1970}
             self.calculateBuildStatus()
         }
     }
     
     func calculateBuildStatus() {
         if lastNotificationDate != nil {
-            var hasGreenBuild = false
-            var hasRedBuild = false
             var failures = 0
             var successes = 0
-            var failedBuild : Build!
-            var successfulBuild : Build!
+            var failedBuild : CircleCIBuild?
+            var successfulBuild : CircleCIBuild?
             for(build) in (allBuilds) {
-                if build.date.timeIntervalSince1970 > lastNotificationDate.timeIntervalSince1970 {
+                if build.start_time.timeIntervalSince1970 > lastNotificationDate.timeIntervalSince1970 {
                     switch build.status {
-                        case "failed": hasRedBuild = true; failures += 1; failedBuild = build; break;
-                        case "timedout": hasRedBuild = true; failures += 1; failedBuild = build; break;
-                        case "success": hasGreenBuild = true; successes += 1; successfulBuild = build; break;
-                        case "fixed": hasGreenBuild = true; successes += 1; successfulBuild = build; break;
+                        case "failed": failures += 1; failedBuild = build; break;
+                        case "timedout": failures += 1; failedBuild = build; break;
+                        case "success": successes += 1; successfulBuild = build; break;
+                        case "fixed": successes += 1; successfulBuild = build; break;
                         default: break;
                     }
                 }
             }
             
-            if failures > 1 {
-                print("Has multiple failues")
-                let info = ["build": failedBuild, "count": failures] as [String : Any]
+            if failures > 0 {
+                print("Has red build \(String(describing: failedBuild!.subject))")
+                let info = ["build": failedBuild!, "count": failures] as [String : Any]
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeRedBuild"), object: nil, userInfo:info)
-            } else if hasRedBuild {
-                print("Has red build \(failedBuild.subject)")
-                let info = ["build": failedBuild, "count": failures] as [String : Any]
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeRedBuild"), object: nil, userInfo:info)
-            } else if successes > 1 {
+            } else if successes > 0 {
                 print("Has multiple successes")
-                let info = ["build": successfulBuild, "count": successes] as [String : Any]
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeGreenBuild"), object: nil, userInfo:info)
-            } else if hasGreenBuild {
-                print("Has green build \(successfulBuild.subject)")
-                let info = ["build": successfulBuild, "count": successes] as [String : Any]
+                let info = ["build": successfulBuild!, "count": successes] as [String : Any]
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeGreenBuild"), object: nil, userInfo:info)
             }
         }
@@ -103,11 +93,11 @@ class CircleCIModel: NSObject {
     
     @objc func validateUserSettingsAndStartRequests() {
         let validation = self.validateKey("SeaEyeAPIKey")
-        && self.validateKey("SeaEyeOrganization")
-        && self.validateKey("SeaEyeProjects")
+            && self.validateKey("SeaEyeOrganization")
+            && self.validateKey("SeaEyeProjects")
         
         if (validation) {
-            allBuilds = nil
+            allBuilds = []
             NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeUpdatedBuilds"), object: nil)
             resetAPIRequests()
         } else {
@@ -155,9 +145,6 @@ class CircleCIModel: NSObject {
         if updatesTimer != nil {
             updatesTimer.invalidate()
             updatesTimer = nil
-        }
-        if allProjects == nil {
-            return
         }
         for(project) in (allProjects) {
             project.stop();

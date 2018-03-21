@@ -29,12 +29,16 @@ class SeaEyeUpdatesController: NSViewController {
     }
     
     func setup() {
-        changes.stringValue = applicationStatus.changes
-        versionLabel.stringValue = "Version \(applicationStatus.latestVersion) Available"
+        if applicationStatus.version != nil {
+            changes.stringValue = applicationStatus.version!.changes
+            versionLabel.stringValue = "Version \(applicationStatus.version!.latest_version) Available"
+        }
     }
     
     @IBAction func openUpdatesPage(_ sender : NSButton) {
-        NSWorkspace.shared.open(applicationStatus.updateURL as URL)
+        if applicationStatus.version != nil {
+            NSWorkspace.shared.open(applicationStatus.version!.download_url)
+        }
     }
     
 }
