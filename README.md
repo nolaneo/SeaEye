@@ -15,7 +15,11 @@ SeaEye is a menu bar notification app for CircleCI written in Swift.
 * Restrict notifications to specific users or branches using regular expressions.
 * Jump directly to the CircleCI site for any build listed.
 
-## [Download V0.4 (OSX Yosemite +)](https://github.com/nolaneo/SeaEye/blob/master/Builds/SeaEye%20v0.4.zip?raw=true)
+##[Download V0.5 (OSX Yosemite +)](https://github.com/nolaneo/SeaEye/blob/master/Builds/SeaEye%20v0.5.zip?raw=true)
+
+### Updates for v0.5
+* Uses Swift 4
+* Multiple bug fixes
 
 ### Updates for v0.4
 * Fixed crash after entering API key.
