@@ -50,22 +50,19 @@ class SeaEyeStatus: NSObject {
     }
     
     func updateAvailable() -> Bool {
-        if self.version != nil {
-            let numberFormatter = NumberFormatter()
-            let currentVersionFloat = numberFormatter.number(from: currentVersion())!.floatValue
-            let latestVersionFloat = numberFormatter.number(from: self.version!.latest_version)!.floatValue
-            return currentVersionFloat < latestVersionFloat
+        if let latestVersion = self.version?.latest_version.versionNumber() {
+            return currentVersion() < latestVersion
         }
         return false
     }
-    
-    func currentVersion() -> String {
+
+    func currentVersion() -> VersionNumber {
         var version = "0.0"
         if let info = Bundle.main.infoDictionary as NSDictionary! {
             if let currentVersionString = info.object(forKey: "CFBundleShortVersionString") as? String {
                 version =  currentVersionString
             }
         }
-        return version
+        return version.versionNumber()
     }
 }
