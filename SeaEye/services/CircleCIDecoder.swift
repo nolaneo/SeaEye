@@ -19,7 +19,7 @@ extension DateFormatter {
     }()
 }
 
-class CircleCIDecoder : JSONDecoder{
+class CircleCIDecoder: JSONDecoder {
     override init() {
         super.init()
         self.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)

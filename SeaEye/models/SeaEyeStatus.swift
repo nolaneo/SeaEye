@@ -11,7 +11,7 @@ import Cocoa
 class SeaEyeStatus: NSObject {
     var hasUpdate = false
     var version: SeaEyeVersion?
-    
+
     override init() {
         super.init()
         Timer.scheduledTimer(
@@ -24,22 +24,21 @@ class SeaEyeStatus: NSObject {
     }
 
     @objc func getApplicationStatus() {
-        latestSeaEyeVersion(completion: {(r) in
-            switch r {
+        latestSeaEyeVersion(completion: {(res) in
+            switch res {
             case .success(let version):
                 self.version = version
                 if self.updateAvailable() {
                     self.hasUpdate = true
                     self.notifyOfNewVersion(version: version)
                 }
-                break
-            
+
             case .failure:
                 break
             }
         })
     }
-    
+
     func notifyOfNewVersion(version: SeaEyeVersion) {
         print("The latest version of SeaEye is: \(version.latest_version)")
         let info = [
@@ -49,7 +48,7 @@ class SeaEyeStatus: NSObject {
         let notification = Notification(name: Notification.Name(rawValue: "SeaEyeAlert"), object: self, userInfo: info)
         NotificationCenter.default.post(notification)
     }
-    
+
     func updateAvailable() -> Bool {
         if let latestVersion = self.version?.latest_version.versionNumber() {
             return currentVersion() < latestVersion

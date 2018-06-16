@@ -5,7 +5,7 @@ enum Result<Value> {
     case failure(Error)
 }
 
-func getProject(name:String, completion: @escaping (Result<[CircleCIBuild]>) -> Void) {
+func getProject(name: String, completion: @escaping (Result<[CircleCIBuild]>) -> Void) {
     request(CircleCIGetRequest(path: "project/\(name)"), of: [CircleCIBuild].self, completion: completion)
 }
 
@@ -25,29 +25,29 @@ func CircleCIGetRequest(path: String) -> URLRequest {
     return request
 }
 
-struct SeaEyeVersion : Decodable {
+struct SeaEyeVersion: Decodable {
     let latest_version: String
     let download_url: URL
     let changes: String
 }
 
-func latestSeaEyeVersion(completion:((Result<SeaEyeVersion>) -> Void)?) {
-    let r = URLRequest(url: (URL(string :"https://raw.githubusercontent.com/nolaneo/SeaEye/master/project_status.json"))!)
-    
+func latestSeaEyeVersion(completion: ((Result<SeaEyeVersion>) -> Void)?) {
+    let r = URLRequest(url: (URL(string: "https://raw.githubusercontent.com/nolaneo/SeaEye/master/project_status.json"))!)
+
     request(r, of: SeaEyeVersion.self, completion: completion)
 }
 
-func request <T: Decodable>(_ request: URLRequest, of:T.Type, completion:((Result<T>) -> Void)?) {
+func request <T: Decodable>(_ request: URLRequest, of: T.Type, completion: ((Result<T>) -> Void)?) {
     let session = URLSession(configuration: URLSessionConfiguration.default)
-    
+
     let task = session.dataTask(with: request) { (responseData, response, responseError) in  DispatchQueue.main.async {
             guard responseError == nil else {
                 completion!(.failure(responseError!))
                 return
             }
-        
+
             guard let jsonData = responseData else {
-                let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Data was not retrieved from request"]) as Error
+                let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Data was not retrieved from request"]) as Error
                 completion!(.failure(error))
                 return
             }
