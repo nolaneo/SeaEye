@@ -29,6 +29,7 @@ class SeaEyeStatus: NSObject {
             case .success(let version):
                 self.version = version
                 if self.updateAvailable() {
+                    self.hasUpdate = true
                     self.notifyOfNewVersion(version: version)
                 }
                 break
