@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  build:
+  build-and-test:
     working_directory: ~/seaeye
     macos:
       xcode: 9.4.0
@@ -12,7 +12,8 @@ jobs:
     steps:
       - checkout
       - run: bundle install
-      - run: bundle exec fastlane scan
+      - run: bundle exec fastlane gym
+      - run: bundle exec fastlane test
       - run: cp /Users/distiller/seaeye/fastlane/test_output/report.junit /Users/distiller/seaeye/fastlane/test_output/results.xml
       - store_test_results:
           path: /Users/distiller/seaeye/fastlane/test_output
@@ -22,3 +23,20 @@ jobs:
       - store_artifacts:
           path: ~/Library/Logs/scan
           destination: scan-logs
+  swiftlint:
+    docker:
+      - image: dantoml/swiftlint:latest
+    steps:
+      - checkout
+      - run: swiftlint lint --reporter junit | tee result.xml
+      - store_artifacts:
+          path: result.xml
+      - store_test_results:
+          path: result.xml
+
+workflows:
+  version: 2
+  build-test-lint:
+    jobs:
+      - swiftlint
+      - build-and-test
