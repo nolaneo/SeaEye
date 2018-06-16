@@ -76,6 +76,11 @@ platform :mac do
     scan(output_types: 'junit')
   end
 
+  desc 'Build SeaEye'
+  lane :build do
+    gym
+  end
+
   desc 'Release a new version of SeaEye'
   lane :release do |options|
     test
