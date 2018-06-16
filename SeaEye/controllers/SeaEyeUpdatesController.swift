@@ -31,13 +31,13 @@ class SeaEyeUpdatesController: NSViewController {
     func setup() {
         if applicationStatus.version != nil {
             changes.stringValue = applicationStatus.version!.changes
-            versionLabel.stringValue = "Version \(applicationStatus.version!.latest_version) Available"
+            versionLabel.stringValue = "Version \(applicationStatus.version!.latestVersion) Available"
         }
     }
 
     @IBAction func openUpdatesPage(_ sender: NSButton) {
         if applicationStatus.version != nil {
-            NSWorkspace.shared.open(applicationStatus.version!.download_url)
+            NSWorkspace.shared.open(applicationStatus.version!.downloadUrl)
         }
     }
 

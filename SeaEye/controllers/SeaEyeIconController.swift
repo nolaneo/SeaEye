@@ -15,10 +15,7 @@ class SeaEyeIconController: NSViewController {
     var applicationStatus = SeaEyeStatus()
     var hasViewedBuilds = true
     var popover = NSPopover()
-<<<<<<< HEAD
     var popoverController: SeaEyePopoverController?
-=======
->>>>>>> swiftlint autocorrect
 
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -88,33 +85,33 @@ class SeaEyeIconController: NSViewController {
             iconButton.image = NSImage(named: NSImage.Name(rawValue: imageFile))
 
             if UserDefaults.standard.bool(forKey: "SeaEyeNotify") {
-                let build = notification.userInfo!["build"] as! CircleCIBuild
-                let count = notification.userInfo!["count"] as! Int
-                NSUserNotificationCenter.default.deliver(buildNotification(build: build, count: count))
+                if let build = notification.userInfo!["build"] as? CircleCIBuild{
+                    if let count = notification.userInfo!["count"] as? Int {
+                        NSUserNotificationCenter.default.deliver(buildNotification(build: build, count: count))
+                    }
+                }
             }
         }
     }
 
     func setRedBuildIcon(notification: Notification) {
         hasViewedBuilds = false
-        if (self.isDarkModeEnabled()) {
-            iconButton.image = NSImage(named: NSImage.Name(rawValue: "circleci-failed-alt"))
-        } else {
-            iconButton.image = NSImage(named: NSImage.Name(rawValue: "circleci-failed"))
-        }
+        let imageFile = self.isDarkModeEnabled() ? "circleci-failed-alt" : "circleci-failed"
+        iconButton.image = NSImage(named: NSImage.Name(rawValue: imageFile))
 
         if UserDefaults.standard.bool(forKey: "SeaEyeNotify") {
-            let build = notification.userInfo!["build"] as! CircleCIBuild
-            let count = notification.userInfo!["count"] as! Int
-
-            NSUserNotificationCenter.default.deliver(buildNotification(build: build, count: count))
+            if let build = notification.userInfo!["build"] as? CircleCIBuild{
+                if let count = notification.userInfo!["count"] as? Int {
+                    NSUserNotificationCenter.default.deliver(buildNotification(build: build, count: count))
+                }
+            }
         }
     }
     func notifcationForBuild(build: CircleCIBuild) -> NSUserNotification {
         let notification = NSUserNotification()
         notification.setValue(false, forKey: "_identityImageHasBorder")
         notification.setValue(nil, forKey: "_imageURL")
-        notification.userInfo = ["url": build.build_url.absoluteString]
+        notification.userInfo = ["url": build.buildUrl.absoluteString]
         return notification
     }
 
@@ -129,7 +126,7 @@ class SeaEyeIconController: NSViewController {
             notification.subtitle = "You have \(count) \(plural) builds"
         } else {
             notification.subtitle = build.subject
-            notification.informativeText = build.author_name
+            notification.informativeText = build.authorName
         }
 
         let image = NSImage(named: NSImage.Name(rawValue: imageFile))
@@ -178,9 +175,10 @@ class SeaEyeIconController: NSViewController {
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier!.rawValue == "SeaEyeOpenPopoverSegue" {
             self.setupMenuBarIcon()
-            let popoverController = segue.destinationController as! SeaEyePopoverController
-            popoverController.model = self.model
-            popoverController.applicationStatus = self.applicationStatus
+            if let popoverController = segue.destinationController as? SeaEyePopoverController {
+                popoverController.model = self.model
+                popoverController.applicationStatus = self.applicationStatus
+            }
         }
     }
 

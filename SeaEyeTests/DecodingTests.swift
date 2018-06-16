@@ -11,7 +11,7 @@ class DecodingTests: XCTestCase {
                 let decoder = CircleCIDecoder()
                 let build = try decoder.decode(CircleCIBuild.self, from: data)
                 XCTAssertEqual(build.branch, "cm-circleci2")
-                XCTAssertEqual(build.author_name, "Conor Mongey")
+                XCTAssertEqual(build.authorName, "Conor Mongey")
 
             } catch {
                 XCTFail(error.localizedDescription)

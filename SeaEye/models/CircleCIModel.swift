@@ -54,7 +54,7 @@ class CircleCIModel: NSObject {
             for (project) in (self.allProjects) {
                 builds += project.projectBuilds
             }
-            self.allBuilds = builds.sorted {$0.start_time.timeIntervalSince1970 > $1.start_time.timeIntervalSince1970}
+            self.allBuilds = builds.sorted {$0.startTime.timeIntervalSince1970 > $1.startTime.timeIntervalSince1970}
             self.calculateBuildStatus()
         }
     }
@@ -65,14 +65,14 @@ class CircleCIModel: NSObject {
             var successes = 0
             var failedBuild: CircleCIBuild?
             var successfulBuild: CircleCIBuild?
-            for(build) in (allBuilds) {
-                if build.start_time.timeIntervalSince1970 > lastNotificationDate.timeIntervalSince1970 {
+            for build in allBuilds {
+                if build.startTime.timeIntervalSince1970 > lastNotificationDate.timeIntervalSince1970 {
                     switch build.status {
-                        case "failed": failures += 1; failedBuild = build; break
-                        case "timedout": failures += 1; failedBuild = build; break
-                        case "success": successes += 1; successfulBuild = build; break
-                        case "fixed": successes += 1; successfulBuild = build; break
-                        default: break
+                    case "failed": failures += 1; failedBuild = build
+                    case "timedout": failures += 1; failedBuild = build
+                    case "success": successes += 1; successfulBuild = build
+                    case "fixed": successes += 1; successfulBuild = build
+                    default: break
                     }
                 }
             }
@@ -96,7 +96,7 @@ class CircleCIModel: NSObject {
             && self.validateKey("SeaEyeOrganization")
             && self.validateKey("SeaEyeProjects")
 
-        if (validation) {
+        if validation {
             allBuilds = []
             NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeUpdatedBuilds"), object: nil)
             resetAPIRequests()
@@ -121,21 +121,21 @@ class CircleCIModel: NSObject {
         let projectsString = userDefaults.string(forKey: "SeaEyeProjects") as String!
         let projectsArray = projectsString?.components(separatedBy: CharacterSet.whitespaces)
 
-        allProjects = ProjectsFromSettings(APIKey: apiKey!, Organisation: organization!, ProjectNames: projectsArray!)
+        allProjects = projectsFromSettings(apiKey: apiKey!, organisation: organization!, projectNames: projectsArray!)
         self.startAPIRequests()
     }
 
-    func ProjectsFromSettings(APIKey: String, Organisation: String, ProjectNames: [String] ) -> [Project] {
+    func projectsFromSettings(apiKey: String, organisation: String, projectNames: [String]) -> [Project] {
         var projects = [Project]()
-        for projectName in ProjectNames {
-            let project = Project(name: projectName, organization: Organisation, key: APIKey, parentModel: self)
+        for projectName in projectNames {
+            let project = Project(name: projectName, organization: organisation, key: apiKey, parentModel: self)
             projects.append(project)
         }
         return projects
     }
 
     fileprivate func startAPIRequests() {
-        for (project) in (allProjects) {
+        for project in allProjects {
             project.reset()
         }
     }
@@ -145,7 +145,7 @@ class CircleCIModel: NSObject {
             updatesTimer.invalidate()
             updatesTimer = nil
         }
-        for(project) in (allProjects) {
+        for project in allProjects {
             project.stop()
         }
     }

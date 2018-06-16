@@ -23,7 +23,7 @@ class SeaEyePopoverController: NSViewController {
     var updatesViewController: SeaEyeUpdatesController!
     var model: CircleCIModel!
     var applicationStatus: SeaEyeStatus!
-    let appDelegate = NSApplication.shared.delegate as! AppDelegate
+    var appDelegate: NSApplicationDelegate? = NSApplication.shared.delegate
 
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -50,7 +50,7 @@ class SeaEyePopoverController: NSViewController {
 
         setupNibControllers()
 
-        settingsViewController.parent_controller = self
+        settingsViewController.parentController = self
         buildsViewController.model = model
         updatesViewController.applicationStatus = self.applicationStatus
         openBuildsButton.isHidden = true
@@ -59,9 +59,16 @@ class SeaEyePopoverController: NSViewController {
 
     fileprivate func setupStoryboardControllers() {
         let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
-        settingsViewController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "SeaEyeSettingsController")) as! SeaEyeSettingsController
-        buildsViewController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "SeaEyeBuildsController")) as! SeaEyeBuildsController
-        updatesViewController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "SeaEyeUpdatesController")) as! SeaEyeUpdatesController
+        if let sVC = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "SeaEyeSettingsController")) as? SeaEyeSettingsController {
+            settingsViewController = sVC
+        }
+
+        if let bVC = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "SeaEyeBuildsController")) as? SeaEyeBuildsController {
+            buildsViewController = bVC
+        }
+        if let uVC = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "SeaEyeUpdatesController")) as? SeaEyeUpdatesController {
+            updatesViewController = uVC
+        }
     }
 
     fileprivate func setupNibControllers() {
@@ -113,8 +120,8 @@ class SeaEyePopoverController: NSViewController {
 
     fileprivate func showUpdateButtonIfAppropriate() {
         if applicationStatus.hasUpdate {
-            let versionString = NSMutableAttributedString(string: applicationStatus.version!.latest_version)
-            let range = NSRange(location: 0, length: applicationStatus.version!.latest_version.count)
+            let versionString = NSMutableAttributedString(string: applicationStatus.version!.latestVersion)
+            let range = NSRange(location: 0, length: applicationStatus.version!.latestVersion.count)
             versionString.addAttribute(
                 NSAttributedStringKey.foregroundColor,
                 value: NSColor.red,

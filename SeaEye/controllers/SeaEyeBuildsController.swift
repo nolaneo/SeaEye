@@ -52,17 +52,17 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
         fallbackView.isHidden = false
         buildsTable.isHidden = true
         let userDefaults = UserDefaults.standard
-        if  (userDefaults.string(forKey: "SeaEyeAPIKey") == nil) {
+        if userDefaults.string(forKey: "SeaEyeAPIKey") == nil {
             return fallbackView.stringValue = "You have not set an API key"
         }
 
-        if (userDefaults.string(forKey: "SeaEyeOrganization") == nil) {
+        if userDefaults.string(forKey: "SeaEyeOrganization") == nil {
             return fallbackView.stringValue = "You have not set an organization name"
         }
-        if (userDefaults.value(forKey: "SeaEyeProjects") == nil) {
+        if userDefaults.value(forKey: "SeaEyeProjects") == nil {
             return fallbackView.stringValue = "You have not added any projects"
         }
-        if (model.allBuilds.count == 0) {
+        if model.allBuilds.count == 0 {
             return fallbackView.stringValue = "No Recent Builds Found"
         }
         fallbackView.isHidden = true
@@ -79,9 +79,11 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let cellView: BuildView = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! BuildView
-        cellView.setupForBuild(build: model.allBuilds[row])
-        return cellView
+        if let cellView: BuildView = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as? BuildView {
+            cellView.setupForBuild(build: model.allBuilds[row])
+            return cellView
+        }
+        return nil
     }
 
     func selectionShouldChange(in tableView: NSTableView) -> Bool {

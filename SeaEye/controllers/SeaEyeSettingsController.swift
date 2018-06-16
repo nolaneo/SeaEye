@@ -10,7 +10,7 @@ import Cocoa
 
 class SeaEyeSettingsController: NSViewController {
 
-    var parent_controller: SeaEyePopoverController!
+    var parentController: SeaEyePopoverController!
 
     @IBOutlet weak var runOnStartup: NSButton!
     @IBOutlet weak var showNotifications: NSButton!
@@ -23,7 +23,7 @@ class SeaEyeSettingsController: NSViewController {
 
     @IBOutlet weak var versionString: NSTextField!
 
-    let appDelegate = NSApplication.shared.delegate as! AppDelegate
+    let appDelegate = NSApplication.shared.delegate
 
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -56,7 +56,7 @@ class SeaEyeSettingsController: NSViewController {
         setUserDefaultsFromField(usersField, key: "SeaEyeUsers")
         UserDefaults.standard.set(false, forKey: "SeaEyeError")
         NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeSettingsChanged"), object: nil)
-        parent_controller.openBuilds(sender)
+        parentController.openBuilds(sender)
     }
 
     @IBAction func saveNotificationPreferences(_ sender: NSButton) {
@@ -67,7 +67,9 @@ class SeaEyeSettingsController: NSViewController {
 
     @IBAction func saveRunOnStartupPreferences(_ sender: NSButton) {
         print("Changing launch on startup")
-        appDelegate.toggleLaunchAtStartup()
+        if let ap = appDelegate as? AppDelegate? {
+            ap?.toggleLaunchAtStartup()
+        }
     }
 
     fileprivate func setUserDefaultsFromField(_ field: NSTextField, key: String) {
@@ -87,7 +89,13 @@ class SeaEyeSettingsController: NSViewController {
         } else {
             showNotifications.state = NSControl.StateValue.off
         }
-        let hasRunOnStartup = appDelegate.applicationIsInStartUpItems()
+        var hasRunOnStartup = false
+        if let apD = appDelegate as? AppDelegate? {
+            if let actualAppD = apD {
+                hasRunOnStartup = actualAppD.applicationIsInStartUpItems()
+            }
+        }
+
         if hasRunOnStartup {
             runOnStartup.state = NSControl.StateValue.on
         } else {

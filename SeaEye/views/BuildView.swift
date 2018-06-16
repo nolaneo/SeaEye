@@ -17,35 +17,34 @@ class BuildView: NSTableCellView {
     var url: URL?
 
     func setupForBuild(build: CircleCIBuild) {
-        url = build.build_url
+        url = build.buildUrl
         statusAndSubject.stringValue = build.status.capitalized
 
         if build.status == "no_tests" {
             statusAndSubject.stringValue = "No tests"
         }
         if build.subject != nil {
-            statusAndSubject.stringValue = statusAndSubject.stringValue + ": \(build.subject!)"
+            statusAndSubject.stringValue += ": \(build.subject!)"
         }
         switch build.status {
-            case "success": setColors(greenColor()); break
-            case "fixed": setColors(greenColor()); break
-            case "no_tests": setColors(redColor()); break
-            case "failed": setColors(redColor()); break
-            case "timedout": setColors(redColor()); break
-            case "running": setColors(blueColor()); break
-            case "canceled": setColors(grayColor()); break
-            case "retried": setColors(grayColor()); break
-            default:
-                print("unknown status" + build.status)
-                break
+        case "success": setColors(greenColor())
+        case "fixed": setColors(greenColor())
+        case "no_tests": setColors(redColor())
+        case "failed": setColors(redColor())
+        case "timedout": setColors(redColor())
+        case "running": setColors(blueColor())
+        case "canceled": setColors(grayColor())
+        case "retried": setColors(grayColor())
+        default:
+            print("unknown status" + build.status)
         }
         branchName.stringValue = "\(build.branch) | \(build.reponame)"
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm MMM dd"
-        timeAndBuildNumber.stringValue = dateFormatter.string(from: build.start_time) + " | Build #\(build.build_num)"
+        timeAndBuildNumber.stringValue = dateFormatter.string(from: build.startTime) + " | Build #\(build.buildNum)"
 
-        if build.author_name != nil {
-            timeAndBuildNumber.stringValue = dateFormatter.string(from: build.start_time) + " | Build #\(build.build_num)" + " | By \(build.author_name!)"
+        if build.authorName != nil {
+            timeAndBuildNumber.stringValue = dateFormatter.string(from: build.startTime) + " | Build #\(build.buildNum)" + " | By \(build.authorName!)"
 
         }
         if isDarkModeEnabled() {

@@ -63,11 +63,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             if loginItemsRef == nil {
                 return (nil, nil)
         }
-        let loginItems: NSArray = LSSharedFileListCopySnapshot(loginItemsRef, nil).takeRetainedValue() as NSArray
+        // swiftlint:disable force_cast
+        let loginItems: [LSSharedFileListItem] = LSSharedFileListCopySnapshot(loginItemsRef, nil).takeRetainedValue() as! [LSSharedFileListItem]
+        // swiftlint:enable force_cast
         print("There are \(loginItems.count) login items")
-        let lastItemRef: LSSharedFileListItem = loginItems.lastObject as! LSSharedFileListItem
+        let lastItemRef: LSSharedFileListItem = loginItems.last!
 
-        for currentItemRef in loginItems as! [LSSharedFileListItem] {
+        for currentItemRef in loginItems {
             if let itemUrl = LSSharedFileListItemCopyResolvedURL(currentItemRef, 0, nil) {
                 if (itemUrl.takeRetainedValue() as URL) == appUrl {
                     return (currentItemRef, lastItemRef)

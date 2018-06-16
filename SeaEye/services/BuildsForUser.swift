@@ -10,8 +10,8 @@ func buildMatches(build: CircleCIBuild, userRegex: NSRegularExpression?, branchR
     var matching = true
     if userRegex != nil {
         var maybeAuthorName = ""
-        if build.author_name != nil {
-            maybeAuthorName = build.author_name!
+        if build.authorName != nil {
+            maybeAuthorName = build.authorName!
         }
         matching = userRegex!.matches(in: maybeAuthorName, options: [], range: NSRange(maybeAuthorName.startIndex..., in: maybeAuthorName)).count > 0
     }
