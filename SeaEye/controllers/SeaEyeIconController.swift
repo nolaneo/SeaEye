@@ -15,7 +15,8 @@ class SeaEyeIconController: NSViewController {
     var applicationStatus = SeaEyeStatus()
     var hasViewedBuilds = true
     var popover = NSPopover()
-    
+    var popoverController: SeaEyePopoverController?
+
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -48,6 +49,11 @@ class SeaEyeIconController: NSViewController {
                                                queue: OperationQueue.main,
                                                using: setGreenBuildIcon)
         
+        if let popoverController = SeaEyePopoverController(nibName: NSNib.Name(rawValue: "SeaEyePopoverController"), bundle: nil) as SeaEyePopoverController? {
+            popoverController.model = self.model
+            popoverController.applicationStatus = self.applicationStatus
+            self.popoverController = popoverController
+        }
         NSEvent.addGlobalMonitorForEvents(
             matching: [.leftMouseUp, .rightMouseUp],
             handler: closePopover
@@ -178,10 +184,6 @@ class SeaEyeIconController: NSViewController {
     
     @IBAction func openPopover(_ sender: NSButton) {
         self.setupMenuBarIcon()
-        let popoverController = SeaEyePopoverController(nibName: NSNib.Name(rawValue: "SeaEyePopoverController"), bundle: nil) as SeaEyePopoverController!
-        popoverController?.model = self.model
-        popoverController?.applicationStatus = self.applicationStatus   
-        
         if !popover.isShown {
             popover.contentViewController = popoverController
             popover.show(relativeTo: self.view.frame, of: self.view, preferredEdge: NSRectEdge.minY)
