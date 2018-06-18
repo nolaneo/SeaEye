@@ -1,10 +1,140 @@
-fastlane_version "2.59.0"
+fastlane_version '2.97.0'
+
+VERSION_FILE = 'SeaEye/Info.plist'
+ZIP_OUTPUT = 'SeaEye.app.zip'
+RELEASE_BRANCH = 'master'
+GITHUB_REPOSITORY = ENV.fetch('GITHUB_REPO', 'nolaneo/SeaEye')
+DEV_VERSION_STRING = "-dev"
 
 default_platform :mac
 
+class VersionNumber
+  attr_accessor :major, :minor, :development
+
+  def initialize(str)
+    self.major, self.minor = 0
+
+    if str.include?(DEV_VERSION_STRING)
+      self.development = true
+      str = str.gsub(DEV_VERSION_STRING, "")
+    end
+
+    version_split = str.split('.').map{ |v| v.to_i }
+
+    if version_split.size >= 2
+      self.major = version_split[0]
+      self.minor = version_split[1]
+    end
+  end
+
+  def to_s
+    a = [major,minor].join(".")
+    if development
+      a = a + DEV_VERSION_STRING
+    end
+    return a
+  end
+
+  def next_version(type)
+    if type == "minor"
+      self.minor = self.minor + 1
+    elsif type == "major"
+      self.major = self.major + 1
+      self.minor = 0
+    end
+    self
+  end
+end
+
+def changelog(last_git_tag)
+  changelog_from_git_commits(
+    between: [last_git_tag, 'HEAD'],
+    pretty: '- %s',
+    date_format: 'short',
+    match_lightweight_tag: false,
+    merge_commit_filtering: 'exclude_merges'
+  )
+end
+
+def get_version
+  VersionNumber.new(get_version_number)
+end
+
+def build_and_zip
+  gym
+  zip(path: 'SeaEye.app', output_path: ZIP_OUTPUT)
+end
+
+def set_version(version)
+  update_plist(plist_path: VERSION_FILE,
+               block: proc { |p| p['CFBundleShortVersionString'] = version })
+end
+
 platform :mac do
-  desc "Runs all the tests"
+  desc 'Runs all the tests'
   lane :test do
-    scan(output_types: "junit")
+    scan(output_types: 'junit')
+  end
+
+  desc 'Build SeaEye'
+  lane :build do
+    gym
+  end
+
+  desc 'Release a new version of SeaEye'
+  lane :release do |options|
+    test
+    ensure_git_status_clean
+    ensure_git_branch(branch: RELEASE_BRANCH)
+
+    build_and_zip
+
+    new_version = get_version
+    new_version.development = false
+
+    puts "Setting version to v#{new_version}"
+    set_version(new_version.to_s)
+
+    git_add(path: VERSION_FILE)
+    git_commit(path: VERSION_FILE,
+               message: "Release version #{new_version}")
+
+    comments = changelog(last_git_tag)
+    add_git_tag(
+      message: comments,
+      tag: "#{version}",
+      prefix: "v"
+    )
+
+    approved = prompt(boolean: true,
+                      text: ["#{new_version} Changelog:",
+                             "====================",
+                             comments.to_s,
+                             "Release v#{new_version} ?"].join("\n"))
+
+    next unless approved
+    set_github_release(
+      repository_name: GITHUB_REPOSITORY,
+      api_token: ENV["GITHUB_TOKEN"],
+      name: "SeaEye v#{version}",
+      is_prerelease: false,
+      tag_name: version,
+      description: comments,
+      commitish: RELEASE_BRANCH,
+      upload_assets: [ZIP_OUTPUT]
+    )
+    puts "Released: #{new_version}"
+
+    post_release_version = new_version.next_version('minor')
+    post_release_version.development = true
+
+    puts 'Bumping version number'
+    set_version(post_release_version)
+    git_add(path: VERSION_FILE)
+    git_commit(path: VERSION_FILE, message: "Version bump to #{post_release_version}")
+
+    push_to_git_remote(
+      tags: ture
+    )
   end
 end

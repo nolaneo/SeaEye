@@ -9,15 +9,15 @@ class DecodingTests: XCTestCase {
             let data = try NSData(contentsOfFile: path) as Data
             do {
                 let decoder = CircleCIDecoder()
-                let build = try decoder.decode(CircleCIBuild.self, from:data)
+                let build = try decoder.decode(CircleCIBuild.self, from: data)
                 XCTAssertEqual(build.branch, "cm-circleci2")
-                XCTAssertEqual(build.author_name, "Conor Mongey")
+                XCTAssertEqual(build.authorName, "Conor Mongey")
 
-            } catch  {
+            } catch {
                 XCTFail(error.localizedDescription)
             }
 
-        } catch{
+        } catch {
             XCTFail("couldn't load file")
         }
     }

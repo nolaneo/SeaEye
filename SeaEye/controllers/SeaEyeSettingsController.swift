@@ -9,44 +9,43 @@
 import Cocoa
 
 class SeaEyeSettingsController: NSViewController {
-    
-    var parent_controller : SeaEyePopoverController!
-    
-    @IBOutlet weak var runOnStartup : NSButton!
-    @IBOutlet weak var showNotifications : NSButton!
-    
-    @IBOutlet weak var apiKeyField : NSTextField!
-    @IBOutlet weak var organizationField : NSTextField!
-    @IBOutlet weak var projectsField : NSTextField!
-    @IBOutlet weak var usersField : NSTextField!
-    @IBOutlet weak var branchesField : NSTextField!
-    
-    @IBOutlet weak var versionString : NSTextField!
-    
-    let appDelegate = NSApplication.shared.delegate as! AppDelegate
-    
+
+    var parentController: SeaEyePopoverController!
+
+    @IBOutlet weak var runOnStartup: NSButton!
+    @IBOutlet weak var showNotifications: NSButton!
+
+    @IBOutlet weak var apiKeyField: NSTextField!
+    @IBOutlet weak var organizationField: NSTextField!
+    @IBOutlet weak var projectsField: NSTextField!
+    @IBOutlet weak var usersField: NSTextField!
+    @IBOutlet weak var branchesField: NSTextField!
+
+    @IBOutlet weak var versionString: NSTextField!
+
+    let appDelegate = NSApplication.shared.delegate
+
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVersionNumber()
     }
-    
+
     override func viewWillAppear() {
        setupInputFields()
     }
-    
-    
+
     @IBAction func openAPIPage(_ sender: NSButton) {
         NSWorkspace.shared.open(URL(string: "https://circleci.com/account/api")!)
     }
-    
+
     @IBAction func saveUserData(_ sender: NSButton) {
         let notify = showNotifications.state == .on
         UserDefaults.standard.set(notify, forKey: "SeaEyeNotify")
@@ -57,20 +56,22 @@ class SeaEyeSettingsController: NSViewController {
         setUserDefaultsFromField(usersField, key: "SeaEyeUsers")
         UserDefaults.standard.set(false, forKey: "SeaEyeError")
         NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeSettingsChanged"), object: nil)
-        parent_controller.openBuilds(sender)
+        parentController.openBuilds(sender)
     }
-    
+
     @IBAction func saveNotificationPreferences(_ sender: NSButton) {
         let notify = showNotifications.state == .on
         print("Notificaiton Preference: \(notify)")
         UserDefaults.standard.set(notify, forKey: "SeaEyeNotify")
     }
-    
+
     @IBAction func saveRunOnStartupPreferences(_ sender: NSButton) {
         print("Changing launch on startup")
-        appDelegate.toggleLaunchAtStartup()
+        if let ap = appDelegate as? AppDelegate? {
+            ap?.toggleLaunchAtStartup()
+        }
     }
-    
+
     fileprivate func setUserDefaultsFromField(_ field: NSTextField, key: String) {
         let userDefaults = UserDefaults.standard
         let fieldValue = field.stringValue
@@ -80,7 +81,7 @@ class SeaEyeSettingsController: NSViewController {
             userDefaults.setValue(fieldValue, forKey: key)
         }
     }
-    
+
     fileprivate func setupInputFields() {
         let notify = UserDefaults.standard.bool(forKey: "SeaEyeNotify")
         if notify {
@@ -88,7 +89,13 @@ class SeaEyeSettingsController: NSViewController {
         } else {
             showNotifications.state = NSControl.StateValue.off
         }
-        let hasRunOnStartup = appDelegate.applicationIsInStartUpItems()
+        var hasRunOnStartup = false
+        if let apD = appDelegate as? AppDelegate? {
+            if let actualAppD = apD {
+                hasRunOnStartup = actualAppD.applicationIsInStartUpItems()
+            }
+        }
+
         if hasRunOnStartup {
             runOnStartup.state = NSControl.StateValue.on
         } else {
@@ -100,14 +107,14 @@ class SeaEyeSettingsController: NSViewController {
         setupFieldFromUserDefaults(branchesField, key: "SeaEyeBranches")
         setupFieldFromUserDefaults(usersField, key: "SeaEyeUsers")
     }
-    
+
     fileprivate func setupFieldFromUserDefaults(_ field: NSTextField, key: String) {
         let userDefaults = UserDefaults.standard
         if let savedValue = userDefaults.string(forKey: key) {
             field.stringValue = savedValue
         }
     }
-    
+
     fileprivate func setupVersionNumber() {
         if let info = Bundle.main.infoDictionary as NSDictionary! {
             if let version = info.object(forKey: "CFBundleShortVersionString") as? String {
