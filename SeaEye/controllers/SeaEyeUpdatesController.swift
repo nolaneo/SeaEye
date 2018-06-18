@@ -9,7 +9,6 @@
 import Cocoa
 
 class SeaEyeUpdatesController: NSViewController {
-
     var applicationStatus: SeaEyeStatus!
 
     @IBOutlet weak var versionLabel: NSTextField!
@@ -29,6 +28,10 @@ class SeaEyeUpdatesController: NSViewController {
     }
 
     func setup() {
+        if applicationStatus == nil {
+            return
+        }
+
         if applicationStatus.version != nil {
             changes.stringValue = applicationStatus.version!.changes
             versionLabel.stringValue = "Version \(applicationStatus.version!.latestVersion) Available"
@@ -36,9 +39,11 @@ class SeaEyeUpdatesController: NSViewController {
     }
 
     @IBAction func openUpdatesPage(_ sender: NSButton) {
+        if applicationStatus == nil {
+            return
+        }
         if applicationStatus.version != nil {
             NSWorkspace.shared.open(applicationStatus.version!.downloadUrl)
         }
     }
-
 }

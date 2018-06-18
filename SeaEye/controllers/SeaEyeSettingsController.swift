@@ -116,10 +116,6 @@ class SeaEyeSettingsController: NSViewController {
     }
 
     fileprivate func setupVersionNumber() {
-        if let info = Bundle.main.infoDictionary as NSDictionary! {
-            if let version = info.object(forKey: "CFBundleShortVersionString") as? String {
-                versionString.stringValue = "Version \(version)"
-            }
-        }
+        versionString.stringValue = VersionNumber.current().description
     }
 }

@@ -1,9 +1,18 @@
 import Foundation
 
-struct VersionNumber: Equatable, CustomStringConvertible, Comparable{
+struct VersionNumber: Equatable, CustomStringConvertible, Comparable {
     var major: Int
     var minor: Int
     var development: Bool
+
+    static func current() -> VersionNumber {
+        if let info = Bundle.main.infoDictionary as NSDictionary? {
+            if let version = info.object(forKey: "CFBundleShortVersionString") as? String {
+                return version.versionNumber()
+            }
+        }
+        return VersionNumber.init(major: 0, minor: 0, development: true)
+    }
 
     var description: String {
         var str = "\(major).\(minor)"

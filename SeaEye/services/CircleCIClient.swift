@@ -25,20 +25,6 @@ func circleCIurlForPath(path: String) -> URL {
     return URL(string: "https://circleci.com/api/v1.1/\(path)?circle-token=\(token)")!
 }
 
-
-struct SeaEyeVersion: Decodable {
-    let latestVersion: String
-    let downloadUrl: URL
-    let changes: String
-}
-
-func latestSeaEyeVersion(completion: ((Result<SeaEyeVersion>) -> Void)?) {
-    let url = "https://raw.githubusercontent.com/nolaneo/SeaEye/master/project_status.json"
-    let req = URLRequest(url: (URL(string: url))!)
-
-    request(req, of: SeaEyeVersion.self, completion: completion)
-}
-
 func request <T: Decodable>(_ request: URLRequest, of: T.Type, completion: ((Result<T>) -> Void)?) {
     let session = URLSession(configuration: URLSessionConfiguration.default)
 
