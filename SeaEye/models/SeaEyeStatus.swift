@@ -14,6 +14,7 @@ class SeaEyeStatus: NSObject {
 
     override init() {
         super.init()
+        self.getApplicationStatus()
         Timer.scheduledTimer(
             timeInterval: TimeInterval(60),
             target: self,
@@ -24,22 +25,24 @@ class SeaEyeStatus: NSObject {
     }
 
     @objc func getApplicationStatus() {
-        latestSeaEyeVersion(completion: {(result) in
+        GithubClient.latestRelease { (result) in
             switch result {
-            case .success(let version):
-                self.version = version
-                if self.updateAvailable() {
+            case .success(let latestRelease):
+                let updateAvailable = VersionNumber.current() < latestRelease.version()
+                print("Update: \(updateAvailable). Current \(VersionNumber.current()) |  \(latestRelease.version())")
+                if updateAvailable {
                     self.hasUpdate = true
-                    self.notifyOfNewVersion(version: version)
+                    self.notifyOfNewVersion(version: latestRelease.toSeaEye())
                 }
-
             case .failure:
-                break
+                print("Failed to get version")
             }
-        })
+        }
+
     }
 
     func notifyOfNewVersion(version: SeaEyeVersion) {
+        self.version = version
         print("The latest version of SeaEye is: \(version.latestVersion)")
         let info = [
             "message": "A new version of SeaEye is available (\(version.latestVersion))",
@@ -47,22 +50,6 @@ class SeaEyeStatus: NSObject {
         ]
         let notification = Notification(name: Notification.Name(rawValue: "SeaEyeAlert"), object: self, userInfo: info)
         NotificationCenter.default.post(notification)
-    }
-
-    func updateAvailable() -> Bool {
-        if let latestVersion = self.version?.latestVersion.versionNumber() {
-            return currentVersion() < latestVersion
-        }
-        return false
-    }
-
-    func currentVersion() -> VersionNumber {
-        var version = "0.0"
-        if let info = Bundle.main.infoDictionary as NSDictionary! {
-            if let currentVersionString = info.object(forKey: "CFBundleShortVersionString") as? String {
-                version =  currentVersionString
-            }
-        }
-        return version.versionNumber()
+        self.hasUpdate = true
     }
 }
