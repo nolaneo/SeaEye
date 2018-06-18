@@ -14,8 +14,8 @@ class Project: NSObject {
     var apiKey: String!
     var parent: CircleCIModel!
     var timer: Timer!
-    var projectBuilds : Array<CircleCIBuild>
-    
+    var projectBuilds: [CircleCIBuild]
+
     init(name: String, organization: String, key: String, parentModel: CircleCIModel!) {
         projectBuilds = []
         projectName = name
@@ -23,7 +23,7 @@ class Project: NSObject {
         organizationName = organization
         parent = parentModel
     }
-    
+
     func reset() {
         self.stop()
         self.getBuildData()
@@ -38,48 +38,49 @@ class Project: NSObject {
                         repeats: true)
         }
     }
-    
+
     func stop() {
         if timer != nil {
             timer.invalidate()
             timer = nil
         }
     }
-    
-    @objc func getBuildData(_: Any? = nil) -> Void {
-        getProject(name: "github/\(organizationName)/\(projectName)", completion: { (r: Result<[CircleCIBuild]>) -> Void in
-                switch r {
+
+    @objc func getBuildData(_: Any? = nil) {
+        getProject(name: "github/\(organizationName)/\(projectName)",
+                   completion: { (result: Result<[CircleCIBuild]>) -> Void in
+                switch result {
                 case .success(let builds):
-                   
+
                     do {
                         let branchString = UserDefaults.standard.string(forKey: "SeaEyeBranches")
                         let userString = UserDefaults.standard.string(forKey: "SeaEyeUsers")
                         var branchRegex: NSRegularExpression?
                         var userRegex: NSRegularExpression?
-                        
+
                         if userString != nil {
                             print("Using regex \(userString!) for user")
                             userRegex = try NSRegularExpression(pattern: userString!, options: NSRegularExpression.Options.caseInsensitive)
                         }
-                        
+
                         if branchString != nil {
                             branchRegex = try NSRegularExpression(pattern: branchString!, options: NSRegularExpression.Options.caseInsensitive)
                         }
-                        
+
                         self.projectBuilds = buildsForUser(builds: builds, userRegex: userRegex, branchRegex: branchRegex)
                     } catch {
                          self.projectBuilds = builds
                     }
                     self.parent.runModelUpdates()
                     break
-                    
+
                 case .failure(let error):
                     print("error: \(error.localizedDescription) \(self.organizationName) \(self.projectName)")
 //                    self.notifyError(error.localizedDescription)
                 }
         })
     }
- 
+
     private func notifyError(_ error: String) {
         print(error)
         UserDefaults.standard.set(true, forKey: "SeaEyeError")

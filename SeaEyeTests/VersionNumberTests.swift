@@ -10,23 +10,23 @@ class VersionNumberTests: XCTestCase {
             VersionNumber.init(major: 0, minor: 4, development: true),
             VersionNumber.init(major: 1, minor: 33, development: true)]
 
-            for i in 0...versions.count-1 {
-                let result = versions[i].versionNumber()
-                if result != expected[i] {
-                    XCTFail("Test \(i): \(result) != \(expected[i])")
+            for index in 0...versions.count-1 {
+                let result = versions[index].versionNumber()
+                if result != expected[index] {
+                    XCTFail("Test \(index): \(result) != \(expected[index])")
                 }
             }
     }
 
     func testVersionCompare() {
-        var a = VersionNumber.init(major: 1, minor: 1, development: true)
-        var b = VersionNumber.init(major: 1, minor: 1, development: false)
-        if !(a < b) {
+        var tc1 = VersionNumber.init(major: 1, minor: 1, development: true)
+        var tc2 = VersionNumber.init(major: 1, minor: 1, development: false)
+        if !(tc1 < tc2) {
             XCTFail("Dev versions should be less than released versions")
         }
-        a = VersionNumber.init(major: 0, minor: 10, development: false)
-        b = VersionNumber.init(major: 1, minor: 1, development: false)
-        if !(a < b) {
+        tc1 = VersionNumber.init(major: 0, minor: 10, development: false)
+        tc2 = VersionNumber.init(major: 1, minor: 1, development: false)
+        if !(tc1 < tc2) {
             XCTFail("Major should be less than Minor")
         }
     }

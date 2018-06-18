@@ -10,35 +10,35 @@ import Cocoa
 
 class SeaEyeUpdatesController: NSViewController {
 
-    var applicationStatus : SeaEyeStatus!
-    
-    @IBOutlet weak var versionLabel : NSTextField!
-    @IBOutlet weak var changes : NSTextField!
-    
+    var applicationStatus: SeaEyeStatus!
+
+    @IBOutlet weak var versionLabel: NSTextField!
+    @IBOutlet weak var changes: NSTextField!
+
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
     }
-    
+
     func setup() {
         if applicationStatus.version != nil {
             changes.stringValue = applicationStatus.version!.changes
-            versionLabel.stringValue = "Version \(applicationStatus.version!.latest_version) Available"
+            versionLabel.stringValue = "Version \(applicationStatus.version!.latestVersion) Available"
         }
     }
-    
-    @IBAction func openUpdatesPage(_ sender : NSButton) {
+
+    @IBAction func openUpdatesPage(_ sender: NSButton) {
         if applicationStatus.version != nil {
-            NSWorkspace.shared.open(applicationStatus.version!.download_url)
+            NSWorkspace.shared.open(applicationStatus.version!.downloadUrl)
         }
     }
-    
+
 }
