@@ -47,6 +47,11 @@ class SeaEyeIconController: NSViewController {
                                                object: nil,
                                                queue: OperationQueue.main,
                                                using: setGreenBuildIcon)
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "SeaEyeYellowBuild"),
+                                               object: nil,
+                                               queue: OperationQueue.main,
+                                               using: setYellowBuildIcon)
+        
         if let popoverController = SeaEyePopoverController(nibName: NSNib.Name(rawValue: "SeaEyePopoverController"), bundle: nil) as SeaEyePopoverController? {
             popoverController.model = self.model
             popoverController.applicationStatus = self.applicationStatus
@@ -107,6 +112,14 @@ class SeaEyeIconController: NSViewController {
             }
         }
     }
+    
+    func setYellowBuildIcon(notification: Notification) -> Void {
+        if hasViewedBuilds {
+            let imageFile = self.isDarkModeEnabled() ? "circleci-pending-alt" : "circleci-pending"
+            iconButton.image = NSImage(named: NSImage.Name(rawValue: imageFile))
+        }
+    }
+
     func notifcationForBuild(build: CircleCIBuild) -> NSUserNotification {
         let notification = NSUserNotification()
         notification.setValue(false, forKey: "_identityImageHasBorder")

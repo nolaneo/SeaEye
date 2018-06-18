@@ -63,6 +63,7 @@ class CircleCIModel: NSObject {
         if lastNotificationDate != nil {
             var failures = 0
             var successes = 0
+            var runningBuilds = 0
             var failedBuild: CircleCIBuild?
             var successfulBuild: CircleCIBuild?
             for build in allBuilds {
@@ -72,6 +73,7 @@ class CircleCIModel: NSObject {
                     case "timedout": failures += 1; failedBuild = build
                     case "success": successes += 1; successfulBuild = build
                     case "fixed": successes += 1; successfulBuild = build
+                    case "running": runningBuilds += 1
                     default: break
                     }
                 }
@@ -83,8 +85,12 @@ class CircleCIModel: NSObject {
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeRedBuild"), object: nil, userInfo: info)
             } else if successes > 0 {
                 print("Has multiple successes")
-                let info = ["build": successfulBuild!, "count": successes] as [String: Any]
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeGreenBuild"), object: nil, userInfo: info)
+                let info = ["build": successfulBuild!, "count": successes] as [String : Any]
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeGreenBuild"), object: nil, userInfo:info)
+            } else if runningBuilds > 0 {
+                print("Has running builds")
+                let info = ["build": nil, "count": runningBuilds] as [String : Any]
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeYellowBuild"), object: nil, userInfo:info)
             }
         }
         NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeUpdatedBuilds"), object: nil)
