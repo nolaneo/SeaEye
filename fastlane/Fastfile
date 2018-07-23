@@ -116,7 +116,7 @@ platform :mac do
     set_github_release(
       repository_name: GITHUB_REPOSITORY,
       api_token: ENV["GITHUB_TOKEN"],
-      name: "SeaEye v#{new_version}",
+      name: "SeaEye #{new_version}",
       is_prerelease: false,
       tag_name: new_version.to_s,
       description: comments,
@@ -133,8 +133,6 @@ platform :mac do
     git_add(path: VERSION_FILE)
     git_commit(path: VERSION_FILE, message: "Version bump to #{post_release_version}")
 
-    push_to_git_remote(
-      tags: ture
-    )
+    push_to_git_remote
   end
 end
