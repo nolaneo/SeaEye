@@ -118,7 +118,7 @@ platform :mac do
       api_token: ENV["GITHUB_TOKEN"],
       name: "SeaEye v#{new_version}",
       is_prerelease: false,
-      tag_name: new_version,
+      tag_name: new_version.to_s,
       description: comments,
       commitish: RELEASE_BRANCH,
       upload_assets: [ZIP_OUTPUT]
