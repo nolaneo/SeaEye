@@ -102,7 +102,7 @@ platform :mac do
     comments = changelog(last_git_tag)
     add_git_tag(
       message: comments,
-      tag: "#{version}",
+      tag: "#{new_version}",
       prefix: "v"
     )
 
@@ -116,9 +116,9 @@ platform :mac do
     set_github_release(
       repository_name: GITHUB_REPOSITORY,
       api_token: ENV["GITHUB_TOKEN"],
-      name: "SeaEye v#{version}",
+      name: "SeaEye v#{new_version}",
       is_prerelease: false,
-      tag_name: version,
+      tag_name: new_version,
       description: comments,
       commitish: RELEASE_BRANCH,
       upload_assets: [ZIP_OUTPUT]
