@@ -84,10 +84,9 @@ platform :mac do
   desc 'Release a new version of SeaEye'
   lane :release do |options|
     test
+
     ensure_git_status_clean
     ensure_git_branch(branch: RELEASE_BRANCH)
-
-    build_and_zip
 
     new_version = get_version
     new_version.development = false
@@ -98,6 +97,9 @@ platform :mac do
     git_add(path: VERSION_FILE)
     git_commit(path: VERSION_FILE,
                message: "Release version #{new_version}")
+
+
+    build_and_zip
 
     comments = changelog(last_git_tag)
     add_git_tag(
