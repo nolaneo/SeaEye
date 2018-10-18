@@ -90,6 +90,7 @@
 		F422C54B20D48CF2002A5897 /* VersionNumberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422C54A20D48CF2002A5897 /* VersionNumberTests.swift */; };
 		F4F1A61D20D84CD1008B8C04 /* GithubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F1A61C20D84CD1008B8C04 /* GithubClient.swift */; };
 		F4F1A61E20D84DBE008B8C04 /* GithubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F1A61C20D84CD1008B8C04 /* GithubClient.swift */; };
+		F4472C0C216D72B700ECD077 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4472C0B216D72B700ECD077 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +181,7 @@
 		60F0232B1A1A95930067C0A0 /* SeaEyeUpdatesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeaEyeUpdatesController.swift; sourceTree = "<group>"; };
 		F422C54720D48CC2002A5897 /* VersionNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionNumber.swift; sourceTree = "<group>"; };
 		F422C54A20D48CF2002A5897 /* VersionNumberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionNumberTests.swift; sourceTree = "<group>"; };
+		F4472C0B216D72B700ECD077 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F4F1A61C20D84CD1008B8C04 /* GithubClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -264,6 +266,7 @@
 		60C73BD019FC025A0067CDCA = {
 			isa = PBXGroup;
 			children = (
+				F4472C0B216D72B700ECD077 /* Main.storyboard */,
 				6008691C1A1D4F7400600E4C /* Main.xib */,
 				60C73BDB19FC025A0067CDCA /* SeaEye */,
 				60C73BEE19FC025A0067CDCA /* SeaEyeTests */,
@@ -503,6 +506,7 @@
 				6014AD9719FEE4A900865329 /* open@2x.png in Resources */,
 				60C73C1B19FD806A0067CDCA /* back.png in Resources */,
 				6014AD9619FEE4A900865329 /* open.png in Resources */,
+				F4472C0C216D72B700ECD077 /* Main.storyboard in Resources */,
 				6008691D1A1D4F7400600E4C /* Main.xib in Resources */,
 				601D48CA1A0A841F007EA297 /* icon_128x128.png in Resources */,
 				601D48D01A0A841F007EA297 /* icon_512x512@2x.png in Resources */,
