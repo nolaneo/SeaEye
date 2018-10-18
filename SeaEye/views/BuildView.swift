@@ -55,6 +55,7 @@ class BuildView: NSTableCellView {
     @IBAction func openBuild(_ sender: AnyObject) {
         if url != nil {
             NSWorkspace.shared.open(url!)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeClosePopover"), object: nil)
         }
     }
 

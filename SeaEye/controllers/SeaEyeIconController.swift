@@ -51,7 +51,12 @@ class SeaEyeIconController: NSViewController {
                                                object: nil,
                                                queue: OperationQueue.main,
                                                using: setYellowBuildIcon)
-        
+        NotificationCenter.default.addObserver(forName:
+                                               NSNotification.Name(rawValue: "SeaEyeClosePopover"),
+                                               object: nil,
+                                               queue: OperationQueue.main,
+                                               using: closePopover)
+
         if let popoverController = SeaEyePopoverController(nibName: NSNib.Name(rawValue: "SeaEyePopoverController"), bundle: nil) as SeaEyePopoverController? {
             popoverController.model = self.model
             popoverController.applicationStatus = self.applicationStatus
@@ -205,7 +210,7 @@ class SeaEyeIconController: NSViewController {
         }
     }
 
-    func closePopover(_ aEvent: NSEvent) {
+    func closePopover(_ aEvent: Any?) {
         if popover.isShown {
             popover.close()
         }
