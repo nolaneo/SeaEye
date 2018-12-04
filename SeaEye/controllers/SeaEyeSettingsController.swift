@@ -67,9 +67,7 @@ class SeaEyeSettingsController: NSViewController {
 
     @IBAction func saveRunOnStartupPreferences(_ sender: NSButton) {
         print("Changing launch on startup")
-        if let ap = appDelegate as? AppDelegate? {
-            ap?.toggleLaunchAtStartup()
-        }
+        ApplicationStartupManager.toggleLaunchAtStartup()
     }
 
     fileprivate func setUserDefaultsFromField(_ field: NSTextField, key: String) {
@@ -89,13 +87,7 @@ class SeaEyeSettingsController: NSViewController {
         } else {
             showNotifications.state = NSControl.StateValue.off
         }
-        var hasRunOnStartup = false
-        if let apD = appDelegate as? AppDelegate? {
-            if let actualAppD = apD {
-                hasRunOnStartup = actualAppD.applicationIsInStartUpItems()
-            }
-        }
-
+        let hasRunOnStartup = ApplicationStartupManager.applicationIsInStartUpItems()
         if hasRunOnStartup {
             runOnStartup.state = NSControl.StateValue.on
         } else {

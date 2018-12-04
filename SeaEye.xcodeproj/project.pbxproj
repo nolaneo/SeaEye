@@ -89,6 +89,7 @@
 		F422C54920D48CDD002A5897 /* VersionNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422C54720D48CC2002A5897 /* VersionNumber.swift */; };
 		F422C54B20D48CF2002A5897 /* VersionNumberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422C54A20D48CF2002A5897 /* VersionNumberTests.swift */; };
 		F4472C0C216D72B700ECD077 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4472C0B216D72B700ECD077 /* Main.storyboard */; };
+		F4B672D821B60A7C003E30A9 /* ApplicationStartupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B672D721B60A7C003E30A9 /* ApplicationStartupManager.swift */; };
 		F4F1A61D20D84CD1008B8C04 /* GithubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F1A61C20D84CD1008B8C04 /* GithubClient.swift */; };
 		F4F1A61E20D84DBE008B8C04 /* GithubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F1A61C20D84CD1008B8C04 /* GithubClient.swift */; };
 /* End PBXBuildFile section */
@@ -182,6 +183,7 @@
 		F422C54720D48CC2002A5897 /* VersionNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionNumber.swift; sourceTree = "<group>"; };
 		F422C54A20D48CF2002A5897 /* VersionNumberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionNumberTests.swift; sourceTree = "<group>"; };
 		F4472C0B216D72B700ECD077 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		F4B672D721B60A7C003E30A9 /* ApplicationStartupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationStartupManager.swift; sourceTree = "<group>"; };
 		F4F1A61C20D84CD1008B8C04 /* GithubClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -210,6 +212,7 @@
 				539479741FCB639300D6FA19 /* CircleCIClient.swift */,
 				539479811FCB8D4C00D6FA19 /* BuildsForUser.swift */,
 				53A3BE981FD35F04006961C6 /* CircleCIDecoder.swift */,
+				F4B672D721B60A7C003E30A9 /* ApplicationStartupManager.swift */,
 			);
 			path = services;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 				60C73C0919FC23F60067CDCA /* SeaEyeIconController.swift in Sources */,
 				6014AD991A09874E00865329 /* Project.swift in Sources */,
 				53A3BE991FD35F04006961C6 /* CircleCIDecoder.swift in Sources */,
+				F4B672D821B60A7C003E30A9 /* ApplicationStartupManager.swift in Sources */,
 				539479821FCB8D4C00D6FA19 /* BuildsForUser.swift in Sources */,
 				60C73C1519FD7ECB0067CDCA /* SeaEyeBuildsController.swift in Sources */,
 				60C73C0619FC16FE0067CDCA /* SeaEyePopoverController.swift in Sources */,
