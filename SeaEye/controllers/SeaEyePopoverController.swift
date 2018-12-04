@@ -38,7 +38,6 @@ class SeaEyePopoverController: NSViewController {
     }
 
     func setup() {
-        setupNavButtons()
         setupViewControllers()
         showUpdateButtonIfAppropriate()
     }
@@ -73,14 +72,6 @@ class SeaEyePopoverController: NSViewController {
         updatesViewController = SeaEyeUpdatesController(nibName: "SeaEyeUpdatesController", bundle: nil)
     }
 
-    fileprivate func setupNavButtons() {
-        //Templated images cause background overlay weirdness
-        let imageSuffix = isDarkModeEnabled() ? "" : "-alt"
-
-        openSettingsButton.image = NSImage(named: "settings\(imageSuffix)")
-        openBuildsButton.image = NSImage(named: "back\(imageSuffix)")
-        shutdownButton.image = NSImage(named: "power\(imageSuffix)")
-    }
 
     @IBAction func openSettings(_ sender: NSButton) {
         openSettingsButton.isHidden = true

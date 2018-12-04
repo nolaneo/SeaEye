@@ -70,7 +70,7 @@
                                                         </textFieldCell>
                                                     </textField>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4jW-d5-ZUa">
-                                                        <rect key="frame" x="20" y="32" width="237" height="17"/>
+                                                        <rect key="frame" x="20" y="32" width="250" height="17"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="en/1024-open-lala-tha" drawsBackground="YES" id="eV3-Z9-21Z">
                                                             <font key="font" metaFont="system"/>
@@ -90,7 +90,7 @@
                                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QSb-jB-3I8">
                                                         <rect key="frame" x="272" y="33" width="16" height="16"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="open" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="FCO-zf-hhg">
+                                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSShareTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="FCO-zf-hhg">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
@@ -142,6 +142,6 @@
         </view>
     </objects>
     <resources>
-        <image name="open" width="16" height="16"/>
+        <image name="NSShareTemplate" width="11" height="16"/>
     </resources>
 </document>
