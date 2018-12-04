@@ -57,7 +57,7 @@ class SeaEyeIconController: NSViewController {
                                                queue: OperationQueue.main,
                                                using: closePopover)
 
-        if let popoverController = SeaEyePopoverController(nibName: NSNib.Name(rawValue: "SeaEyePopoverController"), bundle: nil) as SeaEyePopoverController? {
+        if let popoverController = SeaEyePopoverController(nibName: "SeaEyePopoverController", bundle: nil) as SeaEyePopoverController? {
             popoverController.model = self.model
             popoverController.applicationStatus = self.applicationStatus
             self.popoverController = popoverController
@@ -92,7 +92,7 @@ class SeaEyeIconController: NSViewController {
     func setGreenBuildIcon(notification: Notification) {
         if hasViewedBuilds {
             let imageFile = self.isDarkModeEnabled() ? "circleci-success-alt" : "circleci-success"
-            iconButton.image = NSImage(named: NSImage.Name(rawValue: imageFile))
+            iconButton.image = NSImage(named: imageFile)
 
             if UserDefaults.standard.bool(forKey: "SeaEyeNotify") {
                 if let build = notification.userInfo!["build"] as? CircleCIBuild{
@@ -107,7 +107,7 @@ class SeaEyeIconController: NSViewController {
     func setRedBuildIcon(notification: Notification) {
         hasViewedBuilds = false
         let imageFile = self.isDarkModeEnabled() ? "circleci-failed-alt" : "circleci-failed"
-        iconButton.image = NSImage(named: NSImage.Name(rawValue: imageFile))
+        iconButton.image = NSImage(named: imageFile)
 
         if UserDefaults.standard.bool(forKey: "SeaEyeNotify") {
             if let build = notification.userInfo!["build"] as? CircleCIBuild{
@@ -121,7 +121,7 @@ class SeaEyeIconController: NSViewController {
     func setYellowBuildIcon(notification: Notification) -> Void {
         if hasViewedBuilds {
             let imageFile = self.isDarkModeEnabled() ? "circleci-pending-alt" : "circleci-pending"
-            iconButton.image = NSImage(named: NSImage.Name(rawValue: imageFile))
+            iconButton.image = NSImage(named: imageFile)
         }
     }
 
@@ -147,7 +147,7 @@ class SeaEyeIconController: NSViewController {
             notification.informativeText = build.authorName
         }
 
-        let image = NSImage(named: NSImage.Name(rawValue: imageFile))
+        let image = NSImage(named: imageFile)
         notification.setValue(image, forKey: "_identityImage")
         return notification
     }
@@ -155,7 +155,7 @@ class SeaEyeIconController: NSViewController {
     fileprivate func setupMenuBarIcon() {
         hasViewedBuilds = true
         let imageFile = isDarkModeEnabled() ? "circleci-normal-alt" : "circleci-normal"
-        iconButton.image = NSImage(named: NSImage.Name(rawValue: imageFile))
+        iconButton.image = NSImage(named: imageFile)
     }
 
     fileprivate func setupStyleNotificationObserver() {
@@ -179,19 +179,19 @@ class SeaEyeIconController: NSViewController {
 
     @objc func alternateIconStyle() {
         let currentImage = iconButton.image
-        if let imageName = currentImage?.name()?.rawValue {
+        if let imageName = currentImage?.name() {
             var alternateImageName: NSString
             if imageName.hasSuffix("-alt") {
                 alternateImageName = imageName.replacingOccurrences(of: "alt", with: "") as NSString
             } else {
                 alternateImageName = imageName + "-alt" as NSString
             }
-            iconButton.image = NSImage(named: NSImage.Name(rawValue: alternateImageName as String as String))
+            iconButton.image = NSImage(named: alternateImageName as String as String)
         }
     }
 
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        if segue.identifier!.rawValue == "SeaEyeOpenPopoverSegue" {
+        if segue.identifier! == "SeaEyeOpenPopoverSegue" {
             self.setupMenuBarIcon()
             if let popoverController = segue.destinationController as? SeaEyePopoverController {
                 popoverController.model = self.model
