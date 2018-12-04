@@ -51,7 +51,6 @@
 		602BB1BD1A1A881E00E50B78 /* circleci-success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 602BB1BB1A1A881E00E50B78 /* circleci-success@2x.png */; };
 		602BB1C01A1A93E900E50B78 /* update.png in Resources */ = {isa = PBXBuildFile; fileRef = 602BB1BE1A1A93E900E50B78 /* update.png */; };
 		602BB1C11A1A93E900E50B78 /* update@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 602BB1BF1A1A93E900E50B78 /* update@2x.png */; };
-		602F20F31A1D313A00F16F79 /* SeaEyeIconController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 602F20F21A1D313A00F16F79 /* SeaEyeIconController.xib */; };
 		6033149819FDA94D0073EAED /* power.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033149619FDA94D0073EAED /* power.png */; };
 		6033149919FDA94D0073EAED /* power@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033149719FDA94D0073EAED /* power@2x.png */; };
 		6033149C19FDAE540073EAED /* circleci-failed-alt.png in Resources */ = {isa = PBXBuildFile; fileRef = 6033149A19FDAE540073EAED /* circleci-failed-alt.png */; };
@@ -142,7 +141,6 @@
 		602BB1BB1A1A881E00E50B78 /* circleci-success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-success@2x.png"; sourceTree = "<group>"; };
 		602BB1BE1A1A93E900E50B78 /* update.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = update.png; sourceTree = "<group>"; };
 		602BB1BF1A1A93E900E50B78 /* update@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "update@2x.png"; sourceTree = "<group>"; };
-		602F20F21A1D313A00F16F79 /* SeaEyeIconController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeaEyeIconController.xib; sourceTree = "<group>"; };
 		6033149619FDA94D0073EAED /* power.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power.png; sourceTree = "<group>"; };
 		6033149719FDA94D0073EAED /* power@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "power@2x.png"; sourceTree = "<group>"; };
 		6033149A19FDAE540073EAED /* circleci-failed-alt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleci-failed-alt.png"; sourceTree = "<group>"; };
@@ -222,7 +220,6 @@
 			children = (
 				6014AD8D19FED4C400865329 /* BuildView.swift */,
 				600869131A1D3EA000600E4C /* SeaEyeUpdatesController.xib */,
-				602F20F21A1D313A00F16F79 /* SeaEyeIconController.xib */,
 				6008690D1A1D3E5E00600E4C /* SeaEyeBuildsController.xib */,
 				6008690F1A1D3E6F00600E4C /* SeaEyeSettingsController.xib */,
 				600869111A1D3E9200600E4C /* SeaEyePopoverController.xib */,
@@ -502,7 +499,6 @@
 				601D48C01A0A62C6007EA297 /* open-alt.png in Resources */,
 				601D48CD1A0A841F007EA297 /* icon_32x32.png in Resources */,
 				601D48C11A0A62C6007EA297 /* open-alt@2x.png in Resources */,
-				602F20F31A1D313A00F16F79 /* SeaEyeIconController.xib in Resources */,
 				601D48CB1A0A841F007EA297 /* icon_16x16.png in Resources */,
 				602BB1B71A1A880000E50B78 /* circleci-failed@2x.png in Resources */,
 				041E7C2920630A3400B22010 /* circleci-pending-alt@2x.png in Resources */,
