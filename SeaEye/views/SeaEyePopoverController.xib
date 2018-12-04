@@ -8,7 +8,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SeaEyePopoverController" customModule="SeaEye" customModuleProvider="target">
             <connections>
-                <outlet property="opacityFixView" destination="4pd-89-q1m" id="X3Q-Fv-eFM"/>
                 <outlet property="openBuildsButton" destination="GEF-ue-G8e" id="pKb-Wg-J7G"/>
                 <outlet property="openSettingsButton" destination="lUS-Wj-shM" id="DKQ-V9-ALN"/>
                 <outlet property="openUpdatesButton" destination="59N-QJ-ftt" id="5GF-Af-bnW"/>
@@ -23,11 +22,6 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <imageView identifier="OpacityFixView" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4pd-89-q1m">
-                    <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="opacity-fix-dark" id="nni-tF-mTk"/>
-                </imageView>
                 <customView identifier="SubcontrollerView" autoresizesSubviews="NO" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hzT-j3-Atn">
                     <rect key="frame" x="0.0" y="0.0" width="300" height="360"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -90,7 +84,6 @@
     </objects>
     <resources>
         <image name="back" width="16" height="16"/>
-        <image name="opacity-fix-dark" width="300" height="400"/>
         <image name="power" width="16" height="16"/>
         <image name="settings" width="39.724136352539062" height="39.724136352539062"/>
         <image name="update" width="16" height="16"/>

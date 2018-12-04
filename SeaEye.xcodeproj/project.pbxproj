@@ -63,10 +63,8 @@
 		607C77F31A1860070040FD5C /* build-passed.png in Resources */ = {isa = PBXBuildFile; fileRef = 607C77EB1A1860070040FD5C /* build-passed.png */; };
 		607C77F41A1860070040FD5C /* build-passed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 607C77EC1A1860070040FD5C /* build-passed@2x.png */; };
 		607C78261A190C580040FD5C /* SeaEyeStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607C78251A190C580040FD5C /* SeaEyeStatus.swift */; };
-		60BE799C1A0AAD3C007E5179 /* opacity-fix-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 60BE799B1A0AAD3C007E5179 /* opacity-fix-dark.png */; };
 		60BE79A41A0AB357007E5179 /* back-alt.png in Resources */ = {isa = PBXBuildFile; fileRef = 60BE799D1A0AB357007E5179 /* back-alt.png */; };
 		60BE79A51A0AB357007E5179 /* back-alt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60BE799E1A0AB357007E5179 /* back-alt@2x.png */; };
-		60BE79A61A0AB357007E5179 /* opacity-fix-light in Resources */ = {isa = PBXBuildFile; fileRef = 60BE799F1A0AB357007E5179 /* opacity-fix-light */; };
 		60BE79A71A0AB357007E5179 /* power-alt.png in Resources */ = {isa = PBXBuildFile; fileRef = 60BE79A01A0AB357007E5179 /* power-alt.png */; };
 		60BE79A81A0AB357007E5179 /* power-alt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60BE79A11A0AB357007E5179 /* power-alt@2x.png */; };
 		60BE79A91A0AB357007E5179 /* setting-alt.png in Resources */ = {isa = PBXBuildFile; fileRef = 60BE79A21A0AB357007E5179 /* setting-alt.png */; };
@@ -153,10 +151,8 @@
 		607C77EB1A1860070040FD5C /* build-passed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "build-passed.png"; sourceTree = "<group>"; };
 		607C77EC1A1860070040FD5C /* build-passed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "build-passed@2x.png"; sourceTree = "<group>"; };
 		607C78251A190C580040FD5C /* SeaEyeStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeaEyeStatus.swift; sourceTree = "<group>"; };
-		60BE799B1A0AAD3C007E5179 /* opacity-fix-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "opacity-fix-dark.png"; sourceTree = "<group>"; };
 		60BE799D1A0AB357007E5179 /* back-alt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-alt.png"; sourceTree = "<group>"; };
 		60BE799E1A0AB357007E5179 /* back-alt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-alt@2x.png"; sourceTree = "<group>"; };
-		60BE799F1A0AB357007E5179 /* opacity-fix-light */ = {isa = PBXFileReference; lastKnownFileType = file; path = "opacity-fix-light"; sourceTree = "<group>"; };
 		60BE79A01A0AB357007E5179 /* power-alt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "power-alt.png"; sourceTree = "<group>"; };
 		60BE79A11A0AB357007E5179 /* power-alt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "power-alt@2x.png"; sourceTree = "<group>"; };
 		60BE79A21A0AB357007E5179 /* setting-alt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting-alt.png"; sourceTree = "<group>"; };
@@ -345,12 +341,10 @@
 				607C77E81A1860070040FD5C /* status images */,
 				60BE799D1A0AB357007E5179 /* back-alt.png */,
 				60BE799E1A0AB357007E5179 /* back-alt@2x.png */,
-				60BE799F1A0AB357007E5179 /* opacity-fix-light */,
 				60BE79A01A0AB357007E5179 /* power-alt.png */,
 				60BE79A11A0AB357007E5179 /* power-alt@2x.png */,
 				60BE79A21A0AB357007E5179 /* setting-alt.png */,
 				60BE79A31A0AB357007E5179 /* settings-alt@2x.png */,
-				60BE799B1A0AAD3C007E5179 /* opacity-fix-dark.png */,
 				601D48C21A0A841F007EA297 /* app icons */,
 				601D48BE1A0A62C6007EA297 /* open-alt.png */,
 				601D48BF1A0A62C6007EA297 /* open-alt@2x.png */,
@@ -481,7 +475,6 @@
 				601D48CE1A0A841F007EA297 /* icon_32x32@2x.png in Resources */,
 				601D48CC1A0A841F007EA297 /* icon_256x256.png in Resources */,
 				041E7C2820630A3400B22010 /* circleci-pending.png in Resources */,
-				60BE79A61A0AB357007E5179 /* opacity-fix-light in Resources */,
 				60C73C0219FC0FF40067CDCA /* circleci-normal-alt.png in Resources */,
 				600869101A1D3E6F00600E4C /* SeaEyeSettingsController.xib in Resources */,
 				607C77F21A1860070040FD5C /* build-failed@2x.png in Resources */,
@@ -509,7 +502,6 @@
 				6008691D1A1D4F7400600E4C /* Main.xib in Resources */,
 				601D48CA1A0A841F007EA297 /* icon_128x128.png in Resources */,
 				601D48D01A0A841F007EA297 /* icon_512x512@2x.png in Resources */,
-				60BE799C1A0AAD3C007E5179 /* opacity-fix-dark.png in Resources */,
 				60C73C0319FC0FF40067CDCA /* circleci-normal.png in Resources */,
 				602BB1C01A1A93E900E50B78 /* update.png in Resources */,
 				600869121A1D3E9200600E4C /* SeaEyePopoverController.xib in Resources */,
