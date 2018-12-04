@@ -9,20 +9,31 @@
 import Cocoa
 
 class SeaEyeIconController: NSViewController {
+    var statusBarItem: NSStatusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
 
-    @IBOutlet var iconButton: NSButton!
+    var iconButton: NSStatusBarButton!
     var model = CircleCIModel()
     var applicationStatus = SeaEyeStatus()
     var hasViewedBuilds = true
     var popover = NSPopover()
-    var popoverController: SeaEyePopoverController?
+    var popoverController: SeaEyePopoverController
 
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
+        self.popoverController = SeaEyePopoverController(nibName: "SeaEyePopoverController", bundle: nil)
+        self.popoverController.model = self.model
+        self.popoverController.applicationStatus = self.applicationStatus
+
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
     }
 
     required init?(coder: NSCoder) {
+        self.popoverController = SeaEyePopoverController(nibName: "SeaEyePopoverController", bundle: nil)
+        self.popoverController.model = self.model
+        self.popoverController.applicationStatus = self.applicationStatus
+
         super.init(coder: coder)
+        setup()
     }
 
     override func viewDidLoad() {
@@ -31,9 +42,9 @@ class SeaEyeIconController: NSViewController {
     }
 
     func setup() {
-        self.setupMenuBarIcon()
+        self.setupIcon()
+        self.resetIcon()
         self.setupStyleNotificationObserver()
-
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "SeaEyeAlert"),
                                                object: nil,
                                                queue: OperationQueue.main,
@@ -57,17 +68,29 @@ class SeaEyeIconController: NSViewController {
                                                queue: OperationQueue.main,
                                                using: closePopover)
 
-        if let popoverController = SeaEyePopoverController(nibName: "SeaEyePopoverController", bundle: nil) as SeaEyePopoverController? {
-            popoverController.model = self.model
-            popoverController.applicationStatus = self.applicationStatus
-            self.popoverController = popoverController
-        }
 
         NSEvent.addGlobalMonitorForEvents(
             matching: [.leftMouseUp, .rightMouseUp],
             handler: closePopover
         )
 
+    }
+
+    func setupIcon() {
+        statusBarItem.target = self
+
+        if let button = statusBarItem.button {
+            let statusImage = NSImage.init(named: "circleci-normal")
+            statusImage?.size = NSSize.init(width: 17, height: 17)
+            statusImage?.isTemplate = true
+            button.image = statusImage
+            button.target = self
+            button.action = #selector(openPopover)
+            button.isEnabled = true
+            button.state = .on
+            iconButton = button
+        }
+        statusBarItem.action = #selector(openPopover)
     }
 
     func alert(notification: Notification) {
@@ -152,7 +175,7 @@ class SeaEyeIconController: NSViewController {
         return notification
     }
 
-    fileprivate func setupMenuBarIcon() {
+    fileprivate func resetIcon() {
         hasViewedBuilds = true
         let imageFile = isDarkModeEnabled() ? "circleci-normal-alt" : "circleci-normal"
         iconButton.image = NSImage(named: imageFile)
@@ -190,21 +213,13 @@ class SeaEyeIconController: NSViewController {
         }
     }
 
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        if segue.identifier! == "SeaEyeOpenPopoverSegue" {
-            self.setupMenuBarIcon()
-            if let popoverController = segue.destinationController as? SeaEyePopoverController {
-                popoverController.model = self.model
-                popoverController.applicationStatus = self.applicationStatus
-            }
-        }
-    }
-
-    @IBAction func openPopover(_ sender: NSButton) {
-        self.setupMenuBarIcon()
+    @objc func openPopover(_ sender: NSButton) {
+        self.resetIcon()
         if !popover.isShown {
+            popoverController.model = self.model
+            popoverController.applicationStatus = self.applicationStatus
             popover.contentViewController = popoverController
-            popover.show(relativeTo: self.view.frame, of: self.view, preferredEdge: NSRectEdge.minY)
+            popover.show(relativeTo: sender.frame, of: sender, preferredEdge: NSRectEdge.minY)
         } else {
             popover.close()
         }

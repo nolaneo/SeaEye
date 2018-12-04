@@ -12,19 +12,16 @@ import Foundation
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
 
-    var statusBarItem: NSStatusItem = NSStatusItem()
     var statusBarIconViewController: SeaEyeIconController!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         NSUserNotificationCenter.default.delegate = self
         self.initialSetup()
-        statusBarItem = NSStatusBar.system.statusItem(withLength: -1)
         self.setupApplicationMenuViewController()
     }
 
     func setupApplicationMenuViewController() {
         statusBarIconViewController = SeaEyeIconController(nibName: "SeaEyeIconController", bundle: nil)
-        statusBarItem.view = statusBarIconViewController?.view
     }
 
     func userNotificationCenter(_ center: NSUserNotificationCenter, shouldPresent notification: NSUserNotification) -> Bool {
