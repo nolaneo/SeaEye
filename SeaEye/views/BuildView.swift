@@ -47,9 +47,6 @@ class BuildView: NSTableCellView {
             timeAndBuildNumber.stringValue = dateFormatter.string(from: build.startTime) + " | Build #\(build.buildNum)" + " | By \(build.authorName!)"
 
         }
-        if isDarkModeEnabled() {
-            openURLButton.image = NSImage(named: "open-alt")
-        }
     }
 
     @IBAction func openBuild(_ sender: AnyObject) {
