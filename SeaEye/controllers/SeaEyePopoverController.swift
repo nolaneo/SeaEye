@@ -16,7 +16,6 @@ class SeaEyePopoverController: NSViewController {
     @IBOutlet weak var openBuildsButton: NSButton!
     @IBOutlet weak var openUpdatesButton: NSButton!
     @IBOutlet weak var shutdownButton: NSButton!
-    @IBOutlet weak var opacityFixView: NSImageView!
 
     var settingsViewController: SeaEyeSettingsController!
     var buildsViewController: SeaEyeBuildsController!
@@ -45,9 +44,6 @@ class SeaEyePopoverController: NSViewController {
     }
 
     fileprivate func setupViewControllers() {
-        let imageFile = isDarkModeEnabled()  ? "opacity-fix-dark" : "opacity-fix-light"
-        opacityFixView.image = NSImage(named: imageFile)
-
         setupNibControllers()
 
         settingsViewController.parentController = self
