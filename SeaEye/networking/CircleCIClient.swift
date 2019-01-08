@@ -1,6 +1,6 @@
 import Foundation
 
-struct CircleCIClient {
+struct CircleCIClient: Codable {
     var baseURL: String = "https://circleci.com"
     var token: String
 

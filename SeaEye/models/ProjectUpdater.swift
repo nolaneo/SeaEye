@@ -29,10 +29,10 @@ protocol BuildUpdateListener {
 }
 
 class ProjectUpdater: NSObject {
-    let REFRESH_TIME = 30
+    private let REFRESH_TIME = 30
+    private var timer: Timer!
 
     var buildListener: BuildUpdateListener
-    var timer: Timer!
     var projectBuilds: [CircleCIBuild]
     let client: CircleCIClient
     let project : Project
@@ -61,13 +61,7 @@ class ProjectUpdater: NSObject {
         }
     }
 
-    func stop() {
-        if timer != nil {
-            timer.invalidate()
-            timer = nil
-        }
-    }
-
+    // gets builds, sets the projectBuilds and notfies the listener.
     @objc func getBuildData(_: Any? = nil) {
         client.getProject(name: project.path(),
                     completion: { (result: Result<[CircleCIBuild]>) -> Void in
@@ -83,5 +77,12 @@ class ProjectUpdater: NSObject {
                     self.stop()
                 }
         })
+    }
+
+    func stop() {
+        if timer != nil {
+            timer.invalidate()
+            timer = nil
+        }
     }
 }

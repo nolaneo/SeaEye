@@ -29,28 +29,35 @@ struct Settings: Codable {
         return settings
     }
 
-    func projects(parentModel: CircleCIModel) -> [ProjectUpdater] {
+    func projects() -> [ClientProject] {
         let projectNames = projectsString?.components(separatedBy: CharacterSet.whitespaces)
         let client = CircleCIClient.init(apiKey: apiKey!)
-        var projects = [ProjectUpdater]()
+        if !valid(){
+            return []
+        }
+        var projects = [Project]()
+
         if let projectNames = projectNames {
-            for projectName in projectNames {
+            projects = projectNames.map {
                 let filter = Filter.init(userFilter: userFilter, branchFilter: branchFilter)
                 // github is hardcoded, as it was assumed
-                let project = Project.init(vcsProvider: "github",
-                                           organisation: self.organization!,
-                                           name: projectName,
-                                           filter: filter,
-                                           notify: self.notify)
-
-                let projectUpdater = ProjectUpdater(project: project, client: client, buildUpdateListener: parentModel)
-                projects.append(projectUpdater)
+                return Project.init(vcsProvider: "github",
+                                   organisation: self.organization!,
+                                   name: $0,
+                                   filter: filter,
+                                   notify: self.notify)
             }
         }
-        return projects
+        return [ClientProject.init(client: client, projects: projects)]
+
     }
 
     func valid() -> Bool {
         return apiKey != nil && organization != nil && projectsString != nil
     }
+}
+
+struct ClientProject: Codable {
+    let client: CircleCIClient
+    let projects: [Project]
 }

@@ -11,7 +11,7 @@ import Cocoa
 class CircleCIModel: NSObject, BuildUpdateListener {
     override init() {
         self.allBuilds = []
-        self.allProjects = []
+        self.projectUpdaters = []
 
         super.init()
         NotificationCenter.default.addObserver(
@@ -23,11 +23,12 @@ class CircleCIModel: NSObject, BuildUpdateListener {
         self.validateUserSettingsAndStartRequests()
     }
 
-    var allProjects: [ProjectUpdater]
+    var projectUpdaters: [ProjectUpdater]
     var allBuilds: [CircleCIBuild]
     var lastNotificationDate: Date = Date()
     var updatesTimer: Timer!
 
+    // a 3second debounce proxy to updateBuilds
     func runModelUpdates() {
         objc_sync_enter(self)
         //Debounce the calls to this function
@@ -45,16 +46,17 @@ class CircleCIModel: NSObject, BuildUpdateListener {
         objc_sync_exit(self)
     }
 
+    // collects all builds from the projectUpdaters and recalculates the build status
     @objc func updateBuilds() {
         autoreleasepool {
             print("Update builds!")
-            let builds: [CircleCIBuild] =  self.allProjects.flatMap {$0.projectBuilds}
+            let builds: [CircleCIBuild] = self.projectUpdaters.flatMap {$0.projectBuilds}
             self.allBuilds = builds.sorted {$0.lastUpdateTime() > $1.lastUpdateTime()}
             self.calculateBuildStatus()
         }
     }
 
-    func calculateBuildStatus() {
+    private func calculateBuildStatus() {
         let buildsSinceLastNotification = allBuilds.filter {$0.lastUpdateTime() > lastNotificationDate}
         print("\(buildsSinceLastNotification.count) builds to update")
         if let summary = BuildSummary.generate(builds: buildsSinceLastNotification) {
@@ -92,13 +94,23 @@ class CircleCIModel: NSObject, BuildUpdateListener {
 
     fileprivate func resetAPIRequests() {
         self.stopAPIRequests()
-
-        allProjects = Settings.load().projects(parentModel: self)
+        self.projectUpdaters = projectUpdaters(Settings.load())
         self.startAPIRequests()
     }
 
+    private func projectUpdaters(_ settings: Settings) -> [ProjectUpdater] {
+        let cp = settings.projects()
+        let projectUpdaters = cp.compactMap { (cps) -> [ProjectUpdater] in
+            return cps.projects.compactMap {
+                return ProjectUpdater.init(project: $0, client: cps.client, buildUpdateListener: self)
+            }
+        }
+
+        return Array(projectUpdaters.joined())
+    }
+
     fileprivate func startAPIRequests() {
-        for project in allProjects {
+        for project in projectUpdaters {
             project.reset()
         }
     }
@@ -108,7 +120,7 @@ class CircleCIModel: NSObject, BuildUpdateListener {
             updatesTimer.invalidate()
             updatesTimer = nil
         }
-        for project in allProjects {
+        for project in projectUpdaters {
             project.stop()
         }
     }
