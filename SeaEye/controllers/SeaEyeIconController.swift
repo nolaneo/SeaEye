@@ -85,11 +85,11 @@ class SeaEyeIconController: NSViewController {
     func colorForState(_ imageName: IconStatus) -> NSColor? {
         switch imageName {
         case .failure:
-            return NSColor.red
+            return NSColor.systemRed
         case .success:
-            return NSColor.green
+            return NSColor.systemGreen
         case .running:
-            return NSColor.yellow
+            return NSColor.systemYellow
         case .idle:
             return nil
         }
