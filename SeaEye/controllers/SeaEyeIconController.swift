@@ -10,8 +10,6 @@ import Cocoa
 
 class SeaEyeIconController: NSViewController {
     var statusBarItem: SeaEyeStatusBar!
-    var model = CircleCIModel()
-
     var applicationStatus = SeaEyeStatus()
 
     var hasViewedBuilds = true
@@ -26,7 +24,6 @@ class SeaEyeIconController: NSViewController {
 
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         self.popoverController = SeaEyePopoverController(nibName: "SeaEyePopoverController", bundle: nil)
-        self.popoverController.model = self.model
         self.popoverController.applicationStatus = self.applicationStatus
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.statusBarItem = SeaEyeStatusBar(controller: self)
@@ -35,7 +32,6 @@ class SeaEyeIconController: NSViewController {
 
     required init?(coder: NSCoder) {
         self.popoverController = SeaEyePopoverController(nibName: "SeaEyePopoverController", bundle: nil)
-        self.popoverController.model = self.model
         self.popoverController.applicationStatus = self.applicationStatus
 
         super.init(coder: coder)
@@ -50,7 +46,10 @@ class SeaEyeIconController: NSViewController {
 
     func setup() {
         let secondsToRefreshBuilds = 30
+        let popoverControllerBuildListener = PopoverContollerBuildUpdateListener(buildSetter: popoverController)
+
         let listeners : [BuildUpdateListener] = [TextPrinter(),
+                                                 popoverControllerBuildListener,
                                                  SeaEyeStatusBarListener.init(statusBar: self.statusBarItem),
                                                  NotificationListener()]
 
@@ -136,7 +135,7 @@ class SeaEyeIconController: NSViewController {
     @objc func openPopover(_ sender: NSButton) {
         self.resetIcon()
         if !popover.isShown {
-            popoverController.model = self.model
+//            popoverController.model = self.model
             popoverController.applicationStatus = self.applicationStatus
             popover.contentViewController = popoverController
             popover.show(relativeTo: sender.frame, of: sender, preferredEdge: NSRectEdge.minY)

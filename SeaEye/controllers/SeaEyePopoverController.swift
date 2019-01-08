@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class SeaEyePopoverController: NSViewController {
+class SeaEyePopoverController: NSViewController, BuildSetter {
     @IBOutlet weak var subcontrollerView: NSView!
     @IBOutlet weak var openSettingsButton: NSButton!
     @IBOutlet weak var openBuildsButton: NSButton!
@@ -18,9 +18,9 @@ class SeaEyePopoverController: NSViewController {
     var settingsViewController: SeaEyeSettingsController!
     var buildsViewController: SeaEyeBuildsController!
     var updatesViewController: SeaEyeUpdatesController!
-    var model: CircleCIModel!
     var applicationStatus: SeaEyeStatus!
     var appDelegate: NSApplicationDelegate? = NSApplication.shared.delegate
+    var heldBuilds = [CircleCIBuild]()
 
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -39,12 +39,25 @@ class SeaEyePopoverController: NSViewController {
         setupViewControllers()
         showUpdateButtonIfAppropriate()
     }
+    
+    func setBuilds(_ builds: [CircleCIBuild]) {
+        guard let buildController = buildsViewController else {
+            heldBuilds.append(contentsOf: builds)
+            return print("No build controller")
+        }
+
+        for build in builds {
+            buildController.buildsDict[build.buildUrl.absoluteString] = build
+        }
+
+        buildController.regenBuilds()
+        buildController.reloadBuilds()
+    }
 
     fileprivate func setupViewControllers() {
         setupNibControllers()
 
         settingsViewController.parentController = self
-        buildsViewController.model = model
         updatesViewController.applicationStatus = self.applicationStatus
         openBuildsButton.isHidden = true
         subcontrollerView.addSubview(buildsViewController.view)
@@ -67,9 +80,13 @@ class SeaEyePopoverController: NSViewController {
     fileprivate func setupNibControllers() {
         settingsViewController = SeaEyeSettingsController(nibName: "SeaEyeSettingsController", bundle: nil)
         buildsViewController = SeaEyeBuildsController(nibName: "SeaEyeBuildsController", bundle: nil)
+        // If we have builds from client, we hold them until we can push them into the buildViewsController
+        if heldBuilds.count > 0 {
+            setBuilds(heldBuilds)
+            heldBuilds = []
+        }
         updatesViewController = SeaEyeUpdatesController(nibName: "SeaEyeUpdatesController", bundle: nil)
     }
-
 
     @IBAction func openSettings(_ sender: NSButton) {
         openSettingsButton.isHidden = true

@@ -5,8 +5,6 @@ struct SeaEyeStatusBarListener: BuildUpdateListener {
     private let initDate = Date()
 
     mutating func notify(project: Project, builds: [CircleCIBuild]) {
-        print("\(project) got \(builds.count) new builds")
-
         let buildsAfterApplicationStarted = builds.filter {$0.lastUpdateTime() > initDate}
 
         if let buildSummary = BuildSummary.generate(builds: buildsAfterApplicationStarted) {

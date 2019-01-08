@@ -9,8 +9,8 @@
 import Cocoa
 
 class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
-
-    var model: CircleCIModel!
+    private var builds: [CircleCIBuild] = []
+    var buildsDict: Dictionary<String,CircleCIBuild> = Dictionary()
 
     @IBOutlet weak var fallbackView: NSTextField!
     @IBOutlet weak var buildsTable: NSTableView!
@@ -44,12 +44,21 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
 
     func reloadBuilds(_: Any? = nil) {
         print("Reload builds!")
-        setupFallBackViews()
-        buildsTable.reloadData()
+        buildsTable?.reloadData()
+        if fallbackView != nil {
+            setupFallBackViews()
+        }
+    }
+
+    func regenBuilds() {
+        self.builds = Array(buildsDict.values).sorted(by: { (a, b) -> Bool in
+            a.lastUpdateTime() > b.lastUpdateTime()
+        })
+        buildsTable?.reloadData()
     }
 
     fileprivate func setupFallBackViews() {
-        if let fallbackString = FallbackView(settings: Settings.load(), builds: model.allBuilds).description() {
+        if let fallbackString = FallbackView(settings: Settings.load(), builds: builds).description() {
             fallbackView.stringValue = fallbackString
             fallbackView.isHidden = false
             buildsTable.isHidden = true
@@ -61,16 +70,12 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
 
     //NSTableViewDataSource
     func numberOfRows(in tableView: NSTableView) -> Int {
-        if model != nil {
-            return model.allBuilds.count
-        } else {
-            return 0
-        }
+        return builds.count
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if let cellView: BuildView = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as? BuildView {
-            cellView.setupForBuild(build: model.allBuilds[row])
+            cellView.setupForBuild(build: builds[row])
             return cellView
         }
         return nil
