@@ -2,7 +2,7 @@ version: 2
 
 jobs:
   build-and-test:
-    working_directory: ~/seaeye
+    working_directory: ~/SeaEye
     macos:
       xcode: 10.1.0
     environment:
@@ -14,11 +14,15 @@ jobs:
       - run: bundle install
       - run: bundle exec fastlane gym
       - run: bundle exec fastlane test
-      - run: cp /Users/distiller/seaeye/fastlane/test_output/report.junit /Users/distiller/seaeye/fastlane/test_output/results.xml
+      - run: cp /Users/distiller/SeaEye/fastlane/test_output/report.junit /Users/distiller/SeaEye/fastlane/test_output/results.xml
+      - run: cd /Users/distiller/SeaEye/ && zip -r SeaEye.app.zip SeaEye.app
       - store_test_results:
-          path: /Users/distiller/seaeye/fastlane/test_output
+          path: /Users/distiller/SeaEye/fastlane/test_output
       - store_artifacts:
-          path: /Users/distiller/seaeye/fastlane/test_output
+          path: /Users/distiller/SeaEye/SeaEye.app.zip
+          destination: SeaEye.app.zip
+      - store_artifacts:
+          path: /Users/distiller/SeaEye/fastlane/test_output
           destination: scan-test-results
       - store_artifacts:
           path: ~/Library/Logs/scan
