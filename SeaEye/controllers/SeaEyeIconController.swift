@@ -80,7 +80,7 @@ class SeaEyeIconController: NSViewController {
         statusBarItem.target = self
 
         if let button = statusBarItem.button {
-            let statusImage = NSImage.init(named: "circleci-normal")
+            let statusImage = NSImage.init(named: "circleci")
             statusImage?.size = NSSize.init(width: 17, height: 17)
             statusImage?.isTemplate = true
             button.image = statusImage
@@ -129,7 +129,7 @@ class SeaEyeIconController: NSViewController {
 
     func setRedBuildIcon(notification: Notification) {
         hasViewedBuilds = false
-        let imageFile = self.isDarkModeEnabled() ? "circleci-failed-alt" : "circleci-failed"
+        let imageFile = "circleci-fail"
         iconButton.image = NSImage(named: imageFile)
 
         if UserDefaults.standard.bool(forKey: "SeaEyeNotify") {
@@ -143,8 +143,7 @@ class SeaEyeIconController: NSViewController {
     
     func setYellowBuildIcon(notification: Notification) -> Void {
         if hasViewedBuilds {
-            let imageFile = self.isDarkModeEnabled() ? "circleci-pending-alt" : "circleci-pending"
-            iconButton.image = NSImage(named: imageFile)
+            iconButton.image = NSImage(named: "circleci-running")
         }
     }
 
@@ -177,7 +176,7 @@ class SeaEyeIconController: NSViewController {
 
     fileprivate func resetIcon() {
         hasViewedBuilds = true
-        let imageFile = isDarkModeEnabled() ? "circleci-normal-alt" : "circleci-normal"
+        let imageFile = "circleci"
         iconButton.image = NSImage(named: imageFile)
     }
 
