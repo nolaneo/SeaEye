@@ -19,8 +19,6 @@
 		5394798A1FCB908E00D6FA19 /* SeaEyeStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607C78251A190C580040FD5C /* SeaEyeStatus.swift */; };
 		5394798D1FCB909600D6FA19 /* CircleCIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539479741FCB639300D6FA19 /* CircleCIClient.swift */; };
 		53A3BE8D1FD34D85006961C6 /* circleci2-project.json in Resources */ = {isa = PBXBuildFile; fileRef = 53A3BE8C1FD34D85006961C6 /* circleci2-project.json */; };
-		53A3BE991FD35F04006961C6 /* CircleCIDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A3BE981FD35F04006961C6 /* CircleCIDecoder.swift */; };
-		53A3BE9A1FD35F6B006961C6 /* CircleCIDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A3BE981FD35F04006961C6 /* CircleCIDecoder.swift */; };
 		6008690E1A1D3E5E00600E4C /* SeaEyeBuildsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6008690D1A1D3E5E00600E4C /* SeaEyeBuildsController.xib */; };
 		600869101A1D3E6F00600E4C /* SeaEyeSettingsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6008690F1A1D3E6F00600E4C /* SeaEyeSettingsController.xib */; };
 		600869121A1D3E9200600E4C /* SeaEyePopoverController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 600869111A1D3E9200600E4C /* SeaEyePopoverController.xib */; };
@@ -56,6 +54,8 @@
 		F412CA9A21D3E3C90069C7C7 /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F412CA9621D3E3530069C7C7 /* HTTPRequest.swift */; };
 		F412CA9B21D3E3D50069C7C7 /* SeaEyeDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F412CA9821D3E3A40069C7C7 /* SeaEyeDecoder.swift */; };
 		F412CA9D21D3ED0D0069C7C7 /* BuildDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F412CA9C21D3ED0D0069C7C7 /* BuildDecorator.swift */; };
+		F412CA9F21D3EFEF0069C7C7 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F412CA9E21D3EFEF0069C7C7 /* DateFormatter.swift */; };
+		F412CAA021D3EFEF0069C7C7 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F412CA9E21D3EFEF0069C7C7 /* DateFormatter.swift */; };
 		F422C54820D48CC2002A5897 /* VersionNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422C54720D48CC2002A5897 /* VersionNumber.swift */; };
 		F422C54920D48CDD002A5897 /* VersionNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422C54720D48CC2002A5897 /* VersionNumber.swift */; };
 		F422C54B20D48CF2002A5897 /* VersionNumberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422C54A20D48CF2002A5897 /* VersionNumberTests.swift */; };
@@ -83,7 +83,6 @@
 		539479811FCB8D4C00D6FA19 /* BuildsForUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildsForUser.swift; sourceTree = "<group>"; };
 		539479831FCB8D8F00D6FA19 /* BuildsForUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildsForUserTests.swift; sourceTree = "<group>"; };
 		53A3BE8C1FD34D85006961C6 /* circleci2-project.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "circleci2-project.json"; sourceTree = "<group>"; };
-		53A3BE981FD35F04006961C6 /* CircleCIDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCIDecoder.swift; sourceTree = "<group>"; };
 		6008690D1A1D3E5E00600E4C /* SeaEyeBuildsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeaEyeBuildsController.xib; sourceTree = "<group>"; };
 		6008690F1A1D3E6F00600E4C /* SeaEyeSettingsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeaEyeSettingsController.xib; sourceTree = "<group>"; };
 		600869111A1D3E9200600E4C /* SeaEyePopoverController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeaEyePopoverController.xib; sourceTree = "<group>"; };
@@ -121,6 +120,7 @@
 		F412CA9621D3E3530069C7C7 /* HTTPRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
 		F412CA9821D3E3A40069C7C7 /* SeaEyeDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaEyeDecoder.swift; sourceTree = "<group>"; };
 		F412CA9C21D3ED0D0069C7C7 /* BuildDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildDecorator.swift; sourceTree = "<group>"; };
+		F412CA9E21D3EFEF0069C7C7 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		F422C54720D48CC2002A5897 /* VersionNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionNumber.swift; sourceTree = "<group>"; };
 		F422C54A20D48CF2002A5897 /* VersionNumberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionNumberTests.swift; sourceTree = "<group>"; };
 		F4472C0B216D72B700ECD077 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -151,7 +151,6 @@
 			isa = PBXGroup;
 			children = (
 				539479811FCB8D4C00D6FA19 /* BuildsForUser.swift */,
-				53A3BE981FD35F04006961C6 /* CircleCIDecoder.swift */,
 				F4B672D721B60A7C003E30A9 /* ApplicationStartupManager.swift */,
 			);
 			path = services;
@@ -300,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				F412CA9121D3DF050069C7C7 /* NSImage.swift */,
+				F412CA9E21D3EFEF0069C7C7 /* DateFormatter.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -445,13 +445,13 @@
 				607C78261A190C580040FD5C /* SeaEyeStatus.swift in Sources */,
 				60C73C0919FC23F60067CDCA /* SeaEyeIconController.swift in Sources */,
 				6014AD991A09874E00865329 /* Project.swift in Sources */,
-				53A3BE991FD35F04006961C6 /* CircleCIDecoder.swift in Sources */,
 				F4B672D821B60A7C003E30A9 /* ApplicationStartupManager.swift in Sources */,
 				539479821FCB8D4C00D6FA19 /* BuildsForUser.swift in Sources */,
 				60C73C1519FD7ECB0067CDCA /* SeaEyeBuildsController.swift in Sources */,
 				60C73C0619FC16FE0067CDCA /* SeaEyePopoverController.swift in Sources */,
 				60C73C1819FD7EE10067CDCA /* SeaEyeSettingsController.swift in Sources */,
 				F412CA9D21D3ED0D0069C7C7 /* BuildDecorator.swift in Sources */,
+				F412CA9F21D3EFEF0069C7C7 /* DateFormatter.swift in Sources */,
 				5394797D1FCB8C5200D6FA19 /* CircleCIBuild.swift in Sources */,
 				60F0232C1A1A95930067C0A0 /* SeaEyeUpdatesController.swift in Sources */,
 				603314A619FDCBFD0073EAED /* CircleCIModel.swift in Sources */,
@@ -469,10 +469,10 @@
 				539479861FCB8E8F00D6FA19 /* CircleCIModel.swift in Sources */,
 				F412CA9A21D3E3C90069C7C7 /* HTTPRequest.swift in Sources */,
 				F4F1A61E20D84DBE008B8C04 /* GithubClient.swift in Sources */,
-				53A3BE9A1FD35F6B006961C6 /* CircleCIDecoder.swift in Sources */,
 				5389EF4A1FCBBA49001C0D5F /* DecodingTests.swift in Sources */,
 				F422C54B20D48CF2002A5897 /* VersionNumberTests.swift in Sources */,
 				F412CA9B21D3E3D50069C7C7 /* SeaEyeDecoder.swift in Sources */,
+				F412CAA021D3EFEF0069C7C7 /* DateFormatter.swift in Sources */,
 				F422C54920D48CDD002A5897 /* VersionNumber.swift in Sources */,
 				539479851FCB8E7B00D6FA19 /* BuildsForUser.swift in Sources */,
 				5394798A1FCB908E00D6FA19 /* SeaEyeStatus.swift in Sources */,

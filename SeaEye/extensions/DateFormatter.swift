@@ -1,11 +1,3 @@
-//
-//  CircleCIDecoder.swift
-//  SeaEye
-//
-//  Created by Conor Mongey on 02/12/2017.
-//  Copyright © 2017 Nolaneo. All rights reserved.
-//
-
 import Foundation
 
 extension DateFormatter {
@@ -17,12 +9,4 @@ extension DateFormatter {
         formatter.locale = Locale(identifier: "en_US_POSIX")
         return formatter
     }()
-}
-
-class CircleCIDecoder: JSONDecoder {
-    override init() {
-        super.init()
-        self.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
-        self.keyDecodingStrategy = .convertFromSnakeCase
-    }
 }
