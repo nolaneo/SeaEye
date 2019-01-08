@@ -1,7 +1,7 @@
 import Foundation
 
 struct NewBuildFilter {
-    var seenProjects: Dictionary<String,Date> = Dictionary()
+    var seenProjects: Dictionary<String, Date> = Dictionary()
 
     mutating func newBuilds(project: Project, builds: [CircleCIBuild]) -> [CircleCIBuild] {
         if seenProjects[project.description] == nil {

@@ -15,7 +15,7 @@ class SeaEyeIconController: NSViewController {
     var popover = NSPopover()
     var popoverController: SeaEyePopoverController
 
-    var clientBuildUpdateListeners : [ClientBuildUpdater] = []
+    var clientBuildUpdateListeners: [ClientBuildUpdater] = []
     var timers: [Timer] = []
 
     let settings = Settings.load()
@@ -46,7 +46,7 @@ class SeaEyeIconController: NSViewController {
         let secondsToRefreshBuilds = 30
         let popoverControllerBuildListener = PopoverContollerBuildUpdateListener(buildSetter: popoverController)
 
-        let listeners : [BuildUpdateListener] = [TextPrinter(),
+        let listeners: [BuildUpdateListener] = [TextPrinter(),
                                                  popoverControllerBuildListener,
                                                  SeaEyeStatusBarListener.init(statusBar: self.statusBarItem),
                                                  NotificationListener()]
@@ -72,7 +72,6 @@ class SeaEyeIconController: NSViewController {
                                                object: nil,
                                                queue: OperationQueue.main,
                                                using: closePopover)
-
 
         NSEvent.addGlobalMonitorForEvents(
             matching: [.leftMouseUp, .rightMouseUp],

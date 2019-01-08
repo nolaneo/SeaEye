@@ -9,7 +9,7 @@
 import Foundation
 import XCTest
 
-class SettingsTest : XCTestCase {
+class SettingsTest: XCTestCase {
 
     func testDefaults() {
         var settings = Settings.load(userDefaults: UserDefaults.init(suiteName: "testing")!)

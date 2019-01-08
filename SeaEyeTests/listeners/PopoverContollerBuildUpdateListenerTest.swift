@@ -1,9 +1,9 @@
 import Foundation
 import XCTest
 
-class PopoverContollerBuildUpdateListenerTest : XCTestCase {
+class PopoverContollerBuildUpdateListenerTest: XCTestCase {
     class MockBuildSetter: BuildSetter {
-        var builds : [CircleCIBuild] = [CircleCIBuild]()
+        var builds: [CircleCIBuild] = [CircleCIBuild]()
 
         func setBuilds(_ builds: [CircleCIBuild]) {
             self.builds.append(contentsOf: builds)
@@ -12,8 +12,8 @@ class PopoverContollerBuildUpdateListenerTest : XCTestCase {
     }
 
     func testItSetsAllTheBuilds() {
-        let b = MockBuildSetter()
-        let sut = PopoverContollerBuildUpdateListener.init(buildSetter: b)
+        let buildSetter = MockBuildSetter()
+        let sut = PopoverContollerBuildUpdateListener.init(buildSetter: buildSetter)
 
         let old = CircleCIBuild(branch: "master",
                                    project: "foo/bar",
@@ -38,9 +38,8 @@ class PopoverContollerBuildUpdateListenerTest : XCTestCase {
                                    filter: nil,
                                    notify: true)
 
-
         sut.notify(project: project, builds: [old, new])
 
-        XCTAssertEqual(b.builds.count, 2, "PopoverController should be set with ALL builds, olds and new.")
+        XCTAssertEqual(buildSetter.builds.count, 2, "PopoverController should be set with ALL builds, olds and new.")
     }
 }

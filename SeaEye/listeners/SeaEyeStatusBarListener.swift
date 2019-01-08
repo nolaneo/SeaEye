@@ -1,7 +1,7 @@
 import Foundation
 
 protocol IconSetter {
-    var state : SeaEyeStatusBar.IconStatus { get set }
+    var state: SeaEyeStatusBar.IconStatus { get set }
 }
 
 struct SeaEyeStatusBarListener: BuildUpdateListener {

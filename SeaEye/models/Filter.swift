@@ -34,7 +34,7 @@ struct Filter: Codable {
         }
         return matching
     }
-    
+
     private func branchRegex() -> NSRegularExpression? {
         return try? NSRegularExpression(pattern: branchFilter,
                                         options: NSRegularExpression.Options.caseInsensitive)

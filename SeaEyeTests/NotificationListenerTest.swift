@@ -27,7 +27,6 @@ class NotificationListenerTest: XCTestCase {
                                    filter: nil,
                                    notify: true)
 
-
-        sut.notify(project:  project, builds: [failed])
+        sut.notify(project: project, builds: [failed])
     }
 }

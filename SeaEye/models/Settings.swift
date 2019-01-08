@@ -32,7 +32,7 @@ struct Settings: Codable {
     func projects() -> [ClientProject] {
         let projectNames = projectsString?.components(separatedBy: CharacterSet.whitespaces)
         let client = CircleCIClient.init(apiKey: apiKey!)
-        if !valid(){
+        if !valid() {
             return []
         }
         var projects = [Project]()
@@ -54,7 +54,7 @@ struct Settings: Codable {
     func clientBuildUpdateListeners(listeners: [BuildUpdateListener]) -> [ClientBuildUpdater] {
         let clientProjects = projects()
         return clientProjects.flatMap { (cp) -> [ClientBuildUpdater] in
-            cp.projects.map{
+            cp.projects.map {
                 return ClientBuildUpdater(listeners: listeners,
                                           client: cp.client,
                                           project: $0)

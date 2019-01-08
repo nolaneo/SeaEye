@@ -32,7 +32,7 @@ class SeaEyeStatusBarListenerTest: XCTestCase {
                                    name: "SeaEye",
                                    filter: nil,
                                    notify: true)
-        sut.notify(project:  project, builds: [failed])
+        sut.notify(project: project, builds: [failed])
 
         XCTAssertEqual(sut.statusBar.state, .idle, "Old builds should not effect the status")
         let failed2 = CircleCIBuild(branch: "master",
@@ -43,7 +43,7 @@ class SeaEyeStatusBarListenerTest: XCTestCase {
                                    buildNum: 100,
                                    url: URL.init(string: "https://google.com")!,
                                    date: Date())
-        sut.notify(project:  project, builds: [failed2])
+        sut.notify(project: project, builds: [failed2])
         XCTAssertEqual(sut.statusBar.state, .failure, "Failed builds should set the icon")
 
         let success = CircleCIBuild(branch: "master",
@@ -55,10 +55,10 @@ class SeaEyeStatusBarListenerTest: XCTestCase {
                                     url: URL.init(string: "https://google.com")!,
                                     date: Date())
 
-        sut.notify(project:  project, builds: [success])
+        sut.notify(project: project, builds: [success])
         XCTAssertEqual(sut.statusBar.state, .success, "Successful builds should set the icon")
 
-        sut.notify(project:  project, builds: [])
+        sut.notify(project: project, builds: [])
         XCTAssertEqual(sut.statusBar.state, .success, "The Icon should remain set if there are no builds")
     }
 }

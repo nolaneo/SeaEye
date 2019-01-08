@@ -10,7 +10,7 @@ import Cocoa
 
 class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
     private var builds: [CircleCIBuild] = []
-    var buildsDict: Dictionary<String,CircleCIBuild> = Dictionary()
+    var buildsDict: [String: CircleCIBuild] = Dictionary()
 
     @IBOutlet weak var fallbackView: NSTextField!
     @IBOutlet weak var buildsTable: NSTableView!
@@ -51,8 +51,8 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     }
 
     func regenBuilds() {
-        self.builds = Array(buildsDict.values).sorted(by: { (a, b) -> Bool in
-            a.lastUpdateTime() > b.lastUpdateTime()
+        self.builds = Array(buildsDict.values).sorted(by: {
+            $0.lastUpdateTime() > $1.lastUpdateTime()
         })
         buildsTable?.reloadData()
     }

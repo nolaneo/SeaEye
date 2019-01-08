@@ -39,7 +39,7 @@ class SeaEyePopoverController: NSViewController, BuildSetter {
         setupViewControllers()
         showUpdateButtonIfAppropriate()
     }
-    
+
     func setBuilds(_ builds: [CircleCIBuild]) {
         guard let buildController = buildsViewController else {
             heldBuilds.append(contentsOf: builds)

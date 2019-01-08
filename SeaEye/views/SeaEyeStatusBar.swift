@@ -1,16 +1,16 @@
 import Cocoa
 
-struct SeaEyeStatusBar : IconSetter {
-    let item : NSStatusItem
-    let iconController : SeaEyeIconController
+struct SeaEyeStatusBar: IconSetter {
+    let item: NSStatusItem
+    let iconController: SeaEyeIconController
 
-    var state : IconStatus {
+    var state: IconStatus {
         didSet {
             setIcon()
         }
     }
 
-    enum IconStatus : String {
+    enum IconStatus: String {
         case idle = "circleci"
         case success = "circleci-success"
         case failure = "circleci-fail"
@@ -25,7 +25,7 @@ struct SeaEyeStatusBar : IconSetter {
         setIcon()
     }
 
-    func setupIcon(){
+    func setupIcon() {
         item.target = iconController
         item.action = #selector(SeaEyeIconController.openPopover)
     }
