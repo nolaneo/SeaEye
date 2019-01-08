@@ -10,9 +10,6 @@
 		5389EF4A1FCBBA49001C0D5F /* DecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5389EF491FCBBA49001C0D5F /* DecodingTests.swift */; };
 		539479751FCB639300D6FA19 /* CircleCIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539479741FCB639300D6FA19 /* CircleCIClient.swift */; };
 		5394797D1FCB8C5200D6FA19 /* CircleCIBuild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5394797C1FCB8C5200D6FA19 /* CircleCIBuild.swift */; };
-		539479821FCB8D4C00D6FA19 /* BuildsForUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539479811FCB8D4C00D6FA19 /* BuildsForUser.swift */; };
-		539479841FCB8D8F00D6FA19 /* BuildsForUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539479831FCB8D8F00D6FA19 /* BuildsForUserTests.swift */; };
-		539479851FCB8E7B00D6FA19 /* BuildsForUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539479811FCB8D4C00D6FA19 /* BuildsForUser.swift */; };
 		539479861FCB8E8F00D6FA19 /* CircleCIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603314A519FDCBFD0073EAED /* CircleCIModel.swift */; };
 		539479871FCB8EA500D6FA19 /* CircleCIBuild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5394797C1FCB8C5200D6FA19 /* CircleCIBuild.swift */; };
 		539479891FCB908E00D6FA19 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6014AD981A09874D00865329 /* Project.swift */; };
@@ -80,6 +77,9 @@
 		F4D5A44621E420A4006140DE /* BuildDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F412CA9C21D3ED0D0069C7C7 /* BuildDecorator.swift */; };
 		F4D5A44721E420B5006140DE /* ApplicationStartupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B672D721B60A7C003E30A9 /* ApplicationStartupManager.swift */; };
 		F4D5A44821E420C5006140DE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A43A21E40E4C006140DE /* Notifications.swift */; };
+		F4D5A44A21E427BB006140DE /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A44921E427BB006140DE /* Filter.swift */; };
+		F4D5A44B21E427BB006140DE /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A44921E427BB006140DE /* Filter.swift */; };
+		F4D5A44E21E42A77006140DE /* FilterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A44C21E42A77006140DE /* FilterTest.swift */; };
 		F4F1A61D20D84CD1008B8C04 /* GithubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F1A61C20D84CD1008B8C04 /* GithubClient.swift */; };
 		F4F1A61E20D84DBE008B8C04 /* GithubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F1A61C20D84CD1008B8C04 /* GithubClient.swift */; };
 		F4FFD80421CA897F00E8C82E /* circleci-workflow.json in Resources */ = {isa = PBXBuildFile; fileRef = F4FFD80321CA897F00E8C82E /* circleci-workflow.json */; };
@@ -99,8 +99,6 @@
 		5389EF491FCBBA49001C0D5F /* DecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingTests.swift; sourceTree = "<group>"; };
 		539479741FCB639300D6FA19 /* CircleCIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCIClient.swift; sourceTree = "<group>"; };
 		5394797C1FCB8C5200D6FA19 /* CircleCIBuild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCIBuild.swift; sourceTree = "<group>"; };
-		539479811FCB8D4C00D6FA19 /* BuildsForUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildsForUser.swift; sourceTree = "<group>"; };
-		539479831FCB8D8F00D6FA19 /* BuildsForUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildsForUserTests.swift; sourceTree = "<group>"; };
 		53A3BE8C1FD34D85006961C6 /* circleci2-project.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "circleci2-project.json"; sourceTree = "<group>"; };
 		6008690D1A1D3E5E00600E4C /* SeaEyeBuildsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeaEyeBuildsController.xib; sourceTree = "<group>"; };
 		6008690F1A1D3E6F00600E4C /* SeaEyeSettingsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeaEyeSettingsController.xib; sourceTree = "<group>"; };
@@ -149,6 +147,8 @@
 		F4D5A43721E3FE32006140DE /* BuildSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildSummary.swift; sourceTree = "<group>"; };
 		F4D5A43A21E40E4C006140DE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		F4D5A43C21E41FEB006140DE /* SeaEyeStatusBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaEyeStatusBar.swift; sourceTree = "<group>"; };
+		F4D5A44921E427BB006140DE /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		F4D5A44C21E42A77006140DE /* FilterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilterTest.swift; path = models/FilterTest.swift; sourceTree = "<group>"; };
 		F4F1A61C20D84CD1008B8C04 /* GithubClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubClient.swift; sourceTree = "<group>"; };
 		F4FFD80321CA897F00E8C82E /* circleci-workflow.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "circleci-workflow.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -175,7 +175,6 @@
 			isa = PBXGroup;
 			children = (
 				F4B672D721B60A7C003E30A9 /* ApplicationStartupManager.swift */,
-				539479811FCB8D4C00D6FA19 /* BuildsForUser.swift */,
 				F4D5A43721E3FE32006140DE /* BuildSummary.swift */,
 				F4D5A43A21E40E4C006140DE /* Notifications.swift */,
 			);
@@ -214,10 +213,11 @@
 		603314A419FDCBD90073EAED /* models */ = {
 			isa = PBXGroup;
 			children = (
+				5394797C1FCB8C5200D6FA19 /* CircleCIBuild.swift */,
 				603314A519FDCBFD0073EAED /* CircleCIModel.swift */,
+				F4D5A44921E427BB006140DE /* Filter.swift */,
 				6014AD981A09874D00865329 /* Project.swift */,
 				607C78251A190C580040FD5C /* SeaEyeStatus.swift */,
-				5394797C1FCB8C5200D6FA19 /* CircleCIBuild.swift */,
 				F4D5A43121E3F6B3006140DE /* Settings.swift */,
 			);
 			path = models;
@@ -284,9 +284,9 @@
 			isa = PBXGroup;
 			children = (
 				60C73BEF19FC025A0067CDCA /* Supporting Files */,
-				539479831FCB8D8F00D6FA19 /* BuildsForUserTests.swift */,
 				5389EF491FCBBA49001C0D5F /* DecodingTests.swift */,
 				F422C54A20D48CF2002A5897 /* VersionNumberTests.swift */,
+				F4D5A44C21E42A77006140DE /* FilterTest.swift */,
 			);
 			path = SeaEyeTests;
 			sourceTree = "<group>";
@@ -477,7 +477,6 @@
 				F4D5A43521E3F782006140DE /* FallbackView.swift in Sources */,
 				F4B672D821B60A7C003E30A9 /* ApplicationStartupManager.swift in Sources */,
 				F4D5A43D21E41FEB006140DE /* SeaEyeStatusBar.swift in Sources */,
-				539479821FCB8D4C00D6FA19 /* BuildsForUser.swift in Sources */,
 				60C73C1519FD7ECB0067CDCA /* SeaEyeBuildsController.swift in Sources */,
 				60C73C0619FC16FE0067CDCA /* SeaEyePopoverController.swift in Sources */,
 				60C73C1819FD7EE10067CDCA /* SeaEyeSettingsController.swift in Sources */,
@@ -490,6 +489,7 @@
 				603314A619FDCBFD0073EAED /* CircleCIModel.swift in Sources */,
 				F412CA9721D3E3530069C7C7 /* HTTPRequest.swift in Sources */,
 				F4D5A43221E3F6B3006140DE /* Settings.swift in Sources */,
+				F4D5A44A21E427BB006140DE /* Filter.swift in Sources */,
 				F4F1A61D20D84CD1008B8C04 /* GithubClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -500,6 +500,7 @@
 			files = (
 				5394798D1FCB909600D6FA19 /* CircleCIClient.swift in Sources */,
 				539479871FCB8EA500D6FA19 /* CircleCIBuild.swift in Sources */,
+				F4D5A44B21E427BB006140DE /* Filter.swift in Sources */,
 				539479861FCB8E8F00D6FA19 /* CircleCIModel.swift in Sources */,
 				F412CA9A21D3E3C90069C7C7 /* HTTPRequest.swift in Sources */,
 				F4D5A44421E4208A006140DE /* NSImage.swift in Sources */,
@@ -517,14 +518,13 @@
 				F4D5A44021E42057006140DE /* SeaEyePopoverController.swift in Sources */,
 				F4D5A43321E3F6B3006140DE /* Settings.swift in Sources */,
 				F422C54920D48CDD002A5897 /* VersionNumber.swift in Sources */,
-				539479851FCB8E7B00D6FA19 /* BuildsForUser.swift in Sources */,
 				F4D5A44521E42099006140DE /* BuildView.swift in Sources */,
+				F4D5A44E21E42A77006140DE /* FilterTest.swift in Sources */,
 				5394798A1FCB908E00D6FA19 /* SeaEyeStatus.swift in Sources */,
 				F4D5A44721E420B5006140DE /* ApplicationStartupManager.swift in Sources */,
 				F4D5A43921E3FE32006140DE /* BuildSummary.swift in Sources */,
 				F4D5A44121E4206D006140DE /* SeaEyeSettingsController.swift in Sources */,
 				539479891FCB908E00D6FA19 /* Project.swift in Sources */,
-				539479841FCB8D8F00D6FA19 /* BuildsForUserTests.swift in Sources */,
 				F4D5A43E21E41FEB006140DE /* SeaEyeStatusBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

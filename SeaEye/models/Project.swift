@@ -54,31 +54,13 @@ class Project: NSObject {
                 switch result {
                 case .success(let builds):
                     let settings = Settings.load()
-                    do {
-                        let branchString = settings.branchFilter
-                        let userString = settings.userFilter
-                        var branchRegex: NSRegularExpression?
-                        var userRegex: NSRegularExpression?
-
-                        if userString != nil {
-                            print("Using regex \(userString!) for user")
-                            userRegex = try NSRegularExpression(pattern: userString!, options: NSRegularExpression.Options.caseInsensitive)
-                        }
-
-                        if branchString != nil {
-                            branchRegex = try NSRegularExpression(pattern: branchString!, options: NSRegularExpression.Options.caseInsensitive)
-                        }
-
-                        self.projectBuilds = buildsForUser(builds: builds, userRegex: userRegex, branchRegex: branchRegex)
-                    } catch {
-                         self.projectBuilds = builds
-                    }
+                    let f = Filter.init(userFilter: settings.userFilter, branchFilter: settings.branchFilter)
+                    self.projectBuilds = f.builds(builds)
                     self.parent.runModelUpdates()
                     break
 
                 case .failure(let error):
                     print("error: \(error.localizedDescription) \(self.organizationName) \(self.projectName)")
-//                    self.notifyError(error.localizedDescription)
                 }
         })
     }
