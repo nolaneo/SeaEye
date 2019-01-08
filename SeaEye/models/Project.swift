@@ -9,6 +9,8 @@
 import Cocoa
 
 class Project: NSObject {
+    let REFRESH_TIME = 30
+
     var projectName: String
     var organizationName: String
     var apiKey: String!
@@ -28,10 +30,10 @@ class Project: NSObject {
         self.stop()
         self.getBuildData()
         if #available(OSX 10.12, *) {
-            timer = Timer.scheduledTimer(withTimeInterval: TimeInterval(30), repeats: true, block: self.getBuildData(_:))
+            timer = Timer.scheduledTimer(withTimeInterval: TimeInterval(REFRESH_TIME), repeats: true, block: self.getBuildData(_:))
         } else {
             timer = Timer.scheduledTimer(
-                        timeInterval: TimeInterval(30),
+                        timeInterval: TimeInterval(REFRESH_TIME),
                         target: self,
                         selector: #selector(Project.getBuildData),
                         userInfo: nil,

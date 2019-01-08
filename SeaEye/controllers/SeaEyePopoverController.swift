@@ -122,13 +122,4 @@ class SeaEyePopoverController: NSViewController {
             openUpdatesButton.isHidden = true
         }
     }
-
-    fileprivate func isDarkModeEnabled() -> Bool {
-        let dictionary  = UserDefaults.standard.persistentDomain(forName: UserDefaults.globalDomain)
-        if let interfaceStyle = dictionary?["AppleInterfaceStyle"] as? NSString {
-            return interfaceStyle.localizedCaseInsensitiveContains("dark")
-        } else {
-            return false
-        }
-    }
 }

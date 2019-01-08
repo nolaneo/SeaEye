@@ -11,6 +11,13 @@ import Cocoa
 class SeaEyeIconController: NSViewController {
     var statusBarItem: NSStatusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
 
+    enum IconStatus : String {
+        case idle = "circleci"
+        case success = "circleci-success"
+        case failure = "circleci-fail"
+        case running = "circleci-running"
+    }
+
     var iconButton: NSStatusBarButton!
     var model = CircleCIModel()
     var applicationStatus = SeaEyeStatus()
@@ -44,7 +51,6 @@ class SeaEyeIconController: NSViewController {
     func setup() {
         self.setupIcon()
         self.resetIcon()
-        self.setupStyleNotificationObserver()
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "SeaEyeAlert"),
                                                object: nil,
                                                queue: OperationQueue.main,
@@ -76,19 +82,41 @@ class SeaEyeIconController: NSViewController {
 
     }
 
+    func colorForState(_ imageName: IconStatus) -> NSColor? {
+        switch imageName {
+        case .failure:
+            return NSColor.red
+        case .success:
+            return NSColor.green
+        case .running:
+            return NSColor.yellow
+        case .idle:
+            return nil
+        }
+    }
+
+    func setIcon(_ state: IconStatus) {
+        let statusImage = NSImage.init(named: state.rawValue)
+        statusImage?.size = NSSize.init(width: 16, height: 16)
+        statusImage?.isTemplate = true
+
+        if let tintColor = colorForState(state) {
+            iconButton.image = statusImage?.tinting(with: tintColor)
+        } else {
+            iconButton.image = statusImage
+        }
+    }
+
     func setupIcon() {
         statusBarItem.target = self
 
         if let button = statusBarItem.button {
-            let statusImage = NSImage.init(named: "circleci")
-            statusImage?.size = NSSize.init(width: 17, height: 17)
-            statusImage?.isTemplate = true
-            button.image = statusImage
+            iconButton = button
+            setIcon(.idle)
             button.target = self
             button.action = #selector(openPopover)
             button.isEnabled = true
             button.state = .on
-            iconButton = button
         }
         statusBarItem.action = #selector(openPopover)
     }
@@ -114,9 +142,7 @@ class SeaEyeIconController: NSViewController {
 
     func setGreenBuildIcon(notification: Notification) {
         if hasViewedBuilds {
-            let imageFile = self.isDarkModeEnabled() ? "circleci-success-alt" : "circleci-success"
-            iconButton.image = NSImage(named: imageFile)
-
+            setIcon(.success)
             if UserDefaults.standard.bool(forKey: "SeaEyeNotify") {
                 if let build = notification.userInfo!["build"] as? CircleCIBuild{
                     if let count = notification.userInfo!["count"] as? Int {
@@ -129,8 +155,7 @@ class SeaEyeIconController: NSViewController {
 
     func setRedBuildIcon(notification: Notification) {
         hasViewedBuilds = false
-        let imageFile = "circleci-fail"
-        iconButton.image = NSImage(named: imageFile)
+        setIcon(.failure)
 
         if UserDefaults.standard.bool(forKey: "SeaEyeNotify") {
             if let build = notification.userInfo!["build"] as? CircleCIBuild{
@@ -143,7 +168,7 @@ class SeaEyeIconController: NSViewController {
     
     func setYellowBuildIcon(notification: Notification) -> Void {
         if hasViewedBuilds {
-            iconButton.image = NSImage(named: "circleci-running")
+            setIcon(.running)
         }
     }
 
@@ -176,40 +201,7 @@ class SeaEyeIconController: NSViewController {
 
     fileprivate func resetIcon() {
         hasViewedBuilds = true
-        let imageFile = "circleci"
-        iconButton.image = NSImage(named: imageFile)
-    }
-
-    fileprivate func setupStyleNotificationObserver() {
-        DistributedNotificationCenter.default()
-            .addObserver(
-                self,
-                selector: #selector(SeaEyeIconController.alternateIconStyle),
-                name: NSNotification.Name(rawValue: "AppleInterfaceThemeChangedNotification"),
-                object: nil
-        )
-    }
-
-    fileprivate func isDarkModeEnabled() -> Bool {
-        let dictionary  = UserDefaults.standard.persistentDomain(forName: UserDefaults.globalDomain)
-        if let interfaceStyle = dictionary?["AppleInterfaceStyle"] as? NSString {
-            return interfaceStyle.localizedCaseInsensitiveContains("dark")
-        } else {
-            return false
-        }
-    }
-
-    @objc func alternateIconStyle() {
-        let currentImage = iconButton.image
-        if let imageName = currentImage?.name() {
-            var alternateImageName: NSString
-            if imageName.hasSuffix("-alt") {
-                alternateImageName = imageName.replacingOccurrences(of: "alt", with: "") as NSString
-            } else {
-                alternateImageName = imageName + "-alt" as NSString
-            }
-            iconButton.image = NSImage(named: alternateImageName as String as String)
-        }
+        setIcon(.idle)
     }
 
     @objc func openPopover(_ sender: NSButton) {
