@@ -1,7 +1,11 @@
 import Foundation
 
+protocol IconSetter {
+    var state : SeaEyeStatusBar.IconStatus { get set }
+}
+
 struct SeaEyeStatusBarListener: BuildUpdateListener {
-    var statusBar: SeaEyeStatusBar
+    var statusBar: IconSetter
     private let initDate = Date()
 
     mutating func notify(project: Project, builds: [CircleCIBuild]) {

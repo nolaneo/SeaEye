@@ -1,4 +1,5 @@
 import Foundation
+import Cocoa
 
 // Delivers a NSUserNotification for a project
 class NotificationListener: BuildUpdateListener {

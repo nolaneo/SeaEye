@@ -9,11 +9,11 @@
 import Foundation
 
 protocol BuildSetter {
-    func setBuilds(_ builds: [CircleCIBuild])
+    mutating func setBuilds(_ builds: [CircleCIBuild])
 }
 
 class PopoverContollerBuildUpdateListener: BuildUpdateListener {
-    private let buildSetter: BuildSetter
+    private var buildSetter: BuildSetter
     var allKnownBuilds: [CircleCIBuild] = []
 
     init(buildSetter: BuildSetter) {
@@ -21,7 +21,6 @@ class PopoverContollerBuildUpdateListener: BuildUpdateListener {
     }
 
     func notify(project: Project, builds: [CircleCIBuild]) {
-        print("Got \(builds.count) builds from \(project)!")
         buildSetter.setBuilds(builds)
     }
 }

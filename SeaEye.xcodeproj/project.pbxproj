@@ -90,8 +90,12 @@
 		F4D5A45E21E454F4006140DE /* NotificationListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A45C21E454F4006140DE /* NotificationListener.swift */; };
 		F4D5A46021E45613006140DE /* PopoverContollerBuildUpdateListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A45F21E45613006140DE /* PopoverContollerBuildUpdateListener.swift */; };
 		F4D5A46121E45613006140DE /* PopoverContollerBuildUpdateListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A45F21E45613006140DE /* PopoverContollerBuildUpdateListener.swift */; };
+		F4D5A46421E4619C006140DE /* SeaEyeStatusBarListenerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A46321E4619C006140DE /* SeaEyeStatusBarListenerTest.swift */; };
 		F4F1A61D20D84CD1008B8C04 /* GithubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F1A61C20D84CD1008B8C04 /* GithubClient.swift */; };
 		F4F1A61E20D84DBE008B8C04 /* GithubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F1A61C20D84CD1008B8C04 /* GithubClient.swift */; };
+		F4F4807221E46CE90038DC09 /* NotificationListenerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F4807121E46CE90038DC09 /* NotificationListenerTest.swift */; };
+		F4F4807421E471DE0038DC09 /* SettingsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F4807321E471DE0038DC09 /* SettingsTest.swift */; };
+		F4F4807621E4DD6A0038DC09 /* PopoverContollerBuildUpdateListenerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F4807521E4DD6A0038DC09 /* PopoverContollerBuildUpdateListenerTest.swift */; };
 		F4FFD80421CA897F00E8C82E /* circleci-workflow.json in Resources */ = {isa = PBXBuildFile; fileRef = F4FFD80321CA897F00E8C82E /* circleci-workflow.json */; };
 /* End PBXBuildFile section */
 
@@ -164,7 +168,11 @@
 		F4D5A45921E45257006140DE /* SeaEyeStatusBarListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaEyeStatusBarListener.swift; sourceTree = "<group>"; };
 		F4D5A45C21E454F4006140DE /* NotificationListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListener.swift; sourceTree = "<group>"; };
 		F4D5A45F21E45613006140DE /* PopoverContollerBuildUpdateListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverContollerBuildUpdateListener.swift; sourceTree = "<group>"; };
+		F4D5A46321E4619C006140DE /* SeaEyeStatusBarListenerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SeaEyeStatusBarListenerTest.swift; path = listeners/SeaEyeStatusBarListenerTest.swift; sourceTree = "<group>"; };
 		F4F1A61C20D84CD1008B8C04 /* GithubClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubClient.swift; sourceTree = "<group>"; };
+		F4F4807121E46CE90038DC09 /* NotificationListenerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListenerTest.swift; sourceTree = "<group>"; };
+		F4F4807321E471DE0038DC09 /* SettingsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTest.swift; sourceTree = "<group>"; };
+		F4F4807521E4DD6A0038DC09 /* PopoverContollerBuildUpdateListenerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PopoverContollerBuildUpdateListenerTest.swift; path = listeners/PopoverContollerBuildUpdateListenerTest.swift; sourceTree = "<group>"; };
 		F4FFD80321CA897F00E8C82E /* circleci-workflow.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "circleci-workflow.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -204,11 +212,11 @@
 				F412CA9C21D3ED0D0069C7C7 /* BuildDecorator.swift */,
 				6014AD8D19FED4C400865329 /* BuildView.swift */,
 				F4D5A43421E3F782006140DE /* FallbackView.swift */,
+				F4D5A43C21E41FEB006140DE /* SeaEyeStatusBar.swift */,
 				600869131A1D3EA000600E4C /* SeaEyeUpdatesController.xib */,
 				6008690D1A1D3E5E00600E4C /* SeaEyeBuildsController.xib */,
 				6008690F1A1D3E6F00600E4C /* SeaEyeSettingsController.xib */,
 				600869111A1D3E9200600E4C /* SeaEyePopoverController.xib */,
-				F4D5A43C21E41FEB006140DE /* SeaEyeStatusBar.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -300,10 +308,12 @@
 		60C73BEE19FC025A0067CDCA /* SeaEyeTests */ = {
 			isa = PBXGroup;
 			children = (
+				F4D5A46221E46170006140DE /* listeners */,
 				60C73BEF19FC025A0067CDCA /* Supporting Files */,
 				5389EF491FCBBA49001C0D5F /* DecodingTests.swift */,
 				F422C54A20D48CF2002A5897 /* VersionNumberTests.swift */,
 				F4D5A44C21E42A77006140DE /* FilterTest.swift */,
+				F4F4807321E471DE0038DC09 /* SettingsTest.swift */,
 			);
 			path = SeaEyeTests;
 			sourceTree = "<group>";
@@ -370,6 +380,16 @@
 				F4D5A45F21E45613006140DE /* PopoverContollerBuildUpdateListener.swift */,
 			);
 			path = listeners;
+			sourceTree = "<group>";
+		};
+		F4D5A46221E46170006140DE /* listeners */ = {
+			isa = PBXGroup;
+			children = (
+				F4D5A46321E4619C006140DE /* SeaEyeStatusBarListenerTest.swift */,
+				F4F4807121E46CE90038DC09 /* NotificationListenerTest.swift */,
+				F4F4807521E4DD6A0038DC09 /* PopoverContollerBuildUpdateListenerTest.swift */,
+			);
+			name = listeners;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -538,8 +558,10 @@
 				F4D5A45821E451BA006140DE /* TextPrinter.swift in Sources */,
 				F4D5A45121E44BA6006140DE /* ClientBuildUpdater.swift in Sources */,
 				F4D5A44421E4208A006140DE /* NSImage.swift in Sources */,
+				F4F4807221E46CE90038DC09 /* NotificationListenerTest.swift in Sources */,
 				F4D5A44221E42076006140DE /* SeaEyeBuildsController.swift in Sources */,
 				F4D5A43F21E4201F006140DE /* SeaEyeIconController.swift in Sources */,
+				F4F4807421E471DE0038DC09 /* SettingsTest.swift in Sources */,
 				F4F1A61E20D84DBE008B8C04 /* GithubClient.swift in Sources */,
 				F4D5A44821E420C5006140DE /* Notifications.swift in Sources */,
 				5389EF4A1FCBBA49001C0D5F /* DecodingTests.swift in Sources */,
@@ -553,6 +575,7 @@
 				F4D5A44021E42057006140DE /* SeaEyePopoverController.swift in Sources */,
 				F4D5A43321E3F6B3006140DE /* Settings.swift in Sources */,
 				F422C54920D48CDD002A5897 /* VersionNumber.swift in Sources */,
+				F4F4807621E4DD6A0038DC09 /* PopoverContollerBuildUpdateListenerTest.swift in Sources */,
 				F4D5A44521E42099006140DE /* BuildView.swift in Sources */,
 				F4D5A46121E45613006140DE /* PopoverContollerBuildUpdateListener.swift in Sources */,
 				F4D5A44E21E42A77006140DE /* FilterTest.swift in Sources */,
@@ -562,6 +585,7 @@
 				F4D5A44121E4206D006140DE /* SeaEyeSettingsController.swift in Sources */,
 				539479891FCB908E00D6FA19 /* Project.swift in Sources */,
 				F4D5A43E21E41FEB006140DE /* SeaEyeStatusBar.swift in Sources */,
+				F4D5A46421E4619C006140DE /* SeaEyeStatusBarListenerTest.swift in Sources */,
 				F4D5A45421E44BF1006140DE /* NewBuildFilter.swift in Sources */,
 				F4D5A45E21E454F4006140DE /* NotificationListener.swift in Sources */,
 			);

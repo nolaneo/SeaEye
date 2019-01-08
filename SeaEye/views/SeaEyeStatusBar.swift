@@ -1,8 +1,14 @@
 import Cocoa
 
-struct SeaEyeStatusBar{
+struct SeaEyeStatusBar : IconSetter {
     let item : NSStatusItem
     let iconController : SeaEyeIconController
+
+    var state : IconStatus {
+        didSet {
+            setIcon()
+        }
+    }
 
     enum IconStatus : String {
         case idle = "circleci"
@@ -17,12 +23,6 @@ struct SeaEyeStatusBar{
         self.state = .idle
         setupIcon()
         setIcon()
-    }
-
-    var state : IconStatus {
-        didSet {
-            setIcon()
-        }
     }
 
     func setupIcon(){
@@ -42,7 +42,6 @@ struct SeaEyeStatusBar{
         } else {
             iconButton?.image = statusImage
         }
-
     }
 
     private func colorForState(_ imageName: IconStatus) -> NSColor? {
