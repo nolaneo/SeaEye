@@ -27,19 +27,8 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
         super.viewDidLoad()
     }
 
-    override func viewWillAppear() {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "SeaEyeUpdatedBuilds"),
-                                               object: nil,
-                                               queue: OperationQueue.main,
-                                               using: reloadBuilds)
-    }
-
     override func viewDidAppear() {
         self.reloadBuilds()
-    }
-
-    override func viewWillDisappear() {
-        NotificationCenter.default.removeObserver(self)
     }
 
     func reloadBuilds(_: Any? = nil) {
