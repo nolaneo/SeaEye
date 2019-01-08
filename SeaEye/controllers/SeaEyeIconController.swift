@@ -67,11 +67,6 @@ class SeaEyeIconController: NSViewController {
 
         self.resetIcon()
 
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "SeaEyeAlert"),
-                                               object: nil,
-                                               queue: OperationQueue.main,
-                                               using: alert)
-
         NotificationCenter.default.addObserver(forName:
                                                NSNotification.Name(rawValue: "SeaEyeClosePopover"),
                                                object: nil,
@@ -83,10 +78,6 @@ class SeaEyeIconController: NSViewController {
             matching: [.leftMouseUp, .rightMouseUp],
             handler: closePopover
         )
-    }
-
-    func alert(notification: Notification) {
-        UpdateAvailableNotification.display(notification: notification)
     }
 
     @objc func openPopover(_ sender: NSButton) {

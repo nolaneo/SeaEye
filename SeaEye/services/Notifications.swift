@@ -43,34 +43,16 @@ struct BuildsNotification {
 struct UpdateAvailableNotification {
     static let notificationCenter = NSUserNotificationCenter.default
 
-    static func display(notification: Notification) {
-        if let userInfo = notification.userInfo {
-            if let message = userInfo["message"] as? String {
-                let notification = NSUserNotification()
-                notification.title = "SeaEye"
-                notification.informativeText = message
+    static func display(version: SeaEyeVersion) {
+        let url = version.downloadUrl.absoluteString
+        let notification = NSUserNotification()
+        notification.title = "SeaEye"
+        notification.informativeText = "A new version of SeaEye is available (\(version.latestVersion))"
+        notification.setValue(true, forKey: "_showsButtons")
+        notification.hasActionButton = true
+        notification.actionButtonTitle = "Download"
+        notification.userInfo = ["url": url]
 
-                if let url = userInfo["url"] as? String {
-                    notification.setValue(true, forKey: "_showsButtons")
-                    notification.hasActionButton = true
-                    notification.actionButtonTitle = "Download"
-                    notification.userInfo = ["url": url]
-                }
-
-                notificationCenter.deliver(notification)
-            }
-        }
-    }
-}
-
-struct ErrorAlert {
-    static func display(_ message: String) {
-        print(message)
-        let info = ["message": message]
-        NotificationCenter.default.post(
-            name: Notification.Name(rawValue: "SeaEyeAlert"),
-            object: self,
-            userInfo: info
-        )
+        notificationCenter.deliver(notification)
     }
 }
