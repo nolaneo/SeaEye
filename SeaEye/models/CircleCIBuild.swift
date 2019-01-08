@@ -24,8 +24,13 @@ struct CircleCIBuild: Decodable {
     let authorName: String?
     let buildNum: Int
     let buildUrl: URL
-    let startTime: Date
+    let startTime: Date?
+    var queuedAt: Date?
+    var stopTime: Date?
     let workflows: Workflow?
+    
+    private let initDate: Date = Date.distantPast
+
 
     init(branch: String, project: String, status: Status, subject: String, user: String, buildNum: Int, url: URL, date: Date) {
         self.branch = branch
@@ -37,6 +42,10 @@ struct CircleCIBuild: Decodable {
         self.buildUrl = url
         self.startTime = date
         self.workflows = nil
+    }
+    
+    func lastUpdateTime() -> Date {
+        return [self.startTime, self.queuedAt, self.stopTime, self.initDate].compactMap{ $0 }.max()!
     }
 }
 

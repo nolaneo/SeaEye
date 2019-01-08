@@ -53,7 +53,7 @@ struct BuildDecorator {
     func timeAndBuildNumber() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm MMM dd"
-        let startTime =  dateFormatter.string(from: build.startTime)
+        let startTime =  dateFormatter.string(from: build.lastUpdateTime())
         var result =  startTime + " \(seperator) Build #\(build.buildNum)"
         if build.authorName != nil {
             result += " \(seperator) By \(build.authorName!)"

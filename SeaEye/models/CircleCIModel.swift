@@ -52,34 +52,37 @@ class CircleCIModel: NSObject {
             for (project) in (self.allProjects) {
                 builds += project.projectBuilds
             }
-            self.allBuilds = builds.sorted {$0.startTime.timeIntervalSince1970 > $1.startTime.timeIntervalSince1970}
+            self.allBuilds = builds.sorted {$0.lastUpdateTime() > $1.lastUpdateTime()}
             self.calculateBuildStatus()
         }
     }
 
     func calculateBuildStatus() {
-        if lastNotificationDate != nil {
-            let buildsSinceLastNotification = allBuilds.filter {$0.startTime > lastNotificationDate}
-            if let summary = BuildSummary.generate(builds: buildsSinceLastNotification) {
-                switch summary.status {
-                case .running:
-                    print("Has running builds")
-                    let info = ["build": nil, "count": summary.count] as [String : Any]
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeYellowBuild"), object: nil, userInfo:info)
-                case .failed:
-                    print("Has red build \(String(describing: summary.build!.subject))")
-                    let info = ["build": summary.build!, "count": summary.count] as [String: Any]
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeRedBuild"), object: nil, userInfo: info)
-                case .success:
-                    print("Notifiy of a success build")
-                    let info = ["build": summary.build!, "count": summary.count] as [String : Any]
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeGreenBuild"), object: nil, userInfo:info)
-                }
+        let buildsSinceLastNotification = allBuilds.filter {$0.lastUpdateTime() > lastNotificationDate}
+        print("\(buildsSinceLastNotification.count) builds to update")
+        if let summary = BuildSummary.generate(builds: buildsSinceLastNotification) {
+            print(summary.status)
+            switch summary.status {
+            case .running:
+                print("Has running builds")
+                let info = ["build": nil, "count": summary.count] as [String : Any]
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeYellowBuild"), object: nil, userInfo:info)
+            case .failed:
+                print("Has red build \(String(describing: summary.build!.subject))")
+                let info = ["build": summary.build!, "count": summary.count] as [String: Any]
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeRedBuild"), object: nil, userInfo: info)
+            case .success:
+                print("Notifiy of a success build")
+                let info = ["build": summary.build!, "count": summary.count] as [String : Any]
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeGreenBuild"), object: nil, userInfo:info)
             }
         }
+        if buildsSinceLastNotification.count > 0 {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeUpdatedBuilds"), object: nil)
+            lastNotificationDate = Date()
+        }
 
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeUpdatedBuilds"), object: nil)
-        lastNotificationDate = Date()
+
     }
 
     @objc func validateUserSettingsAndStartRequests() {
