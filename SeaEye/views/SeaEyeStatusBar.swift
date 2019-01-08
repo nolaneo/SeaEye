@@ -51,7 +51,11 @@ struct SeaEyeStatusBar : IconSetter {
         case .success:
             return NSColor.systemGreen
         case .running:
-            return NSColor.systemYellow
+            if #available(OSX 10.13, *) {
+                return NSColor(named: "GithubYellow")
+            } else {
+                return NSColor.systemYellow
+            }
         case .idle:
             return nil
         }
