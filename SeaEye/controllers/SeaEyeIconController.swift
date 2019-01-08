@@ -12,8 +12,6 @@ class SeaEyeIconController: NSViewController {
     var statusBarItem: SeaEyeStatusBar!
     var applicationStatus = SeaEyeStatus()
 
-    var hasViewedBuilds = true
-
     var popover = NSPopover()
     var popoverController: SeaEyePopoverController
 
@@ -94,7 +92,6 @@ class SeaEyeIconController: NSViewController {
     @objc func openPopover(_ sender: NSButton) {
         self.resetIcon()
         if !popover.isShown {
-//            popoverController.model = self.model
             popoverController.applicationStatus = self.applicationStatus
             popover.contentViewController = popoverController
             popover.show(relativeTo: sender.frame, of: sender, preferredEdge: NSRectEdge.minY)
@@ -104,7 +101,6 @@ class SeaEyeIconController: NSViewController {
     }
 
     fileprivate func resetIcon() {
-        hasViewedBuilds = true
         statusBarItem.state = .idle
     }
 
