@@ -61,18 +61,9 @@ class Project: NSObject {
 
                 case .failure(let error):
                     print("error: \(error.localizedDescription) \(self.organizationName) \(self.projectName)")
+                    ErrorAlert.display(error.localizedDescription)
+                    self.stop()
                 }
         })
-    }
-
-    private func notifyError(_ error: String) {
-        print(error)
-        let info = ["message": error]
-        NotificationCenter.default.post(
-            name: Notification.Name(rawValue: "SeaEyeAlert"),
-            object: self,
-            userInfo: info
-        )
-        self.stop()
     }
 }

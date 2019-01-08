@@ -62,3 +62,15 @@ struct UpdateAvailableNotification {
         }
     }
 }
+
+struct ErrorAlert {
+    static func display(_ message: String) {
+        print(message)
+        let info = ["message": message]
+        NotificationCenter.default.post(
+            name: Notification.Name(rawValue: "SeaEyeAlert"),
+            object: self,
+            userInfo: info
+        )
+    }
+}
