@@ -73,6 +73,7 @@
 		F4B672D821B60A7C003E30A9 /* ApplicationStartupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B672D721B60A7C003E30A9 /* ApplicationStartupManager.swift */; };
 		F4F1A61D20D84CD1008B8C04 /* GithubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F1A61C20D84CD1008B8C04 /* GithubClient.swift */; };
 		F4F1A61E20D84DBE008B8C04 /* GithubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F1A61C20D84CD1008B8C04 /* GithubClient.swift */; };
+		F4FFD80421CA897F00E8C82E /* circleci-workflow.json in Resources */ = {isa = PBXBuildFile; fileRef = F4FFD80321CA897F00E8C82E /* circleci-workflow.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +148,7 @@
 		F4472C0B216D72B700ECD077 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F4B672D721B60A7C003E30A9 /* ApplicationStartupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationStartupManager.swift; sourceTree = "<group>"; };
 		F4F1A61C20D84CD1008B8C04 /* GithubClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubClient.swift; sourceTree = "<group>"; };
+		F4FFD80321CA897F00E8C82E /* circleci-workflow.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "circleci-workflow.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,6 +289,7 @@
 			children = (
 				60C73BF019FC025A0067CDCA /* Info.plist */,
 				53A3BE8C1FD34D85006961C6 /* circleci2-project.json */,
+				F4FFD80321CA897F00E8C82E /* circleci-workflow.json */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -436,8 +439,6 @@
 				601D48CB1A0A841F007EA297 /* icon_16x16.png in Resources */,
 				602BB1B71A1A880000E50B78 /* circleci-failed@2x.png in Resources */,
 				041E7C2920630A3400B22010 /* circleci-pending-alt@2x.png in Resources */,
-				6014AD9719FEE4A900865329 /* open@2x.png in Resources */,
-				6014AD9619FEE4A900865329 /* open.png in Resources */,
 				F4472C0C216D72B700ECD077 /* Main.storyboard in Resources */,
 				6008691D1A1D4F7400600E4C /* Main.xib in Resources */,
 				601D48CA1A0A841F007EA297 /* icon_128x128.png in Resources */,
@@ -457,6 +458,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4FFD80421CA897F00E8C82E /* circleci-workflow.json in Resources */,
 				53A3BE8D1FD34D85006961C6 /* circleci2-project.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
