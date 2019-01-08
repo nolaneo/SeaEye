@@ -48,10 +48,7 @@ class CircleCIModel: NSObject {
     @objc func updateBuilds() {
         autoreleasepool {
             print("Update builds!")
-            var builds: [CircleCIBuild] = []
-            for (project) in (self.allProjects) {
-                builds += project.projectBuilds
-            }
+            let builds: [CircleCIBuild] =  self.allProjects.flatMap {$0.projectBuilds}
             self.allBuilds = builds.sorted {$0.lastUpdateTime() > $1.lastUpdateTime()}
             self.calculateBuildStatus()
         }
@@ -81,8 +78,6 @@ class CircleCIModel: NSObject {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeUpdatedBuilds"), object: nil)
             lastNotificationDate = Date()
         }
-
-
     }
 
     @objc func validateUserSettingsAndStartRequests() {

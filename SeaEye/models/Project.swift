@@ -17,6 +17,7 @@ class Project: NSObject {
     var parent: CircleCIModel!
     var timer: Timer!
     var projectBuilds: [CircleCIBuild]
+    let client = CircleCIClient.init()
 
     init(name: String, organization: String, key: String, parentModel: CircleCIModel!) {
         projectBuilds = []
@@ -49,8 +50,8 @@ class Project: NSObject {
     }
 
     @objc func getBuildData(_: Any? = nil) {
-        CircleCIClient.init().getProject(name: "github/\(organizationName)/\(projectName)",
-                   completion: { (result: Result<[CircleCIBuild]>) -> Void in
+        client.getProject(name: "github/\(organizationName)/\(projectName)",
+                    completion: { (result: Result<[CircleCIBuild]>) -> Void in
                 switch result {
                 case .success(let builds):
                     let settings = Settings.load()
