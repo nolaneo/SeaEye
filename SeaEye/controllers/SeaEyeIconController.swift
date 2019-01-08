@@ -50,9 +50,11 @@ class SeaEyeIconController: NSViewController {
 
     func setup() {
         let secondsToRefreshBuilds = 30
-        let listeners : [BuildUpdateListener] = [TextPrinter()]
+        let listeners : [BuildUpdateListener] = [TextPrinter(),
+                                                 SeaEyeStatusBarListener.init(statusBar: self.statusBarItem)]
+
         clientBuildUpdateListeners = Settings.load().clientBuildUpdateListeners(listeners: listeners)
-//        clientBuildUpdateListeners = 
+
         // keep a timer for each build updater
         self.timers = clientBuildUpdateListeners.map { (cbul) -> Timer in
             return Timer.scheduledTimer(
