@@ -31,11 +31,20 @@ struct Settings: Codable {
 
     func projects(parentModel: CircleCIModel) -> [ProjectUpdater] {
         let projectNames = projectsString?.components(separatedBy: CharacterSet.whitespaces)
+        let client = CircleCIClient.init(apiKey: apiKey!)
         var projects = [ProjectUpdater]()
         if let projectNames = projectNames {
             for projectName in projectNames {
-                let project = ProjectUpdater(name: projectName, organization: organization!, apiKey: apiKey!, buildUpdateListener: parentModel)
-                projects.append(project)
+                let filter = Filter.init(userFilter: userFilter, branchFilter: branchFilter)
+                // github is hardcoded, as it was assumed
+                let project = Project.init(vcsProvider: "github",
+                                           organisation: self.organization!,
+                                           name: projectName,
+                                           filter: filter,
+                                           notify: self.notify)
+
+                let projectUpdater = ProjectUpdater(project: project, client: client, buildUpdateListener: parentModel)
+                projects.append(projectUpdater)
             }
         }
         return projects

@@ -37,9 +37,11 @@ class ProjectUpdater: NSObject {
     let client: CircleCIClient
     let project : Project
 
-    init(name: String, organization: String, apiKey: String, buildUpdateListener: BuildUpdateListener) {
-        project = Project.init(vcsProvider: "github", organisation: organization, name: name, filter: nil, notify: false)
-        client = CircleCIClient(apiKey: apiKey)
+    init(project: Project,
+         client: CircleCIClient,
+         buildUpdateListener: BuildUpdateListener) {
+        self.client = client
+        self.project = project
         projectBuilds = []
         buildListener = buildUpdateListener
     }
@@ -71,9 +73,7 @@ class ProjectUpdater: NSObject {
                     completion: { (result: Result<[CircleCIBuild]>) -> Void in
                 switch result {
                 case .success(let builds):
-                    let settings = Settings.load()
-                    let f = Filter.init(userFilter: settings.userFilter, branchFilter: settings.branchFilter)
-                    self.projectBuilds = f.builds(builds)
+                    self.projectBuilds = self.project.filter?.builds(builds) ?? builds
                     self.buildListener.runModelUpdates()
                     break
 
