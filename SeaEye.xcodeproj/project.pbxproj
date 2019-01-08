@@ -55,6 +55,7 @@
 		F412CA9921D3E3A40069C7C7 /* SeaEyeDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F412CA9821D3E3A40069C7C7 /* SeaEyeDecoder.swift */; };
 		F412CA9A21D3E3C90069C7C7 /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F412CA9621D3E3530069C7C7 /* HTTPRequest.swift */; };
 		F412CA9B21D3E3D50069C7C7 /* SeaEyeDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F412CA9821D3E3A40069C7C7 /* SeaEyeDecoder.swift */; };
+		F412CA9D21D3ED0D0069C7C7 /* BuildDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F412CA9C21D3ED0D0069C7C7 /* BuildDecorator.swift */; };
 		F422C54820D48CC2002A5897 /* VersionNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422C54720D48CC2002A5897 /* VersionNumber.swift */; };
 		F422C54920D48CDD002A5897 /* VersionNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422C54720D48CC2002A5897 /* VersionNumber.swift */; };
 		F422C54B20D48CF2002A5897 /* VersionNumberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422C54A20D48CF2002A5897 /* VersionNumberTests.swift */; };
@@ -119,6 +120,7 @@
 		F412CA9121D3DF050069C7C7 /* NSImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImage.swift; sourceTree = "<group>"; };
 		F412CA9621D3E3530069C7C7 /* HTTPRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
 		F412CA9821D3E3A40069C7C7 /* SeaEyeDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaEyeDecoder.swift; sourceTree = "<group>"; };
+		F412CA9C21D3ED0D0069C7C7 /* BuildDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildDecorator.swift; sourceTree = "<group>"; };
 		F422C54720D48CC2002A5897 /* VersionNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionNumber.swift; sourceTree = "<group>"; };
 		F422C54A20D48CF2002A5897 /* VersionNumberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionNumberTests.swift; sourceTree = "<group>"; };
 		F4472C0B216D72B700ECD077 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 		6014AD8C19FED4B400865329 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				F412CA9C21D3ED0D0069C7C7 /* BuildDecorator.swift */,
 				6014AD8D19FED4C400865329 /* BuildView.swift */,
 				600869131A1D3EA000600E4C /* SeaEyeUpdatesController.xib */,
 				6008690D1A1D3E5E00600E4C /* SeaEyeBuildsController.xib */,
@@ -448,6 +451,7 @@
 				60C73C1519FD7ECB0067CDCA /* SeaEyeBuildsController.swift in Sources */,
 				60C73C0619FC16FE0067CDCA /* SeaEyePopoverController.swift in Sources */,
 				60C73C1819FD7EE10067CDCA /* SeaEyeSettingsController.swift in Sources */,
+				F412CA9D21D3ED0D0069C7C7 /* BuildDecorator.swift in Sources */,
 				5394797D1FCB8C5200D6FA19 /* CircleCIBuild.swift in Sources */,
 				60F0232C1A1A95930067C0A0 /* SeaEyeUpdatesController.swift in Sources */,
 				603314A619FDCBFD0073EAED /* CircleCIModel.swift in Sources */,
