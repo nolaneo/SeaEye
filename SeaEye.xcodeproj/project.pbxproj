@@ -286,8 +286,8 @@
 		60C73C0419FC16C60067CDCA /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				60C73C0519FC16FE0067CDCA /* SeaEyePopoverController.swift */,
 				60C73C0719FC23F60067CDCA /* SeaEyeIconController.swift */,
+				60C73C0519FC16FE0067CDCA /* SeaEyePopoverController.swift */,
 				60C73C1319FD7ECB0067CDCA /* SeaEyeBuildsController.swift */,
 				60C73C1719FD7EE10067CDCA /* SeaEyeSettingsController.swift */,
 				60F0232B1A1A95930067C0A0 /* SeaEyeUpdatesController.swift */,
