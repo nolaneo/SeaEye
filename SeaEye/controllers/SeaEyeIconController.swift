@@ -9,16 +9,7 @@
 import Cocoa
 
 class SeaEyeIconController: NSViewController {
-    var statusBarItem: NSStatusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-
-    enum IconStatus : String {
-        case idle = "circleci"
-        case success = "circleci-success"
-        case failure = "circleci-fail"
-        case running = "circleci-running"
-    }
-
-    var iconButton: NSStatusBarButton!
+    var statusBarItem: SeaEyeStatusBar!
     var model = CircleCIModel()
     var applicationStatus = SeaEyeStatus()
     var hasViewedBuilds = true
@@ -30,8 +21,8 @@ class SeaEyeIconController: NSViewController {
         self.popoverController = SeaEyePopoverController(nibName: "SeaEyePopoverController", bundle: nil)
         self.popoverController.model = self.model
         self.popoverController.applicationStatus = self.applicationStatus
-
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.statusBarItem = SeaEyeStatusBar(controller: self)
         setup()
     }
 
@@ -41,6 +32,7 @@ class SeaEyeIconController: NSViewController {
         self.popoverController.applicationStatus = self.applicationStatus
 
         super.init(coder: coder)
+        self.statusBarItem = SeaEyeStatusBar(controller: self)
         setup()
     }
 
@@ -50,7 +42,6 @@ class SeaEyeIconController: NSViewController {
     }
 
     func setup() {
-        self.setupIcon()
         self.resetIcon()
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "SeaEyeAlert"),
                                                object: nil,
@@ -82,65 +73,26 @@ class SeaEyeIconController: NSViewController {
         )
     }
 
-    func setIcon(_ state: IconStatus) {
-        let statusImage = NSImage.init(named: state.rawValue)
-        statusImage?.size = NSSize.init(width: 16, height: 16)
-        statusImage?.isTemplate = true
-
-        if let tintColor = colorForState(state) {
-            iconButton.image = statusImage?.tinting(with: tintColor)
-        } else {
-            iconButton.image = statusImage
-        }
-    }
-
-    private func colorForState(_ imageName: IconStatus) -> NSColor? {
-        switch imageName {
-        case .failure:
-            return NSColor.systemRed
-        case .success:
-            return NSColor.systemGreen
-        case .running:
-            return NSColor.systemYellow
-        case .idle:
-            return nil
-        }
-    }
-
-    func setupIcon() {
-        statusBarItem.target = self
-
-        if let button = statusBarItem.button {
-            iconButton = button
-            setIcon(.idle)
-            button.target = self
-            button.action = #selector(openPopover)
-            button.isEnabled = true
-            button.state = .on
-        }
-        statusBarItem.action = #selector(openPopover)
-    }
-
     func alert(notification: Notification) {
         UpdateAvailableNotification.display(notification: notification)
     }
 
     func setGreenBuildIcon(notification: Notification) {
         if hasViewedBuilds {
-            setIcon(.success)
+            statusBarItem.state = .success
             displayBuildNotifcation(notification)
         }
     }
 
     func setRedBuildIcon(notification: Notification) {
         hasViewedBuilds = false
-        setIcon(.failure)
+        statusBarItem.state = .failure
         displayBuildNotifcation(notification)
     }
     
     func setYellowBuildIcon(notification: Notification) -> Void {
         if hasViewedBuilds {
-            setIcon(.running)
+            statusBarItem.state = .running
         }
     }
 
@@ -155,11 +107,6 @@ class SeaEyeIconController: NSViewController {
         }
     }
 
-    fileprivate func resetIcon() {
-        hasViewedBuilds = true
-        setIcon(.idle)
-    }
-
     @objc func openPopover(_ sender: NSButton) {
         self.resetIcon()
         if !popover.isShown {
@@ -170,6 +117,11 @@ class SeaEyeIconController: NSViewController {
         } else {
             popover.close()
         }
+    }
+
+    fileprivate func resetIcon() {
+        hasViewedBuilds = true
+        statusBarItem.state = .idle
     }
 
     func closePopover(_ aEvent: Any?) {
