@@ -74,18 +74,6 @@ class SeaEyeIconController: NSViewController {
                                                queue: OperationQueue.main,
                                                using: alert)
 
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "SeaEyeRedBuild"),
-                                               object: nil,
-                                               queue: OperationQueue.main,
-                                               using: setRedBuildIcon)
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "SeaEyeGreenBuild"),
-                                               object: nil,
-                                               queue: OperationQueue.main,
-                                               using: setGreenBuildIcon)
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "SeaEyeYellowBuild"),
-                                               object: nil,
-                                               queue: OperationQueue.main,
-                                               using: setYellowBuildIcon)
         NotificationCenter.default.addObserver(forName:
                                                NSNotification.Name(rawValue: "SeaEyeClosePopover"),
                                                object: nil,
@@ -101,36 +89,6 @@ class SeaEyeIconController: NSViewController {
 
     func alert(notification: Notification) {
         UpdateAvailableNotification.display(notification: notification)
-    }
-
-    func setGreenBuildIcon(notification: Notification) {
-        if hasViewedBuilds {
-            statusBarItem.state = .success
-            displayBuildNotifcation(notification)
-        }
-    }
-
-    func setRedBuildIcon(notification: Notification) {
-        hasViewedBuilds = false
-        statusBarItem.state = .failure
-        displayBuildNotifcation(notification)
-    }
-    
-    func setYellowBuildIcon(notification: Notification) -> Void {
-        if hasViewedBuilds {
-            statusBarItem.state = .running
-        }
-    }
-
-    func displayBuildNotifcation(_ notification: Notification) {
-        if settings.notify {
-            if let build = notification.userInfo!["build"] as? CircleCIBuild{
-                if let count = notification.userInfo!["count"] as? Int {
-                    let bn = BuildsNotification.init(build, count)
-                    NSUserNotificationCenter.default.deliver(bn.toNotification())
-                }
-            }
-        }
     }
 
     @objc func openPopover(_ sender: NSButton) {
