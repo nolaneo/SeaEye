@@ -84,6 +84,8 @@
 		F4D5A45121E44BA6006140DE /* ClientBuildUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A44F21E44BA6006140DE /* ClientBuildUpdater.swift */; };
 		F4D5A45321E44BF1006140DE /* NewBuildFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A45221E44BF1006140DE /* NewBuildFilter.swift */; };
 		F4D5A45421E44BF1006140DE /* NewBuildFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A45221E44BF1006140DE /* NewBuildFilter.swift */; };
+		F4D5A45721E451BA006140DE /* TextPrinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A45621E451BA006140DE /* TextPrinter.swift */; };
+		F4D5A45821E451BA006140DE /* TextPrinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A45621E451BA006140DE /* TextPrinter.swift */; };
 		F4F1A61D20D84CD1008B8C04 /* GithubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F1A61C20D84CD1008B8C04 /* GithubClient.swift */; };
 		F4F1A61E20D84DBE008B8C04 /* GithubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F1A61C20D84CD1008B8C04 /* GithubClient.swift */; };
 		F4FFD80421CA897F00E8C82E /* circleci-workflow.json in Resources */ = {isa = PBXBuildFile; fileRef = F4FFD80321CA897F00E8C82E /* circleci-workflow.json */; };
@@ -155,6 +157,7 @@
 		F4D5A44C21E42A77006140DE /* FilterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilterTest.swift; path = models/FilterTest.swift; sourceTree = "<group>"; };
 		F4D5A44F21E44BA6006140DE /* ClientBuildUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientBuildUpdater.swift; sourceTree = "<group>"; };
 		F4D5A45221E44BF1006140DE /* NewBuildFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBuildFilter.swift; sourceTree = "<group>"; };
+		F4D5A45621E451BA006140DE /* TextPrinter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPrinter.swift; sourceTree = "<group>"; };
 		F4F1A61C20D84CD1008B8C04 /* GithubClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubClient.swift; sourceTree = "<group>"; };
 		F4FFD80321CA897F00E8C82E /* circleci-workflow.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "circleci-workflow.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -265,6 +268,7 @@
 		60C73BDB19FC025A0067CDCA /* SeaEye */ = {
 			isa = PBXGroup;
 			children = (
+				F4D5A45521E45196006140DE /* listeners */,
 				F412CA9521D3E33C0069C7C7 /* networking */,
 				F412CA9021D3DEE70069C7C7 /* extensions */,
 				5394797E1FCB8C9000D6FA19 /* services */,
@@ -350,6 +354,14 @@
 				F412CA9821D3E3A40069C7C7 /* SeaEyeDecoder.swift */,
 			);
 			path = networking;
+			sourceTree = "<group>";
+		};
+		F4D5A45521E45196006140DE /* listeners */ = {
+			isa = PBXGroup;
+			children = (
+				F4D5A45621E451BA006140DE /* TextPrinter.swift */,
+			);
+			path = listeners;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -486,6 +498,7 @@
 				F4B672D821B60A7C003E30A9 /* ApplicationStartupManager.swift in Sources */,
 				F4D5A43D21E41FEB006140DE /* SeaEyeStatusBar.swift in Sources */,
 				60C73C1519FD7ECB0067CDCA /* SeaEyeBuildsController.swift in Sources */,
+				F4D5A45721E451BA006140DE /* TextPrinter.swift in Sources */,
 				60C73C0619FC16FE0067CDCA /* SeaEyePopoverController.swift in Sources */,
 				60C73C1819FD7EE10067CDCA /* SeaEyeSettingsController.swift in Sources */,
 				F4D5A43B21E40E4C006140DE /* Notifications.swift in Sources */,
@@ -513,6 +526,7 @@
 				F4D5A44B21E427BB006140DE /* Filter.swift in Sources */,
 				539479861FCB8E8F00D6FA19 /* CircleCIModel.swift in Sources */,
 				F412CA9A21D3E3C90069C7C7 /* HTTPRequest.swift in Sources */,
+				F4D5A45821E451BA006140DE /* TextPrinter.swift in Sources */,
 				F4D5A45121E44BA6006140DE /* ClientBuildUpdater.swift in Sources */,
 				F4D5A44421E4208A006140DE /* NSImage.swift in Sources */,
 				F4D5A44221E42076006140DE /* SeaEyeBuildsController.swift in Sources */,
