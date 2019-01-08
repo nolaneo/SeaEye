@@ -10,9 +10,8 @@
 		5389EF4A1FCBBA49001C0D5F /* DecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5389EF491FCBBA49001C0D5F /* DecodingTests.swift */; };
 		539479751FCB639300D6FA19 /* CircleCIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539479741FCB639300D6FA19 /* CircleCIClient.swift */; };
 		5394797D1FCB8C5200D6FA19 /* CircleCIBuild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5394797C1FCB8C5200D6FA19 /* CircleCIBuild.swift */; };
-		539479861FCB8E8F00D6FA19 /* CircleCIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603314A519FDCBFD0073EAED /* CircleCIModel.swift */; };
 		539479871FCB8EA500D6FA19 /* CircleCIBuild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5394797C1FCB8C5200D6FA19 /* CircleCIBuild.swift */; };
-		539479891FCB908E00D6FA19 /* ProjectUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6014AD981A09874D00865329 /* ProjectUpdater.swift */; };
+		539479891FCB908E00D6FA19 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6014AD981A09874D00865329 /* Project.swift */; };
 		5394798A1FCB908E00D6FA19 /* SeaEyeStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607C78251A190C580040FD5C /* SeaEyeStatus.swift */; };
 		5394798D1FCB909600D6FA19 /* CircleCIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539479741FCB639300D6FA19 /* CircleCIClient.swift */; };
 		53A3BE8D1FD34D85006961C6 /* circleci2-project.json in Resources */ = {isa = PBXBuildFile; fileRef = 53A3BE8C1FD34D85006961C6 /* circleci2-project.json */; };
@@ -22,7 +21,7 @@
 		600869141A1D3EA000600E4C /* SeaEyeUpdatesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 600869131A1D3EA000600E4C /* SeaEyeUpdatesController.xib */; };
 		6008691D1A1D4F7400600E4C /* Main.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6008691C1A1D4F7400600E4C /* Main.xib */; };
 		6014AD8E19FED4C400865329 /* BuildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6014AD8D19FED4C400865329 /* BuildView.swift */; };
-		6014AD991A09874E00865329 /* ProjectUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6014AD981A09874D00865329 /* ProjectUpdater.swift */; };
+		6014AD991A09874E00865329 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6014AD981A09874D00865329 /* Project.swift */; };
 		601D48CA1A0A841F007EA297 /* icon_128x128.png in Resources */ = {isa = PBXBuildFile; fileRef = 601D48C31A0A841F007EA297 /* icon_128x128.png */; };
 		601D48CB1A0A841F007EA297 /* icon_16x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 601D48C41A0A841F007EA297 /* icon_16x16.png */; };
 		601D48CC1A0A841F007EA297 /* icon_256x256.png in Resources */ = {isa = PBXBuildFile; fileRef = 601D48C51A0A841F007EA297 /* icon_256x256.png */; };
@@ -32,7 +31,6 @@
 		601D48D01A0A841F007EA297 /* icon_512x512@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 601D48C91A0A841F007EA297 /* icon_512x512@2x.png */; };
 		602BB1C01A1A93E900E50B78 /* update.png in Resources */ = {isa = PBXBuildFile; fileRef = 602BB1BE1A1A93E900E50B78 /* update.png */; };
 		602BB1C11A1A93E900E50B78 /* update@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 602BB1BF1A1A93E900E50B78 /* update@2x.png */; };
-		603314A619FDCBFD0073EAED /* CircleCIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603314A519FDCBFD0073EAED /* CircleCIModel.swift */; };
 		607C77F11A1860070040FD5C /* build-failed.png in Resources */ = {isa = PBXBuildFile; fileRef = 607C77E91A1860070040FD5C /* build-failed.png */; };
 		607C77F21A1860070040FD5C /* build-failed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 607C77EA1A1860070040FD5C /* build-failed@2x.png */; };
 		607C77F31A1860070040FD5C /* build-passed.png in Resources */ = {isa = PBXBuildFile; fileRef = 607C77EB1A1860070040FD5C /* build-passed.png */; };
@@ -118,7 +116,7 @@
 		600869131A1D3EA000600E4C /* SeaEyeUpdatesController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeaEyeUpdatesController.xib; sourceTree = "<group>"; };
 		6008691C1A1D4F7400600E4C /* Main.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Main.xib; sourceTree = "<group>"; };
 		6014AD8D19FED4C400865329 /* BuildView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildView.swift; sourceTree = "<group>"; };
-		6014AD981A09874D00865329 /* ProjectUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectUpdater.swift; sourceTree = "<group>"; };
+		6014AD981A09874D00865329 /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		601D48C31A0A841F007EA297 /* icon_128x128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_128x128.png; sourceTree = "<group>"; };
 		601D48C41A0A841F007EA297 /* icon_16x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_16x16.png; sourceTree = "<group>"; };
 		601D48C51A0A841F007EA297 /* icon_256x256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_256x256.png; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 		601D48C91A0A841F007EA297 /* icon_512x512@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_512x512@2x.png"; sourceTree = "<group>"; };
 		602BB1BE1A1A93E900E50B78 /* update.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = update.png; sourceTree = "<group>"; };
 		602BB1BF1A1A93E900E50B78 /* update@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "update@2x.png"; sourceTree = "<group>"; };
-		603314A519FDCBFD0073EAED /* CircleCIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleCIModel.swift; sourceTree = "<group>"; };
 		607C77E91A1860070040FD5C /* build-failed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "build-failed.png"; sourceTree = "<group>"; };
 		607C77EA1A1860070040FD5C /* build-failed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "build-failed@2x.png"; sourceTree = "<group>"; };
 		607C77EB1A1860070040FD5C /* build-passed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "build-passed.png"; sourceTree = "<group>"; };
@@ -234,9 +231,8 @@
 			isa = PBXGroup;
 			children = (
 				5394797C1FCB8C5200D6FA19 /* CircleCIBuild.swift */,
-				603314A519FDCBFD0073EAED /* CircleCIModel.swift */,
 				F4D5A44921E427BB006140DE /* Filter.swift */,
-				6014AD981A09874D00865329 /* ProjectUpdater.swift */,
+				6014AD981A09874D00865329 /* Project.swift */,
 				607C78251A190C580040FD5C /* SeaEyeStatus.swift */,
 				F4D5A43121E3F6B3006140DE /* Settings.swift */,
 			);
@@ -505,7 +501,7 @@
 				F412CA9221D3DF050069C7C7 /* NSImage.swift in Sources */,
 				607C78261A190C580040FD5C /* SeaEyeStatus.swift in Sources */,
 				60C73C0919FC23F60067CDCA /* SeaEyeIconController.swift in Sources */,
-				6014AD991A09874E00865329 /* ProjectUpdater.swift in Sources */,
+				6014AD991A09874E00865329 /* Project.swift in Sources */,
 				F4D5A43521E3F782006140DE /* FallbackView.swift in Sources */,
 				F4B672D821B60A7C003E30A9 /* ApplicationStartupManager.swift in Sources */,
 				F4D5A43D21E41FEB006140DE /* SeaEyeStatusBar.swift in Sources */,
@@ -520,7 +516,6 @@
 				F4D5A45D21E454F4006140DE /* NotificationListener.swift in Sources */,
 				60F0232C1A1A95930067C0A0 /* SeaEyeUpdatesController.swift in Sources */,
 				F4D5A43821E3FE32006140DE /* BuildSummary.swift in Sources */,
-				603314A619FDCBFD0073EAED /* CircleCIModel.swift in Sources */,
 				F4D5A45A21E45257006140DE /* SeaEyeStatusBarListener.swift in Sources */,
 				F412CA9721D3E3530069C7C7 /* HTTPRequest.swift in Sources */,
 				F4D5A46021E45613006140DE /* PopoverContollerBuildUpdateListener.swift in Sources */,
@@ -539,7 +534,6 @@
 				5394798D1FCB909600D6FA19 /* CircleCIClient.swift in Sources */,
 				539479871FCB8EA500D6FA19 /* CircleCIBuild.swift in Sources */,
 				F4D5A44B21E427BB006140DE /* Filter.swift in Sources */,
-				539479861FCB8E8F00D6FA19 /* CircleCIModel.swift in Sources */,
 				F412CA9A21D3E3C90069C7C7 /* HTTPRequest.swift in Sources */,
 				F4D5A45821E451BA006140DE /* TextPrinter.swift in Sources */,
 				F4D5A45121E44BA6006140DE /* ClientBuildUpdater.swift in Sources */,
@@ -566,7 +560,7 @@
 				F4D5A44721E420B5006140DE /* ApplicationStartupManager.swift in Sources */,
 				F4D5A43921E3FE32006140DE /* BuildSummary.swift in Sources */,
 				F4D5A44121E4206D006140DE /* SeaEyeSettingsController.swift in Sources */,
-				539479891FCB908E00D6FA19 /* ProjectUpdater.swift in Sources */,
+				539479891FCB908E00D6FA19 /* Project.swift in Sources */,
 				F4D5A43E21E41FEB006140DE /* SeaEyeStatusBar.swift in Sources */,
 				F4D5A45421E44BF1006140DE /* NewBuildFilter.swift in Sources */,
 				F4D5A45E21E454F4006140DE /* NotificationListener.swift in Sources */,
