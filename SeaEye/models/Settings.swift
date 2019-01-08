@@ -29,12 +29,12 @@ struct Settings: Codable {
         return settings
     }
 
-    func projects(parentModel: CircleCIModel) -> [Project] {
+    func projects(parentModel: CircleCIModel) -> [ProjectUpdater] {
         let projectNames = projectsString?.components(separatedBy: CharacterSet.whitespaces)
-        var projects = [Project]()
+        var projects = [ProjectUpdater]()
         if let projectNames = projectNames {
             for projectName in projectNames {
-                let project = Project(name: projectName, organization: organization!, key: apiKey!, parentModel: parentModel)
+                let project = ProjectUpdater(name: projectName, organization: organization!, apiKey: apiKey!, buildUpdateListener: parentModel)
                 projects.append(project)
             }
         }

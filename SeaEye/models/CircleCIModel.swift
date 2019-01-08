@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class CircleCIModel: NSObject {
+class CircleCIModel: NSObject, BuildUpdateListener {
     override init() {
         self.allBuilds = []
         self.allProjects = []
@@ -23,7 +23,7 @@ class CircleCIModel: NSObject {
         self.validateUserSettingsAndStartRequests()
     }
 
-    var allProjects: [Project]
+    var allProjects: [ProjectUpdater]
     var allBuilds: [CircleCIBuild]
     var lastNotificationDate: Date = Date()
     var updatesTimer: Timer!

@@ -2,8 +2,11 @@ import Foundation
 
 struct CircleCIClient {
     var baseURL: String = "https://circleci.com"
-    var token: String = UserDefaults.standard.string(forKey: "SeaEyeAPIKey") ?? ""
+    var token: String
 
+    init(apiKey: String) {
+        token = apiKey
+    }
     func getProject(name: String, completion: ((Result<[CircleCIBuild]>) -> Void)?) {
         request(get(path: "project/\(name)"), of: [CircleCIBuild].self, completion: completion)
     }

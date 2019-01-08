@@ -9,8 +9,6 @@
 import Cocoa
 
 class SeaEyePopoverController: NSViewController {
-
-    var clickEventMonitor: AnyObject!
     @IBOutlet weak var subcontrollerView: NSView!
     @IBOutlet weak var openSettingsButton: NSButton!
     @IBOutlet weak var openBuildsButton: NSButton!

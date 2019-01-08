@@ -8,23 +8,40 @@
 
 import Cocoa
 
-class Project: NSObject {
+struct Project: Codable, CustomStringConvertible {
+    let vcsProvider: String
+    let organisation: String
+    let name: String
+    var filter: Filter?
+    var notify: Bool
+
+    func path() -> String {
+        return "\(vcsProvider)/\(organisation)/\(name)"
+    }
+
+    var description: String {
+        return "\(organisation)/\(name)"
+    }
+}
+
+protocol BuildUpdateListener {
+    func runModelUpdates()
+}
+
+class ProjectUpdater: NSObject {
     let REFRESH_TIME = 30
 
-    var projectName: String
-    var organizationName: String
-    var apiKey: String!
-    var parent: CircleCIModel!
+    var buildListener: BuildUpdateListener
     var timer: Timer!
     var projectBuilds: [CircleCIBuild]
-    let client = CircleCIClient.init()
+    let client: CircleCIClient
+    let project : Project
 
-    init(name: String, organization: String, key: String, parentModel: CircleCIModel!) {
+    init(name: String, organization: String, apiKey: String, buildUpdateListener: BuildUpdateListener) {
+        project = Project.init(vcsProvider: "github", organisation: organization, name: name, filter: nil, notify: false)
+        client = CircleCIClient(apiKey: apiKey)
         projectBuilds = []
-        projectName = name
-        apiKey = key
-        organizationName = organization
-        parent = parentModel
+        buildListener = buildUpdateListener
     }
 
     func reset() {
@@ -36,7 +53,7 @@ class Project: NSObject {
             timer = Timer.scheduledTimer(
                         timeInterval: TimeInterval(REFRESH_TIME),
                         target: self,
-                        selector: #selector(Project.getBuildData),
+                        selector: #selector(ProjectUpdater.getBuildData),
                         userInfo: nil,
                         repeats: true)
         }
@@ -50,18 +67,18 @@ class Project: NSObject {
     }
 
     @objc func getBuildData(_: Any? = nil) {
-        client.getProject(name: "github/\(organizationName)/\(projectName)",
+        client.getProject(name: project.path(),
                     completion: { (result: Result<[CircleCIBuild]>) -> Void in
                 switch result {
                 case .success(let builds):
                     let settings = Settings.load()
                     let f = Filter.init(userFilter: settings.userFilter, branchFilter: settings.branchFilter)
                     self.projectBuilds = f.builds(builds)
-                    self.parent.runModelUpdates()
+                    self.buildListener.runModelUpdates()
                     break
 
                 case .failure(let error):
-                    print("error: \(error.localizedDescription) \(self.organizationName) \(self.projectName)")
+                    print("error: \(error.localizedDescription) \(self.project)")
                     ErrorAlert.display(error.localizedDescription)
                     self.stop()
                 }
