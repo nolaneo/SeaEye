@@ -68,6 +68,7 @@ class SeaEyeIconController: NSViewController {
         for cbul in clientBuildUpdateListeners { cbul.getBuilds() }
 
         self.resetIcon()
+
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "SeaEyeAlert"),
                                                object: nil,
                                                queue: OperationQueue.main,

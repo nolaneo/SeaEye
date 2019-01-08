@@ -63,20 +63,6 @@ class SeaEyePopoverController: NSViewController, BuildSetter {
         subcontrollerView.addSubview(buildsViewController.view)
     }
 
-    fileprivate func setupStoryboardControllers() {
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        if let sVC = storyboard.instantiateController(withIdentifier: "SeaEyeSettingsController") as? SeaEyeSettingsController {
-            settingsViewController = sVC
-        }
-
-        if let bVC = storyboard.instantiateController(withIdentifier: "SeaEyeBuildsController") as? SeaEyeBuildsController {
-            buildsViewController = bVC
-        }
-        if let uVC = storyboard.instantiateController(withIdentifier: "SeaEyeUpdatesController") as? SeaEyeUpdatesController {
-            updatesViewController = uVC
-        }
-    }
-
     fileprivate func setupNibControllers() {
         settingsViewController = SeaEyeSettingsController(nibName: "SeaEyeSettingsController", bundle: nil)
         buildsViewController = SeaEyeBuildsController(nibName: "SeaEyeBuildsController", bundle: nil)
