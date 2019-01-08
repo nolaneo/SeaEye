@@ -9,8 +9,6 @@
 import Cocoa
 
 class CircleCIModel: NSObject {
-    var hasValidUserSettings = false
-
     override init() {
         self.allBuilds = []
         self.allProjects = []
@@ -98,11 +96,7 @@ class CircleCIModel: NSObject {
     }
 
     @objc func validateUserSettingsAndStartRequests() {
-        let validation = self.validateKey("SeaEyeAPIKey")
-            && self.validateKey("SeaEyeOrganization")
-            && self.validateKey("SeaEyeProjects")
-
-        if validation {
+        if Settings.load().valid() {
             allBuilds = []
             NotificationCenter.default.post(name: Notification.Name(rawValue: "SeaEyeUpdatedBuilds"), object: nil)
             resetAPIRequests()
@@ -111,33 +105,11 @@ class CircleCIModel: NSObject {
         }
     }
 
-    fileprivate func validateKey(_ key: String) -> Bool {
-        let userDefaults = UserDefaults.standard
-        return userDefaults.string(forKey: key) != nil
-    }
-
     fileprivate func resetAPIRequests() {
-
         self.stopAPIRequests()
 
-        allProjects = []
-        let userDefaults = UserDefaults.standard
-        let apiKey = userDefaults.string(forKey: "SeaEyeAPIKey") as String!
-        let organization = userDefaults.string(forKey: "SeaEyeOrganization") as String!
-        let projectsString = userDefaults.string(forKey: "SeaEyeProjects") as String!
-        let projectsArray = projectsString?.components(separatedBy: CharacterSet.whitespaces)
-
-        allProjects = projectsFromSettings(apiKey: apiKey!, organisation: organization!, projectNames: projectsArray!)
+        allProjects = Settings.load().projects(parentModel: self)
         self.startAPIRequests()
-    }
-
-    func projectsFromSettings(apiKey: String, organisation: String, projectNames: [String]) -> [Project] {
-        var projects = [Project]()
-        for projectName in projectNames {
-            let project = Project(name: projectName, organization: organisation, key: apiKey, parentModel: self)
-            projects.append(project)
-        }
-        return projects
     }
 
     fileprivate func startAPIRequests() {

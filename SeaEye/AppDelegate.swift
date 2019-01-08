@@ -40,7 +40,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     fileprivate func initialSetup() {
         let userDefaults = UserDefaults.standard
         if userDefaults.bool(forKey: "SeaEyePerformedFirstSetup") == false {
-            userDefaults.set(true, forKey: "SeaEyeNotify")
+            userDefaults.set(true, forKey: Settings.Keys.notify.rawValue)
             userDefaults.set(true, forKey: "SeaEyePerformedFirstSetup")
             ApplicationStartupManager.toggleLaunchAtStartup()
         }

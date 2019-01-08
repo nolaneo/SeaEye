@@ -53,10 +53,10 @@ class Project: NSObject {
                    completion: { (result: Result<[CircleCIBuild]>) -> Void in
                 switch result {
                 case .success(let builds):
-
+                    let settings = Settings.load()
                     do {
-                        let branchString = UserDefaults.standard.string(forKey: "SeaEyeBranches")
-                        let userString = UserDefaults.standard.string(forKey: "SeaEyeUsers")
+                        let branchString = settings.branchFilter
+                        let userString = settings.userFilter
                         var branchRegex: NSRegularExpression?
                         var userRegex: NSRegularExpression?
 
@@ -85,7 +85,6 @@ class Project: NSObject {
 
     private func notifyError(_ error: String) {
         print(error)
-        UserDefaults.standard.set(true, forKey: "SeaEyeError")
         let info = ["message": error]
         NotificationCenter.default.post(
             name: Notification.Name(rawValue: "SeaEyeAlert"),

@@ -24,6 +24,7 @@ class SeaEyeIconController: NSViewController {
     var hasViewedBuilds = true
     var popover = NSPopover()
     var popoverController: SeaEyePopoverController
+    let settings = Settings.load()
 
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         self.popoverController = SeaEyePopoverController(nibName: "SeaEyePopoverController", bundle: nil)
@@ -79,7 +80,6 @@ class SeaEyeIconController: NSViewController {
             matching: [.leftMouseUp, .rightMouseUp],
             handler: closePopover
         )
-
     }
 
     func colorForState(_ imageName: IconStatus) -> NSColor? {
@@ -143,7 +143,7 @@ class SeaEyeIconController: NSViewController {
     func setGreenBuildIcon(notification: Notification) {
         if hasViewedBuilds {
             setIcon(.success)
-            if UserDefaults.standard.bool(forKey: "SeaEyeNotify") {
+            if settings.notify {
                 if let build = notification.userInfo!["build"] as? CircleCIBuild{
                     if let count = notification.userInfo!["count"] as? Int {
                         NSUserNotificationCenter.default.deliver(buildNotification(build: build, count: count))
@@ -157,7 +157,7 @@ class SeaEyeIconController: NSViewController {
         hasViewedBuilds = false
         setIcon(.failure)
 
-        if UserDefaults.standard.bool(forKey: "SeaEyeNotify") {
+        if settings.notify {
             if let build = notification.userInfo!["build"] as? CircleCIBuild{
                 if let count = notification.userInfo!["count"] as? Int {
                     NSUserNotificationCenter.default.deliver(buildNotification(build: build, count: count))
