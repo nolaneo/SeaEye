@@ -122,48 +122,20 @@ class SeaEyeIconController: NSViewController {
     }
 
     func alert(notification: Notification) {
-        if let userInfo = notification.userInfo {
-            if let message = userInfo["message"] as? String {
-                let notification = NSUserNotification()
-                notification.title = "SeaEye"
-                notification.informativeText = message
-
-                if let url = userInfo["url"] as? String {
-                    notification.setValue(true, forKey: "_showsButtons")
-                    notification.hasActionButton = true
-                    notification.actionButtonTitle = "Download"
-                    notification.userInfo = ["url": url]
-                }
-
-                NSUserNotificationCenter.default.deliver(notification)
-            }
-        }
+        UpdateAvailableNotification.display(notification: notification)
     }
 
     func setGreenBuildIcon(notification: Notification) {
         if hasViewedBuilds {
             setIcon(.success)
-            if settings.notify {
-                if let build = notification.userInfo!["build"] as? CircleCIBuild{
-                    if let count = notification.userInfo!["count"] as? Int {
-                        NSUserNotificationCenter.default.deliver(buildNotification(build: build, count: count))
-                    }
-                }
-            }
+            displayBuildNotifcation(notification)
         }
     }
 
     func setRedBuildIcon(notification: Notification) {
         hasViewedBuilds = false
         setIcon(.failure)
-
-        if settings.notify {
-            if let build = notification.userInfo!["build"] as? CircleCIBuild{
-                if let count = notification.userInfo!["count"] as? Int {
-                    NSUserNotificationCenter.default.deliver(buildNotification(build: build, count: count))
-                }
-            }
-        }
+        displayBuildNotifcation(notification)
     }
     
     func setYellowBuildIcon(notification: Notification) -> Void {
@@ -172,31 +144,15 @@ class SeaEyeIconController: NSViewController {
         }
     }
 
-    func buildNotification(build: CircleCIBuild, count: Int) -> NSUserNotification {
-        let notification = notifcationForBuild(build: build)
-        let endTitle = build.status == .success ? "Sucess" : "Failed"
-        let plural = build.status == .success ?  "successful" : "failed"
-        let imageFile = build.status == .success ? "build-passed" : "build-failed"
-
-        notification.title = "SeaEye: Build \(endTitle)"
-        if count > 1 {
-            notification.subtitle = "You have \(count) \(plural) builds"
-        } else {
-            notification.subtitle = build.subject
-            notification.informativeText = build.authorName
+    func displayBuildNotifcation(_ notification: Notification) {
+        if settings.notify {
+            if let build = notification.userInfo!["build"] as? CircleCIBuild{
+                if let count = notification.userInfo!["count"] as? Int {
+                    let bn = BuildsNotification.init(build, count)
+                    NSUserNotificationCenter.default.deliver(bn.toNotification())
+                }
+            }
         }
-
-        let image = NSImage(named: imageFile)
-        notification.setValue(image, forKey: "_identityImage")
-        return notification
-    }
-
-    private func notifcationForBuild(build: CircleCIBuild) -> NSUserNotification {
-        let notification = NSUserNotification()
-        notification.setValue(false, forKey: "_identityImageHasBorder")
-        notification.setValue(nil, forKey: "_imageURL")
-        notification.userInfo = ["url": build.buildUrl.absoluteString]
-        return notification
     }
 
     fileprivate func resetIcon() {

@@ -67,6 +67,7 @@
 		F4D5A43621E3F782006140DE /* FallbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A43421E3F782006140DE /* FallbackView.swift */; };
 		F4D5A43821E3FE32006140DE /* BuildSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A43721E3FE32006140DE /* BuildSummary.swift */; };
 		F4D5A43921E3FE32006140DE /* BuildSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A43721E3FE32006140DE /* BuildSummary.swift */; };
+		F4D5A43B21E40E4C006140DE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A43A21E40E4C006140DE /* Notifications.swift */; };
 		F4F1A61D20D84CD1008B8C04 /* GithubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F1A61C20D84CD1008B8C04 /* GithubClient.swift */; };
 		F4F1A61E20D84DBE008B8C04 /* GithubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F1A61C20D84CD1008B8C04 /* GithubClient.swift */; };
 		F4FFD80421CA897F00E8C82E /* circleci-workflow.json in Resources */ = {isa = PBXBuildFile; fileRef = F4FFD80321CA897F00E8C82E /* circleci-workflow.json */; };
@@ -134,6 +135,7 @@
 		F4D5A43121E3F6B3006140DE /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		F4D5A43421E3F782006140DE /* FallbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallbackView.swift; sourceTree = "<group>"; };
 		F4D5A43721E3FE32006140DE /* BuildSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildSummary.swift; sourceTree = "<group>"; };
+		F4D5A43A21E40E4C006140DE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		F4F1A61C20D84CD1008B8C04 /* GithubClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubClient.swift; sourceTree = "<group>"; };
 		F4FFD80321CA897F00E8C82E /* circleci-workflow.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "circleci-workflow.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,6 +164,7 @@
 				F4B672D721B60A7C003E30A9 /* ApplicationStartupManager.swift */,
 				539479811FCB8D4C00D6FA19 /* BuildsForUser.swift */,
 				F4D5A43721E3FE32006140DE /* BuildSummary.swift */,
+				F4D5A43A21E40E4C006140DE /* Notifications.swift */,
 			);
 			path = services;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 				60C73C1519FD7ECB0067CDCA /* SeaEyeBuildsController.swift in Sources */,
 				60C73C0619FC16FE0067CDCA /* SeaEyePopoverController.swift in Sources */,
 				60C73C1819FD7EE10067CDCA /* SeaEyeSettingsController.swift in Sources */,
+				F4D5A43B21E40E4C006140DE /* Notifications.swift in Sources */,
 				F412CA9D21D3ED0D0069C7C7 /* BuildDecorator.swift in Sources */,
 				F412CA9F21D3EFEF0069C7C7 /* DateFormatter.swift in Sources */,
 				5394797D1FCB8C5200D6FA19 /* CircleCIBuild.swift in Sources */,
