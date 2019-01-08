@@ -9,8 +9,8 @@ struct SeaEyeStatusBarListener: BuildUpdateListener {
 
         let buildsAfterApplicationStarted = builds.filter {$0.lastUpdateTime() > initDate}
 
-        if let thing = BuildSummary.generate(builds: buildsAfterApplicationStarted) {
-            switch thing.status {
+        if let buildSummary = BuildSummary.generate(builds: buildsAfterApplicationStarted) {
+            switch buildSummary.status {
             case .running:
                  statusBar.state = .running
             case .failed:
