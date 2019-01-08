@@ -25,7 +25,7 @@ class CircleCIModel: NSObject {
 
     var allProjects: [Project]
     var allBuilds: [CircleCIBuild]
-    var lastNotificationDate: Date!
+    var lastNotificationDate: Date = Date()
     var updatesTimer: Timer!
 
     func runModelUpdates() {
