@@ -9,8 +9,8 @@
 import Cocoa
 
 class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
-
-    var model: CircleCIModel!
+    private var builds: [CircleCIBuild] = []
+    var buildsDict: [String: CircleCIBuild] = Dictionary()
 
     @IBOutlet weak var fallbackView: NSTextField!
     @IBOutlet weak var buildsTable: NSTableView!
@@ -27,60 +27,44 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
         super.viewDidLoad()
     }
 
-    override func viewWillAppear() {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "SeaEyeUpdatedBuilds"),
-                                               object: nil,
-                                               queue: OperationQueue.main,
-                                               using: reloadBuilds)
-    }
-
     override func viewDidAppear() {
         self.reloadBuilds()
     }
 
-    override func viewWillDisappear() {
-        NotificationCenter.default.removeObserver(self)
-    }
-
     func reloadBuilds(_: Any? = nil) {
         print("Reload builds!")
-        setupFallBackViews()
-        buildsTable.reloadData()
+        buildsTable?.reloadData()
+        if fallbackView != nil {
+            setupFallBackViews()
+        }
+    }
+
+    func regenBuilds() {
+        self.builds = Array(buildsDict.values).sorted(by: {
+            $0.lastUpdateTime() > $1.lastUpdateTime()
+        })
+        buildsTable?.reloadData()
     }
 
     fileprivate func setupFallBackViews() {
-        fallbackView.isHidden = false
-        buildsTable.isHidden = true
-        let userDefaults = UserDefaults.standard
-        if userDefaults.string(forKey: "SeaEyeAPIKey") == nil {
-            return fallbackView.stringValue = "You have not set an API key"
+        if let fallbackString = FallbackView(settings: Settings.load(), builds: builds).description() {
+            fallbackView.stringValue = fallbackString
+            fallbackView.isHidden = false
+            buildsTable.isHidden = true
+        } else {
+            fallbackView.isHidden = true
+            buildsTable.isHidden = false
         }
-
-        if userDefaults.string(forKey: "SeaEyeOrganization") == nil {
-            return fallbackView.stringValue = "You have not set an organization name"
-        }
-        if userDefaults.value(forKey: "SeaEyeProjects") == nil {
-            return fallbackView.stringValue = "You have not added any projects"
-        }
-        if model.allBuilds.count == 0 {
-            return fallbackView.stringValue = "No Recent Builds Found"
-        }
-        fallbackView.isHidden = true
-        buildsTable.isHidden = false
     }
 
     //NSTableViewDataSource
     func numberOfRows(in tableView: NSTableView) -> Int {
-        if model != nil {
-            return model.allBuilds.count
-        } else {
-            return 0
-        }
+        return builds.count
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if let cellView: BuildView = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as? BuildView {
-            cellView.setupForBuild(build: model.allBuilds[row])
+            cellView.setupForBuild(build: builds[row])
             return cellView
         }
         return nil
