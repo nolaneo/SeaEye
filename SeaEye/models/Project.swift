@@ -49,7 +49,7 @@ class Project: NSObject {
     }
 
     @objc func getBuildData(_: Any? = nil) {
-        getProject(name: "github/\(organizationName)/\(projectName)",
+        CircleCIClient.init().getProject(name: "github/\(organizationName)/\(projectName)",
                    completion: { (result: Result<[CircleCIBuild]>) -> Void in
                 switch result {
                 case .success(let builds):
