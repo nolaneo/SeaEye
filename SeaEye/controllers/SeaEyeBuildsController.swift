@@ -49,24 +49,14 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     }
 
     fileprivate func setupFallBackViews() {
-        fallbackView.isHidden = false
-        buildsTable.isHidden = true
-        let userDefaults = UserDefaults.standard
-        if userDefaults.string(forKey: "SeaEyeAPIKey") == nil {
-            return fallbackView.stringValue = "You have not set an API key"
+        if let fallbackString = FallbackView(settings: Settings.load(), builds: model.allBuilds).description() {
+            fallbackView.stringValue = fallbackString
+            fallbackView.isHidden = false
+            buildsTable.isHidden = true
+        } else {
+            fallbackView.isHidden = true
+            buildsTable.isHidden = false
         }
-
-        if userDefaults.string(forKey: "SeaEyeOrganization") == nil {
-            return fallbackView.stringValue = "You have not set an organization name"
-        }
-        if userDefaults.value(forKey: "SeaEyeProjects") == nil {
-            return fallbackView.stringValue = "You have not added any projects"
-        }
-        if model.allBuilds.count == 0 {
-            return fallbackView.stringValue = "No Recent Builds Found"
-        }
-        fallbackView.isHidden = true
-        buildsTable.isHidden = false
     }
 
     //NSTableViewDataSource
