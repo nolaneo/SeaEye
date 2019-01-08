@@ -172,14 +172,6 @@ class SeaEyeIconController: NSViewController {
         }
     }
 
-    func notifcationForBuild(build: CircleCIBuild) -> NSUserNotification {
-        let notification = NSUserNotification()
-        notification.setValue(false, forKey: "_identityImageHasBorder")
-        notification.setValue(nil, forKey: "_imageURL")
-        notification.userInfo = ["url": build.buildUrl.absoluteString]
-        return notification
-    }
-
     func buildNotification(build: CircleCIBuild, count: Int) -> NSUserNotification {
         let notification = notifcationForBuild(build: build)
         let endTitle = build.status == .success ? "Sucess" : "Failed"
@@ -196,6 +188,14 @@ class SeaEyeIconController: NSViewController {
 
         let image = NSImage(named: imageFile)
         notification.setValue(image, forKey: "_identityImage")
+        return notification
+    }
+
+    private func notifcationForBuild(build: CircleCIBuild) -> NSUserNotification {
+        let notification = NSUserNotification()
+        notification.setValue(false, forKey: "_identityImageHasBorder")
+        notification.setValue(nil, forKey: "_imageURL")
+        notification.userInfo = ["url": build.buildUrl.absoluteString]
         return notification
     }
 
