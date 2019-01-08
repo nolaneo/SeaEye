@@ -24,7 +24,7 @@ struct Project: Codable, CustomStringConvertible {
     }
 }
 
-protocol BuildUpdateListener {
+protocol OldBuildUpdateListener {
     func runModelUpdates()
 }
 
@@ -32,14 +32,14 @@ class ProjectUpdater: NSObject {
     private let REFRESH_TIME = 30
     private var timer: Timer!
 
-    var buildListener: BuildUpdateListener
+    var buildListener: OldBuildUpdateListener
     var projectBuilds: [CircleCIBuild]
     let client: CircleCIClient
     let project : Project
 
     init(project: Project,
          client: CircleCIClient,
-         buildUpdateListener: BuildUpdateListener) {
+         buildUpdateListener: OldBuildUpdateListener) {
         self.client = client
         self.project = project
         projectBuilds = []

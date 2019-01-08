@@ -49,7 +49,17 @@ struct Settings: Codable {
             }
         }
         return [ClientProject.init(client: client, projects: projects)]
+    }
 
+    func clientBuildUpdateListeners(listeners: [BuildUpdateListener]) -> [ClientBuildUpdater] {
+        let clientProjects = projects()
+        return clientProjects.flatMap { (cp) -> [ClientBuildUpdater] in
+            cp.projects.map{
+                return ClientBuildUpdater(listeners: listeners,
+                                          client: cp.client,
+                                          project: $0)
+            }
+        }
     }
 
     func valid() -> Bool {

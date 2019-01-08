@@ -11,10 +11,17 @@ import Cocoa
 class SeaEyeIconController: NSViewController {
     var statusBarItem: SeaEyeStatusBar!
     var model = CircleCIModel()
+
     var applicationStatus = SeaEyeStatus()
+
     var hasViewedBuilds = true
+
     var popover = NSPopover()
     var popoverController: SeaEyePopoverController
+
+    var clientBuildUpdateListeners : [ClientBuildUpdater] = []
+    var timers: [Timer] = []
+
     let settings = Settings.load()
 
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
@@ -42,6 +49,22 @@ class SeaEyeIconController: NSViewController {
     }
 
     func setup() {
+        let secondsToRefreshBuilds = 30
+        let listeners : [BuildUpdateListener] = [TextPrinter()]
+        clientBuildUpdateListeners = Settings.load().clientBuildUpdateListeners(listeners: listeners)
+//        clientBuildUpdateListeners = 
+        // keep a timer for each build updater
+        self.timers = clientBuildUpdateListeners.map { (cbul) -> Timer in
+            return Timer.scheduledTimer(
+                timeInterval: TimeInterval(secondsToRefreshBuilds),
+                target: cbul,
+                selector: #selector(cbul.getBuilds),
+                userInfo: nil,
+                repeats: true
+            )
+        }
+        for cbul in clientBuildUpdateListeners { cbul.getBuilds() }
+
         self.resetIcon()
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "SeaEyeAlert"),
                                                object: nil,

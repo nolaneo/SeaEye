@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class CircleCIModel: NSObject, BuildUpdateListener {
+class CircleCIModel: NSObject, OldBuildUpdateListener {
     override init() {
         self.allBuilds = []
         self.projectUpdaters = []

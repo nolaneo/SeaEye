@@ -1,6 +1,10 @@
 import Foundation
 
-struct CircleCIClient: Codable {
+protocol BuildClient {
+    func getProject(name: String, completion: ((Result<[CircleCIBuild]>) -> Void)?)
+}
+
+struct CircleCIClient: Codable, BuildClient {
     var baseURL: String = "https://circleci.com"
     var token: String
 
