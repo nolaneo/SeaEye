@@ -82,19 +82,6 @@ class SeaEyeIconController: NSViewController {
         )
     }
 
-    func colorForState(_ imageName: IconStatus) -> NSColor? {
-        switch imageName {
-        case .failure:
-            return NSColor.systemRed
-        case .success:
-            return NSColor.systemGreen
-        case .running:
-            return NSColor.systemYellow
-        case .idle:
-            return nil
-        }
-    }
-
     func setIcon(_ state: IconStatus) {
         let statusImage = NSImage.init(named: state.rawValue)
         statusImage?.size = NSSize.init(width: 16, height: 16)
@@ -104,6 +91,19 @@ class SeaEyeIconController: NSViewController {
             iconButton.image = statusImage?.tinting(with: tintColor)
         } else {
             iconButton.image = statusImage
+        }
+    }
+
+    private func colorForState(_ imageName: IconStatus) -> NSColor? {
+        switch imageName {
+        case .failure:
+            return NSColor.systemRed
+        case .success:
+            return NSColor.systemGreen
+        case .running:
+            return NSColor.systemYellow
+        case .idle:
+            return nil
         }
     }
 
