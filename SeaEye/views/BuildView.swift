@@ -18,25 +18,25 @@ class BuildView: NSTableCellView {
 
     func setupForBuild(build: CircleCIBuild) {
         url = build.buildUrl
-        statusAndSubject.stringValue = build.status.capitalized
+        statusAndSubject.stringValue = build.status.rawValue.capitalized
 
-        if build.status == "no_tests" {
+        if build.status == .noTests {
             statusAndSubject.stringValue = "No tests"
         }
         if build.subject != nil {
             statusAndSubject.stringValue += ": \(build.subject!)"
         }
         switch build.status {
-        case "success": setColors(greenColor())
-        case "fixed": setColors(greenColor())
-        case "no_tests": setColors(redColor())
-        case "failed": setColors(redColor())
-        case "timedout": setColors(redColor())
-        case "running": setColors(blueColor())
-        case "canceled": setColors(grayColor())
-        case "retried": setColors(grayColor())
+        case .success: setColors(greenColor())
+        case .fixed: setColors(greenColor())
+        case .noTests: setColors(redColor())
+        case .failed: setColors(redColor())
+        case .timedout: setColors(redColor())
+        case .running: setColors(blueColor())
+        case .canceled: setColors(grayColor())
+        case .retried: setColors(grayColor())
         default:
-            print("unknown status" + build.status)
+            print("unknown status" + build.status.rawValue)
         }
         branchName.stringValue = "\(build.branch) | \(build.reponame)"
         let dateFormatter = DateFormatter()

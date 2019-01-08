@@ -158,9 +158,9 @@ class SeaEyeIconController: NSViewController {
 
     func buildNotification(build: CircleCIBuild, count: Int) -> NSUserNotification {
         let notification = notifcationForBuild(build: build)
-        let endTitle = build.status == "success" ? "Sucess" : "Failed"
-        let plural = build.status == "success" ?  "successful" : "failed"
-        let imageFile = build.status == "success" ? "build-passed" : "build-failed"
+        let endTitle = build.status == .success ? "Sucess" : "Failed"
+        let plural = build.status == .success ?  "successful" : "failed"
+        let imageFile = build.status == .success ? "build-passed" : "build-failed"
 
         notification.title = "SeaEye: Build \(endTitle)"
         if count > 1 {

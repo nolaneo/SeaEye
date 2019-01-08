@@ -12,7 +12,7 @@ class BuildsForUserTests: XCTestCase {
     func testBuildsForUserWithUserRegex() {
         let homerBuild = CircleCIBuild.init(branch: "master",
                                             project: "foobar",
-                                            status: "failure",
+                                            status: .failed,
                                             subject: "wat",
                                             user: "Homer Simpson",
                                             buildNum: 5,
@@ -20,7 +20,7 @@ class BuildsForUserTests: XCTestCase {
                                             date: Date())
         let homerDevBuild = CircleCIBuild.init(branch: "dev",
                                             project: "foobar",
-                                            status: "failure",
+                                            status: .failed,
                                             subject: "wat",
                                             user: "Homer Simpson",
                                             buildNum: 5,
@@ -28,7 +28,7 @@ class BuildsForUserTests: XCTestCase {
                                             date: Date())
         let bartBuild = CircleCIBuild.init(branch: "master",
                                           project: "foobar",
-                                          status: "failure",
+                                          status: .failed,
                                           subject: "wat",
                                           user: "Bart Simpson",
                                           buildNum: 4,

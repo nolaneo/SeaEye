@@ -69,11 +69,11 @@ class CircleCIModel: NSObject {
             for build in allBuilds {
                 if build.startTime.timeIntervalSince1970 > lastNotificationDate.timeIntervalSince1970 {
                     switch build.status {
-                    case "failed": failures += 1; failedBuild = build
-                    case "timedout": failures += 1; failedBuild = build
-                    case "success": successes += 1; successfulBuild = build
-                    case "fixed": successes += 1; successfulBuild = build
-                    case "running": runningBuilds += 1
+                    case .failed: failures += 1; failedBuild = build
+                    case .timedout: failures += 1; failedBuild = build
+                    case .success: successes += 1; successfulBuild = build
+                    case .fixed: successes += 1; successfulBuild = build
+                    case .running: runningBuilds += 1
                     default: break
                     }
                 }
