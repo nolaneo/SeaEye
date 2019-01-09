@@ -31,7 +31,8 @@ class SeaEyeStatusBarListenerTest: XCTestCase {
                                    organisation: "nolaneo",
                                    name: "SeaEye",
                                    filter: nil,
-                                   notify: true)
+                                   notifySuccess: true,
+                                   notifyFailure: true)
         sut.notify(project: project, builds: [failed])
 
         XCTAssertEqual(sut.statusBar.state, .idle, "Old builds should not effect the status")

@@ -56,8 +56,8 @@
 		F422C54B20D48CF2002A5897 /* VersionNumberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422C54A20D48CF2002A5897 /* VersionNumberTests.swift */; };
 		F4472C0C216D72B700ECD077 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4472C0B216D72B700ECD077 /* Main.storyboard */; };
 		F4B672D821B60A7C003E30A9 /* ApplicationStartupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B672D721B60A7C003E30A9 /* ApplicationStartupManager.swift */; };
-		F4D5A43221E3F6B3006140DE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A43121E3F6B3006140DE /* Settings.swift */; };
-		F4D5A43321E3F6B3006140DE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A43121E3F6B3006140DE /* Settings.swift */; };
+		F4D5A43221E3F6B3006140DE /* SettingsV0.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A43121E3F6B3006140DE /* SettingsV0.swift */; };
+		F4D5A43321E3F6B3006140DE /* SettingsV0.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A43121E3F6B3006140DE /* SettingsV0.swift */; };
 		F4D5A43521E3F782006140DE /* FallbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A43421E3F782006140DE /* FallbackView.swift */; };
 		F4D5A43621E3F782006140DE /* FallbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A43421E3F782006140DE /* FallbackView.swift */; };
 		F4D5A43821E3FE32006140DE /* BuildSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5A43721E3FE32006140DE /* BuildSummary.swift */; };
@@ -96,6 +96,17 @@
 		F4F4807221E46CE90038DC09 /* NotificationListenerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F4807121E46CE90038DC09 /* NotificationListenerTest.swift */; };
 		F4F4807421E471DE0038DC09 /* SettingsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F4807321E471DE0038DC09 /* SettingsTest.swift */; };
 		F4F4807621E4DD6A0038DC09 /* PopoverContollerBuildUpdateListenerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F4807521E4DD6A0038DC09 /* PopoverContollerBuildUpdateListenerTest.swift */; };
+		F4F4807821E518CE0038DC09 /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4F4807721E518CE0038DC09 /* PreferencesWindow.xib */; };
+		F4F4807A21E518F20038DC09 /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F4807921E518F20038DC09 /* PreferencesWindow.swift */; };
+		F4F4807C21E5191D0038DC09 /* CurrentProjectsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F4807B21E5191D0038DC09 /* CurrentProjectsController.swift */; };
+		F4F4807E21E519350038DC09 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F4807D21E519350038DC09 /* PreferencesWindowController.swift */; };
+		F4F4808021E5194A0038DC09 /* ServerTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F4807F21E5194A0038DC09 /* ServerTable.swift */; };
+		F4F4808221E5196B0038DC09 /* UnfollowedProjectsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F4808121E5196B0038DC09 /* UnfollowedProjectsController.swift */; };
+		F4F4808321E51B1B0038DC09 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F4807D21E519350038DC09 /* PreferencesWindowController.swift */; };
+		F4F4808421E51B2C0038DC09 /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F4807921E518F20038DC09 /* PreferencesWindow.swift */; };
+		F4F4808621E51B4D0038DC09 /* CurrentProjectsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F4807B21E5191D0038DC09 /* CurrentProjectsController.swift */; };
+		F4F4808721E51B510038DC09 /* ServerTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F4807F21E5194A0038DC09 /* ServerTable.swift */; };
+		F4F4808821E51B530038DC09 /* UnfollowedProjectsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F4808121E5196B0038DC09 /* UnfollowedProjectsController.swift */; };
 		F4FFD80421CA897F00E8C82E /* circleci-workflow.json in Resources */ = {isa = PBXBuildFile; fileRef = F4FFD80321CA897F00E8C82E /* circleci-workflow.json */; };
 /* End PBXBuildFile section */
 
@@ -155,7 +166,7 @@
 		F422C54A20D48CF2002A5897 /* VersionNumberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionNumberTests.swift; sourceTree = "<group>"; };
 		F4472C0B216D72B700ECD077 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F4B672D721B60A7C003E30A9 /* ApplicationStartupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationStartupManager.swift; sourceTree = "<group>"; };
-		F4D5A43121E3F6B3006140DE /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		F4D5A43121E3F6B3006140DE /* SettingsV0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsV0.swift; sourceTree = "<group>"; };
 		F4D5A43421E3F782006140DE /* FallbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallbackView.swift; sourceTree = "<group>"; };
 		F4D5A43721E3FE32006140DE /* BuildSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildSummary.swift; sourceTree = "<group>"; };
 		F4D5A43A21E40E4C006140DE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
@@ -173,6 +184,12 @@
 		F4F4807121E46CE90038DC09 /* NotificationListenerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListenerTest.swift; sourceTree = "<group>"; };
 		F4F4807321E471DE0038DC09 /* SettingsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTest.swift; sourceTree = "<group>"; };
 		F4F4807521E4DD6A0038DC09 /* PopoverContollerBuildUpdateListenerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PopoverContollerBuildUpdateListenerTest.swift; path = listeners/PopoverContollerBuildUpdateListenerTest.swift; sourceTree = "<group>"; };
+		F4F4807721E518CE0038DC09 /* PreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindow.xib; sourceTree = "<group>"; };
+		F4F4807921E518F20038DC09 /* PreferencesWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindow.swift; sourceTree = "<group>"; };
+		F4F4807B21E5191D0038DC09 /* CurrentProjectsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentProjectsController.swift; sourceTree = "<group>"; };
+		F4F4807D21E519350038DC09 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
+		F4F4807F21E5194A0038DC09 /* ServerTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerTable.swift; sourceTree = "<group>"; };
+		F4F4808121E5196B0038DC09 /* UnfollowedProjectsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnfollowedProjectsController.swift; sourceTree = "<group>"; };
 		F4FFD80321CA897F00E8C82E /* circleci-workflow.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "circleci-workflow.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -217,6 +234,7 @@
 				6008690D1A1D3E5E00600E4C /* SeaEyeBuildsController.xib */,
 				6008690F1A1D3E6F00600E4C /* SeaEyeSettingsController.xib */,
 				600869111A1D3E9200600E4C /* SeaEyePopoverController.xib */,
+				F4F4807721E518CE0038DC09 /* PreferencesWindow.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -242,7 +260,7 @@
 				F4D5A44921E427BB006140DE /* Filter.swift */,
 				6014AD981A09874D00865329 /* Project.swift */,
 				607C78251A190C580040FD5C /* SeaEyeStatus.swift */,
-				F4D5A43121E3F6B3006140DE /* Settings.swift */,
+				F4D5A43121E3F6B3006140DE /* SettingsV0.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -347,6 +365,7 @@
 				60C73C1319FD7ECB0067CDCA /* SeaEyeBuildsController.swift */,
 				60C73C1719FD7EE10067CDCA /* SeaEyeSettingsController.swift */,
 				60F0232B1A1A95930067C0A0 /* SeaEyeUpdatesController.swift */,
+				F4F4808521E51B390038DC09 /* preferences */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -390,6 +409,18 @@
 				F4F4807521E4DD6A0038DC09 /* PopoverContollerBuildUpdateListenerTest.swift */,
 			);
 			name = listeners;
+			sourceTree = "<group>";
+		};
+		F4F4808521E51B390038DC09 /* preferences */ = {
+			isa = PBXGroup;
+			children = (
+				F4F4807921E518F20038DC09 /* PreferencesWindow.swift */,
+				F4F4807B21E5191D0038DC09 /* CurrentProjectsController.swift */,
+				F4F4807D21E519350038DC09 /* PreferencesWindowController.swift */,
+				F4F4807F21E5194A0038DC09 /* ServerTable.swift */,
+				F4F4808121E5196B0038DC09 /* UnfollowedProjectsController.swift */,
+			);
+			path = preferences;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -481,6 +512,7 @@
 				601D48CC1A0A841F007EA297 /* icon_256x256.png in Resources */,
 				600869101A1D3E6F00600E4C /* SeaEyeSettingsController.xib in Resources */,
 				607C77F21A1860070040FD5C /* build-failed@2x.png in Resources */,
+				F4F4807821E518CE0038DC09 /* PreferencesWindow.xib in Resources */,
 				602BB1C11A1A93E900E50B78 /* update@2x.png in Resources */,
 				601D48CF1A0A841F007EA297 /* icon_512x512.png in Resources */,
 				601D48CD1A0A841F007EA297 /* icon_32x32.png in Resources */,
@@ -527,6 +559,8 @@
 				F4D5A43D21E41FEB006140DE /* SeaEyeStatusBar.swift in Sources */,
 				60C73C1519FD7ECB0067CDCA /* SeaEyeBuildsController.swift in Sources */,
 				F4D5A45721E451BA006140DE /* TextPrinter.swift in Sources */,
+				F4F4808221E5196B0038DC09 /* UnfollowedProjectsController.swift in Sources */,
+				F4F4807E21E519350038DC09 /* PreferencesWindowController.swift in Sources */,
 				60C73C0619FC16FE0067CDCA /* SeaEyePopoverController.swift in Sources */,
 				60C73C1819FD7EE10067CDCA /* SeaEyeSettingsController.swift in Sources */,
 				F4D5A43B21E40E4C006140DE /* Notifications.swift in Sources */,
@@ -539,8 +573,11 @@
 				F4D5A45A21E45257006140DE /* SeaEyeStatusBarListener.swift in Sources */,
 				F412CA9721D3E3530069C7C7 /* HTTPRequest.swift in Sources */,
 				F4D5A46021E45613006140DE /* PopoverContollerBuildUpdateListener.swift in Sources */,
-				F4D5A43221E3F6B3006140DE /* Settings.swift in Sources */,
+				F4D5A43221E3F6B3006140DE /* SettingsV0.swift in Sources */,
+				F4F4808021E5194A0038DC09 /* ServerTable.swift in Sources */,
 				F4D5A45021E44BA6006140DE /* ClientBuildUpdater.swift in Sources */,
+				F4F4807C21E5191D0038DC09 /* CurrentProjectsController.swift in Sources */,
+				F4F4807A21E518F20038DC09 /* PreferencesWindow.swift in Sources */,
 				F4D5A44A21E427BB006140DE /* Filter.swift in Sources */,
 				F4F1A61D20D84CD1008B8C04 /* GithubClient.swift in Sources */,
 				F4D5A45321E44BF1006140DE /* NewBuildFilter.swift in Sources */,
@@ -557,9 +594,12 @@
 				F412CA9A21D3E3C90069C7C7 /* HTTPRequest.swift in Sources */,
 				F4D5A45821E451BA006140DE /* TextPrinter.swift in Sources */,
 				F4D5A45121E44BA6006140DE /* ClientBuildUpdater.swift in Sources */,
+				F4F4808321E51B1B0038DC09 /* PreferencesWindowController.swift in Sources */,
 				F4D5A44421E4208A006140DE /* NSImage.swift in Sources */,
+				F4F4808721E51B510038DC09 /* ServerTable.swift in Sources */,
 				F4F4807221E46CE90038DC09 /* NotificationListenerTest.swift in Sources */,
 				F4D5A44221E42076006140DE /* SeaEyeBuildsController.swift in Sources */,
+				F4F4808421E51B2C0038DC09 /* PreferencesWindow.swift in Sources */,
 				F4D5A43F21E4201F006140DE /* SeaEyeIconController.swift in Sources */,
 				F4F4807421E471DE0038DC09 /* SettingsTest.swift in Sources */,
 				F4F1A61E20D84DBE008B8C04 /* GithubClient.swift in Sources */,
@@ -568,12 +608,14 @@
 				F422C54B20D48CF2002A5897 /* VersionNumberTests.swift in Sources */,
 				F4D5A44621E420A4006140DE /* BuildDecorator.swift in Sources */,
 				F412CA9B21D3E3D50069C7C7 /* SeaEyeDecoder.swift in Sources */,
+				F4F4808621E51B4D0038DC09 /* CurrentProjectsController.swift in Sources */,
 				F4D5A43621E3F782006140DE /* FallbackView.swift in Sources */,
 				F412CAA021D3EFEF0069C7C7 /* DateFormatter.swift in Sources */,
 				F4D5A44321E4207C006140DE /* SeaEyeUpdatesController.swift in Sources */,
 				F4D5A45B21E45257006140DE /* SeaEyeStatusBarListener.swift in Sources */,
 				F4D5A44021E42057006140DE /* SeaEyePopoverController.swift in Sources */,
-				F4D5A43321E3F6B3006140DE /* Settings.swift in Sources */,
+				F4F4808821E51B530038DC09 /* UnfollowedProjectsController.swift in Sources */,
+				F4D5A43321E3F6B3006140DE /* SettingsV0.swift in Sources */,
 				F422C54920D48CDD002A5897 /* VersionNumber.swift in Sources */,
 				F4F4807621E4DD6A0038DC09 /* PopoverContollerBuildUpdateListenerTest.swift in Sources */,
 				F4D5A44521E42099006140DE /* BuildView.swift in Sources */,
