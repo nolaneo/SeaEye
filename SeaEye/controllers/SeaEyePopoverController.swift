@@ -73,6 +73,8 @@ class SeaEyePopoverController: NSViewController, BuildSetter {
     }
 
     @IBAction func openSettings(_ sender: NSButton) {
+        NSApp.activate(ignoringOtherApps: true) // force the settings window to the front
+
         let prefrencesWindowVC = PreferencesWindowController()
         prefrencesWindowVC.iconController = iconController
         prefrencesWindowVC.showWindow(self)
