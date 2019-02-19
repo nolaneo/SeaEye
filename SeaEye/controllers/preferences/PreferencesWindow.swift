@@ -1,17 +1,6 @@
 import Cocoa
 import Foundation
 
-struct SelectedServerView {
-    var apiServerApiPath: NSTextField!
-    var apiServerAuthToken: NSTextField!
-    var apiServerTestButton: NSButton!
-
-    func fill(client: CircleCIClient) {
-        apiServerApiPath.stringValue = client.baseURL
-        apiServerAuthToken.stringValue = client.token
-        apiServerTestButton.isEnabled = !client.token.isEmpty
-    }
-}
 
 protocol ProjectFollowedDelegate {
     func addProject(project: Project)
@@ -25,7 +14,6 @@ protocol ProjectUpdatedDelegate {
     func projectUpdated(projectIndex: Int, project: Project)
 }
 
-// This is a kind-of-controller, that is used to
 class PreferencesWindow: NSWindow, NSWindowDelegate, NSTabViewDelegate, ProjectFollowedDelegate, ProjectUnfollowedDelegate, ProjectUpdatedDelegate {
     // Preferences window
     @IBOutlet var projectsTable: NSTableView!
@@ -33,9 +21,9 @@ class PreferencesWindow: NSWindow, NSWindowDelegate, NSTabViewDelegate, ProjectF
     @IBOutlet var launchAtStartup: NSButton!
     @IBOutlet var knownProjectsTable: NSTableView!
 
-    var serverListView: ServerTable?
-    var currentProjectsView: CurrentProjectsController!
-    var unfollowedProjectsTableView: UnfollowedProjectsController?
+    private var serverListView: ServerTable?
+    private var currentProjectsView: CurrentProjectsController!
+    private var unfollowedProjectsTableView: UnfollowedProjectsController?
 
     // Servers
     @IBOutlet var serverList: NSTableView!
@@ -73,50 +61,40 @@ class PreferencesWindow: NSWindow, NSWindowDelegate, NSTabViewDelegate, ProjectF
     }
 
     func addProject(project: Project) {
-        if let client = self.serverListView?.selectedClient() {
-            print("Add \(project) to \(client)")
+        print("Add \(project)")
 
-            if let index = self.serverListView?.selectedIndex {
-                print("Add Project \(index)")
-                settings.clientProjects[index].projects.append(project)
-                settings.save()
-                currentProjectsView.set(projects: settings.clientProjects[index].projects)
-                serverListView?.reloadFromSettings()
-                iconController?.reset()
-            }
+        if let index = self.serverListView?.selectedIndex {
+            print("Add Project \(index)")
+            settings.clientProjects[index].projects.append(project)
+            settings.save()
+            currentProjectsView.set(projects: settings.clientProjects[index].projects)
+            serverListView?.reloadFromSettings()
+            iconController?.reset()
         }
     }
 
     func removeProject(projectIndex: Int) {
-        if var client = self.serverListView?.selectedClient() {
-            print("Remove Project \(projectIndex)")
+        print("Remove Project \(projectIndex)")
 
-//            print("Remove \(client.projects[projectIndex]) to \(client)")
-//
-            if let index = self.serverListView?.selectedIndex {
-                settings.clientProjects[index].projects.remove(at: projectIndex)
-                settings.save()
-                serverListView?.reloadFromSettings()
-                currentProjectsView.set(projects: settings.clientProjects[index].projects)
-                iconController?.reset()
-            }
+        if let index = self.serverListView?.selectedIndex {
+            settings.clientProjects[index].projects.remove(at: projectIndex)
+            settings.save()
+            serverListView?.reloadFromSettings()
+            currentProjectsView.set(projects: settings.clientProjects[index].projects)
+            iconController?.reset()
         }
     }
 
     func projectUpdated(projectIndex: Int, project: Project) {
-        if var client = self.serverListView?.selectedClient() {
-            print("Project @ \(projectIndex) updated")
+        print("Project @ \(projectIndex) updated")
 
-//            print("Update \(client.clientProjects[projectIndex]) to \n \(project)")
-//
-            if let index = self.serverListView?.selectedIndex {
-                settings.clientProjects[index].projects[projectIndex] = project
-                settings.save()
-                currentProjectsView.set(projects: settings.clientProjects[index].projects)
-                iconController?.reset()
-            }
+        if let index = self.serverListView?.selectedIndex {
+            settings.clientProjects[index].projects[projectIndex] = project
+            settings.save()
+            currentProjectsView.set(projects: settings.clientProjects[index].projects)
+            iconController?.reset()
+        }
 
-        } else {}
     }
 
     func tabView(_: NSTabView, willSelect: NSTabViewItem?) {

@@ -44,15 +44,10 @@ class CurrentProjectsController: NSObject, NSTextFieldDelegate {
             print("\(itemsSelected) no row is selected")
         }
     }
-    
-    func controlTextDidEndEditing(_ obj: Notification) {
-//        print(obj)
-        print("Editing \(tableView.editedRow) - \(tableView.editedColumn)")
-        print("Clicked \(tableView.clickedRow) - \(tableView.clickedColumn)")
-        print("Selected \(tableView.selectedRow) - \(tableView.selectedColumn)")
 
+    func controlTextDidEndEditing(_ obj: Notification) {
         if let textField = obj.object as? NSTextField {
-            print("just set some value \(textField.tag) to \(textField.stringValue)")
+//            print("just set some value \(textField.tag) to \(textField.stringValue)")
             let branchFilterTag = 1
             let userFilterTag = 2
 
@@ -174,7 +169,6 @@ extension CurrentProjectsController: NSTableViewDataSource {
     func tableView(_ view: NSTableView,
                    objectValueFor col: NSTableColumn?,
                    row index: Int) -> Any? {
-//        print("\(index) \(col) \(col?.identifier.rawValue)")
         let project = projects[index]
         switch col?.identifier.rawValue {
         case "projectName":

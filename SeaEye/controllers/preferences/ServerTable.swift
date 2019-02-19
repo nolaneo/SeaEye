@@ -1,7 +1,7 @@
 import Cocoa
 import Foundation
 
-class ServerTable: NSObject, NSTableViewDelegate, NSTableViewDataSource {
+class ServerTable: NSObject {
     let cellIdentifier = NSUserInterfaceItemIdentifier(rawValue: "serverCell")
     var selectedIndex: Int = 0
     var clients: [CircleCIClient]
@@ -46,7 +46,7 @@ class ServerTable: NSObject, NSTableViewDelegate, NSTableViewDataSource {
         return nil
     }
 
-    func selectFirstClient() {
+    private func selectFirstClient() {
         tableView.selectRowIndexes([0], byExtendingSelection: false)
 
         if let mclient = selectedClient() {
@@ -60,7 +60,15 @@ class ServerTable: NSObject, NSTableViewDelegate, NSTableViewDataSource {
         clients = Settings.load().clients()
         tableView.reloadData()
     }
+}
 
+extension ServerTable : NSTableViewDataSource {
+    func numberOfRows(in _: NSTableView) -> Int {
+        return clients.count
+    }
+}
+
+extension ServerTable : NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor _: NSTableColumn?, row: Int) -> NSView? {
         if let cell = tableView.makeView(withIdentifier: cellIdentifier, owner: nil) as? NSTableCellView {
             cell.textField?.stringValue = clients[row].baseURL
@@ -73,9 +81,5 @@ class ServerTable: NSObject, NSTableViewDelegate, NSTableViewDataSource {
         print("\(row) was \(clients[row])")
         view.fill(client: clients[row])
         return true
-    }
-
-    func numberOfRows(in _: NSTableView) -> Int {
-        return clients.count
     }
 }

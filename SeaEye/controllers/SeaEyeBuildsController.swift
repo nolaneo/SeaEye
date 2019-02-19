@@ -36,7 +36,6 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     }
 
     func reloadBuilds(_: Any? = nil) {
-//        print("Reload builds!")
         buildsTable?.reloadData()
         if fallbackView != nil {
             setupFallBackViews()
