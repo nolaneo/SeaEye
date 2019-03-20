@@ -31,6 +31,9 @@ struct Settings: Codable {
 
     func projects() -> [ClientProject] {
         let projectNames = projectsString?.components(separatedBy: CharacterSet.whitespaces)
+        if (apiKey == nil) {
+            return []
+        }
         let client = CircleCIClient.init(apiKey: apiKey!)
         if !valid() {
             return []
