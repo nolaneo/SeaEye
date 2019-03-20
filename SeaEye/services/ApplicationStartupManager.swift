@@ -52,6 +52,9 @@ struct ApplicationStartupManager {
         let loginItems: [LSSharedFileListItem] = LSSharedFileListCopySnapshot(loginItemsRef, nil).takeRetainedValue() as! [LSSharedFileListItem]
         // swiftlint:enable force_cast
         print("There are \(loginItems.count) login items")
+        if (loginItems.last == nil) {
+            return (nil, nil)
+        }
         let lastItemRef: LSSharedFileListItem = loginItems.last!
 
         for currentItemRef in loginItems {
