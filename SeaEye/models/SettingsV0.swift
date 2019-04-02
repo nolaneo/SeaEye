@@ -43,11 +43,11 @@ struct SettingsV0: Codable {
     }
 
     func clientProjects() -> [ClientProject] {
-        let projectNames = projectsString?.components(separatedBy: CharacterSet.whitespaces)
-        let client = CircleCIClient.init(apiKey: apiKey!)
         if !valid() {
             return []
         }
+        let projectNames = projectsString?.components(separatedBy: CharacterSet.whitespaces)
+        let client = CircleCIClient.init(apiKey: apiKey!)
         var projects = [Project]()
 
         if let projectNames = projectNames {
