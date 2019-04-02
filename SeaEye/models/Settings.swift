@@ -1,13 +1,11 @@
 import Foundation
 
 struct Settings: Codable {
-    private static let defaultsKey: String = "SeaEyeSettings2"
+    static let defaultsKey: String = "SeaEyeSettings2"
 
     var clientProjects: [ClientProject]
 
     static func load(userDefaults: UserDefaults = UserDefaults.standard) -> Settings {
-        let oldSettings = SettingsV0.load(userDefaults: userDefaults)
-
         var settings = Settings(clientProjects: [])
         if let settingsString = userDefaults.string(forKey: self.defaultsKey) {
             let decoder = JSONDecoder()
@@ -19,10 +17,13 @@ struct Settings: Codable {
                     print(error.localizedDescription)
                 }
             }
+        } else {
+            let oldSettings = SettingsV0.load(userDefaults: userDefaults)
+            print("Migrating old settings to new settings format")
+            settings = oldSettings.toSettings()
+            settings.save(userDefaults: userDefaults)
         }
-        print("Migrating old settings to new settings format")
-        settings = oldSettings.toSettings()
-        settings.save(userDefaults: userDefaults)
+
         return settings
     }
 

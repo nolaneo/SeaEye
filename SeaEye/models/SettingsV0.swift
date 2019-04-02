@@ -29,6 +29,15 @@ struct SettingsV0: Codable {
         return settings
     }
 
+    func save(userDefaults: UserDefaults = UserDefaults.standard) {
+        userDefaults.set(self.apiKey, forKey: Keys.apiKey.rawValue)
+        userDefaults.set(self.organization, forKey: Keys.organisation.rawValue)
+        userDefaults.set(self.projectsString, forKey: Keys.projects.rawValue)
+        userDefaults.set(self.branchFilter, forKey: Keys.branchFilter.rawValue)
+        userDefaults.set(self.userFilter, forKey: Keys.userFilter.rawValue)
+        userDefaults.set(self.notify, forKey: Keys.notify.rawValue)
+    }
+
     func toSettings() -> Settings {
         return Settings(clientProjects: self.clientProjects())
     }
