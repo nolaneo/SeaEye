@@ -51,4 +51,12 @@ class SettingsTest: XCTestCase {
         // we should ignore v0's key, we have v1
         XCTAssertEqual(result.clientProjects.count, 0)
     }
+
+    func testInvalidJSONInUserDefaults() {
+        let ud = UserDefaults.init(suiteName: UUID().uuidString)!
+        XCTAssertNil(ud.string(forKey: Settings.defaultsKey))
+        ud.setValue("not a json string", forKey: Settings.defaultsKey)
+        let newSettings = Settings.load(userDefaults: ud)
+        XCTAssertEqual(newSettings.clientProjects.count, 0, "Settings should ignore invalid json")
+    }
 }
