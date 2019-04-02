@@ -5,7 +5,8 @@ struct Project: Codable, CustomStringConvertible {
     let organisation: String
     let name: String
     var filter: Filter?
-    var notify: Bool
+    var notifySuccess: Bool
+    var notifyFailure: Bool
 
     func path() -> String {
         return "\(vcsProvider)/\(organisation)/\(name)"

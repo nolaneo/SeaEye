@@ -25,7 +25,8 @@ class NotificationListenerTest: XCTestCase {
                                    organisation: "nolaneo",
                                    name: "SeaEye",
                                    filter: nil,
-                                   notify: true)
+                                   notifySuccess: true,
+                                   notifyFailure: true)
 
         sut.notify(project: project, builds: [failed])
     }

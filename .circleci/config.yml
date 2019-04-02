@@ -11,6 +11,7 @@ jobs:
     shell: /bin/bash --login -eo pipefail
     steps:
       - checkout
+      - run: gem install bundler -v 2.0.1
       - run: bundle install
       - run: bundle exec fastlane gym
       - run: bundle exec fastlane test

@@ -5,15 +5,18 @@ struct FallbackView {
     let builds: [CircleCIBuild]
 
     func description() -> String? {
-        if settings.apiKey == nil {
-            return "You have not set an API key"
+        if settings.numberOfProjects() == 0 {
+            return "Add some projects, mo chara"
         }
-        if settings.organization == nil {
-            return "You have not set an organization name"
-        }
-        if settings.projectsString == nil {
-            return "You have not added any projects"
-        }
+//        if settings.apiKey == nil {
+//            return "You have not set an API key"
+//        }
+//        if settings.organization == nil {
+//            return "You have not set an organization name"
+//        }
+//        if settings.projectsString == nil {
+//            return "You have not added any projects"
+//        }
         if builds.count == 0 {
             return "No Recent Builds Found"
         }

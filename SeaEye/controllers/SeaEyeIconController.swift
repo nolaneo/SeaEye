@@ -42,11 +42,21 @@ class SeaEyeIconController: NSViewController {
         setup()
     }
 
+    func reset() {
+        popoverController.buildsViewController.resetBuilds()
+        for timer in self.timers {
+            timer.invalidate()
+        }
+        setup()
+    }
+
     func setup() {
+        self.popoverController.iconController = self
         let secondsToRefreshBuilds = 30
         let popoverControllerBuildListener = PopoverContollerBuildUpdateListener(buildSetter: popoverController)
 
-        let listeners: [BuildUpdateListener] = [TextPrinter(),
+        let listeners: [BuildUpdateListener] = [
+//            TextPrinter(),
                                                  popoverControllerBuildListener,
                                                  SeaEyeStatusBarListener.init(statusBar: self.statusBarItem),
                                                  NotificationListener()]

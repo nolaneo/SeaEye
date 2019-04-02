@@ -15,11 +15,11 @@ class SeaEyePopoverController: NSViewController, BuildSetter {
     @IBOutlet weak var openUpdatesButton: NSButton!
     @IBOutlet weak var shutdownButton: NSButton!
 
-    var settingsViewController: SeaEyeSettingsController!
     var buildsViewController: SeaEyeBuildsController!
     var updatesViewController: SeaEyeUpdatesController!
     var applicationStatus: SeaEyeStatus!
     var appDelegate: NSApplicationDelegate? = NSApplication.shared.delegate
+    var iconController: SeaEyeIconController?
     var heldBuilds = [CircleCIBuild]()
 
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
@@ -57,14 +57,12 @@ class SeaEyePopoverController: NSViewController, BuildSetter {
     fileprivate func setupViewControllers() {
         setupNibControllers()
 
-        settingsViewController.parentController = self
         updatesViewController.applicationStatus = self.applicationStatus
         openBuildsButton.isHidden = true
         subcontrollerView.addSubview(buildsViewController.view)
     }
 
     fileprivate func setupNibControllers() {
-        settingsViewController = SeaEyeSettingsController(nibName: "SeaEyeSettingsController", bundle: nil)
         buildsViewController = SeaEyeBuildsController(nibName: "SeaEyeBuildsController", bundle: nil)
         // If we have builds from client, we hold them until we can push them into the buildViewsController
         if heldBuilds.count > 0 {
@@ -75,12 +73,12 @@ class SeaEyePopoverController: NSViewController, BuildSetter {
     }
 
     @IBAction func openSettings(_ sender: NSButton) {
-        openSettingsButton.isHidden = true
-        openUpdatesButton.isHidden = true
-        shutdownButton.isHidden = true
-        openBuildsButton.isHidden = false
-        buildsViewController.view.removeFromSuperview()
-        subcontrollerView.addSubview(settingsViewController.view)
+        NSApp.activate(ignoringOtherApps: true) // force the settings window to the front
+
+        let prefrencesWindowVC = PreferencesWindowController()
+        prefrencesWindowVC.iconController = iconController
+        prefrencesWindowVC.showWindow(self)
+        iconController?.closePopover(nil)
     }
 
     @IBAction func openBuilds(_ sender: NSButton) {
@@ -88,7 +86,6 @@ class SeaEyePopoverController: NSViewController, BuildSetter {
         openBuildsButton.isHidden = true
         shutdownButton.isHidden = false
         openSettingsButton.isHidden = false
-        settingsViewController.view.removeFromSuperview()
         updatesViewController.view.removeFromSuperview()
         subcontrollerView.addSubview(buildsViewController.view)
     }

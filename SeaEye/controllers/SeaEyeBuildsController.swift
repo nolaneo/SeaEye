@@ -30,9 +30,12 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     override func viewDidAppear() {
         self.reloadBuilds()
     }
+    func resetBuilds() {
+        buildsDict = Dictionary()
+        regenBuilds()
+    }
 
     func reloadBuilds(_: Any? = nil) {
-        print("Reload builds!")
         buildsTable?.reloadData()
         if fallbackView != nil {
             setupFallBackViews()
