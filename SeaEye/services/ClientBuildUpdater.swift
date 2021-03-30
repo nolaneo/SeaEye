@@ -33,6 +33,7 @@ class ClientBuildUpdater {
                 break
             case let .failure(error):
                 print("error: \(error.localizedDescription) \(String(describing: self.project))")
+                debugPrint(error)
             }
         })
     }
