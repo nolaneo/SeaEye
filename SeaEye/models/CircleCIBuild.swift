@@ -2,7 +2,6 @@ import Foundation
 
 struct CircleCIBuild: Decodable, Identifiable {
     private static let initDate: Date = Date.distantPast
-    var id = UUID()
     
     enum Status: String, Decodable {
         case canceled
@@ -31,6 +30,10 @@ struct CircleCIBuild: Decodable, Identifiable {
     var queuedAt: Date?
     var stopTime: Date?
     let workflows: Workflow?
+
+    var id: String {
+        buildUrl.absoluteString
+    }
 
     init(branch: String, project: String, status: Status, subject: String, user: String, buildNum: Int, url: URL, date: Date) {
         self.branch = branch
