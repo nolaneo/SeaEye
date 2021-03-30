@@ -2,7 +2,7 @@ import XCTest
 
 class VersionNumberTests: XCTestCase {
     func testVersionDecode() {
-        var versions = ["1.2", "0.4", "0.4-dev", "1.33-dev"]
+        let versions = ["1.2", "0.4", "0.4-dev", "1.33-dev"]
 
         let expected = [
             VersionNumber.init(major: 1, minor: 2, development: false),
