@@ -1,6 +1,9 @@
 import Foundation
 
-struct CircleCIBuild: Decodable {
+struct CircleCIBuild: Decodable, Identifiable {
+    private static let initDate: Date = Date.distantPast
+    var id = UUID()
+    
     enum Status: String, Decodable {
         case canceled
         case failed
@@ -29,8 +32,6 @@ struct CircleCIBuild: Decodable {
     var stopTime: Date?
     let workflows: Workflow?
 
-    private let initDate: Date = Date.distantPast
-
     init(branch: String, project: String, status: Status, subject: String, user: String, buildNum: Int, url: URL, date: Date) {
         self.branch = branch
         self.reponame = project
@@ -44,7 +45,7 @@ struct CircleCIBuild: Decodable {
     }
 
     func lastUpdateTime() -> Date {
-        return [self.startTime, self.queuedAt, self.stopTime, self.initDate].compactMap { $0 }.max()!
+        return [self.startTime, self.queuedAt, self.stopTime, CircleCIBuild.initDate].compactMap { $0 }.max()!
     }
 }
 

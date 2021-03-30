@@ -24,10 +24,9 @@ class BuildView: NSTableCellView {
         branchName.stringValue = decorator.branchName()
         timeAndBuildNumber.stringValue = decorator.timeAndBuildNumber()
 
-        if let color = decorator.statusColor() {
-            statusAndSubject.textColor = color
-            statusColorBox.fillColor = color
-        }
+        statusAndSubject.textColor = decorator.statusColor
+        statusColorBox.fillColor = decorator.statusColor
+
     }
 
     @IBAction func openBuild(_ sender: AnyObject) {

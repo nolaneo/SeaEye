@@ -43,6 +43,7 @@
 		60C73C1519FD7ECB0067CDCA /* SeaEyeBuildsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C73C1319FD7ECB0067CDCA /* SeaEyeBuildsController.swift */; };
 		60C73C1819FD7EE10067CDCA /* SeaEyeSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C73C1719FD7EE10067CDCA /* SeaEyeSettingsController.swift */; };
 		60F0232C1A1A95930067C0A0 /* SeaEyeUpdatesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F0232B1A1A95930067C0A0 /* SeaEyeUpdatesController.swift */; };
+		7D4CDD3E26134F1B003DD497 /* BuildStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4CDD3D26134F1B003DD497 /* BuildStatusView.swift */; };
 		F412CA9221D3DF050069C7C7 /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F412CA9121D3DF050069C7C7 /* NSImage.swift */; };
 		F412CA9721D3E3530069C7C7 /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F412CA9621D3E3530069C7C7 /* HTTPRequest.swift */; };
 		F412CA9921D3E3A40069C7C7 /* SeaEyeDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F412CA9821D3E3A40069C7C7 /* SeaEyeDecoder.swift */; };
@@ -146,6 +147,7 @@
 		60C73C1319FD7ECB0067CDCA /* SeaEyeBuildsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeaEyeBuildsController.swift; sourceTree = "<group>"; };
 		60C73C1719FD7EE10067CDCA /* SeaEyeSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeaEyeSettingsController.swift; sourceTree = "<group>"; };
 		60F0232B1A1A95930067C0A0 /* SeaEyeUpdatesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeaEyeUpdatesController.swift; sourceTree = "<group>"; };
+		7D4CDD3D26134F1B003DD497 /* BuildStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildStatusView.swift; sourceTree = "<group>"; };
 		F412CA9121D3DF050069C7C7 /* NSImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImage.swift; sourceTree = "<group>"; };
 		F412CA9621D3E3530069C7C7 /* HTTPRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
 		F412CA9821D3E3A40069C7C7 /* SeaEyeDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeaEyeDecoder.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				6008690D1A1D3E5E00600E4C /* SeaEyeBuildsController.xib */,
 				6008690F1A1D3E6F00600E4C /* SeaEyeSettingsController.xib */,
 				600869111A1D3E9200600E4C /* SeaEyePopoverController.xib */,
+				7D4CDD3D26134F1B003DD497 /* BuildStatusView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 				F4D5A44A21E427BB006140DE /* Filter.swift in Sources */,
 				F4F1A61D20D84CD1008B8C04 /* GithubClient.swift in Sources */,
 				F4D5A45321E44BF1006140DE /* NewBuildFilter.swift in Sources */,
+				7D4CDD3E26134F1B003DD497 /* BuildStatusView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -717,7 +721,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SeaEye/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.nolan.eoin.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -733,7 +737,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SeaEye/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.nolan.eoin.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;

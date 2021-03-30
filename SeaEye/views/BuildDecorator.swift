@@ -31,7 +31,7 @@ struct BuildDecorator {
         return status
     }
 
-    func statusColor() -> NSColor? {
+    var statusColor: NSColor {
         switch build.status {
         case .success: return greenColor()
         case .fixed: return greenColor()
@@ -46,7 +46,7 @@ struct BuildDecorator {
         case .queued: return NSColor.systemPurple
         default:
             print("unknown status" + build.status.rawValue)
-            return nil
+            return grayColor()
         }
     }
 
