@@ -50,7 +50,7 @@ class SeaEyeBuildsController: NSViewController, NSTableViewDelegate, NSTableView
     }
 
     fileprivate func setupFallBackViews() {
-        if let fallbackString = FallbackView(settings: Settings.load(), builds: builds).description() {
+        if let fallbackString = FallbackView(settings: Settings.load(), builds: builds).description {
             fallbackView.stringValue = fallbackString
             fallbackView.isHidden = false
             buildsTable.isHidden = true

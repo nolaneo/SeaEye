@@ -4,7 +4,7 @@ struct FallbackView {
     let settings: Settings
     let builds: [CircleCIBuild]
 
-    func description() -> String? {
+    var description : String? {
         if settings.numberOfProjects() == 0 {
             return "Add some projects, mo chara"
         }

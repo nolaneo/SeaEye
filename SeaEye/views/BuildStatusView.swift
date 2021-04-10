@@ -24,7 +24,7 @@ struct BuildStatusView : View {
         HStack {
             Rectangle()
                 .fill(Color(b.statusColor))
-                .frame(width: 5)
+                .frame(width: 3)
             VStack(alignment: .leading){
                 Text(b.statusAndSubject())
                     .font(.headline)
@@ -47,6 +47,7 @@ struct BuildStatusView : View {
                     }
                 }
             }
+            .buttonStyle(PlainButtonStyle())
         }
     }
 }
@@ -55,11 +56,12 @@ struct BuildsView: View {
     var builds: [CircleCIBuild]
     
     var body: some View {
-        VStack{
-            ForEach(builds) {
-                BuildStatusView(build: $0)
-                    .frame(width: .infinity,
-                           height: 80)
+        ScrollView(.vertical){
+            VStack{
+                ForEach(builds) {
+                    BuildStatusView(build: $0)
+                        .frame(width: 280, height: 80)
+                }
             }
         }
     }

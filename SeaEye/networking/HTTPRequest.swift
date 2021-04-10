@@ -25,7 +25,8 @@ func request<T: Decodable>(_ request: URLRequest, of _: T.Type, completion: ((Re
         do {
             let response = try SeaEyeDecoder().decode(T.self, from: jsonData)
             completion!(.success(response))
-        } catch {
+        }
+        catch {
             completion!(.failure(error))
         }
         }
