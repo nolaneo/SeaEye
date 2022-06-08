@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct ServersView : View {
+    @State var clients: [CircleCIClient] = []
     @State var url : String = ""
     @State var accessToken : String = ""
     @State private var selection: String?
@@ -18,8 +19,8 @@ struct ServersView : View {
             VStack{
                 List {
                     Section(header: Text("CI Systems")) {
-                        ForEach((1..<51)){
-                            Text("CircleCI \($0)")
+                        ForEach(clients){
+                            Text("CircleCI \($0.token)")
                         }
                     }
                 }
@@ -43,33 +44,36 @@ struct ServersView : View {
                     Button("Reset To Defaults") {}
                 }
             }.frame(height: .infinity, alignment: .topLeading)
-            .padding()
-        }
+            .padding(.horizontal)
+        }.padding()
         
     }
 }
 
 struct ProjectsView : View {
+    @State var projects: [CircleCIProject]
+    @State var unfollowedProjects: [Project] = []
+    
     var body: some View {
         VStack{
             VStack{
                 List {
                     Section(header:
                                 HStack{
-                                    Text("Projects")
+                                    Text("Followed Projects \(projects.count)")
                                     
                                 }.frame(width: .infinity)
                     ) {
-                        ForEach(1..<51){_ in
-                            FollowedProjectSettingsRow()
+                        ForEach(projects){
+                            FollowedProjectSettingsRow(project: $0)
                         }
                     }
                 }
                 Spacer()
                 List {
-                    Section(header: Text("second section")) {
-                        ForEach(1..<51){ _ in
-                            UnfollowedProjectSettingsRow()
+                    Section(header: Text("Available Projects \(unfollowedProjects.count)")) {
+                        ForEach(unfollowedProjects){
+                            UnfollowedProjectSettingsRow(project: $0)
                         }
                     }
                 }
@@ -77,19 +81,42 @@ struct ProjectsView : View {
         }.padding()
     }
 }
+extension Set {
+    var array: [Element] {
+        return Array(self)
+    }
+}
 
 struct PrefrencesPane: View {
+    @State var settings = Settings.load()
+    @State var projects : [CircleCIProject] = []
+    @State private var selectedTab = 0
+
     var body: some View {
-        TabView {
-            ServersView()
+        TabView(selection: $selectedTab) {
+            ProjectsView(projects:  projects)
+                        .tabItem {
+                            Label("Projects", systemImage: "square.and.pencil")
+                        }
+            ServersView(clients: settings.clients())
                         .tabItem {
                             Label("Servers", systemImage: "list.dash")
                         }
-
-            ProjectsView()
-                        .tabItem {
-                            Label("Order", systemImage: "square.and.pencil")
-                        }
+        }
+        .onAppear{
+            self.settings.clients().forEach { (c)  in
+                c.getProjects { (r) in
+                    switch r {
+                    case .success(let projects):
+                        print("Got \(projects.count) projects \(projects.map({$0.vcsUrl}))")
+                        self.projects.append(contentsOf: projects)
+                        
+                    case .failure:
+                        print("shit")
+                    
+                    }
+                }
+            }
         }.padding()
     }
 }
@@ -98,30 +125,37 @@ struct PrefrencesPane_Previews: PreviewProvider {
     static var previews: some View {
         PrefrencesPane()
             .frame(width: 800, height: 450, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-        ProjectsView()
+        ProjectsView(projects: [])
+        ServersView()
     }
 }
 
 struct FollowedProjectSettingsRow: View {
-    @State private var showGreeting = true
+    @State var project: CircleCIProject
 
     var body: some View {
         HStack{
             Text("nolaneo/Seaeye")
+            Spacer()
             Text("main|en-*")
+            Spacer()
             Text("Regex")
-            Toggle("Success notifications", isOn: $showGreeting)
-                .toggleStyle(CheckboxToggleStyle())
-            Toggle("Failure notifications", isOn: $showGreeting)
-                .toggleStyle(CheckboxToggleStyle())
+            Spacer()
+//            Toggle("Success notifications", isOn: project.following)
+//                .toggleStyle(CheckboxToggleStyle())
+//            Toggle("Failure notifications", isOn: project.following)
+//                .toggleStyle(CheckboxToggleStyle())
+            Spacer()
             Button("Delete"){}
         }
     }
 }
 struct UnfollowedProjectSettingsRow: View {
+    @State var project : Project
+    
     var body: some View {
         HStack{
-            Text("Project name")
+            Text(project.description)
             Spacer()
             Button("Add"){}
         }

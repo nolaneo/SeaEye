@@ -9,10 +9,78 @@
 import SwiftUI
 
 struct BuildStatusView : View {
-    var build: CircleCIBuild
-    
-    var b : BuildDecorator {
-        BuildDecorator.init(build: build)
+    @State var build: CircleCIBuild
+    var seperator: String = "|"
+
+    var branchName: String {
+        return "\(build.branch) \(seperator) \(build.reponame)"
+    }
+
+    var statusAndSubject : String {
+        if build.status == .noTests {
+            return "No tests"
+        }
+
+        var status = build.status.rawValue.capitalized
+
+        if let subject = build.subject {
+            status += ": \(subject)"
+        } else {
+            if let workflow = build.workflows {
+                status += ": \(workflow.workflowName!) - \(workflow.jobName!)"
+            }
+        }
+
+        return status
+    }
+
+    var color: Color {
+        return Color(statusColor)
+    }
+    var statusColor: NSColor {
+        switch build.status {
+        case .success: return greenColor()
+        case .fixed: return greenColor()
+        case .noTests: return redColor()
+        case .failed: return redColor()
+        case .timedout: return redColor()
+        case .running: return blueColor()
+        case .notRunning: return grayColor()
+        case .canceled: return grayColor()
+        case .retried: return grayColor()
+        case .notRun: return grayColor()
+        case .queued: return NSColor.systemPurple
+        default:
+            print("unknown status" + build.status.rawValue)
+            return grayColor()
+        }
+    }
+
+    var timeAndBuildNumber:  String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm MMM dd"
+        let startTime =  dateFormatter.string(from: build.lastUpdateTime())
+        var result =  startTime + " \(seperator) Build #\(build.buildNum)"
+        if build.authorName != nil {
+            result += " \(seperator) By \(build.authorName!)"
+        }
+        return result
+    }
+
+    private func greenColor() -> NSColor {
+        return NSColor.systemGreen
+    }
+
+    private func redColor() -> NSColor {
+        return NSColor.systemRed
+    }
+
+    private func blueColor() -> NSColor {
+        return NSColor.systemBlue
+    }
+
+    private func grayColor() -> NSColor {
+        return NSColor.systemGray
     }
     
     func openLink() {
@@ -23,32 +91,36 @@ struct BuildStatusView : View {
     var body: some View {
         HStack {
             Rectangle()
-                .fill(Color(b.statusColor))
+                .fill(Color(statusColor))
                 .frame(width: 3)
-            VStack(alignment: .leading){
-                Text(b.statusAndSubject())
+            VStack(alignment: .leading, spacing:0){
+                Text(statusAndSubject)
                     .font(.headline)
-                    .foregroundColor(Color(b.statusColor))
-                Text(b.branchName())
+                    .foregroundColor(color)
+                    .padding(.bottom, 5)
+                    .accessibility(label: Text("Build Status"))
+                Text(branchName)
                     .font(.subheadline)
-                Text(b.timeAndBuildNumber())
+                    .padding(.bottom, 5)
+                Spacer()
+                Text(timeAndBuildNumber)
                     .font(.subheadline)
+            }
+            Spacer()
+            VStack{
+                Spacer()
+                Button(action: {
+                    openLink()
+                }) {
+                    Image(systemName: "square.and.arrow.up")
+
+                }
+                .buttonStyle(PlainButtonStyle())
+                Spacer()
             }
             
-            Button(action: {
-                openLink()
-            }) {
-                HStack(spacing: 10) {
-                    if #available(OSX 11.0, *) {
-                        Image(systemName: "square.and.arrow.up")
-                            .foregroundColor(.black)
-                    } else {
-                        // Fallback on earlier versions
-                    }
-                }
-            }
-            .buttonStyle(PlainButtonStyle())
         }
+//        .background(Color.white)
     }
 }
     
@@ -60,7 +132,7 @@ struct BuildsView: View {
             VStack{
                 ForEach(builds) {
                     BuildStatusView(build: $0)
-                        .frame(width: 280, height: 80)
+                        .frame(width: .infinity, height: 80)
                 }
             }
         }
@@ -69,40 +141,14 @@ struct BuildsView: View {
 
 struct BuildStatusView_Previews: PreviewProvider {
     static var previews: some View {
-        
-        let failedBuild = CircleCIBuild(branch: "master",
-                                       project: "foobar",
-                                       status: .failed,
-                                       subject: "wat how long does this go.... all the way plz",
-                                       user: "Homer Simpson",
-                                       buildNum: 5,
-                                       url: URL(string: "http://google.com")!,
-                                       date: Date())
-        let queuedBuild = CircleCIBuild(branch: "master",
-                                       project: "foobar",
-                                       status: .queued,
-                                       subject: "wat",
-                                       user: "Homer Simpson",
-                                       buildNum: 5,
-                                       url: URL(string: "http://google.com")!,
-                                       date: Date())
-        let succBuild = CircleCIBuild(branch: "master",
-                                       project: "foobar",
-                                       status: .success,
-                                       subject: "wat",
-                                       user: "Homer Simpson",
-                                       buildNum: 5,
-                                       url: URL(string: "http://google.com")!,
-                                       date: Date())
-        let cancelledBuild = CircleCIBuild(branch: "master",
-                                       project: "foobar",
-                                       status: .canceled,
-                                       subject: "wat",
-                                       user: "Homer Simpson",
-                                       buildNum: 5,
-                                       url: URL(string: "http://google.com")!,
-                                       date: Date())
-        BuildsView(builds: [failedBuild,queuedBuild, succBuild, cancelledBuild])
+      
+        BuildsView(builds: Fixtures.builds)
             .previewLayout(.sizeThatFits)
+        ForEach( Fixtures.builds){ build in
+            VStack {
+                Text("\(build.status.rawValue)")
+                BuildStatusView(build: build)
+            }
+        }.previewLayout(.fixed(width: 400, height: 100))
     }
 }

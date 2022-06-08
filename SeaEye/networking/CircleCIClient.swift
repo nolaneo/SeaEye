@@ -3,7 +3,8 @@ import Foundation
 protocol BuildClient {
     func getProject(name: String, completion: ((Result<[CircleCIBuild]>) -> Void)?)
 }
-struct CircleCIProject: Decodable {
+
+struct CircleCIProject: Decodable, Identifiable, Hashable {
     let username: String
     let reponame: String
     let vcsUrl: String
@@ -11,6 +12,9 @@ struct CircleCIProject: Decodable {
 
     func description() -> String {
         return "\(username)/\(reponame)"
+    }
+    var id : String {
+        return vcsUrl
     }
 
     func toProject() -> Project {
@@ -25,12 +29,15 @@ struct CircleCIProject: Decodable {
     }
 }
 
-struct CircleCIClient: Codable, BuildClient {
+struct CircleCIClient: Codable, BuildClient, Identifiable {
     var baseURL: String = "https://circleci.com"
     var token: String
 
     init(apiKey: String) {
         token = apiKey
+    }
+    var id : String{
+        return "\(baseURL.description)/\(token)"
     }
 
     func getProjects(completion: ((Result<[CircleCIProject]>) -> Void)?) {

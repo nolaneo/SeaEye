@@ -21,7 +21,7 @@ class ClientBuildUpdater {
     }
 
     @objc func getBuilds() {
-        client.getProject(name: project.path(), completion: { (result: Result<[CircleCIBuild]>) -> Void in
+        client.getProject(name: project.path, completion: { (result: Result<[CircleCIBuild]>) -> Void in
             switch result {
             case let .success(builds):
                 let filteredBuilds = self.buildFilter.newBuilds(project: self.project,

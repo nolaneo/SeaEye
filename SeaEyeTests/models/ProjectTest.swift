@@ -10,6 +10,6 @@ class ProjectTest: XCTestCase {
                                    notifySuccess: false,
                                    notifyFailure: false)
 
-        XCTAssertEqual(project.path(), "github/nolaneo/SeaEye")
+        XCTAssertEqual(project.path, "github/nolaneo/SeaEye")
     }
 }

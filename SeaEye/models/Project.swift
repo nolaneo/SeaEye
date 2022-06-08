@@ -1,6 +1,6 @@
 import Cocoa
 
-struct Project: Codable, CustomStringConvertible {
+struct Project: Codable, CustomStringConvertible, Identifiable {
     let vcsProvider: String
     let organisation: String
     let name: String
@@ -8,10 +8,13 @@ struct Project: Codable, CustomStringConvertible {
     var notifySuccess: Bool
     var notifyFailure: Bool
 
-    func path() -> String {
+    var path : String {
         return "\(vcsProvider)/\(organisation)/\(name)"
     }
-
+    var id : String {
+        return path
+    }
+    
     var description: String {
         return "\(organisation)/\(name)"
     }
