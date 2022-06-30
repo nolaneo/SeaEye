@@ -61,8 +61,8 @@ def get_version
 end
 
 def build_and_zip
-  gym
   zip(path: 'SeaEye.app', output_path: ZIP_OUTPUT)
+  build_app(skip_codesigning: true)
 end
 
 def set_version(version)
