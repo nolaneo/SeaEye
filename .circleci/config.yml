@@ -1,10 +1,10 @@
-version: 2
+version: 2.1
 
 jobs:
   build-and-test:
     working_directory: ~/SeaEye
     macos:
-      xcode: 10.1.0
+      xcode: 13.3.1
     environment:
       LC_ALL: en_US.UTF-8
       LANG: en_US.UTF-8
@@ -40,7 +40,6 @@ jobs:
           path: result.xml
 
 workflows:
-  version: 2
   build-test-lint:
     jobs:
       - swiftlint
