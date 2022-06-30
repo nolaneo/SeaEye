@@ -1,5 +1,16 @@
 version: 2.1
 
+commands:
+  install-fastlane:
+    steps:
+      - run: gem install bundler -v 2.0.1
+      - restore_cache:
+          key: gems-{{ checksum "Gemfile.lock" }}
+      - run: bundle check || bundle install --path vendor/bundle
+      - save_cache:
+          key: gems-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
 jobs:
   build-and-test:
     working_directory: ~/SeaEye
@@ -11,14 +22,13 @@ jobs:
     shell: /bin/bash --login -eo pipefail
     steps:
       - checkout
-      - run: gem install bundler -v 2.0.1
-      - run: bundle install
-      - run: bundle exec fastlane gym
+      - install-fastlane
+      - run: bundle exec fastlane mac build
       - run: bundle exec fastlane test
-      - run: cp /Users/distiller/SeaEye/fastlane/test_output/report.junit /Users/distiller/SeaEye/fastlane/test_output/results.xml
+      - run: cp /Users/distiller/SeaEye/fastlane/test_output/report.junit results.xml
       - run: cd /Users/distiller/SeaEye/ && zip -r SeaEye.app.zip SeaEye.app
       - store_test_results:
-          path: /Users/distiller/SeaEye/fastlane/test_output
+          path: results.xml
       - store_artifacts:
           path: /Users/distiller/SeaEye/SeaEye.app.zip
           destination: SeaEye.app.zip
