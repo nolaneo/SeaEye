@@ -31,7 +31,8 @@ class SeaEyeStatusBarListenerTest: XCTestCase {
                                    organisation: "nolaneo",
                                    name: "SeaEye",
                                    filter: nil,
-                                   notify: true)
+                                   notifySuccess: true,
+                                   notifyFailure: true)
         sut.notify(project: project, builds: [failed])
 
         XCTAssertEqual(sut.statusBar.state, .idle, "Old builds should not effect the status")
@@ -60,5 +61,16 @@ class SeaEyeStatusBarListenerTest: XCTestCase {
 
         sut.notify(project: project, builds: [])
         XCTAssertEqual(sut.statusBar.state, .success, "The Icon should remain set if there are no builds")
+
+        let runningBuild = CircleCIBuild(branch: "master",
+                                         project: "foo/bar",
+                                         status: .running,
+                                         subject: "Got some tests",
+                                         user: "Homer",
+                                         buildNum: 100,
+                                         url: URL.init(string: "https://google.com")!,
+                                         date: Date())
+        sut.notify(project: project, builds: [runningBuild])
+        XCTAssertEqual(sut.statusBar.state, .running, "The Icon should set to running, when there's a running build")
     }
 }
