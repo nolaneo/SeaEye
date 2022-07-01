@@ -1,9 +1,9 @@
-fastlane_version '2.97.0'
+fastlane_version "2.97.0"
 
-VERSION_FILE = 'SeaEye/Info.plist'
-ZIP_OUTPUT = 'SeaEye.app.zip'
-RELEASE_BRANCH = 'master'
-GITHUB_REPOSITORY = ENV.fetch('GITHUB_REPO', 'nolaneo/SeaEye')
+VERSION_FILE = "SeaEye/Info.plist"
+ZIP_OUTPUT = "SeaEye.app.zip"
+RELEASE_BRANCH = "master"
+GITHUB_REPOSITORY = ENV.fetch("GITHUB_REPO", "nolaneo/SeaEye")
 DEV_VERSION_STRING = "-dev"
 
 default_platform :mac
@@ -19,7 +19,7 @@ class VersionNumber
       str = str.gsub(DEV_VERSION_STRING, "")
     end
 
-    version_split = str.split('.').map{ |v| v.to_i }
+    version_split = str.split(".").map { |v| v.to_i }
 
     if version_split.size >= 2
       self.major = version_split[0]
@@ -28,18 +28,18 @@ class VersionNumber
   end
 
   def to_s
-    a = [major,minor].join(".")
+    a = [major, minor].join(".")
     if development
-      a = a + DEV_VERSION_STRING
+      a += DEV_VERSION_STRING
     end
-    return a
+    a
   end
 
   def next_version(type)
     if type == "minor"
-      self.minor = self.minor + 1
+      self.minor = minor + 1
     elsif type == "major"
-      self.major = self.major + 1
+      self.major = major + 1
       self.minor = 0
     end
     self
@@ -48,11 +48,11 @@ end
 
 def changelog(last_git_tag)
   changelog_from_git_commits(
-    between: [last_git_tag, 'HEAD'],
-    pretty: '- %s',
-    date_format: 'short',
+    between: [last_git_tag, "HEAD"],
+    pretty: "- %s",
+    date_format: "short",
     match_lightweight_tag: false,
-    merge_commit_filtering: 'exclude_merges'
+    merge_commit_filtering: "exclude_merges"
   )
 end
 
@@ -61,27 +61,27 @@ def get_version
 end
 
 def build_and_zip
-  gym
-  zip(path: 'SeaEye.app', output_path: ZIP_OUTPUT)
+  build_app(skip_codesigning: true, export_method: "mac-application")
+  zip(path: "SeaEye.app", output_path: ZIP_OUTPUT)
 end
 
 def set_version(version)
   update_plist(plist_path: VERSION_FILE,
-               block: proc { |p| p['CFBundleShortVersionString'] = version })
+    block: proc { |p| p["CFBundleShortVersionString"] = version })
 end
 
 platform :mac do
-  desc 'Runs all the tests'
+  desc "Runs all the tests"
   lane :test do
-    scan(output_types: 'junit')
+    scan(output_types: "junit")
   end
 
-  desc 'Build SeaEye'
+  desc "Build SeaEye"
   lane :build do
-    gym
+    build_and_zip
   end
 
-  desc 'Release a new version of SeaEye'
+  desc "Release a new version of SeaEye"
   lane :release do |options|
     test
 
@@ -96,23 +96,22 @@ platform :mac do
 
     git_add(path: VERSION_FILE)
     git_commit(path: VERSION_FILE,
-               message: "Release version #{new_version}")
-
+      message: "Release version #{new_version}")
 
     build_and_zip
 
     comments = changelog(last_git_tag)
     add_git_tag(
       message: comments,
-      tag: "#{new_version}",
+      tag: new_version.to_s,
       prefix: "v"
     )
 
     approved = prompt(boolean: true,
-                      text: ["#{new_version} Changelog:",
-                             "====================",
-                             comments.to_s,
-                             "Release v#{new_version} ?"].join("\n"))
+      text: ["#{new_version} Changelog:",
+        "====================",
+        comments.to_s,
+        "Release v#{new_version} ?"].join("\n"))
 
     next unless approved
     set_github_release(
@@ -127,10 +126,10 @@ platform :mac do
     )
     puts "Released: #{new_version}"
 
-    post_release_version = new_version.next_version('minor')
+    post_release_version = new_version.next_version("minor")
     post_release_version.development = true
 
-    puts 'Bumping version number'
+    puts "Bumping version number"
     set_version(post_release_version)
     git_add(path: VERSION_FILE)
     git_commit(path: VERSION_FILE, message: "Version bump to #{post_release_version}")
