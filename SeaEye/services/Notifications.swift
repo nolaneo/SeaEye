@@ -10,7 +10,7 @@ struct BuildsNotification {
     private let build: CircleCIBuild
 
     init(_ build: CircleCIBuild, _ count: Int) {
-        let endTitle = build.status == .success ? "Sucess" : "Failed"
+        let endTitle = build.status == .success ? "Success" : "Failed"
         let plural = build.status == .success ? "successful" : "failed"
         self.build = build
         self.title = "SeaEye: Build \(endTitle)"
